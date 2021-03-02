@@ -58,6 +58,8 @@ development:
 test:
   <<: *default
   database: electric_curcuit_testing_platform_test
+  username: <%= ENV["POSTGRES_USER"] || Rails.application.credentials.postgresql[:user] %>
+  password: <%= ENV["POSTGRES_PASSWORD"] || Rails.application.credentials.postgresql[:password] %>
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
