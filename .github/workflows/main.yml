@@ -39,7 +39,7 @@ jobs:
       - name: Create database
         env:
           RAILS_ENV: test
-        run: bundler exec rails db:create db:migrate
+        run: ENV=test bundler exec rails db:create db:migrate
 
       - name: Install yarn dependencies
         run: yarn --frozen-lockfile
