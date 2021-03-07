@@ -15,9 +15,9 @@ feature 'User can sign up', "
       visit new_user_registration_path
 
       fill_in 'Email', with: 'test@example.com'
-      fill_in 'Password', with: '12345678'
-      fill_in 'Password confirmation', with: '12345678'
-      click_on 'Sign up'
+      fill_in 'Пароль', with: '12345678'
+      fill_in 'Подтверждение пароля', with: '12345678'
+      click_on 'Зарегистрироваться'
 
       expect(page).to have_content 'Вы успешно зарегистрировались.'
     end
@@ -27,10 +27,10 @@ feature 'User can sign up', "
     scenario 'tries to sign up with errors' do
       visit new_user_registration_path
 
-      click_on 'Sign up'
+      click_on 'Зарегистрироваться'
 
       expect(page).to have_content 'Email не может быть пустым'
-      expect(page).to have_content 'Password не может быть пустым'
+      expect(page).to have_content 'Пароль не может быть пустым'
     end
   end
 

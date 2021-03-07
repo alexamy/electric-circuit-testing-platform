@@ -19,7 +19,7 @@ feature 'User can sign in', "
   scenario 'Unregistered user tries to sign in' do
     visit new_user_session_path
     fill_in 'Email', with: 'wrong@test.com'
-    fill_in 'Password', with: '123456'
+    fill_in 'Пароль', with: '123456'
     click_on 'Войти'
 
     expect(page).to have_content 'Неверный Email или пароль.'

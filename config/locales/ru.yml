@@ -1,5 +1,13 @@
 ru:
   activerecord:
+    models:
+      user: 'Пользователь'
+    attributes:
+      user:
+        email: 'Email'
+        password: 'Пароль'
+        password_confirmation: 'Подтверждение пароля'
+        remember_me: 'Запомнить?'
     errors:
       messages:
         record_invalid: 'Возникли ошибки: %{errors}'
