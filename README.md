@@ -1,24 +1,16 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Веб-платформа для тестирования студентов, с расчётом ВАХ характеристик элементов электрических схем.
 
-Things you may want to cover:
+Научный руководитель: Подрядчиков С. Ф.
 
-* Ruby version
+Возможности:
 
-* System dependencies
+* Учетные записи студентов (с привязкой к группе) и преподавателей
+* Отчеты разных уровней детализации по прогрессу прохождения тестов
+* Генерация вопросов на основе электрических схем и указанных формул расчета
 
-* Configuration
+Реализация:
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* Ruby 2.7 + Rails 6
+* BDD
