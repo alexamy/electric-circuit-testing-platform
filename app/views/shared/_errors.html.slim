@@ -1,2 +1,5 @@
-p.notice = notice
-p.alert = alert
+- if resource&.errors.present?
+  b = "Ошибок возникло - #{resource.errors.count}: "
+  ul
+    - resource.errors.full_messages.each do |message|
+      li = message
