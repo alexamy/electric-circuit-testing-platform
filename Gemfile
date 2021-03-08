@@ -56,3 +56,5 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'devise', '~> 4.7'
 
 gem 'slim-rails', '~> 3.2'
+
+gem "dentaku", "~> 3.4"
