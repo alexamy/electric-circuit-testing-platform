@@ -12,11 +12,15 @@ class FormulaParser < ApplicationService
     @text = text
     @calculator = Dentaku::Calculator.new(case_sensitive: true)
     @entries = text.split("\n").map { |line| parse_one(line) }
-
-    parse
   end
 
-  def call; end
+  def call
+    find_target
+    find_dependencies
+    find_bodies
+
+    { target: target, dependencies: dependencies, bodies: bodies }
+  end
 
   private
 
@@ -26,12 +30,6 @@ class FormulaParser < ApplicationService
     target, body = line.split('=')
     dependencies = calculator.dependencies(body)
     { target: target, body: body, dependencies: dependencies }
-  end
-
-  def parse
-    find_target
-    find_dependencies
-    find_bodies
   end
 
   def find_target
