@@ -21,6 +21,10 @@ Layout/LineLength:
     - spec/**/*
     - config/**/*
 
+Lint/SymbolConversion:
+  Exclude:
+    - spec/**/*
+
 Metrics/BlockLength:
   Exclude:
     - spec/**/*
