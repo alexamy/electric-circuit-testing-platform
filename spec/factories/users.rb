@@ -9,5 +9,9 @@ FactoryBot.define do
     email
     password { "123456" }
     password_confirmation { "123456" }
+
+    factory :admin, class: "Admin" do
+      email { "admin@test.com" }
+    end
   end
 end
