@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# rubocop:disable Metrics/MethodLength
 class CreateQuestions < ActiveRecord::Migration[6.0]
   def change
     create_table :categories do |t|
@@ -9,7 +10,6 @@ class CreateQuestions < ActiveRecord::Migration[6.0]
     end
 
     create_table :questions do |t|
-      t.string :formula_text
       t.string :text
       t.string :comment
       t.json :formula
@@ -20,3 +20,4 @@ class CreateQuestions < ActiveRecord::Migration[6.0]
     end
   end
 end
+# rubocop:enable Metrics/MethodLength
