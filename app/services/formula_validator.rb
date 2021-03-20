@@ -21,6 +21,7 @@ class FormulaValidator < ApplicationService
   end
 
   # all checks start with 'check_' and automatically run in 'call'
+
   def check_assignments
     entries.all? do |entry|
       eq_once = entry.count('=') == 1
