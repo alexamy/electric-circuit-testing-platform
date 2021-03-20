@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-# pass string with lines of variable assignments, e.g.:
-# Rx=R2*R3/(R2+R3)
-# Vxmm1=VCC*Rx/(R1+Rx)
 class FormulaParser < ApplicationService
   attr_reader :text, :target, :dependencies, :bodies
 
@@ -11,7 +8,7 @@ class FormulaParser < ApplicationService
 
     @text = text
     @calculator = Dentaku::Calculator.new(case_sensitive: true)
-    @entries = text.split("\n").map { |line| parse_one(line) }
+    @entries = text.split("\n").map { |line| parse_one(line.strip) }
   end
 
   def call
@@ -27,7 +24,7 @@ class FormulaParser < ApplicationService
   attr_reader :calculator, :entries
 
   def parse_one(line)
-    target, body = line.split('=')
+    target, body = line.split('=').map(&:strip)
     dependencies = calculator.dependencies(body)
     { target: target, body: body, dependencies: dependencies }
   end
