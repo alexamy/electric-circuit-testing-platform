@@ -22,6 +22,7 @@ class FormulaValidator < ApplicationService
 
   # all checks start with 'check_' and automatically run in 'call'
 
+  # :reek:FeatureEnvy
   def check_assignments
     entries.all? do |entry|
       eq_once = entry.count('=') == 1
@@ -36,6 +37,7 @@ class FormulaValidator < ApplicationService
     end
   end
 
+  # :reek:FeatureEnvy
   def check_duplicate_targets
     targets = entries.map { |entry| entry.split('=').first }
     targets.count == targets.uniq.count
