@@ -17,6 +17,12 @@ ru:
         text: 'Текст вопроса'
         comment: 'Комментарий'
         formula: 'Формула'
+      formula_parameter:
+        name: 'Название'
+        minimum: 'Минимум'
+        maximum: 'Максимум'
+        step: 'Шаг'
+        unit: 'Единица измерения'
     errors:
       messages:
         record_invalid: 'Возникли ошибки: %{errors}'

@@ -6,4 +6,6 @@ class Question < ApplicationRecord
   belongs_to :category
 
   has_many :formula_parameters, dependent: :destroy
+
+  accepts_nested_attributes_for :formula_parameters
 end

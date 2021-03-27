@@ -13,3 +13,24 @@
 
   .form-group
     = f.submit
+
+  = f.fields_for :formula_parameters do |l|
+    .form-group
+      = l.label :name
+      = l.text_field :name
+
+    .form-group
+      = l.label :minimum
+      = l.number_field :minimum
+
+    .form-group
+      = l.label :maximum
+      = l.number_field :maximum
+
+    .form-group
+      = l.label :step
+      = l.number_field :step
+
+    .form-group
+      = l.label :unit
+      = l.text_field :unit
