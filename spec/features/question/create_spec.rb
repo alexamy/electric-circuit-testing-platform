@@ -18,7 +18,7 @@ feature "User can create question", "
     fill_in "Текст вопроса", with: "Вычислить показание вольтметра XMM1"
     fill_in "Формула", with: "V=R2/(R1+R2)"
 
-    click_on "Проверить"
+    click_on "Создать Вопрос"
 
     expect(page).to have_selector('form.parameter[data-target="R1"]')
     expect(page).to have_selector('form.parameter[data-target="R2"]')
