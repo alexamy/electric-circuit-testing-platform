@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe Parameter, type: :model do
+RSpec.describe FormulaParameter, type: :model do
   describe "validations" do
     it { is_expected.to validate_presence_of :minimum }
     it { is_expected.to validate_presence_of :maximum }

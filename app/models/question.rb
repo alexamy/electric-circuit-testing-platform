@@ -5,5 +5,5 @@ class Question < ApplicationRecord
 
   belongs_to :category
 
-  has_many :parameters, dependent: :destroy
+  has_many :formula_parameters, dependent: :destroy
 end

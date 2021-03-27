@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 2021_03_27_151433) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "parameters", force: :cascade do |t|
+  create_table "formula_parameters", force: :cascade do |t|
     t.string "name"
     t.integer "minimum"
     t.integer "maximum"
@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(version: 2021_03_27_151433) do
     t.bigint "question_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["question_id"], name: "index_parameters_on_question_id"
+    t.index ["question_id"], name: "index_formula_parameters_on_question_id"
   end
 
   create_table "questions", force: :cascade do |t|
@@ -58,6 +58,6 @@ ActiveRecord::Schema.define(version: 2021_03_27_151433) do
     t.index ["type"], name: "index_users_on_type"
   end
 
-  add_foreign_key "parameters", "questions"
+  add_foreign_key "formula_parameters", "questions"
   add_foreign_key "questions", "categories"
 end

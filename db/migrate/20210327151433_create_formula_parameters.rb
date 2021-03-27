@@ -1,6 +1,8 @@
-class CreateParameters < ActiveRecord::Migration[6.0]
+# frozen_string_literal: true
+
+class CreateFormulaParameters < ActiveRecord::Migration[6.0]
   def change
-    create_table :parameters do |t|
+    create_table :formula_parameters do |t|
       t.string :name
       t.integer :minimum
       t.integer :maximum
