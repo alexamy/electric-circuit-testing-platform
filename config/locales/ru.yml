@@ -13,8 +13,8 @@ ru:
       category:
         name: 'Название'
       question:
-        formula_text: 'Текст формулы'
-        text: 'Текст'
+        formula_text: 'Формула'
+        text: 'Текст вопроса'
         comment: 'Комментарий'
         formula: 'Формула'
     errors:

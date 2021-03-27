@@ -1,0 +1,15 @@
+= form_with model: [:admin, @question] do |f|
+  .form-group
+    = f.label :text
+    = f.text_field :text
+
+  .form-group
+    = f.label :comment
+    = f.text_field :comment
+
+  .form-group
+    = f.label :formula_text
+    = f.text_field :formula_text
+
+  .form-group
+    = f.submit

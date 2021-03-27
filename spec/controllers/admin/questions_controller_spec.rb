@@ -10,6 +10,10 @@ RSpec.describe Admin::QuestionsController, type: :controller do
 
     before { get :new }
 
+    it "setup new question" do
+      expect(assigns(:question)).to be_a_new(Question)
+    end
+
     it "render new view" do
       expect(response).to render_template :new
     end

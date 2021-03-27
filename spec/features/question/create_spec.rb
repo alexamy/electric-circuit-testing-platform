@@ -15,7 +15,7 @@ feature "User can create question", "
   scenario "Admin see parameters form when verifying question" do
     visit new_admin_question_path
 
-    fill_in "Текст", with: "Вычислить показание вольтметра XMM1"
+    fill_in "Текст вопроса", with: "Вычислить показание вольтметра XMM1"
     fill_in "Формула", with: "V=R2/(R1+R2)"
 
     click_on "Проверить"
