@@ -5,5 +5,13 @@ class Admin::QuestionsController < Admin::BaseController
     @question = Question.new
   end
 
-  def create; end
+  def create
+    FormulaValidator.call(params.dig(:question, :formula_text))
+  end
+
+  private
+
+  def question_params
+    params.require(:question).allow(:formula_text)
+  end
 end
