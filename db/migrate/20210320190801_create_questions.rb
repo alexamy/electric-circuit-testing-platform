@@ -12,6 +12,7 @@ class CreateQuestions < ActiveRecord::Migration[6.0]
     create_table :questions do |t|
       t.string :text
       t.string :comment
+      t.text :formula_text
       t.json :formula
 
       t.belongs_to :category, null: false, foreign_key: true

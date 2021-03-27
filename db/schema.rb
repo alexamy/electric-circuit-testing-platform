@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 2021_03_27_151433) do
   create_table "questions", force: :cascade do |t|
     t.string "text"
     t.string "comment"
+    t.text "formula_text"
     t.json "formula"
     t.bigint "category_id", null: false
     t.datetime "created_at", precision: 6, null: false
