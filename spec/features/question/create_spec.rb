@@ -12,7 +12,7 @@ feature "User can create question", "
 
   scenario "Unauthenticated user cant create question"
 
-  scenario "Admin creates question" do
+  scenario "Admin see parameters form when verifying question" do
     visit new_admin_question_path
 
     fill_in "Текст", with: "Вычислить показание вольтметра XMM1"
@@ -20,20 +20,7 @@ feature "User can create question", "
 
     click_on "Проверить"
 
-    within '.parameter[data-target="R1"]' do
-      fill_in "Мин", with: "100"
-      fill_in "Макс", with: "1000000"
-      fill_in "Шаг", with: "100"
-    end
-
-    within '.parameter[data-target="R2"]' do
-      fill_in "Мин", with: "100"
-      fill_in "Макс", with: "1000000"
-      fill_in "Шаг", with: "100"
-    end
-
-    click_on "Создать"
-
-    expect(page).to have_content "Вопрос успешно создан."
+    expect(page).to have_selector('form.parameter[data-target="R1"]')
+    expect(page).to have_selector('form.parameter[data-target="R2"]')
   end
 end
