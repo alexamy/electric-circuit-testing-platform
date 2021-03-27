@@ -3,6 +3,7 @@
 class Admin::QuestionsController < Admin::BaseController
   def new
     @question = Question.new
+    # @question.formula_parameters.new
   end
 
   def create
@@ -12,6 +13,8 @@ class Admin::QuestionsController < Admin::BaseController
   private
 
   def question_params
-    params.require(:question).allow(:formula_text)
+    params.require(:question)
+          .permit(:text, :comment, :formula_text,
+                  formula_parameters_attributes: %i[name minimum maximum step unit])
   end
 end
