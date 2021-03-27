@@ -48,6 +48,9 @@ RSpec/MultipleExpectations:
 RSpec/ScatteredSetup:
   Enabled: false
 
+Style/ClassAndModuleChildren:
+  EnforcedStyle: compact
+
 Style/StringLiterals:
   EnforcedStyle: double_quotes
 

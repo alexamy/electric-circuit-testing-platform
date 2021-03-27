@@ -1,6 +1,4 @@
 # frozen_string_literal: true
 
-module Admin
-  class QuestionsController < BaseController
-  end
+class Admin::QuestionsController < Admin::BaseController
 end
