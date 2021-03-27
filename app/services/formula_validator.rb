@@ -11,7 +11,7 @@ class FormulaValidator < ApplicationService
   end
 
   def call
-    validators.all? { |validator| send(validator) }
+    @text.present? && validators.all? { |validator| send(validator) }
   end
 
   private
