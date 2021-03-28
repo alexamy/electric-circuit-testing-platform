@@ -15,17 +15,18 @@ feature "User can create question", "
   describe "Admin" do
     background { sign_in(admin) }
 
-    scenario "sees alert when enter invalid formula" do
+    scenario "sees alert when enter invalid formula", js: true do
       visit new_admin_question_path
 
       fill_in "Текст вопроса", with: "Вычислить показание вольтметра XMM1"
-      fill_in "Формула", with: ""
+      fill_in "Формула", with: "formula with error"
       click_on "Создать Вопрос"
 
       expect(page).to have_content "Ошибка в формуле"
+      expect(page).to have_field "Формула", with: "formula with error"
     end
 
-    scenario "sees parameters form when verifying question" do
+    scenario "sees parameters form when verifying question", js: true do
       visit new_admin_question_path
 
       fill_in "Текст вопроса", with: "Вычислить показание вольтметра XMM1"

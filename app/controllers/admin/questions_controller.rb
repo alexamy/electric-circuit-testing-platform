@@ -9,7 +9,11 @@ class Admin::QuestionsController < Admin::BaseController
   def create
     text = params.dig(:question, :formula_text)
     valid = FormulaValidator.call(text)
-    redirect_to new_admin_question_path, alert: t(".formula_error") and return unless valid
+
+    unless valid
+      @alert = t(".formula_error")
+      return
+    end
 
     info = FormulaParser.call(text)
   end

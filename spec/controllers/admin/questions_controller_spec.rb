@@ -25,9 +25,14 @@ RSpec.describe Admin::QuestionsController, type: :controller do
 
       allow(validator).to receive(:call).once
 
-      post :create, params: { question: { formula_text: attributes_for(:text_formula)[:text] } }
+      post :create, params: { question: { formula_text: attributes_for(:text_formula)[:text] } }, format: :js
 
       expect(validator).to have_received(:call).once
+    end
+
+    it "renders create view" do
+      post :create, params: { question: { formula_text: attributes_for(:text_formula)[:text] } }, format: :js
+      expect(response).to render_template :create
     end
 
     describe "with valid text formula, but without formula parameters" do
@@ -36,17 +41,19 @@ RSpec.describe Admin::QuestionsController, type: :controller do
 
         allow(parser).to receive(:call).once
 
-        post :create, params: { question: { formula_text: attributes_for(:text_formula)[:text] } }
+        post :create, params: { question: { formula_text: attributes_for(:text_formula)[:text] } }, format: :js
 
         expect(parser).to have_received(:call).once
       end
     end
 
     describe "with invalid text formula" do
-      it "redirects to new view" do
-        post :create, params: { question: { formula_text: attributes_for(:text_formula, :invalid)[:text] } }
+      before do
+        post :create, params: { question: { formula_text: attributes_for(:text_formula, :invalid)[:text] } }, format: :js
+      end
 
-        expect(response).to redirect_to new_admin_question_path
+      it "sets error message to @alert" do
+        expect(assigns(:alert)).to be_instance_of(String)
       end
     end
   end
