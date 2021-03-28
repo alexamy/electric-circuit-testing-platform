@@ -15,7 +15,7 @@ feature "User can create question", "
   describe "Admin" do
     background { sign_in(admin) }
 
-    scenario "sees alert when enter invalid formula", js: true do
+    scenario "sees alert when enters invalid formula", js: true do
       visit new_admin_question_path
 
       fill_in "Текст вопроса", with: "Вычислить показание вольтметра XMM1"
@@ -26,7 +26,7 @@ feature "User can create question", "
       expect(page).to have_field "Формула", with: "formula with error"
     end
 
-    scenario "sees parameters form when verifying question", js: true do
+    scenario "sees parameters form when enters valid formula", js: true do
       visit new_admin_question_path
 
       fill_in "Текст вопроса", with: "Вычислить показание вольтметра XMM1"
@@ -34,8 +34,8 @@ feature "User can create question", "
 
       click_on "Создать Вопрос"
 
-      # expect(page).to have_selector('form.parameter[data-target="R1"]')
-      # expect(page).to have_selector('form.parameter[data-target="R2"]')
+      expect(page).to have_field "Название", with: "R1"
+      expect(page).to have_field "Название", with: "R2"
     end
   end
 end

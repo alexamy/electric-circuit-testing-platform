@@ -1,3 +1,9 @@
 <% if @alert.present? %>
-  $(".alert").text("<%= j @alert %>");
+
+  $(".alert").html("<%= j @alert %>");
+
+<% else %>
+
+  $(".question").html("<%= j render('form') %>")
+
 <% end %>

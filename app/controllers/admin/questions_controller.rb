@@ -8,14 +8,18 @@ class Admin::QuestionsController < Admin::BaseController
 
   def create
     text = params.dig(:question, :formula_text)
-    valid = FormulaValidator.call(text)
 
-    unless valid
+    unless FormulaValidator.call(text)
       @alert = t(".formula_error")
       return
     end
 
-    info = FormulaParser.call(text)
+    formula = FormulaParser.call(text)
+
+    @question = Question.new(question_params)
+    formula[:dependencies].each do |name|
+      @question.formula_parameters.new(name: name)
+    end
   end
 
   private

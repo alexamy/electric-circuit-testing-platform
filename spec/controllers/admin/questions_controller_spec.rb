@@ -45,6 +45,27 @@ RSpec.describe Admin::QuestionsController, type: :controller do
 
         expect(parser).to have_received(:call).once
       end
+
+      it "create new question with provided params" do
+        post :create, params: { question: { formula_text: attributes_for(:text_formula)[:text] } }, format: :js
+
+        expect(assigns(:question)).to be_a_new(Question)
+      end
+
+      it "create parameters" do
+        post :create, params: { question: { formula_text: "V=R1/R2" } }, format: :js
+
+        parameters = assigns(:question).formula_parameters
+
+        expect(parameters.count).to eq 2
+        expect(parameters.first.name).to eq "R1"
+        expect(parameters.second.name).to eq "R2"
+      end
+
+      it "renders new view" do
+        post :create, params: { question: { formula_text: attributes_for(:text_formula)[:text] } }, format: :js
+        expect(response).to render_template :new
+      end
     end
 
     describe "with invalid text formula" do
