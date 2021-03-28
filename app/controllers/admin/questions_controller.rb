@@ -6,13 +6,22 @@ class Admin::QuestionsController < Admin::BaseController
   end
 
   def create
+    return unless validate_formula
+
+    prepare_parameters
+  end
+
+  private
+
+  def validate_formula
     text = params.dig(:question, :formula_text)
+    valid = FormulaValidator.call(text)
+    @alert = t(".formula_error") unless valid
+    valid
+  end
 
-    unless FormulaValidator.call(text)
-      @alert = t(".formula_error")
-      return
-    end
-
+  def prepare_parameters
+    text = params.dig(:question, :formula_text)
     @question = Question.new(question_params.except(:formula_parameters_attributes))
     formula = FormulaParser.call(text)
 
@@ -20,8 +29,6 @@ class Admin::QuestionsController < Admin::BaseController
       @question.formula_parameters.new(name: name)
     end
   end
-
-  private
 
   def question_params
     params.require(:question)
