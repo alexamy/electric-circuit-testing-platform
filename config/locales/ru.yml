@@ -1,4 +1,8 @@
 ru:
+  admin:
+    questions:
+      create:
+        formula_error: 'Ошибка в формуле'
   activerecord:
     models:
       user: 'Пользователь'

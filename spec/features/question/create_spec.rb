@@ -8,19 +8,33 @@ feature "User can create question", "
   I'd like to be able to create question with formulas
 " do
   given(:user) { create(:user) }
-  given(:admin) { create(:user, :admin) }
+  given(:admin) { create(:admin) }
 
   scenario "Unauthenticated user cant create question"
 
-  scenario "Admin see parameters form when verifying question" do
-    visit new_admin_question_path
+  describe "Admin" do
+    background { sign_in(admin) }
 
-    fill_in "Текст вопроса", with: "Вычислить показание вольтметра XMM1"
-    fill_in "Формула", with: "V=R2/(R1+R2)"
+    scenario "sees alert when enter invalid formula" do
+      visit new_admin_question_path
 
-    click_on "Создать Вопрос"
+      fill_in "Текст вопроса", with: "Вычислить показание вольтметра XMM1"
+      fill_in "Формула", with: ""
+      click_on "Создать Вопрос"
 
-    # expect(page).to have_selector('form.parameter[data-target="R1"]')
-    # expect(page).to have_selector('form.parameter[data-target="R2"]')
+      expect(page).to have_content "Ошибка в формуле"
+    end
+
+    scenario "sees parameters form when verifying question" do
+      visit new_admin_question_path
+
+      fill_in "Текст вопроса", with: "Вычислить показание вольтметра XMM1"
+      fill_in "Формула", with: "V=R2/(R1+R2)"
+
+      click_on "Создать Вопрос"
+
+      # expect(page).to have_selector('form.parameter[data-target="R1"]')
+      # expect(page).to have_selector('form.parameter[data-target="R2"]')
+    end
   end
 end

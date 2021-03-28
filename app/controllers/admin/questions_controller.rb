@@ -7,7 +7,11 @@ class Admin::QuestionsController < Admin::BaseController
   end
 
   def create
-    FormulaValidator.call(params.dig(:question, :formula_text))
+    text = params.dig(:question, :formula_text)
+    valid = FormulaValidator.call(text)
+    redirect_to new_admin_question_path, alert: t(".formula_error") and return unless valid
+
+    info = FormulaParser.call(text)
   end
 
   private

@@ -17,7 +17,7 @@
   = f.fields_for :formula_parameters do |l|
     .form-group
       = l.label :name
-      = l.text_field :name
+      = l.text_field :name, readonly: true
 
     .form-group
       = l.label :minimum
