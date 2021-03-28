@@ -38,7 +38,7 @@ feature "User can create question", "
       expect(page).to have_field "Название", with: "R2"
     end
 
-    scenario "can create question", js: true do
+    xscenario "can create question", js: true do
       visit new_admin_question_path
 
       fill_in "Текст вопроса", with: "Вычислить показание вольтметра XMM1"

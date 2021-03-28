@@ -13,9 +13,9 @@ class Admin::QuestionsController < Admin::BaseController
       return
     end
 
+    @question = Question.new(question_params.except(:formula_parameters_attributes))
     formula = FormulaParser.call(text)
 
-    @question = Question.new(question_params)
     formula[:dependencies].each do |name|
       @question.formula_parameters.new(name: name)
     end

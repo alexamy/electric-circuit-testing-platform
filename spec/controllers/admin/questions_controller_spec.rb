@@ -35,11 +35,18 @@ RSpec.describe Admin::QuestionsController, type: :controller do
       expect(response).to render_template :create
     end
 
+    describe "with invalid text formula" do
+      it "sets error message to @alert" do
+        post :create, params: { question: { formula_text: attributes_for(:text_formula, :invalid)[:text] } }, format: :js
+        expect(assigns(:alert)).to be_instance_of(String)
+      end
+    end
+
     describe "with valid text formula, but without formula parameters" do
       it "calls formula parser" do
         parser = class_double("FormulaParser").as_stubbed_const
 
-        allow(parser).to receive(:call).once
+        allow(parser).to receive(:call).once.and_return(dependencies: [])
 
         post :create, params: { question: { formula_text: attributes_for(:text_formula)[:text] } }, format: :js
 
@@ -57,25 +64,20 @@ RSpec.describe Admin::QuestionsController, type: :controller do
 
         parameters = assigns(:question).formula_parameters
 
-        expect(parameters.count).to eq 2
+        expect(parameters.length).to eq 2
         expect(parameters.first.name).to eq "R1"
         expect(parameters.second.name).to eq "R2"
       end
 
-      it "renders new view" do
+      it "renders create view" do
         post :create, params: { question: { formula_text: attributes_for(:text_formula)[:text] } }, format: :js
-        expect(response).to render_template :new
+        expect(response).to render_template :create
       end
     end
 
-    describe "with invalid text formula" do
-      before do
-        post :create, params: { question: { formula_text: attributes_for(:text_formula, :invalid)[:text] } }, format: :js
-      end
-
-      it "sets error message to @alert" do
-        expect(assigns(:alert)).to be_instance_of(String)
-      end
+    describe "with valid text formula, with formula parameters" do
+      it "creates question"
+      it "redirects to show view"
     end
   end
 end
