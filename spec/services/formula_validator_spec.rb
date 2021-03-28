@@ -22,6 +22,11 @@ RSpec.describe FormulaValidator, type: :service do
     expect(validator.call(formula)).to be true
   end
 
+  it "validates correct formula with spaces in it" do
+    expect(validator.call("v=r1/r2")).to be true
+    expect(validator.call("v = r1 / r2")).to be true
+  end
+
   it "checks assignments" do
     expect(validator.call("ab")).to be false
     expect(validator.call("ab \n a=b")).to be false
