@@ -3,7 +3,6 @@
 class Admin::QuestionsController < Admin::BaseController
   def new
     @question = Question.new
-    # @question.formula_parameters.new
   end
 
   def create

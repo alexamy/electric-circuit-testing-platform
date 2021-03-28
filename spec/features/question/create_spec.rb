@@ -37,5 +37,23 @@ feature "User can create question", "
       expect(page).to have_field "Название", with: "R1"
       expect(page).to have_field "Название", with: "R2"
     end
+
+    scenario "can create question", js: true do
+      visit new_admin_question_path
+
+      fill_in "Текст вопроса", with: "Вычислить показание вольтметра XMM1"
+      fill_in "Формула", with: "V=R1"
+
+      click_on "Создать Вопрос"
+
+      fill_in "Минимум", with: 10
+      fill_in "Максимум", with: 100
+      fill_in "Шаг", with: 10
+      fill_in "Единица измерения", with: "В"
+
+      click_on "Создать Вопрос"
+
+      expect(page).to have_content "Вопрос успешно создан"
+    end
   end
 end
