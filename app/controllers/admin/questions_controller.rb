@@ -6,14 +6,14 @@ class Admin::QuestionsController < Admin::BaseController
   end
 
   def create
-    return unless validate_formula
+    return unless valid_formula?
 
     prepare_parameters
   end
 
   private
 
-  def validate_formula
+  def valid_formula?
     text = params.dig(:question, :formula_text)
     valid = FormulaValidator.call(text)
     @alert = t(".formula_error") unless valid
