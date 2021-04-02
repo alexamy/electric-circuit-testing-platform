@@ -81,15 +81,15 @@ RSpec.describe Admin::QuestionsController, type: :controller do
         {
           question: {
             category_id: category.id,
-            formula_text: "V=R1",
+            formula_text: "V=Vx",
             text: "Найдите V",
             formula_parameters_attributes: {
               "0": {
-                name: "R1",
+                name: "Vx",
                 minimum: "10",
                 maximum: "100",
                 step: "10",
-                unit: "Om"
+                unit: "Volt"
               }
             }
           }
@@ -100,6 +100,12 @@ RSpec.describe Admin::QuestionsController, type: :controller do
         expect do
           post :create, params: question_params, format: :js
         end.to change(Question, :count).by(1)
+      end
+
+      it "creates formula parameters" do
+        expect do
+          post :create, params: question_params, format: :js
+        end.to change(FormulaParameter, :count).by(1)
       end
 
       it "redirects to show view" do
