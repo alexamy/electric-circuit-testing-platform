@@ -3,6 +3,7 @@ ru:
     questions:
       create:
         formula_error: 'Ошибка в формуле'
+        successful: 'Вопрос успешно создан'
   activerecord:
     models:
       user: 'Пользователь'
@@ -17,6 +18,7 @@ ru:
       category:
         name: 'Название'
       question:
+        category_id: 'Категория'
         formula_text: 'Формула'
         text: 'Текст вопроса'
         comment: 'Комментарий'

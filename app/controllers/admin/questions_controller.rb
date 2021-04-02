@@ -11,7 +11,7 @@ class Admin::QuestionsController < Admin::BaseController
 
     @question = Question.new(question_params)
     @question.formula = FormulaParser.call(@question.formula_text)
-    redirect_to admin_question_path(@question) if @question.save
+    redirect_to admin_question_path(@question), notice: t(".successful") if @question.save
   end
 
   private

@@ -9,6 +9,7 @@ feature "User can create question", "
 " do
   given(:user) { create(:user) }
   given(:admin) { create(:admin) }
+  given!(:category) { create(:category) }
 
   scenario "Unauthenticated user cant create question"
 
@@ -38,9 +39,10 @@ feature "User can create question", "
       expect(page).to have_field "Название", with: "R2"
     end
 
-    xscenario "can create question", js: true do
+    scenario "can create question", js: true do
       visit new_admin_question_path
 
+      select category.name, from: 'Категория'
       fill_in "Текст вопроса", with: "Вычислить показание вольтметра XMM1"
       fill_in "Формула", with: "V=R1"
 

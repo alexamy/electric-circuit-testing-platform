@@ -1,5 +1,9 @@
 = form_with model: [:admin, @question] do |f|
   .form-group
+    = f.label :category_id
+    = f.collection_select :category_id, Category.all, :id, :name
+
+  .form-group
     = f.label :text
     = f.text_field :text
 
