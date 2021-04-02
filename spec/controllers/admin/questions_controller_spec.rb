@@ -76,8 +76,36 @@ RSpec.describe Admin::QuestionsController, type: :controller do
     end
 
     describe "with valid text formula, with formula parameters" do
-      it "creates question"
-      it "redirects to show view"
+      let(:category) { create(:category) }
+      let(:question_params) do
+        {
+          question: {
+            category_id: category.id,
+            formula_text: "V=R1",
+            text: "Найдите V",
+            formula_parameters_attributes: {
+              "0": {
+                name: "R1",
+                minimum: "10",
+                maximum: "100",
+                step: "10",
+                unit: "Om"
+              }
+            }
+          }
+        }
+      end
+
+      it "creates question" do
+        expect do
+          post :create, params: question_params, format: :js
+        end.to change(Question, :count).by(1)
+      end
+
+      it "redirects to show view" do
+        post :create, params: question_params, format: :js
+        expect(response).to redirect_to admin_question_path(assigns(:question))
+      end
     end
   end
 end

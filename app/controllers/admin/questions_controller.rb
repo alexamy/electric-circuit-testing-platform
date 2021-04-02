@@ -7,8 +7,11 @@ class Admin::QuestionsController < Admin::BaseController
 
   def create
     return unless valid_formula?
+    prepare_parameters and return if params.dig(:question, :formula_parameters_attributes).blank?
 
-    prepare_parameters
+    @question = Question.new(question_params)
+    @question.formula = FormulaParser.call(@question.formula_text)
+    redirect_to admin_question_path(@question) if @question.save
   end
 
   private
@@ -32,7 +35,7 @@ class Admin::QuestionsController < Admin::BaseController
 
   def question_params
     params.require(:question)
-          .permit(:text, :comment, :formula_text,
+          .permit(:text, :comment, :formula_text, :category_id,
                   formula_parameters_attributes: %i[name minimum maximum step unit])
   end
 end

@@ -6,5 +6,6 @@ FactoryBot.define do
     text { "MyString" }
     comment { "MyString" }
     formula { "" }
+    category
   end
 end
