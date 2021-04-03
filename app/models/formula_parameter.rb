@@ -9,6 +9,7 @@ class FormulaParameter < ApplicationRecord
   private
 
   def validates_range
+    return unless minimum && maximum
     return if minimum <= maximum
 
     errors.add :minimum, :less_than_maximum

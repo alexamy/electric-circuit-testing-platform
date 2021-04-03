@@ -12,7 +12,7 @@ RSpec.describe FormulaParameter, type: :model do
     it { is_expected.to validate_presence_of :unit }
 
     it "isn't valid when minimum is greater than maximum" do
-      expect(create(:formula_parameter, :invalid_range)).not_to be_valid
+      expect(build(:formula_parameter, :invalid_range)).not_to be_valid
     end
   end
 
