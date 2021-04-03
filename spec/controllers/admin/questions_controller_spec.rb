@@ -5,9 +5,9 @@ require "rails_helper"
 RSpec.describe Admin::QuestionsController, type: :controller do
   let(:admin) { create(:admin) }
 
-  describe "GET #new" do
-    before { login(admin) }
+  before { login(admin) }
 
+  describe "GET #new" do
     before { get :new }
 
     it "setups new question" do
