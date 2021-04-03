@@ -11,7 +11,16 @@ feature "User can create question", "
   given(:admin) { create(:admin) }
   given!(:category) { create(:category) }
 
-  scenario "Unauthenticated user cant create question"
+  scenario "Unauthenticated user cant create question" do
+    visit new_admin_question_path
+    expect(page).to have_content "Доступ к ресурсу запрещен"
+  end
+
+  scenario "Student cant create question" do
+    sign_in(user)
+    visit new_admin_question_path
+    expect(page).to have_content "Доступ к ресурсу запрещен"
+  end
 
   describe "Admin" do
     background { sign_in(admin) }
