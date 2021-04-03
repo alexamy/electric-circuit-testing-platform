@@ -27,6 +27,16 @@ feature "User can create question", "
       expect(page).to have_field "Формула", with: "formula with error"
     end
 
+    scenario "sees validation error when skip parameter info", js: true do
+      visit new_admin_question_path
+
+      fill_in "Формула", with: "V=R"
+      click_on "Создать Вопрос"
+      click_on "Создать Вопрос"
+
+      expect(page).to have_content("Текст вопроса не может быть пустым")
+    end
+
     scenario "sees parameters form when enters valid formula", js: true do
       visit new_admin_question_path
 

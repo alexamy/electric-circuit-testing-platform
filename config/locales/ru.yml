@@ -9,6 +9,7 @@ ru:
       user: 'Пользователь'
       category: 'Категория'
       question: 'Вопрос'
+      formula_parameter: 'Параметр формулы'
     attributes:
       user:
         email: 'Email'
@@ -17,18 +18,21 @@ ru:
         remember_me: 'Запомнить?'
       category:
         name: 'Название'
-      question:
-        category_id: 'Категория'
-        formula_text: 'Формула'
-        text: 'Текст вопроса'
-        comment: 'Комментарий'
-        formula: 'Формула'
-      formula_parameter:
+      formula_parameter: &formula_parameter
         name: 'Название'
         minimum: 'Минимум'
         maximum: 'Максимум'
         step: 'Шаг'
         unit: 'Единица измерения'
+      formula_parameters:
+        <<: *formula_parameter
+      question:
+        category: 'Категория'
+        category_id: 'Категория'
+        formula_text: 'Формула'
+        text: 'Текст вопроса'
+        comment: 'Комментарий'
+        formula: 'Формула'
     errors:
       messages:
         record_invalid: 'Возникли ошибки: %{errors}'
