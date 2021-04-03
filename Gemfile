@@ -34,6 +34,7 @@ end
 
 group :development do
   gem "listen", "~> 3.2"
+  gem "pry-rails", "~> 0.3.9"
   gem "web-console", ">= 3.3.0"
 
   gem "spring"
