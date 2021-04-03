@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# :reek:MissingSafeMethod { exclude: [ admin_required! ] }
 class Admin::BaseController < ApplicationController
   layout "admin"
 
