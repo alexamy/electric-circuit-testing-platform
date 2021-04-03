@@ -2,10 +2,10 @@
 
 FactoryBot.define do
   factory :question do
-    formula_text { "MyString" }
-    text { "MyString" }
-    comment { "MyString" }
-    formula { "" }
+    formula_text { "V=R" }
+    text { "Найти V" }
+    comment { "" }
+    formula { { target: "V", dependencies: %i[R], bodies: { V: "R" } } }
     category
   end
 end

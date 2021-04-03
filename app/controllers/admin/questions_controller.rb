@@ -14,6 +14,10 @@ class Admin::QuestionsController < Admin::BaseController
     redirect_to admin_question_path(@question), notice: t(".successful") if @question.save
   end
 
+  def show
+
+  end
+
   private
 
   def valid_formula?

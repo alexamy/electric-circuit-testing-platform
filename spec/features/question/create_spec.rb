@@ -42,7 +42,7 @@ feature "User can create question", "
     scenario "can create question", js: true do
       visit new_admin_question_path
 
-      select category.name, from: 'Категория'
+      select category.name, from: "Категория"
       fill_in "Текст вопроса", with: "Вычислить показание вольтметра XMM1"
       fill_in "Формула", with: "V=R1"
 
