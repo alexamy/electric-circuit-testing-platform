@@ -1,5 +1,7 @@
 ru:
   admin:
+    base:
+      restricted: 'Доступ к ресурсу запрещен'
     questions:
       create:
         formula_error: 'Ошибка в формуле'
