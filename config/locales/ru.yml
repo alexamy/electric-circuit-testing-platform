@@ -36,6 +36,11 @@ ru:
         comment: 'Комментарий'
         formula: 'Формула'
     errors:
+      models:
+        formula_parameter:
+          attributes:
+            minimum:
+              less_than_maximum: 'меньше максимума'
       messages:
         record_invalid: 'Возникли ошибки: %{errors}'
         restrict_dependent_destroy:
