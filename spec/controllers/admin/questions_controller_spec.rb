@@ -120,6 +120,10 @@ RSpec.describe Admin::QuestionsController, type: :controller do
 
     before { get :show, params: { id: question.id } }
 
+    it "assigns requested question" do
+      expect(assigns(:question)).to eq question
+    end
+
     it "renders show view" do
       expect(response).to render_template :show
     end

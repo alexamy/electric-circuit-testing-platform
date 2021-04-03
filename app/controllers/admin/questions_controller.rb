@@ -15,7 +15,7 @@ class Admin::QuestionsController < Admin::BaseController
   end
 
   def show
-
+    @question = Question.find(params[:id])
   end
 
   private
