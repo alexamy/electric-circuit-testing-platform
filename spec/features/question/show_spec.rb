@@ -29,4 +29,12 @@ feature "User can view question", "
     expect(page).to have_content(question.comment)
     expect(page).to have_content(question.formula_text)
   end
+
+  scenario "User views example of question" do
+    visit admin_question_path(question)
+
+    within(".question-example", text: "Пример вопроса") do
+      expect(page).to have_content ""
+    end
+  end
 end
