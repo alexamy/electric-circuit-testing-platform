@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(version: 2021_04_04_144641) do
 
   create_table "static_questions", force: :cascade do |t|
     t.json "arguments"
+    t.float "answer"
     t.bigint "question_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
