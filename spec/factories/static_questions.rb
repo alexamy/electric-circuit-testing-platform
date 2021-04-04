@@ -2,7 +2,8 @@
 
 FactoryBot.define do
   factory :static_question do
-    arguments { "" }
-    question
+    arguments { { "V" => 1 } }
+    answer { 1 }
+    question factory: :question, formula: { target: "R", dependencies: %w[V], bodies: { V: "R" } }
   end
 end

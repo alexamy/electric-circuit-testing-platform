@@ -36,8 +36,16 @@ ru:
         comment: 'Комментарий'
         formula: 'Формула'
         precision: 'Точность ответа'
+      static_question:
+        arguments: 'Аргументы'
+        answer: 'Ответ'
+        question: 'Вопрос'
     errors:
       models:
+        static_question:
+          attributes:
+            arguments:
+              not_in_dependencies: 'не содержится в зависимостях формулы'
         formula_parameter:
           attributes:
             name:
