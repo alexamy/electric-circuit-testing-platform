@@ -6,7 +6,7 @@ p = @question.text
   p = @question.comment
 
 p = Question.human_attribute_name('formula_text')
-p = @question.formula_text
+p = simple_format(@question.formula_text)
 
 .question-example
   p Пример вопроса
