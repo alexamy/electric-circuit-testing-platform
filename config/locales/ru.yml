@@ -35,6 +35,7 @@ ru:
         text: 'Текст вопроса'
         comment: 'Комментарий'
         formula: 'Формула'
+        precision: 'Точность ответа'
     errors:
       models:
         formula_parameter:

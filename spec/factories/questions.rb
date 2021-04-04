@@ -5,6 +5,7 @@ FactoryBot.define do
     formula_text { "V=R" }
     text { "Найти V" }
     comment { "Comment" }
+    precision { 0 }
     formula { { target: "V", dependencies: %i[R], bodies: { V: "R" } } }
     category
   end
