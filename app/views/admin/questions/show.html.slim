@@ -1,0 +1,9 @@
+p = Question.human_attribute_name('text')
+p = @question.text
+
+- if @question.comment.present?
+  p = Question.human_attribute_name('comment')
+  p = @question.comment
+
+p = Question.human_attribute_name('formula_text')
+p = @question.formula_text
