@@ -6,6 +6,8 @@ RSpec.describe FormulaParameter, type: :model do
   let(:question) { create(:question) }
 
   describe "validations" do
+    let!(:question) { create(:question, formula: { dependencies: %w[R] }) }
+
     it { is_expected.to validate_presence_of :minimum }
     it { is_expected.to validate_presence_of :maximum }
     it { is_expected.to validate_presence_of :step }
@@ -13,6 +15,10 @@ RSpec.describe FormulaParameter, type: :model do
 
     it "isn't valid when minimum is greater than maximum" do
       expect(build(:formula_parameter, :invalid_range)).not_to be_valid
+    end
+
+    it "isn't valid when have no corresponding question formula dependency" do
+      expect(build(:formula_parameter, name: "I", question: question)).not_to be_valid
     end
   end
 

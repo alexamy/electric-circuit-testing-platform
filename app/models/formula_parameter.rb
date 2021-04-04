@@ -2,7 +2,7 @@
 
 class FormulaParameter < ApplicationRecord
   validates :name, :minimum, :maximum, :step, :unit, presence: true
-  validate :validates_range
+  validate :validates_range, :validates_formula_dependency
 
   belongs_to :question
 
@@ -13,5 +13,12 @@ class FormulaParameter < ApplicationRecord
     return if minimum <= maximum
 
     errors.add :minimum, :less_than_maximum
+  end
+
+  def validates_formula_dependency
+    return unless question
+    return if question.formula["dependencies"].include?(name)
+
+    errors.add :name, :not_in_dependencies
   end
 end

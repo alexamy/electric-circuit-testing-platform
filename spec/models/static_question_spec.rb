@@ -8,7 +8,5 @@ RSpec.describe StaticQuestion, type: :model do
   describe "validations" do
     it { is_expected.to validate_presence_of :arguments }
     it { is_expected.to validate_presence_of :answer }
-
-    it "validates argument names to correspond formula parameters"
   end
 end
