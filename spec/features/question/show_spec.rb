@@ -8,9 +8,19 @@ feature "User can view question", "
   I'd like to be able to view questions
 " do
   given(:admin) { create(:admin) }
-  given(:question) { create(:question) }
+  given!(:questions) { create_list(:question, 3) }
+  given(:question) { questions.first }
 
   background { sign_in(admin) }
+
+  scenario "User views question list" do
+    visit admin_questions_path
+
+    questions.each do |question|
+      expect(page).to have_content question.id
+      expect(page).to have_link question.text, href: admin_question_path(question)
+    end
+  end
 
   scenario "User views question" do
     visit admin_question_path(question)

@@ -14,6 +14,10 @@ class Admin::QuestionsController < Admin::BaseController
     redirect_to admin_question_path(@question), notice: t(".successful") if @question.save
   end
 
+  def index
+    @questions = Question.all
+  end
+
   def show
     @question = Question.find(params[:id])
   end

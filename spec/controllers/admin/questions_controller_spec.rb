@@ -128,4 +128,18 @@ RSpec.describe Admin::QuestionsController, type: :controller do
       expect(response).to render_template :show
     end
   end
+
+  describe "GET #index" do
+    let(:questions) { create_list(:question, 3) }
+
+    before { get :index }
+
+    it "assigns all questions" do
+      expect(assigns(:questions)).to match_array questions
+    end
+
+    it "renders index view" do
+      expect(response).to render_template :index
+    end
+  end
 end

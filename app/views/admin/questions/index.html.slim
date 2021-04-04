@@ -1,0 +1,7 @@
+- @questions.each do |question|
+  .question
+    p id
+    p = question.id
+
+    p = Question.human_attribute_name(:text)
+    p = link_to(question.text, admin_question_path(question))
