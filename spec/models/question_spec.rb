@@ -3,11 +3,15 @@
 require "rails_helper"
 
 RSpec.describe Question, type: :model do
-  it { is_expected.to validate_presence_of :text }
-  it { is_expected.to validate_presence_of :formula }
-  it { is_expected.to validate_presence_of :precision }
+  describe "validations" do
+    it { is_expected.to validate_presence_of :text }
+    it { is_expected.to validate_presence_of :formula }
+    it { is_expected.to validate_presence_of :precision }
 
-  it { is_expected.to validate_numericality_of(:precision).only_integer.is_greater_than_or_equal_to(0) }
+    it { is_expected.to validate_numericality_of(:precision).only_integer.is_greater_than_or_equal_to(0) }
+
+    it "validates formula parameter names to be equal to dependecies"
+  end
 
   it { is_expected.to belong_to :category }
   it { is_expected.to have_many(:formula_parameters).dependent(:destroy) }
