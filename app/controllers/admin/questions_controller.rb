@@ -33,9 +33,9 @@ class Admin::QuestionsController < Admin::BaseController
 
   def prepare_parameters
     text = params.dig(:question, :formula_text)
-    @question = Question.new(question_params.except(:formula_parameters_attributes))
     formula = FormulaParser.call(text)
 
+    @question = Question.new(question_params.except(:formula_parameters_attributes))
     formula[:dependencies].each do |name|
       @question.formula_parameters.new(name: name)
     end
