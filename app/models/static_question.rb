@@ -10,7 +10,7 @@ class StaticQuestion < ApplicationRecord
 
   def validates_formula_dependency
     return unless question
-    return if arguments.keys.difference(question.formula["dependencies"]).blank?
+    return if arguments.keys.difference(question.formula_parameters.select(:name)).blank?
 
     errors.add :arguments, :not_in_dependencies
   end
