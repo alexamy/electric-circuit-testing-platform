@@ -83,6 +83,7 @@ RSpec.describe Admin::QuestionsController, type: :controller do
             category_id: category.id,
             formula_text: "V=Vx",
             text: "Найдите V",
+            precision: 0,
             formula_parameters_attributes: {
               "0": {
                 name: "Vx",
