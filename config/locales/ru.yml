@@ -50,8 +50,6 @@ ru:
           attributes:
             name:
               not_in_dependencies: 'не содержится в зависимостях формулы'
-            minimum:
-              less_than_maximum: 'меньше максимума'
       messages:
         record_invalid: 'Возникли ошибки: %{errors}'
         restrict_dependent_destroy:

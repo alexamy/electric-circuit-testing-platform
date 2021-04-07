@@ -2,7 +2,8 @@
 
 class FormulaParameter < ApplicationRecord
   validates :name, :minimum, :maximum, :step, :unit, presence: true
-  validate :validates_range, :validates_formula_dependency
+  validates :minimum, numericality: { less_than_or_equal_to: ->(parameter) { parameter.maximum } }
+  validate :validates_formula_dependency
 
   belongs_to :question
 
@@ -14,13 +15,6 @@ class FormulaParameter < ApplicationRecord
   end
 
   private
-
-  def validates_range
-    return unless minimum && maximum
-    return if minimum <= maximum
-
-    errors.add :minimum, :less_than_maximum
-  end
 
   def validates_formula_dependency
     return unless question
