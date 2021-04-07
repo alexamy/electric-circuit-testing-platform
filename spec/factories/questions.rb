@@ -6,6 +6,7 @@ FactoryBot.define do
     text { "Найти V" }
     comment { "Comment" }
     precision { 0 }
+    answer_unit { "Unit" }
     formula { { target: "V", dependencies: %w[I R], bodies: { V: "I*R" } } }
     category
 

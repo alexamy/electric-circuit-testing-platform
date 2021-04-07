@@ -4,4 +4,6 @@ p Аргументы
   p = "#{parameter.name} = #{@static_question.arguments[parameter.name]} #{parameter.unit}"
 
 p Ответ
-p = @static_question.answer
+
+p = "Знаков после запятой - #{@question.precision}"
+p = "#{@static_question.answer} #{@question.answer_unit}"

@@ -34,6 +34,7 @@ ru:
         formula_text: 'Формула'
         text: 'Текст вопроса'
         comment: 'Комментарий'
+        answer_unit: 'Единица измерения ответа'
         formula: 'Формула'
         precision: 'Точность ответа'
       static_question:

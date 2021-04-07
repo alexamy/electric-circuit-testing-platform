@@ -84,13 +84,14 @@ RSpec.describe Admin::QuestionsController, type: :controller do
             formula_text: "V=Vx",
             text: "Найдите V",
             precision: 0,
+            answer_unit: "В",
             formula_parameters_attributes: {
               "0": {
                 name: "Vx",
                 minimum: "10",
                 maximum: "100",
                 step: "10",
-                unit: "Volt"
+                unit: "В"
               }
             }
           }

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Question < ApplicationRecord
-  validates :text, :formula, :precision, presence: true
+  validates :text, :formula, :precision, :answer_unit, presence: true
   validates :precision, numericality: {
     only_integer: true,
     greater_than_or_equal_to: 0

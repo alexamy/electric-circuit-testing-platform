@@ -64,6 +64,7 @@ feature "User can create question", "
       select category.name, from: "Категория"
       fill_in "Текст вопроса", with: "Вычислить показание вольтметра XMM1"
       fill_in "Формула", with: "V=R1"
+      fill_in "Единица измерения ответа", with: "В"
 
       click_on "Создать Вопрос"
 

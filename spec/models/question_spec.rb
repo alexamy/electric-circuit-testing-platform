@@ -7,6 +7,7 @@ RSpec.describe Question, type: :model do
     it { is_expected.to validate_presence_of :text }
     it { is_expected.to validate_presence_of :formula }
     it { is_expected.to validate_presence_of :precision }
+    it { is_expected.to validate_presence_of :answer_unit }
 
     it { is_expected.to validate_numericality_of(:precision).only_integer.is_greater_than_or_equal_to(0) }
   end

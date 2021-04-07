@@ -20,7 +20,9 @@ class Admin::QuestionsController < Admin::BaseController
 
   def show
     @question = Question.find(params[:id])
-    @static_question = StaticQuestion.new(**ParticularSolutionGenerator.call(@question))
+
+    solution = ParticularSolutionGenerator.call(@question)
+    @static_question = StaticQuestion.new(**solution)
   end
 
   private
@@ -44,7 +46,7 @@ class Admin::QuestionsController < Admin::BaseController
 
   def question_params
     params.require(:question)
-          .permit(:text, :comment, :formula_text, :precision, :category_id,
+          .permit(:text, :comment, :formula_text, :precision, :answer_unit, :category_id,
                   formula_parameters_attributes: %i[name minimum maximum step unit])
   end
 end

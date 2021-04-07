@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(version: 2021_04_04_161611) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "precision"
+    t.string "answer_unit"
     t.index ["category_id"], name: "index_questions_on_category_id"
   end
 
