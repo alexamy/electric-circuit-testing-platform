@@ -25,15 +25,8 @@ class ParticularSolutionGenerator < ApplicationService
 
   def set_arguments
     question.formula_parameters.each do |parameter|
-      arguments[parameter.name] = generate_value(parameter.minimum, parameter.maximum, parameter.step)
+      arguments[parameter.name] = parameter.generate_value
     end
-  end
-
-  def generate_value(minimum, maximum, step)
-    return minimum unless step.positive?
-
-    offset = (maximum - minimum) / step + 1
-    minimum + rand(offset) * step
   end
 
   def set_answer

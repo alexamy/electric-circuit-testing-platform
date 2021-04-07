@@ -30,38 +30,4 @@ RSpec.describe ParticularSolutionGenerator, type: :service do
       expect(result[:answer]).to be_present
     end
   end
-
-  describe "#generate_value" do
-    before { srand(101) }
-
-    it "returns minimimum for zero step" do
-      100.times.each do
-        expect(generator.send(:generate_value, 10, 100, 0)).to eq 10
-      end
-    end
-
-    it "returns minimimum for negative step" do
-      100.times.each do
-        expect(generator.send(:generate_value, 10, 100, -10)).to eq 10
-      end
-    end
-
-    it "returns result greater or equal to minimum" do
-      100.times.each do
-        expect(generator.send(:generate_value, 10, 100, 3)).to be >= 10
-      end
-    end
-
-    it "returns result less than maximum" do
-      100.times.each do
-        expect(generator.send(:generate_value, 10, 20, 4)).to be < 20
-      end
-    end
-
-    it "returns result less than or equal to maximum when maximum is in range" do
-      100.times.each do
-        expect(generator.send(:generate_value, 10, 100, 3)).to be <= 100
-      end
-    end
-  end
 end

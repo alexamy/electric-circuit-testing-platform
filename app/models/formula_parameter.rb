@@ -6,6 +6,13 @@ class FormulaParameter < ApplicationRecord
 
   belongs_to :question
 
+  def generate_value
+    return minimum unless step.positive?
+
+    offset = (maximum - minimum) / step + 1
+    minimum + rand(offset) * step
+  end
+
   private
 
   def validates_range
