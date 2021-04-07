@@ -1,0 +1,7 @@
+p Аргументы
+
+- @question.formula_parameters.each do |parameter|
+  p = "#{parameter.name} = #{@static_question.arguments[parameter.name]} #{parameter.unit}"
+
+p Ответ
+p = @static_question.answer

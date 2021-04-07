@@ -20,6 +20,7 @@ class Admin::QuestionsController < Admin::BaseController
 
   def show
     @question = Question.find(params[:id])
+    @static_question = StaticQuestion.new(**ParticularSolutionGenerator.call(@question))
   end
 
   private
