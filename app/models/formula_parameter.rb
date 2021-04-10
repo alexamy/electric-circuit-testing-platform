@@ -18,7 +18,7 @@ class FormulaParameter < ApplicationRecord
 
   def validates_formula_dependency
     return unless question
-    return if question.formula["dependencies"].include?(name)
+    return if question.formula['dependencies'].include?(name)
 
     errors.add :name, :not_in_dependencies
   end

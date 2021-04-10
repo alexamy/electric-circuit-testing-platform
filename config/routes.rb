@@ -7,5 +7,5 @@ Rails.application.routes.draw do
     resources :questions, shallow: true
   end
 
-  root "home#index"
+  root 'home#index'
 end

@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require_relative "boot"
+require_relative 'boot'
 
-require "rails/all"
+require 'rails/all'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -14,7 +14,7 @@ module ElectricCurcuitTestingPlatform
     config.load_defaults 6.0
 
     # Set russian locale and timezone
-    config.time_zone = "Europe/Moscow"
+    config.time_zone = 'Europe/Moscow'
     config.i18n.available_locales = %i[ru en]
     config.i18n.default_locale = :ru
 

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "rails_helper"
+require 'rails_helper'
 
 RSpec.describe FormulaParser, type: :service do
   let(:formula) { "Rx=R2*R3/(R2+R3)\nVxmm1=VCC*Rx/(R1+Rx)" }
@@ -8,37 +8,37 @@ RSpec.describe FormulaParser, type: :service do
 
   let(:expected) do
     {
-      target: "Vxmm1",
+      target: 'Vxmm1',
       dependencies: %w[R1 R2 R3 VCC],
       bodies: {
-        Rx: "R2*R3/(R2+R3)",
-        Vxmm1: "VCC*Rx/(R1+Rx)"
+        Rx: 'R2*R3/(R2+R3)',
+        Vxmm1: 'VCC*Rx/(R1+Rx)'
       }
     }
   end
 
   before { parser.call }
 
-  describe "initialization" do
-    it "saves provided text" do
+  describe 'initialization' do
+    it 'saves provided text' do
       expect(parser.text).to eq formula
     end
 
-    it "init calculator" do
+    it 'init calculator' do
       expect(parser.send(:calculator)).to be_instance_of Dentaku::Calculator
     end
   end
 
-  describe "parse" do
-    it "assigns last assigned variable as target" do
+  describe 'parse' do
+    it 'assigns last assigned variable as target' do
       expect(parser.target).to eq expected[:target]
     end
 
-    it "assigns dependencies" do
+    it 'assigns dependencies' do
       expect(parser.dependencies).to contain_exactly(*expected[:dependencies])
     end
 
-    it "assigns solving hash" do
+    it 'assigns solving hash' do
       expect(parser.bodies).to eq expected[:bodies]
     end
   end

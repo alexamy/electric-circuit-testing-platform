@@ -24,7 +24,7 @@ class FormulaParser < ApplicationService
   attr_reader :calculator, :entries
 
   def parse_one(line)
-    target, body = line.split("=").map(&:strip)
+    target, body = line.split('=').map(&:strip)
     dependencies = calculator.dependencies(body)
     { target: target, body: body, dependencies: dependencies }
   end
