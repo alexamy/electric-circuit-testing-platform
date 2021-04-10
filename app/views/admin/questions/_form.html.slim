@@ -24,6 +24,10 @@
     = f.text_area :formula_text
 
   .form-group
+    = f.label :scheme
+    = f.file_field :scheme
+
+  .form-group
     = f.submit
 
   = f.fields_for :formula_parameters do |l|

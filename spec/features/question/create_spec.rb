@@ -65,6 +65,7 @@ feature "User can create question", "
       fill_in "Текст вопроса", with: "Вычислить показание вольтметра XMM1"
       fill_in "Формула", with: "V=R1"
       fill_in "Единица измерения ответа", with: "В"
+      attach_file "Схема", "#{Rails.root}/spec/rails_helper.rb"
 
       click_on "Создать Вопрос"
 
@@ -76,6 +77,7 @@ feature "User can create question", "
       click_on "Создать Вопрос"
 
       expect(page).to have_content "Вопрос успешно создан"
+      expect(page).to have_selector "img.question-scheme"
     end
   end
 end

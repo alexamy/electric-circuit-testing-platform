@@ -37,6 +37,7 @@ ru:
         answer_unit: 'Единица измерения ответа'
         formula: 'Формула'
         precision: 'Точность ответа'
+        scheme: 'Схема'
       static_question:
         arguments: 'Аргументы'
         answer: 'Ответ'

@@ -11,5 +11,7 @@ class Question < ApplicationRecord
 
   has_many :formula_parameters, dependent: :destroy
 
+  has_one_attached :scheme
+
   accepts_nested_attributes_for :formula_parameters
 end

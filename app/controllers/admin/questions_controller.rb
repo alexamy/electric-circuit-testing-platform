@@ -46,7 +46,7 @@ class Admin::QuestionsController < Admin::BaseController
 
   def question_params
     params.require(:question)
-          .permit(:text, :comment, :formula_text, :precision, :answer_unit, :category_id,
+          .permit(:text, :comment, :formula_text, :precision, :answer_unit, :category_id, :scheme,
                   formula_parameters_attributes: %i[name minimum maximum step unit])
   end
 end
