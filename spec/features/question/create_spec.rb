@@ -65,6 +65,7 @@ feature "User can create question", "
       fill_in "Текст вопроса", with: "Вычислить показание вольтметра XMM1"
       fill_in "Формула", with: "V=R1"
       fill_in "Единица измерения ответа", with: "В"
+      fill_in "Точность", with: "2"
 
       click_on "Создать Вопрос"
 

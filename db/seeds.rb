@@ -8,5 +8,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+Category.create(name: "Sample category")
+
 User.create(email: "user@test.com", password: Rails.application.credentials[:passwords][:user])
 Admin.create(email: "admin@test.com", password: Rails.application.credentials[:passwords][:admin])
