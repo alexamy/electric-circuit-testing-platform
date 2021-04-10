@@ -11,7 +11,7 @@ class FormulaValidator < ApplicationService
   end
 
   def call
-    validators.all? { |validator| send(validator) }
+    @text.present? && validators.all? { |validator| send(validator) }
   end
 
   private
@@ -33,7 +33,7 @@ class FormulaValidator < ApplicationService
 
   def check_assignment_target
     entries.all? do |entry|
-      entry.split("=").first =~ /^[a-z][a-z0-9]*$/i
+      entry.split("=").map(&:strip).first =~ /^[a-z][a-z0-9]*$/i
     end
   end
 

@@ -1,0 +1,8 @@
+p Аргументы
+
+- @question.formula_parameters.each do |parameter|
+  p = "#{parameter.name} = #{@static_question.arguments[parameter.name]} #{parameter.unit}"
+
+p = "Ответ (знаков после запятой - #{@question.precision}):"
+
+p = "#{@static_question.answer} #{@question.answer_unit}"

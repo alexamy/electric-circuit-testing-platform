@@ -1,14 +1,62 @@
 ru:
+  admin:
+    base:
+      restricted: 'Доступ к ресурсу запрещен'
+    questions:
+      create:
+        formula_error: 'Ошибка в формуле'
+        successful: 'Вопрос успешно создан'
   activerecord:
     models:
       user: 'Пользователь'
+      category: 'Категория'
+      question: 'Вопрос'
+      formula_parameter: 'Параметр формулы'
     attributes:
       user:
         email: 'Email'
         password: 'Пароль'
         password_confirmation: 'Подтверждение пароля'
         remember_me: 'Запомнить?'
+      category:
+        name: 'Название'
+      formula_parameter: &formula_parameter
+        name: 'Название'
+        minimum: 'Минимум'
+        maximum: 'Максимум'
+        step: 'Шаг'
+        unit: 'Единица измерения'
+      formula_parameters:
+        <<: *formula_parameter
+      question:
+        category: 'Категория'
+        category_id: 'Категория'
+        formula_text: 'Формула'
+        text: 'Текст вопроса'
+        comment: 'Комментарий'
+        answer_unit: 'Единица измерения ответа'
+        formula: 'Формула'
+        precision: 'Точность ответа'
+        scheme: 'Схема'
+      static_question:
+        arguments: 'Аргументы'
+        answer: 'Ответ'
+        question: 'Вопрос'
     errors:
+      models:
+        static_question:
+          attributes:
+            arguments:
+              not_in_dependencies: 'не содержится в зависимостях формулы'
+        formula_parameter:
+          attributes:
+            name:
+              not_in_dependencies: 'не содержится в зависимостях формулы'
+        question:
+          attributes:
+            scheme:
+              content_type: 'должна быть изображением'
+              max_size_error: 'должна занимать не более 1 мегабайта'
       messages:
         record_invalid: 'Возникли ошибки: %{errors}'
         restrict_dependent_destroy:

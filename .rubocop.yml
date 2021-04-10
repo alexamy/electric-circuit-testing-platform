@@ -48,6 +48,10 @@ RSpec/MultipleExpectations:
 RSpec/ScatteredSetup:
   Enabled: false
 
+Style/ClassAndModuleChildren:
+  Exclude:
+    - app/controllers/**/*
+
 Style/StringLiterals:
   EnforcedStyle: double_quotes
 

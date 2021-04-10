@@ -14,8 +14,17 @@ RSpec.describe FormulaValidator, type: :service do
     expect(validator.new("sample1 \n sample2").entries).to eq %w[sample1 sample2]
   end
 
+  it "invalidates empty string" do
+    expect(validator.call("")).to be false
+  end
+
   it "validates correct formula" do
     expect(validator.call(formula)).to be true
+  end
+
+  it "validates correct formula with spaces in it" do
+    expect(validator.call("v=r1/r2")).to be true
+    expect(validator.call("v = r1 / r2")).to be true
   end
 
   it "checks assignments" do
