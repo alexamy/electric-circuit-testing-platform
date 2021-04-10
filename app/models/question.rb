@@ -2,6 +2,7 @@
 
 class Question < ApplicationRecord
   validates :text, :formula, :precision, :answer_unit, presence: true
+  validates :scheme, presence: true, blob: { content_type: :image, size_range: 1..1.megabytes }
   validates :precision, numericality: {
     only_integer: true,
     greater_than_or_equal_to: 0

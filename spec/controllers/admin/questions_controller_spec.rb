@@ -85,6 +85,7 @@ RSpec.describe Admin::QuestionsController, type: :controller do
             text: "Найдите V",
             precision: 0,
             answer_unit: "В",
+            scheme: create_file("spec/support/files/397KB.png"),
             formula_parameters_attributes: {
               "0": {
                 name: "Vx",

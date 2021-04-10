@@ -8,11 +8,29 @@ RSpec.describe Question, type: :model do
     it { is_expected.to validate_presence_of :formula }
     it { is_expected.to validate_presence_of :precision }
     it { is_expected.to validate_presence_of :answer_unit }
+    it { is_expected.to validate_presence_of :scheme }
 
     it { is_expected.to validate_numericality_of(:precision).only_integer.is_greater_than_or_equal_to(0) }
   end
 
-  it "allow to upload only images"
+  context "when uploads scheme" do
+    let(:question) { build(:question) }
+
+    it "allow upload" do
+      question.scheme = create_file("spec/support/files/397KB.png")
+      expect(question).to be_valid
+    end
+
+    it "allow only images" do
+      question.scheme = create_file("spec/rails_helper.rb")
+      expect(question).not_to be_valid
+    end
+
+    it "restrict files above 1 MB" do
+      question.scheme = create_file("spec/support/files/1_4MB.png")
+      expect(question).not_to be_valid
+    end
+  end
 
   it { is_expected.to belong_to :category }
   it { is_expected.to have_many(:formula_parameters).dependent(:destroy) }

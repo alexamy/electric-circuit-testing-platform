@@ -52,6 +52,11 @@ ru:
           attributes:
             name:
               not_in_dependencies: 'не содержится в зависимостях формулы'
+        question:
+          attributes:
+            scheme:
+              content_type: 'должна быть изображением'
+              max_size_error: 'должна занимать не более 1 мегабайта'
       messages:
         record_invalid: 'Возникли ошибки: %{errors}'
         restrict_dependent_destroy:
