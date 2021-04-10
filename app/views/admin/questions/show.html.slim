@@ -9,7 +9,7 @@ p = Question.human_attribute_name('formula_text')
 p = simple_format(@question.formula_text)
 
 p = Question.human_attribute_name('scheme')
-= image_tag @question.scheme, class: 'question-scheme'
+= image_tag @question.scheme, class: 'question-scheme', size: '512x512'
 
 .question-example
   p Пример вопроса
