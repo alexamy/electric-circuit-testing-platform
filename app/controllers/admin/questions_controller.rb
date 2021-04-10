@@ -11,7 +11,7 @@ class Admin::QuestionsController < Admin::BaseController
 
     @question = Question.new(question_params)
     @question.formula = FormulaParser.call(@question.formula_text)
-    redirect_to admin_question_path(@question), notice: t(".successful") if @question.save
+    redirect_to admin_question_path(@question), notice: t('.successful') if @question.save
   end
 
   def index
@@ -34,7 +34,7 @@ class Admin::QuestionsController < Admin::BaseController
   def valid_formula?
     text = params.dig(:question, :formula_text)
     valid = FormulaValidator.call(text)
-    @alert = t(".formula_error") unless valid
+    @alert = t('.formula_error') unless valid
     valid
   end
 
