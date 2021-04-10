@@ -65,9 +65,10 @@ feature "User can create question", "
       fill_in "Текст вопроса", with: "Вычислить показание вольтметра XMM1"
       fill_in "Формула", with: "V=R1"
       fill_in "Единица измерения ответа", with: "В"
-      attach_file "Схема", "#{Rails.root}/spec/support/files/397KB.png"
 
       click_on "Создать Вопрос"
+
+      attach_file "Схема", "#{Rails.root}/spec/support/files/397KB.png"
 
       fill_in "Минимум", with: 10
       fill_in "Максимум", with: 100

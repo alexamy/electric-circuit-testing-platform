@@ -23,9 +23,10 @@
     = f.label :formula_text
     = f.text_area :formula_text
 
-  .form-group
-    = f.label :scheme
-    = f.file_field :scheme
+  - if @question.formula_parameters.present?
+    .form-group
+      = f.label :scheme
+      = f.file_field :scheme
 
   .form-group
     = f.submit

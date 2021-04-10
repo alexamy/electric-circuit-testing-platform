@@ -7,7 +7,7 @@ class Admin::QuestionsController < Admin::BaseController
 
   def create
     return unless valid_formula?
-    prepare_parameters and return if params.dig(:question, :formula_parameters_attributes).blank?
+    prepare_parameters and return unless formula_parameters_attributes?
 
     @question = Question.new(question_params)
     @question.formula = FormulaParser.call(@question.formula_text)
@@ -26,6 +26,10 @@ class Admin::QuestionsController < Admin::BaseController
   end
 
   private
+
+  def formula_parameters_attributes?
+    params.dig(:question, :formula_parameters_attributes).present?
+  end
 
   def valid_formula?
     text = params.dig(:question, :formula_text)
