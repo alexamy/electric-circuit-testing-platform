@@ -24,11 +24,13 @@ RSpec.describe Question, type: :model do
     it "allow only images" do
       question.scheme = create_file("spec/rails_helper.rb")
       expect(question).not_to be_valid
+      expect(question.errors.messages[:scheme]).to eq ["должна быть изображением"]
     end
 
-    it "restrict files above 1 MB" do
+    it "restrict files to 1 MB" do
       question.scheme = create_file("spec/support/files/1_4MB.png")
       expect(question).not_to be_valid
+      expect(question.errors.messages[:scheme]).to eq ["должна занимать не более 1 мегабайта"]
     end
   end
 
