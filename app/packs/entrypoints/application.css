@@ -1,7 +1,3 @@
-body {
-  background: lightgray;
-}
-
-img {
-  object-fit: contain;
-}
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
