@@ -1,0 +1,7 @@
+body {
+  background: lightgray;
+}
+
+img {
+  object-fit: contain;
+}
