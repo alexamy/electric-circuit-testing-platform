@@ -4,9 +4,6 @@
 
 @layer base {
   a {
-    @apply underline;
-    @apply text-blue-600;
-    @apply hover:text-blue-800;
-    @apply visited:text-purple-600;
+    @apply underline text-blue-600 hover:text-blue-800 visited:text-purple-600;
   }
 }
