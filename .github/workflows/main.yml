@@ -55,5 +55,10 @@ jobs:
       - name: Brakeman
         run: bundle exec brakeman -q --no-pager
 
+      - name: Build webpack
+        run: bundle exec rails webpacker:compile
+        env:
+          RAILS_ENV: test
+
       - name: RSpec
         run: bundle exec rspec
