@@ -3,6 +3,8 @@
 Rails.application.routes.draw do
   devise_for :users
 
+  resources :categories, only: %i[index]
+
   namespace :admin do
     resources :questions, shallow: true
   end
