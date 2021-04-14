@@ -32,6 +32,7 @@ group :development, :test do
 end
 
 group :development do
+  gem 'lefthook', '~> 0.7.2'
   gem 'listen', '~> 3.2'
   gem 'pry-rails', '~> 0.3.9'
   gem 'web-console', '>= 3.3.0'
