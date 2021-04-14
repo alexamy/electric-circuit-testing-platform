@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 feature 'User can view list of categories', "
-  In order to select preferable category
+  In order to start preferable test
   As an unauthenticated user
   I would like to select a category
 " do
