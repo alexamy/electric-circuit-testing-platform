@@ -6,6 +6,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  has_many :static_questions, dependent: :destroy
+
   def admin?
     is_a?(Admin)
   end

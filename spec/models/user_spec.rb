@@ -3,6 +3,10 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
+  describe 'associations' do
+    it { is_expected.to have_many :static_questions }
+  end
+
   describe 'admin?' do
     let(:user) { create(:user) }
     let(:admin) { create(:admin) }
