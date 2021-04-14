@@ -8,8 +8,9 @@ FactoryBot.define do
     precision { 0 }
     answer_unit { 'Unit' }
     formula { { target: 'V', dependencies: %w[I R], bodies: { V: 'I*R' } } }
-    category
     scheme { create_file('spec/support/files/397KB.png') }
+    category
+    author
 
     after(:create) do |question|
       question.formula['dependencies'].each do |dependency|
