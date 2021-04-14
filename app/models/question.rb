@@ -9,6 +9,7 @@ class Question < ApplicationRecord
   }
 
   belongs_to :category
+  belongs_to :author, class_name: 'Admin', inverse_of: 'questions'
 
   has_many :formula_parameters, dependent: :destroy
 
