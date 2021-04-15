@@ -3,8 +3,7 @@
 Rails.application.routes.draw do
   devise_for :users
 
-  resources :categories, only: %i[index]
-  get '/tests', to: 'categories#index'
+  resources :tests, controller: 'categories', only: %i[index show]
 
   namespace :admin do
     resources :questions, shallow: true

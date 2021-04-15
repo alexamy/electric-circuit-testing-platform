@@ -9,11 +9,11 @@ feature 'User can view list of categories', "
 " do
   given!(:categories) { create_list(:category, 3) }
 
-  scenario 'Anonymous views list of categories' do
-    visit categories_path
+  scenario 'User views list of categories' do
+    visit tests_path
 
     categories.each do |category|
-      expect(page).to have_link category.name
+      expect(page).to have_link category.name, href: test_path(category)
     end
   end
 end
