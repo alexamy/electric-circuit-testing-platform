@@ -8,12 +8,18 @@ feature 'User can start test', "
   I would like to start testing
 " do
   given(:category) { create(:category) }
-  given(:question) { create(:question, category: category) }
+  given(:questions) { create_list(:question, 5, category: category) }
+  given(:user) { create(:user) }
 
   scenario 'Unauthenticated user tries to start testing' do
     visit test_path(category)
+
     expect(page).to have_content 'Вам необходимо войти в систему'
   end
 
-  scenario 'Authenticated start testing'
+  describe 'Authenticated user' do
+    background { sign_in(user) }
+
+    scenario 'starts testing'
+  end
 end
