@@ -8,7 +8,7 @@ FactoryBot.define do
   factory :question do
     formula_text { 'V=I*R' }
     text { 'Найти V' }
-    comment { 'Comment' }
+    comment
     precision { 0 }
     answer_unit { 'Unit' }
     formula { { target: 'V', dependencies: %w[I R], bodies: { V: 'I*R' } } }

@@ -8,7 +8,8 @@ class StaticQuestion < ApplicationRecord
   belongs_to :user
 
   def self.generate_from(question)
-    new(**ParticularSolutionGenerator.call(question))
+    solution = ParticularSolutionGenerator.call(question)
+    new(question: question, **solution)
   end
 
   private

@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe CategoriesController, type: :controller do
-  let(:categories) { create_list(:category, 3) }
+  let(:categories) { create_list(:category, 5) }
   let(:category) { categories.first }
   let(:user) { create(:user) }
 
@@ -20,6 +20,10 @@ RSpec.describe CategoriesController, type: :controller do
   end
 
   describe 'GET #show' do
+    let(:admin) { create(:admin) }
+    let!(:questions) { create_list(:question, 5, category: category, author: admin) }
+    let(:question) { questions.first }
+
     describe 'Unauthenticated user' do
       before { get :show, params: { id: category.id } }
 
@@ -31,13 +35,28 @@ RSpec.describe CategoriesController, type: :controller do
     describe 'Authenticated user' do
       before { login(user) }
 
-      before { get :show, params: { id: category.id } }
-
       it 'sets current category' do
+        get :show, params: { id: category.id }
+
         expect(assigns(:category)).to eq category
       end
 
+      it 'creates a new static question' do
+        expect do
+          get :show, params: { id: category.id }
+        end.to change(StaticQuestion, :count).by 1
+      end
+
+      it 'selects random question' do
+        allow(controller).to receive(:random_question_id).and_return(question.id)
+        get :show, params: { id: category.id }
+
+        expect(assigns(:question)).to eq question
+      end
+
       it 'renders show view' do
+        get :show, params: { id: category.id }
+
         expect(response).to render_template :show
       end
     end
