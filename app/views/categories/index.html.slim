@@ -1,3 +1,3 @@
 - @categories.each do |category|
-  a.block href=test_path(category)
+  a.block href=test_path(category) data-confirm=t('.start-warning')
     = category.name

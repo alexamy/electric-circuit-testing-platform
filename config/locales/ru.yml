@@ -1,4 +1,7 @@
 ru:
+  categories:
+    index:
+      start-warning: Каждый неотвеченный вопрос будет засчитан как неправильный. Вы уверены?
   admin:
     base:
       restricted: Доступ к ресурсу запрещен
