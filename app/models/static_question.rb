@@ -7,7 +7,7 @@ class StaticQuestion < ApplicationRecord
   belongs_to :question
   belongs_to :user
 
-  def self.generate_from(question)
+  def self.new_from(question)
     solution = ParticularSolutionGenerator.call(question)
     new(question: question, **solution)
   end

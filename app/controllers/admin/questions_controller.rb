@@ -20,7 +20,7 @@ class Admin::QuestionsController < Admin::BaseController
 
   def show
     @question = Question.find(params[:id])
-    @static_question = StaticQuestion.generate_from(@question)
+    @static_question = StaticQuestion.new_from(@question)
   end
 
   private

@@ -19,9 +19,9 @@ RSpec.describe StaticQuestion, type: :model do
     end
   end
 
-  describe '.generate_from' do
+  describe '.new_from' do
     it 'returns new static question' do
-      expect(described_class.generate_from(create(:question))).to be_a_new(described_class)
+      expect(described_class.new_from(create(:question))).to be_a_new(described_class)
     end
   end
 end
