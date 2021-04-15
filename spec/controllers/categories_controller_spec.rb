@@ -5,6 +5,7 @@ require 'rails_helper'
 RSpec.describe CategoriesController, type: :controller do
   let(:categories) { create_list(:category, 5) }
   let(:category) { categories.first }
+  let!(:questions) { create_list(:question, 5, category: category) }
   let(:user) { create(:user) }
 
   describe 'GET #index' do
@@ -20,10 +21,6 @@ RSpec.describe CategoriesController, type: :controller do
   end
 
   describe 'GET #show' do
-    let(:admin) { create(:admin) }
-    let!(:questions) { create_list(:question, 5, category: category, author: admin) }
-    let(:question) { questions.first }
-
     describe 'Unauthenticated user' do
       before { get :show, params: { id: category.id } }
 
@@ -48,10 +45,10 @@ RSpec.describe CategoriesController, type: :controller do
       end
 
       it 'selects random question' do
-        allow(controller).to receive(:random_question_id).and_return(question.id)
+        allow(controller).to receive(:random_question_id).and_return(questions[0].id)
         get :show, params: { id: category.id }
 
-        expect(assigns(:question)).to eq question
+        expect(assigns(:question)).to eq questions[0]
       end
 
       it 'renders show view' do
