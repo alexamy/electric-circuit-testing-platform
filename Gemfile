@@ -43,8 +43,9 @@ end
 
 group :test do
   gem 'capybara', '>= 2.15'
-  gem 'selenium-webdriver'
-  gem 'webdrivers'
+  gem 'selenium-webdriver', '~> 3.142.7'
+  gem 'timecop', '~> 0.9.4'
+  gem 'webdrivers', '~> 4.6.0'
 
   gem 'launchy', '~> 2.5'
   gem 'rails-controller-testing', '~> 1.0'

@@ -259,6 +259,7 @@ GEM
     thor (1.1.0)
     thread_safe (0.3.6)
     tilt (2.0.10)
+    timecop (0.9.4)
     turbolinks (5.2.1)
       turbolinks-source (~> 5.2)
     turbolinks-source (5.2.0)
@@ -318,15 +319,16 @@ DEPENDENCIES
   rubocop-performance (~> 1.10)
   rubocop-rails (~> 2.9)
   rubocop-rspec (~> 2.2)
-  selenium-webdriver
+  selenium-webdriver (~> 3.142.7)
   shoulda-matchers (~> 4.5)
   slim-rails (~> 3.2)
   spring
   spring-watcher-listen (~> 2.0.0)
+  timecop (~> 0.9.4)
   turbolinks (~> 5)
   tzinfo-data
   web-console (>= 3.3.0)
-  webdrivers
+  webdrivers (~> 4.6.0)
   webpacker (= 6.0.0.beta.6)
 
 RUBY VERSION
