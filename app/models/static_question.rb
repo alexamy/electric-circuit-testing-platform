@@ -7,6 +7,10 @@ class StaticQuestion < ApplicationRecord
   belongs_to :question
   belongs_to :user
 
+  def self.generate_from(question)
+    new(**ParticularSolutionGenerator.call(question))
+  end
+
   private
 
   def validates_formula_dependency

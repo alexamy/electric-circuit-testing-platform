@@ -18,4 +18,10 @@ RSpec.describe StaticQuestion, type: :model do
       expect(build(:static_question, arguments: { 'V' => 1 }, question: question)).not_to be_valid
     end
   end
+
+  describe '.generate_from' do
+    it 'returns new static question' do
+      expect(described_class.generate_from(create(:question))).to be_a_new(described_class)
+    end
+  end
 end
