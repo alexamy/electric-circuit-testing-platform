@@ -7,13 +7,14 @@ feature 'User can view list of categories', "
   As an unauthenticated user
   I would like to select a category
 " do
-  given!(:categories) { create_list(:category, 3) }
+  given!(:category) { create(:category, name: 'with questions') }
+  given!(:category_without_questions) { create(:category, name: 'without questions') }
+  given!(:questions) { create_list(:question, 3, category: category) }
 
   scenario 'User views list of categories' do
     visit tests_path
 
-    categories.each do |category|
-      expect(page).to have_link category.name, href: test_path(category)
-    end
+    expect(page).not_to have_content category_without_questions.name
+    expect(page).to have_link category.name, href: test_path(category)
   end
 end

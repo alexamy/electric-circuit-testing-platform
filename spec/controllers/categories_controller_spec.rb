@@ -11,8 +11,8 @@ RSpec.describe CategoriesController, type: :controller do
   describe 'GET #index' do
     before { get :index }
 
-    it 'load all categories' do
-      expect(assigns(:categories)).to match_array(categories)
+    it 'load categories with questions' do
+      expect(assigns(:categories)).to contain_exactly category
     end
 
     it 'renders index view' do
