@@ -8,7 +8,7 @@ feature 'User can start test', "
   I would like to start testing
 " do
   given(:category) { create(:category) }
-  given(:questions) { create_list(:question, 5, category: category) }
+  given!(:questions) { create_list(:question, 5, category: category) }
   given(:user) { create(:user) }
 
   scenario 'Unauthenticated user tries to start testing' do
