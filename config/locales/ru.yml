@@ -1,5 +1,5 @@
 ru:
-  categories:
+  tests:
     index:
       start_warning: Каждый неотвеченный вопрос будет засчитан как неправильный. Вы уверены?
   admin:

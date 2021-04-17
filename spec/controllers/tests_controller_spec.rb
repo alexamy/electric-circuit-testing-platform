@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe CategoriesController, type: :controller do
+RSpec.describe TestsController, type: :controller do
   let(:categories) { create_list(:category, 5) }
   let(:category) { categories.first }
   let!(:questions) { create_list(:question, 5, category: category) }

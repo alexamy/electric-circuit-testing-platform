@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class CategoriesController < ApplicationController
+class TestsController < ApplicationController
   before_action :authenticate_user!, only: %i[show]
 
   def index
