@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class TestsController < ApplicationController
-  before_action :authenticate_user!, only: %i[show]
+  before_action :authenticate_user!, except: %i[index]
 
   def index
     @categories = Category.joins(:questions).distinct

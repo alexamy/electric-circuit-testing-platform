@@ -5,7 +5,7 @@ p Параметры схемы
 p = Question.human_attribute_name('scheme')
 = image_tag @question.scheme, class: 'question-scheme', size: '512x512'
 
-= form_with do |f|
+= form_with url: answer_test_path(@category, @static_question), remote: false do |f|
   .form-group
     = f.label :answer, 'Ответ:'
     = f.text_field :answer
