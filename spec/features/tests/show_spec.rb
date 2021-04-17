@@ -29,5 +29,19 @@ feature 'User can start test', "
       expect(page).to have_button 'Отправить'
       expect(page).to have_button 'Отправить и выйти'
     end
+
+    scenario 'proceeds to next question' do
+      visit test_path(category)
+
+      click_on 'Отправить'
+
+      expect(page).to have_content 'Схема'
+      expect(page).to have_field 'Ответ'
+      expect(page).to have_button 'Отправить'
+    end
+
+    scenario 'exits from testing'
+    scenario 'sees his current score'
+    scenario 'can answer only in shown time interval'
   end
 end
