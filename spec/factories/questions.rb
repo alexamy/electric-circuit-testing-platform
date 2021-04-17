@@ -18,7 +18,7 @@ FactoryBot.define do
 
     after(:create) do |question|
       question.formula['dependencies'].each do |dependency|
-        create(:formula_parameter, name: dependency, question: question)
+        create(:formula_parameter, name: dependency, question: question, minimum: 1, maximum: 1, step: 1)
       end
     end
   end
