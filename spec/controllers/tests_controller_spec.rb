@@ -59,7 +59,7 @@ RSpec.describe TestsController, type: :controller do
     end
   end
 
-  describe 'POST #answer' do
+  describe 'PATCH #answer' do
     it 'sets current category'
     it 'sets current static question'
     it 'saves user answer'
