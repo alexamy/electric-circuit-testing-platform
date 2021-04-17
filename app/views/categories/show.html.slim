@@ -1,0 +1,14 @@
+p Параметры схемы
+- @question.formula_parameters.each do |parameter|
+  p = "#{parameter.name} = #{@static_question.arguments[parameter.name]} #{parameter.unit}"
+
+p = Question.human_attribute_name('scheme')
+= image_tag @question.scheme, class: 'question-scheme', size: '512x512'
+
+= form_with do |f|
+  .form-group
+    = f.label :answer, 'Ответ:'
+    = f.text_field :answer
+
+  .form-group
+    = f.submit 'Отправить'

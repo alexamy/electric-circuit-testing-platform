@@ -20,9 +20,11 @@ feature 'User can start test', "
   describe 'Authenticated user' do
     background { sign_in(user) }
 
-    xscenario 'starts testing' do
+    scenario 'starts testing' do
       visit test_path(category)
 
+      expect(page).to have_content 'Схема'
+      expect(page).to have_content 'Параметры схемы'
       expect(page).to have_field 'Ответ'
     end
   end
