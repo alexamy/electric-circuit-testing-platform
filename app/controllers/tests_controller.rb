@@ -13,6 +13,8 @@ class TestsController < ApplicationController
     create_static_question
   end
 
+  def answer; end
+
   private
 
   def random_question_id
