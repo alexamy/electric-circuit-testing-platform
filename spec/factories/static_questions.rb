@@ -6,7 +6,7 @@ FactoryBot.define do
     answer { 1 }
     user_answer { 1 }
     question factory: :question, formula: { target: 'R', dependencies: %w[V], bodies: { V: 'R' } }
-    author
+    association :author, factory: :user
 
     trait :invalid do
       user_answer { 2 }

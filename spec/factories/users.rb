@@ -10,8 +10,6 @@ FactoryBot.define do
     password { '123456' }
     password_confirmation { '123456' }
 
-    factory :admin, aliases: %i[author], class: 'Admin' do
-      email
-    end
+    factory :admin, class: 'Admin'
   end
 end

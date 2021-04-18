@@ -14,7 +14,7 @@ FactoryBot.define do
     formula { { target: 'V', dependencies: %w[I R], bodies: { V: 'I*R' } } }
     scheme { create_file('spec/support/files/397KB.png') }
     category
-    author
+    association :author, factory: :admin
 
     after(:create) do |question|
       question.formula['dependencies'].each do |dependency|
