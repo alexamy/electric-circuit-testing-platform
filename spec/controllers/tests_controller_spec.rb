@@ -43,6 +43,12 @@ RSpec.describe TestsController, type: :controller do
         expect(assigns(:category)).to eq category
       end
 
+      it 'sets current score' do
+        get :show, params: { id: category.id }
+
+        expect(assigns(:score)).to be_zero
+      end
+
       it 'creates a new static question' do
         expect do
           get :show, params: { id: category.id }

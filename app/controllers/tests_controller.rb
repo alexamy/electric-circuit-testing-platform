@@ -10,6 +10,9 @@ class TestsController < ApplicationController
   def show
     @category = Category.find(params[:id])
     @question = Question.find(random_question_id)
+
+    # calculated before creating question, to exclude it from score
+    @score = @category.score_of(current_user)
     create_static_question
   end
 
