@@ -49,7 +49,14 @@ feature 'User can start test', "
       expect(page).not_to have_field 'Ответ'
     end
 
-    scenario 'sees his current score'
+    scenario 'can increase his score with correct answer'
+
+    scenario 'can decrease his score with wrong answer'
+
+    scenario 'can see his score saved between test runs'
+
+    scenario 'can pass the test when get enough test score'
+
     scenario 'can answer only in shown time interval'
   end
 end
