@@ -13,9 +13,21 @@ class TestsController < ApplicationController
     create_static_question
   end
 
+  # NOTE
+  # dont use `redirect_to test_path(@static_question.question.category)`, because
+  # in the future test might be the collection of questions from any categories
   def answer
-    @category = Category.find(params[:test_id])
     @static_question = StaticQuestion.find(params[:id])
+    head :forbidden and return unless current_user.author_of?(@static_question)
+
+    @static_question.update(user_answer: params[:answer])
+
+    if params[:send_and_quit]
+      redirect_to tests_path, notice: t('.test_end')
+    else
+      @category = Category.find(params[:test_id])
+      redirect_to test_path(@category)
+    end
   end
 
   private
@@ -26,7 +38,6 @@ class TestsController < ApplicationController
 
   def create_static_question
     @static_question = StaticQuestion.new_from(@question)
-    @static_question.author = current_user
-    @static_question.save
+    @static_question.update(author: current_user)
   end
 end

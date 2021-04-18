@@ -30,7 +30,7 @@ feature 'User can start test', "
       expect(page).to have_button 'Отправить и выйти'
     end
 
-    xscenario 'proceeds to next question' do
+    scenario 'proceeds to next question' do
       visit test_path(category)
 
       click_on 'Отправить'
@@ -40,12 +40,13 @@ feature 'User can start test', "
       expect(page).to have_button 'Отправить'
     end
 
-    xscenario 'exits from testing' do
+    scenario 'exits from testing' do
       visit test_path(category)
 
       click_on 'Отправить и выйти'
 
       expect(page).to have_content 'Вы вышли из тестирования'
+      expect(page).not_to have_field 'Ответ'
     end
 
     scenario 'sees his current score'
