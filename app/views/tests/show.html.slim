@@ -1,5 +1,6 @@
 .test-score
-  | 0/
+  = @category.score_of(current_user)
+  | /
   = @category.target_score
 
 p Параметры схемы
