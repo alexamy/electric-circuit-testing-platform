@@ -20,9 +20,9 @@ feature 'User can start test', "
   describe 'Authenticated user' do
     background { sign_in(user) }
 
-    scenario 'starts testing' do
-      visit test_path(category)
+    background { visit test_path(category) }
 
+    scenario 'starts testing' do
       expect(page).to have_content 'Схема'
       expect(page).to have_content 'Параметры схемы'
       expect(page).to have_field 'Ответ'
@@ -31,8 +31,6 @@ feature 'User can start test', "
     end
 
     scenario 'proceeds to next question' do
-      visit test_path(category)
-
       click_on 'Отправить'
 
       expect(page).to have_content 'Схема'
@@ -41,8 +39,6 @@ feature 'User can start test', "
     end
 
     scenario 'exits from testing' do
-      visit test_path(category)
-
       click_on 'Отправить и завершить'
 
       expect(page).to have_content 'Вы вышли из тестирования'
