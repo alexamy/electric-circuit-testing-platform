@@ -85,6 +85,14 @@ RSpec.describe TestsController, type: :controller do
       expect(response).to have_http_status :forbidden
     end
 
+    it 'allow answer only once' do
+      patch :answer, params: { test_id: category.id, id: static_question.id, answer: 100.0 }
+      patch :answer, params: { test_id: category.id, id: static_question.id, answer: 1000.0 }
+
+      static_question.reload
+      expect(static_question.user_answer).to eq 100.0
+    end
+
     it 'saves user answer' do
       patch :answer, params: { test_id: category.id, id: static_question.id, answer: 100.0 }
 

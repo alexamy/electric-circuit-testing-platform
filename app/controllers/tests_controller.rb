@@ -15,7 +15,8 @@ class TestsController < ApplicationController
 
   def answer
     @static_question = StaticQuestion.find(params[:id])
-    head :forbidden and return unless current_user.author_of?(@static_question)
+    can_update = @static_question.user_answer.nil? && current_user.author_of?(@static_question)
+    head :forbidden and return unless can_update
 
     @static_question.update(user_answer: params[:answer])
     redirect_after_answer
