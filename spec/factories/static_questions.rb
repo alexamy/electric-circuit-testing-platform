@@ -2,13 +2,13 @@
 
 FactoryBot.define do
   factory :static_question do
-    arguments { { 'V' => 1 } }
+    arguments { { 'I' => 1, 'R' => 1 } }
     answer { 1 }
     user_answer { nil }
-    question factory: :question, formula: { target: 'R', dependencies: %w[V], bodies: { V: 'R' } }
+    question
     association :author, factory: :user
 
-    trait :invalid do
+    trait :wrong do
       user_answer { 2 }
     end
 
