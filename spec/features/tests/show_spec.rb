@@ -27,7 +27,7 @@ feature 'User can start test', "
       expect(page).to have_content 'Параметры схемы'
       expect(page).to have_field 'Ответ'
       expect(page).to have_button 'Отправить'
-      expect(page).to have_button 'Отправить и выйти'
+      expect(page).to have_button 'Отправить и завершить'
     end
 
     scenario 'proceeds to next question' do
