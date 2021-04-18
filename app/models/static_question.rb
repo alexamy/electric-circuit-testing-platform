@@ -5,7 +5,7 @@ class StaticQuestion < ApplicationRecord
   validate :validates_formula_dependency
 
   belongs_to :question
-  belongs_to :user
+  belongs_to :author, class_name: 'User', inverse_of: 'static_questions'
 
   def self.new_from(question)
     solution = ParticularSolutionGenerator.call(question)

@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   describe 'associations' do
-    it { is_expected.to have_many :static_questions }
+    it { is_expected.to have_many(:static_questions).with_foreign_key('author_id') }
   end
 
   describe '#admin?' do

@@ -6,7 +6,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_many :static_questions, dependent: :destroy
+  has_many :static_questions, foreign_key: 'author_id', inverse_of: 'author', dependent: :destroy
 
   def admin?
     is_a?(Admin)

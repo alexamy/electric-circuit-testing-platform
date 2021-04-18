@@ -26,7 +26,7 @@ class TestsController < ApplicationController
 
   def create_static_question
     @static_question = StaticQuestion.new_from(@question)
-    @static_question.user = current_user
+    @static_question.author = current_user
     @static_question.save
   end
 end
