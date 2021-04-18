@@ -56,9 +56,23 @@ feature 'User can start test', "
       end
     end
 
-    scenario 'can increase his score with correct answer'
+    scenario 'can increase his score with correct answer' do
+      fill_in 'Ответ', with: 1
+      click_on 'Отправить'
 
-    scenario 'can decrease his score with wrong answer'
+      within '.test-score' do
+        expect(page).to have_content '1/'
+      end
+    end
+
+    scenario 'can decrease his score with wrong answer' do
+      fill_in 'Ответ', with: 2
+      click_on 'Отправить'
+
+      within '.test-score' do
+        expect(page).to have_content '-2/'
+      end
+    end
 
     scenario 'can pass the test when get enough test score'
 
