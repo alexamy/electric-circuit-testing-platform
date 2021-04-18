@@ -37,3 +37,6 @@ yarn-debug.log*
 
 # Ignore editor workspace
 /.vscode/*.code-workspace
+
+# Ignore coverage reports
+/coverage

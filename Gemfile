@@ -45,6 +45,7 @@ group :test do
   gem 'capybara', '>= 2.15'
   gem 'faker', '~> 2.17'
   gem 'selenium-webdriver', '~> 3.142.7'
+  gem "simplecov", "~> 0.21.2", require: false
   gem 'timecop', '~> 0.9.4'
   gem 'webdrivers', '~> 4.6.0'
 
