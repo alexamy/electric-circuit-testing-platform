@@ -52,7 +52,7 @@ feature 'User can start test', "
 
     scenario 'has score on test' do
       within '.test-score' do
-        expect(page).to have_content '0/'
+        expect(page).to have_content "0/#{category.target_score}"
       end
     end
 
