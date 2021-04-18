@@ -60,10 +60,10 @@ RSpec.describe TestsController, type: :controller do
   end
 
   describe 'PATCH #answer' do
-    it 'sets current category'
-    it 'sets current static question'
+    it 'sets requested category'
+    it 'sets requested static question'
+    it 'restrict user to answer only his own static question'
     it 'saves user answer'
-    it 'restrict user to answer only his own question'
     it 'redirects to next question'
     it 'redirects to tests list when has exit parameter'
   end
