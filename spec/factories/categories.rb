@@ -2,6 +2,7 @@
 
 FactoryBot.define do
   factory :category do
-    name { 'MyString' }
+    name { 'Test category' }
+    target_score { 2 }
   end
 end
