@@ -8,7 +8,7 @@ feature 'User can start test', "
   I would like to start testing
 " do
   given(:category) { create(:category) }
-  given!(:questions) { create_list(:question, 5, category: category) }
+  given!(:question) { create(:question, category: category) }
   given(:user) { create(:user) }
 
   scenario 'Unauthenticated user tries to start testing' do
@@ -28,6 +28,11 @@ feature 'User can start test', "
       expect(page).to have_field 'Ответ'
       expect(page).to have_button 'Отправить'
       expect(page).to have_button 'Отправить и завершить'
+    end
+
+    scenario 'sees answer precision and units' do
+      expect(page).to have_content "Количество знаков после запятой: #{question.precision}"
+      expect(page).to have_content "Единицы измерения: #{question.answer_unit}"
     end
 
     scenario 'proceeds to next question' do

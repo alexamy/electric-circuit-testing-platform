@@ -8,6 +8,13 @@ p Параметры схемы
 p = Question.human_attribute_name('scheme')
 = image_tag @question.scheme, class: 'question-scheme', size: '512x512'
 
+p
+  | Количество знаков после запятой:
+  =< @question.precision
+p
+  | Единицы измерения:
+  =< @question.answer_unit
+
 = form_with url: test_answer_path(@category, @static_question), method: :patch, remote: false do |f|
   .form-group
     = f.label :answer, 'Ответ:'
