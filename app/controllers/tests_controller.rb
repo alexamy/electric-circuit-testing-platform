@@ -13,7 +13,10 @@ class TestsController < ApplicationController
     create_static_question
   end
 
-  def answer; end
+  def answer
+    @category = Category.find(params[:test_id])
+    @static_question = StaticQuestion.find(params[:id])
+  end
 
   private
 

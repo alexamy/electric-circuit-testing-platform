@@ -6,6 +6,7 @@ RSpec.describe TestsController, type: :controller do
   let(:categories) { create_list(:category, 5) }
   let(:category) { categories.first }
   let!(:questions) { create_list(:question, 5, category: category) }
+  let(:static_question) { create(:static_question) }
   let(:user) { create(:user) }
 
   describe 'GET #index' do
@@ -60,8 +61,20 @@ RSpec.describe TestsController, type: :controller do
   end
 
   describe 'PATCH #answer' do
-    it 'sets requested category'
-    it 'sets requested static question'
+    before { login(user) }
+
+    it 'sets requested test' do
+      patch :answer, params: { test_id: category.id, id: static_question.id }
+
+      expect(assigns(:category)).to eq category
+    end
+
+    it 'sets requested static question' do
+      patch :answer, params: { test_id: category.id, id: static_question.id }
+
+      expect(assigns(:static_question)).to eq static_question
+    end
+
     it 'restrict user to answer only his own static question'
     it 'saves user answer'
     it 'redirects to next question'

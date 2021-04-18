@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :tests, only: %i[index show] do
-    resources :answers, only: %i[update], to: 'tests#answer', as: 'answer'
+    resources :answers, only: %i[update], controller: 'tests', action: 'answer', as: 'answer'
   end
 
   namespace :admin do
