@@ -43,7 +43,7 @@ feature 'User can start test', "
     scenario 'exits from testing' do
       visit test_path(category)
 
-      click_on 'Отправить и выйти'
+      click_on 'Отправить и завершить'
 
       expect(page).to have_content 'Вы вышли из тестирования'
       expect(page).not_to have_field 'Ответ'
