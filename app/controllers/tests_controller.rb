@@ -18,8 +18,8 @@ class TestsController < ApplicationController
 
   def answer
     @static_question = StaticQuestion.find(params[:id])
-    can_update = @static_question.user_answer.nil? && current_user.author_of?(@static_question)
-    head :forbidden and return unless can_update
+    return if @static_question.user_answer
+    return unless current_user.author_of?(@static_question)
 
     @static_question.update(user_answer: params[:answer])
     redirect_after_answer
@@ -36,8 +36,7 @@ class TestsController < ApplicationController
     @static_question.update(author: current_user)
   end
 
-  # NOTE
-  # dont use `redirect_to test_path(@static_question.question.category)`, because
+  # NOTE: dont use `redirect_to test_path(@static_question.question.category)`, because
   # in the future *test* might be the collection of questions from any categories
   def redirect_after_answer
     if params[:send_and_quit]

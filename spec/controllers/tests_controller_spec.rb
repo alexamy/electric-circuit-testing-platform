@@ -11,7 +11,7 @@ RSpec.describe TestsController, type: :controller do
 
   let!(:questions) { create_list(:question, 5, category: category) }
   let(:static_question) { create(:static_question, answer: 10, author: user) }
-  let(:static_question_other) { create(:static_question, author: other_user) }
+  let(:static_question_other) { create(:static_question, answer: 10, author: other_user) }
 
   describe 'GET #index' do
     before { get :index }
@@ -86,9 +86,9 @@ RSpec.describe TestsController, type: :controller do
     end
 
     it 'restrict user to answer only his own static question' do
-      patch :answer, params: { test_id: category.id, id: static_question_other.id }
-
-      expect(response).to have_http_status :forbidden
+      expect do
+        patch :answer, params: { test_id: category.id, id: static_question_other.id, answer: 100.0 }
+      end.not_to change(static_question_other, :user_answer)
     end
 
     it 'allow answer only once' do
