@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_18_212543) do
+ActiveRecord::Schema.define(version: 2021_04_19_212751) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -78,8 +78,17 @@ ActiveRecord::Schema.define(version: 2021_04_18_212543) do
     t.datetime "updated_at", precision: 6, null: false
     t.float "user_answer"
     t.bigint "author_id", null: false
+    t.bigint "test_attempt_id", null: false
     t.index ["author_id"], name: "index_static_questions_on_author_id"
     t.index ["question_id"], name: "index_static_questions_on_question_id"
+    t.index ["test_attempt_id"], name: "index_static_questions_on_test_attempt_id"
+  end
+
+  create_table "test_attempts", force: :cascade do |t|
+    t.bigint "category_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["category_id"], name: "index_test_attempts_on_category_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -101,5 +110,7 @@ ActiveRecord::Schema.define(version: 2021_04_18_212543) do
   add_foreign_key "questions", "categories"
   add_foreign_key "questions", "users", column: "author_id"
   add_foreign_key "static_questions", "questions"
+  add_foreign_key "static_questions", "test_attempts"
   add_foreign_key "static_questions", "users", column: "author_id"
+  add_foreign_key "test_attempts", "categories"
 end

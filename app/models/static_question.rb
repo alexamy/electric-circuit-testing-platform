@@ -6,6 +6,7 @@ class StaticQuestion < ApplicationRecord
 
   belongs_to :question
   belongs_to :author, class_name: 'User', inverse_of: 'static_questions'
+  belongs_to :test_attempt
 
   def correct?
     user_answer == answer

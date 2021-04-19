@@ -7,6 +7,7 @@ RSpec.describe StaticQuestion, type: :model do
 
   describe 'associations' do
     it { is_expected.to belong_to :question }
+    it { is_expected.to belong_to :test_attempt }
     it { is_expected.to belong_to(:author).class_name('User') }
   end
 

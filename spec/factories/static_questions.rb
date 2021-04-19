@@ -6,6 +6,7 @@ FactoryBot.define do
     answer { 1 }
     user_answer { nil }
     question
+    test_attempt
     association :author, factory: :user
 
     trait :wrong do
