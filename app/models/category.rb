@@ -8,15 +8,13 @@ class Category < ApplicationRecord
 
   has_many :questions, dependent: :destroy
 
-  # :reek:FeatureEnvy
   def score_of(user)
-    correct, wrong = StaticQuestion.where(author: user)
-                                   .joins(:question)
-                                   .where(questions: { category: self })
-                                   .select(:answer, :user_answer)
-                                   .partition { |question| question.answer == question.user_answer }
-                                   .map(&:count)
+    corrects, wrongs = StaticQuestion.where(author: user)
+                                     .joins(:question)
+                                     .where(questions: { category: self })
+                                     .partition(&:correct?)
+                                     .map(&:count)
 
-    correct * CORRECT_SCORE + wrong * WRONG_SCORE
+    corrects * CORRECT_SCORE + wrongs * WRONG_SCORE
   end
 end

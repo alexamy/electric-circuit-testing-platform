@@ -7,6 +7,10 @@ class StaticQuestion < ApplicationRecord
   belongs_to :question
   belongs_to :author, class_name: 'User', inverse_of: 'static_questions'
 
+  def correct?
+    user_answer == answer
+  end
+
   def self.new_from(question)
     solution = ParticularSolutionGenerator.call(question)
     new(question: question, **solution)
