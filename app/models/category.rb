@@ -9,9 +9,8 @@ class Category < ApplicationRecord
   has_many :questions, dependent: :destroy
 
   def score_of(user)
-    corrects, wrongs = StaticQuestion.where(author: user)
-                                     .joins(:question)
-                                     .where(questions: { category: self })
+    corrects, wrongs = StaticQuestion.joins(:question)
+                                     .where(author: user, questions: { category: self })
                                      .partition(&:correct?)
                                      .map(&:count)
 
