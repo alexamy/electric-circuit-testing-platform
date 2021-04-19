@@ -12,7 +12,7 @@ class Category < ApplicationRecord
     correct, wrong = StaticQuestion.joins(:question)
                                    .where(author: user, questions: { category: self })
                                    .select(:answer, :user_answer)
-                                   .partition { |q| q.answer == q.user_answer }
+                                   .partition { |question| question.answer == question.user_answer }
                                    .map(&:count)
 
     correct * CORRECT_SCORE + wrong * WRONG_SCORE
