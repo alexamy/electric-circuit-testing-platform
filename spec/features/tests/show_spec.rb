@@ -53,49 +53,51 @@ feature 'User can start test', "
       expect(page).not_to have_field 'Ответ'
     end
 
-    scenario 'has score on test' do
-      within '.test-score' do
-        expect(page).to have_content "0/#{category.target_score}"
+    describe 'scoring' do
+      scenario 'has score on test' do
+        within '.test-score' do
+          expect(page).to have_content "0/#{category.target_score}"
+        end
       end
-    end
 
-    scenario 'can increase his score with correct answer' do
-      fill_in 'Ответ', with: 1
-      click_on 'Отправить'
-
-      within '.test-score' do
-        expect(page).to have_content '1/'
-      end
-    end
-
-    scenario 'can decrease his score with wrong answer' do
-      fill_in 'Ответ', with: 2
-      click_on 'Отправить'
-
-      within '.test-score' do
-        expect(page).to have_content '-2/'
-      end
-    end
-
-    scenario 'can pass the test when get enough test score' do
-      2.times.each do
+      scenario 'can increase his score with correct answer' do
         fill_in 'Ответ', with: 1
         click_on 'Отправить'
+
+        within '.test-score' do
+          expect(page).to have_content '1/'
+        end
       end
 
-      expect(page).to have_content 'Вы успешно прошли тест'
-    end
-
-    scenario "can't answer more questions when got test mark" do
-      2.times.each do
-        fill_in 'Ответ', with: 1
+      scenario 'can decrease his score with wrong answer' do
+        fill_in 'Ответ', with: 2
         click_on 'Отправить'
+
+        within '.test-score' do
+          expect(page).to have_content '-2/'
+        end
       end
 
-      visit tests_path
-      click_link category.name
+      scenario 'can pass the test when get enough test score' do
+        2.times.each do
+          fill_in 'Ответ', with: 1
+          click_on 'Отправить'
+        end
 
-      expect(page).to have_content 'Тест уже пройден'
+        expect(page).to have_content 'Вы успешно прошли тест'
+      end
+
+      scenario "can't answer more questions when got test mark" do
+        2.times.each do
+          fill_in 'Ответ', with: 1
+          click_on 'Отправить'
+        end
+
+        visit tests_path
+        click_link category.name
+
+        expect(page).to have_content 'Тест уже пройден'
+      end
     end
 
     scenario 'can answer only in shown time interval'
