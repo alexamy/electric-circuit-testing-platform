@@ -14,7 +14,7 @@ class TestsController < ApplicationController
     redirect_to next_question_test_attempt_path(@test_attempt)
   end
 
-  def show
+  def next_question
     @test_attempt = TestAttempt.find(params[:id])
     @category = @test_attempt.category
 

@@ -43,9 +43,9 @@ RSpec.describe TestsController, type: :controller do
     end
   end
 
-  describe 'GET #show' do
+  describe 'GET #next_question' do
     describe 'Unauthenticated user' do
-      before { get :show, params: { id: category.id } }
+      before { get :next_question, params: { id: category.id } }
 
       it 'tries to start testing' do
         expect(response).to redirect_to new_user_session_path
@@ -56,40 +56,40 @@ RSpec.describe TestsController, type: :controller do
       before { login(user) }
 
       it 'sets current test attempt' do
-        get :show, params: { id: test_attempt.id }
+        get :next_question, params: { id: test_attempt.id }
 
         expect(assigns(:test_attempt)).to eq test_attempt
       end
 
       it 'sets current category' do
-        get :show, params: { id: test_attempt.id }
+        get :next_question, params: { id: test_attempt.id }
 
         expect(assigns(:category)).to eq test_attempt.category
       end
 
       it 'sets current score' do
-        get :show, params: { id: test_attempt.id }
+        get :next_question, params: { id: test_attempt.id }
 
         expect(assigns(:score)).to be_zero
       end
 
       it 'creates a new static question' do
         expect do
-          get :show, params: { id: test_attempt.id }
+          get :next_question, params: { id: test_attempt.id }
         end.to change(StaticQuestion, :count).by 1
       end
 
       it 'selects random question' do
         allow(controller).to receive(:random_question_id).and_return(questions[0].id)
-        get :show, params: { id: test_attempt.id }
+        get :next_question, params: { id: test_attempt.id }
 
         expect(assigns(:question)).to eq questions[0]
       end
 
       it 'renders show view' do
-        get :show, params: { id: test_attempt.id }
+        get :next_question, params: { id: test_attempt.id }
 
-        expect(response).to render_template :show
+        expect(response).to render_template :next_question
       end
     end
   end
