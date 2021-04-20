@@ -9,6 +9,10 @@ class Question < ApplicationRecord
     only_integer: true,
     greater_than_or_equal_to: 0
   }
+  validates :completion_time, allow_nil: true, numericality: {
+    only_integer: true,
+    greater_than_or_equal_to: 0
+  }
 
   belongs_to :category
 
