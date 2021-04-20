@@ -3,5 +3,6 @@
 FactoryBot.define do
   factory :test_attempt do
     category
+    association :author, factory: :user
   end
 end

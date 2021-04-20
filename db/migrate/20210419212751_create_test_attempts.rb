@@ -4,6 +4,7 @@ class CreateTestAttempts < ActiveRecord::Migration[6.0]
   def change
     create_table :test_attempts do |t|
       t.belongs_to :category, null: false, foreign_key: true
+      t.belongs_to :author, null: false, foreign_key: { to_table: :users }
 
       t.timestamps
     end

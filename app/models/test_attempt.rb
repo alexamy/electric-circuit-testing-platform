@@ -2,10 +2,11 @@
 
 class TestAttempt < ApplicationRecord
   belongs_to :category
+  belongs_to :author, class_name: 'User', inverse_of: 'test_attempts'
 
   has_many :static_questions, dependent: :destroy
 
   def latest?
-    self.class.maximum(:created_at) == created_at
+    TestAttempt.where(author: author).maximum(:created_at) == created_at
   end
 end

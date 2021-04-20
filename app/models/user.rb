@@ -7,6 +7,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :static_questions, foreign_key: 'author_id', inverse_of: 'author', dependent: :destroy
+  has_many :test_attempts, foreign_key: 'author_id', inverse_of: 'author', dependent: :destroy
 
   def admin?
     is_a?(Admin)
