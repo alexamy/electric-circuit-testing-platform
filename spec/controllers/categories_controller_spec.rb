@@ -4,6 +4,7 @@ require 'rails_helper'
 
 RSpec.describe CategoriesController, type: :controller do
   let(:category) { create(:category) }
+  let!(:question) { create(:question, category: category) } # rubocop:disable RSpec/LetSetup
 
   describe 'GET #index_with_questions' do
     before { get :index_with_questions }
