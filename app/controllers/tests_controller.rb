@@ -16,6 +16,8 @@ class TestsController < ApplicationController
 
   def next_question
     @test_attempt = TestAttempt.find(params[:id])
+    return unless @test_attempt.latest?
+
     @category = @test_attempt.category
 
     # calculated before creating question, to exclude it from score

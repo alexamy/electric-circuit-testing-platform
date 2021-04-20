@@ -9,7 +9,7 @@ RSpec.describe TestsController, type: :controller do
   let(:categories) { create_list(:category, 5) }
   let(:category) { categories.first }
 
-  let(:test_attempt) { create(:test_attempt, category: category) }
+  let!(:test_attempt) { create(:test_attempt, category: category) }
 
   let!(:questions) { create_list(:question, 5, category: category) }
   let(:static_question) { create(:static_question, answer: 10, test_attempt: test_attempt, author: user) }
@@ -59,6 +59,16 @@ RSpec.describe TestsController, type: :controller do
         get :next_question, params: { id: test_attempt.id }
 
         expect(assigns(:test_attempt)).to eq test_attempt
+      end
+
+      it 'can proceed on the latest test attempt only' do
+        Timecop.travel(5.minutes.from_now) do
+          create(:test_attempt, category: category)
+        end
+
+        expect do
+          get :next_question, params: { id: test_attempt.id }
+        end.not_to change(StaticQuestion, :count)
       end
 
       it 'sets current category' do
