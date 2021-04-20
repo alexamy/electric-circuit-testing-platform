@@ -9,7 +9,7 @@ class TestsController < ApplicationController
 
   def start
     @category = Category.find(params[:category_id])
-    @test_attempt = TestAttempt.create(category: @category)
+    @test_attempt = TestAttempt.create(category: @category, author: current_user)
 
     redirect_to next_question_test_attempt_path(@test_attempt)
   end
