@@ -50,8 +50,7 @@ class TestsController < ApplicationController
     if params[:send_and_quit]
       redirect_to tests_path, notice: t('.test_end')
     else
-      @test_attempt = TestAttempt.find(params[:id])
-      redirect_to next_question_test_attempt_path(@test_attempt)
+      redirect_to next_question_test_attempt_path(@static_question.test_attempt)
     end
   end
 end

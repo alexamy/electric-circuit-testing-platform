@@ -97,12 +97,6 @@ RSpec.describe TestsController, type: :controller do
   describe 'PATCH #answer' do
     before { login(user) }
 
-    it 'sets requested test attempt' do
-      patch :answer, params: { id: test_attempt.id, question_id: static_question.id }
-
-      expect(assigns(:test_attempt)).to eq test_attempt
-    end
-
     it 'sets requested static question' do
       patch :answer, params: { id: test_attempt.id, question_id: static_question.id }
 
