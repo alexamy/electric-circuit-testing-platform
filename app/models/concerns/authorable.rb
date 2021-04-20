@@ -5,7 +5,5 @@ module Authorable
 
   included do
     belongs_to :author, class_name: 'User'
-
-    scope :authored, -> { where(author: author) }
   end
 end

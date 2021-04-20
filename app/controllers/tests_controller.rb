@@ -27,7 +27,7 @@ class TestsController < ApplicationController
   def answer
     @static_question = StaticQuestion.find(params[:question_id])
     return if @static_question.user_answer
-    return unless current_user.author_of?(@static_question)
+    return unless owned?(@static_question)
 
     @static_question.update(user_answer: params[:answer])
     redirect_after_answer
@@ -41,7 +41,7 @@ class TestsController < ApplicationController
 
   def find_test_attempt
     @test_attempt = TestAttempt.find(params[:id])
-    return unless current_user.author_of?(@test_attempt)
+    return unless owned?(@test_attempt)
     return unless @test_attempt.latest?
 
     @test_attempt
