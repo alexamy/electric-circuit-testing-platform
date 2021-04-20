@@ -2,6 +2,7 @@
 
 require 'rails_helper'
 
+# rubocop:disable RSpec/MultipleMemoizedHelpers
 RSpec.describe TestsController, type: :controller do
   let(:user) { create(:user) }
   let(:other_user) { create(:user) }
@@ -10,6 +11,7 @@ RSpec.describe TestsController, type: :controller do
   let(:category) { categories.first }
 
   let!(:test_attempt) { create(:test_attempt, category: category, author: user) }
+  let(:other_test_attempt) { create(:test_attempt, category: category, author: other_user) }
 
   let!(:questions) { create_list(:question, 5, category: category) }
   let(:static_question) { create(:static_question, answer: 10, test_attempt: test_attempt, author: user) }
@@ -59,6 +61,12 @@ RSpec.describe TestsController, type: :controller do
         get :next_question, params: { id: test_attempt.id }
 
         expect(assigns(:test_attempt)).to eq test_attempt
+      end
+
+      it 'can proceed only on his test attemp' do
+        expect do
+          get :next_question, params: { id: other_test_attempt.id }
+        end.not_to change(StaticQuestion, :count)
       end
 
       it 'can proceed on the latest test attempt only' do
@@ -147,3 +155,4 @@ RSpec.describe TestsController, type: :controller do
     end
   end
 end
+# rubocop:enable RSpec/MultipleMemoizedHelpers
