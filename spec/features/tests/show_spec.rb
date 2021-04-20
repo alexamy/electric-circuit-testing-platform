@@ -8,7 +8,7 @@ feature 'User can start test', "
   I would like to start testing
 " do
   given(:category) { create(:category) }
-  given!(:question) { create(:question, category: category, completion_time: 1) }
+  given!(:question) { create(:question, category: category, completion_time: 2) }
   given(:user) { create(:user) }
 
   scenario 'Unauthenticated user tries to start testing' do
@@ -100,25 +100,25 @@ feature 'User can start test', "
       end
     end
 
-    describe 'completion time', js: true do
+    describe 'completion time', slow: true, js: true do
       background { accept_alert }
 
       scenario 'has completion timer' do
-        expect(page).to have_content 'Оставшееся время: 1'
+        expect(page).to have_content 'Оставшееся время: 2'
       end
 
       scenario 'completion timer is changing' do
-        expect(page).to have_content 'Оставшееся время: 0'
+        expect(page).to have_content 'Оставшееся время: 1'
       end
 
       scenario 'proceed to new question when completion time passed and enter wrong answer' do
         fill_in 'Ответ', with: 2
-        expect(page).to have_content '-2/'
+        expect(page).to have_content '-2/', wait: 4
       end
 
       scenario 'proceed to new question when completion time passed and enter correct answer' do
         fill_in 'Ответ', with: 1
-        expect(page).to have_content '1/'
+        expect(page).to have_content '1/', wait: 4
       end
     end
   end
