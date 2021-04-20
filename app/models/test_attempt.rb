@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
 class TestAttempt < ApplicationRecord
+  include Authorable
+
   belongs_to :category
-  belongs_to :author, class_name: 'User', inverse_of: 'test_attempts'
 
   has_many :static_questions, dependent: :destroy
 

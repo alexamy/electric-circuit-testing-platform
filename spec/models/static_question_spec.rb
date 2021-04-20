@@ -5,10 +5,11 @@ require 'rails_helper'
 RSpec.describe StaticQuestion, type: :model do
   let!(:question) { create(:question, formula: { dependencies: %w[R] }) }
 
+  it_behaves_like 'authorable'
+
   describe 'associations' do
     it { is_expected.to belong_to :question }
     it { is_expected.to belong_to :test_attempt }
-    it { is_expected.to belong_to(:author).class_name('User') }
   end
 
   describe 'validations' do

@@ -3,9 +3,10 @@
 require 'rails_helper'
 
 RSpec.describe TestAttempt, type: :model do
+  it_behaves_like 'authorable'
+
   describe 'associations' do
     it { is_expected.to belong_to :category }
-    it { is_expected.to belong_to(:author).class_name('User') }
     it { is_expected.to have_many :static_questions }
   end
 

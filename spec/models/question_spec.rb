@@ -3,9 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe Question, type: :model do
-  describe 'associations' do
-    it { is_expected.to belong_to(:author).class_name('Admin') }
-  end
+  it_behaves_like 'authorable'
 
   describe 'validations' do
     it { is_expected.to validate_presence_of :text }

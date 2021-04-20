@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Question < ApplicationRecord
+  include Authorable
+
   validates :text, :formula, :precision, :answer_unit, presence: true
   validates :scheme, presence: true, blob: { content_type: :image, size_range: 1..1.megabytes }
   validates :precision, numericality: {
@@ -9,7 +11,6 @@ class Question < ApplicationRecord
   }
 
   belongs_to :category
-  belongs_to :author, class_name: 'Admin', inverse_of: 'questions'
 
   has_many :formula_parameters, dependent: :destroy
 
