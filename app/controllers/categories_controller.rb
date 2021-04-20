@@ -2,7 +2,7 @@
 
 class CategoriesController < ApplicationController
   def index_with_questions
-    @categories = Category.joins(:questions).distinct
+    @categories = Category.with_questions
 
     render :index
   end

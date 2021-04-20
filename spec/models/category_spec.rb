@@ -3,19 +3,28 @@
 require 'rails_helper'
 
 RSpec.describe Category, type: :model do
+  let(:model) { described_class }
+  let(:user) { create(:user) }
+
+  let(:category) { create(:category) }
+  let(:category_other) { create(:category) }
+  let(:category_empty) { create(:category) }
+
+  let!(:question) { create(:question, category: category) }
+  let!(:question_other) { create(:question, category: category_other) }
+
   it { is_expected.to validate_presence_of :name }
   it { is_expected.to validate_presence_of :target_score }
 
   it { is_expected.to have_many(:questions).dependent(:destroy) }
 
+  describe '.with_questions' do
+    it 'returns only categories with questions' do
+      expect(model.with_questions).to contain_exactly category, category_other
+    end
+  end
+
   describe '#score_of' do
-    let(:user) { create(:user) }
-    let(:category) { create(:category) }
-    let(:question) { create(:question, category: category) }
-
-    let(:category_other) { create(:category) }
-    let(:question_other) { create(:question, category: category_other) }
-
     it 'returns 0 when no questions answered' do
       expect(category.score_of(user)).to be_zero
     end

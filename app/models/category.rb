@@ -8,6 +8,8 @@ class Category < ApplicationRecord
 
   has_many :questions, dependent: :destroy
 
+  scope :with_questions, -> { joins(:questions).distinct }
+
   def score_of(user)
     corrects, wrongs = StaticQuestion.joins(:question)
                                      .where(author: user, questions: { category: self })
