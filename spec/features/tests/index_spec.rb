@@ -15,6 +15,6 @@ feature 'User can view list of categories', "
     visit tests_path
 
     expect(page).not_to have_content category_without_questions.name
-    expect(page).to have_link category.name, href: test_path(category)
+    expect(page).to have_link category.name, href: start_test_attempt_path(category)
   end
 end

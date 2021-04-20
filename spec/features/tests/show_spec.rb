@@ -12,7 +12,7 @@ feature 'User can start test', "
   given(:user) { create(:user) }
 
   scenario 'Unauthenticated user tries to start testing' do
-    visit test_path(category)
+    visit start_test_attempt_path(category)
 
     expect(page).to have_content 'Вам необходимо войти в систему'
   end
@@ -20,7 +20,10 @@ feature 'User can start test', "
   describe 'Authenticated user' do
     background { sign_in(user) }
 
-    background { visit test_path(category) }
+    background do
+      visit tests_path
+      click_link category.name
+    end
 
     scenario 'starts testing' do
       expect(page).to have_content 'Схема'

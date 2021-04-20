@@ -17,7 +17,7 @@ p
   | Единицы измерения:
   =< @question.answer_unit
 
-= form_with url: test_answer_path(@category, @static_question), method: :patch, remote: false do |f|
+= form_with url: answer_path(@static_question), method: :patch, remote: false do |f|
   .form-group
     = f.label :answer, 'Ответ:'
     = f.text_field :answer
