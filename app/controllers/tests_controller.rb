@@ -15,9 +15,7 @@ class TestsController < ApplicationController
   end
 
   def next_question
-    @test_attempt = TestAttempt.find(params[:id])
-    return unless current_user.author_of?(@test_attempt)
-    return unless @test_attempt.latest?
+    return unless find_test_attempt
 
     @category = @test_attempt.category
 
@@ -39,6 +37,14 @@ class TestsController < ApplicationController
 
   def random_question_id
     Question.where(category: @test_attempt.category).pluck(:id).sample
+  end
+
+  def find_test_attempt
+    @test_attempt = TestAttempt.find(params[:id])
+    return unless current_user.author_of?(@test_attempt)
+    return unless @test_attempt.latest?
+
+    @test_attempt
   end
 
   def create_static_question
