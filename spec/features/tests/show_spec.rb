@@ -77,7 +77,26 @@ feature 'User can start test', "
       end
     end
 
-    scenario 'can pass the test when get enough test score'
+    scenario 'can pass the test when get enough test score' do
+      2.times.each do
+        fill_in 'Ответ', with: 1
+        click_on 'Отправить'
+      end
+
+      expect(page).to have_content 'Вы успешно прошли тест'
+    end
+
+    scenario "can't answer more questions when got test mark" do
+      2.times.each do
+        fill_in 'Ответ', with: 1
+        click_on 'Отправить'
+      end
+
+      visit tests_path
+      click_link category.name
+
+      expect(page).to have_content 'Тест уже пройден'
+    end
 
     scenario 'can answer only in shown time interval'
   end
