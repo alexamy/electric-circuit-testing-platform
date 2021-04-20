@@ -7,8 +7,7 @@
 - if @question.completion_time
   .completion-time
     | Оставшееся время:
-    span#timer< data-target=answer_path(@static_question) = @question.completion_time
-    span#timer-unit< секунд
+    span#timer< = @question.completion_time
 
 .question-data
   p Параметры схемы
@@ -25,7 +24,7 @@
     | Единицы измерения:
     =< @question.answer_unit
 
-= form_with url: answer_path(@static_question), method: :patch, remote: false do |f|
+= form_with url: answer_path(@static_question), method: :patch, remote: false, id: 'answer-form' do |f|
   .form-group
     = f.label :answer, 'Ответ:'
     = f.text_field :answer

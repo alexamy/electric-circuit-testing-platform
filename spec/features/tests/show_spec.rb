@@ -111,8 +111,15 @@ feature 'User can start test', "
         expect(page).to have_content 'Оставшееся время: 0'
       end
 
-      scenario 'proceed to new question when completion time passed and enter wrong answer'
-      scenario 'proceed to new question when completion time passed and enter correct answer'
+      scenario 'proceed to new question when completion time passed and enter wrong answer' do
+        fill_in 'Ответ', with: 2
+        expect(page).to have_content '-2/'
+      end
+
+      scenario 'proceed to new question when completion time passed and enter correct answer' do
+        fill_in 'Ответ', with: 1
+        expect(page).to have_content '1/'
+      end
     end
   end
 end
