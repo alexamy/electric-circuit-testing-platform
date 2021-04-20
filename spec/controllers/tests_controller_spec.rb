@@ -25,6 +25,22 @@ RSpec.describe TestsController, type: :controller do
     end
   end
 
+  describe 'GET #start' do
+    before { login(user) }
+
+    it 'creates test attempt' do
+      expect do
+        get :start, params: { category_id: category.id }
+      end.to change(TestAttempt, :count).by 1
+    end
+
+    it 'redirects to show view' do
+      get :start, params: { category_id: category.id }
+
+      expect(response).to redirect_to next_question_test_attempt_path(assigns(:test_attempt))
+    end
+  end
+
   describe 'GET #show' do
     describe 'Unauthenticated user' do
       before { get :show, params: { id: category.id } }

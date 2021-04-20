@@ -7,6 +7,13 @@ class TestsController < ApplicationController
     @categories = Category.joins(:questions).distinct
   end
 
+  def start
+    @category = Category.find(params[:category_id])
+    @test_attempt = TestAttempt.create(category: @category)
+
+    redirect_to next_question_test_attempt_path(@test_attempt)
+  end
+
   def show
     @category = Category.find(params[:id])
     @question = Question.find(random_question_id)
