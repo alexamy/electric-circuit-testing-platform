@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  root 'home#index'
+
   devise_for :users
 
   get '/tests', controller: 'tests', action: 'index', as: 'tests'
@@ -8,13 +10,7 @@ Rails.application.routes.draw do
   get '/test_attempt/:id', controller: 'tests', action: 'next_question', as: 'next_question_test_attempt'
   patch '/answer/:question_id', controller: 'tests', action: 'answer', as: 'answer'
 
-  resources :tests, only: %i[index show] do
-    resources :answers, only: %i[update], controller: 'tests', action: 'answer', as: 'answer'
-  end
-
   namespace :admin do
     resources :questions, shallow: true
   end
-
-  root 'home#index'
 end
