@@ -26,8 +26,8 @@ class TestsController < ApplicationController
 
   def answer
     @static_question = StaticQuestion.find(params[:question_id])
-    return if @static_question.user_answer
     return unless owned?(@static_question)
+    return if @static_question.user_answer
 
     @static_question.update(user_answer: params[:answer])
     redirect_after_answer
