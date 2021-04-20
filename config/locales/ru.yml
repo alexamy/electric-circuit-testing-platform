@@ -1,7 +1,10 @@
 ru:
   tests:
-    index:
+    start:
       start_warning: Каждый неотвеченный вопрос будет засчитан как неправильный. Вы уверены?
+      already_passed: Тест уже пройден
+    next_question:
+      passed: Вы успешно прошли тест
   static_questions:
     answer:
       test_end: Вы вышли из тестирования

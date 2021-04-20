@@ -31,6 +31,15 @@ RSpec.describe TestsController, type: :controller do
 
       expect(response).to redirect_to next_question_test_attempt_path(assigns(:test_attempt))
     end
+
+    it 'stops when get enough score' do
+      10.times.each do
+        create(:static_question, :correct, question: questions.first, test_attempt: test_attempt, author: user)
+      end
+      get :start, params: { category_id: category.id }
+
+      expect(response).to redirect_to tests_path
+    end
   end
 
   describe 'GET #next_question' do
@@ -47,7 +56,19 @@ RSpec.describe TestsController, type: :controller do
         expect(assigns(:test_attempt)).to eq test_attempt
       end
 
-      it 'can proceed only on his test attemp' do
+      it 'sets current category' do
+        get :next_question, params: { id: test_attempt.id }
+
+        expect(assigns(:category)).to eq test_attempt.category
+      end
+
+      it 'sets current score' do
+        get :next_question, params: { id: test_attempt.id }
+
+        expect(assigns(:score)).to be_zero
+      end
+
+      it 'can proceed only on his test attempt' do
         expect do
           get :next_question, params: { id: other_test_attempt.id }
         end.not_to change(StaticQuestion, :count)
@@ -63,18 +84,6 @@ RSpec.describe TestsController, type: :controller do
         end.not_to change(StaticQuestion, :count)
       end
 
-      it 'sets current category' do
-        get :next_question, params: { id: test_attempt.id }
-
-        expect(assigns(:category)).to eq test_attempt.category
-      end
-
-      it 'sets current score' do
-        get :next_question, params: { id: test_attempt.id }
-
-        expect(assigns(:score)).to be_zero
-      end
-
       it 'creates a new static question' do
         expect do
           get :next_question, params: { id: test_attempt.id }
@@ -86,6 +95,15 @@ RSpec.describe TestsController, type: :controller do
         get :next_question, params: { id: test_attempt.id }
 
         expect(assigns(:question)).to eq questions[0]
+      end
+
+      it 'stops when get enough score' do
+        10.times.each do
+          create(:static_question, :correct, question: questions.first, test_attempt: test_attempt, author: user)
+        end
+        get :next_question, params: { id: test_attempt.id }
+
+        expect(response).to redirect_to tests_path
       end
 
       it 'renders show view' do

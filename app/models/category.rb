@@ -18,4 +18,8 @@ class Category < ApplicationRecord
 
     corrects * CORRECT_SCORE + wrongs * WRONG_SCORE
   end
+
+  def passed?(user)
+    score_of(user) >= target_score
+  end
 end

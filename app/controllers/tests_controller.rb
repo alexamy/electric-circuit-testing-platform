@@ -5,8 +5,9 @@ class TestsController < ApplicationController
 
   def start
     @category = Category.find(params[:category_id])
-    @test_attempt = TestAttempt.create(category: @category, author: current_user)
+    redirect_to tests_path, notice: t('.already_passed') and return if @category.passed?(current_user)
 
+    @test_attempt = TestAttempt.create(category: @category, author: current_user)
     redirect_to next_question_test_attempt_path(@test_attempt)
   end
 
@@ -14,9 +15,9 @@ class TestsController < ApplicationController
     return unless find_test_attempt
 
     @category = @test_attempt.category
+    redirect_to tests_path, notice: t('.passed') and return if @category.passed?(current_user)
 
-    # calculated before creating question, to exclude it from score
-    @score = @category.score_of(current_user)
+    @score = @category.score_of(current_user) # calculated before creating question, to exclude it from score
     create_static_question
   end
 
