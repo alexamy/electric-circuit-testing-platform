@@ -12,8 +12,8 @@ RSpec.describe TestsController, type: :controller do
   let(:test_attempt) { create(:test_attempt, category: category) }
 
   let!(:questions) { create_list(:question, 5, category: category) }
-  let(:static_question) { create(:static_question, answer: 10, author: user) }
-  let(:static_question_other) { create(:static_question, answer: 10, author: other_user) }
+  let(:static_question) { create(:static_question, answer: 10, test_attempt: test_attempt, author: user) }
+  let(:static_question_other) { create(:static_question, answer: 10, test_attempt: test_attempt, author: other_user) }
 
   describe 'GET #index' do
     before { get :index }
@@ -97,47 +97,47 @@ RSpec.describe TestsController, type: :controller do
   describe 'PATCH #answer' do
     before { login(user) }
 
-    it 'sets requested test' do
-      patch :answer, params: { test_id: category.id, id: static_question.id }
+    it 'sets requested test attempt' do
+      patch :answer, params: { id: test_attempt.id, question_id: static_question.id }
 
-      expect(assigns(:category)).to eq category
+      expect(assigns(:test_attempt)).to eq test_attempt
     end
 
     it 'sets requested static question' do
-      patch :answer, params: { test_id: category.id, id: static_question.id }
+      patch :answer, params: { id: test_attempt.id, question_id: static_question.id }
 
       expect(assigns(:static_question)).to eq static_question
     end
 
     it 'restrict user to answer only his own static question' do
       expect do
-        patch :answer, params: { test_id: category.id, id: static_question_other.id, answer: 100.0 }
+        patch :answer, params: { id: test_attempt.id, question_id: static_question_other.id, answer: 100.0 }
       end.not_to change(static_question_other, :user_answer)
     end
 
     it 'allow answer only once' do
-      patch :answer, params: { test_id: category.id, id: static_question.id, answer: 100.0 }
-      patch :answer, params: { test_id: category.id, id: static_question.id, answer: 1000.0 }
+      patch :answer, params: { id: test_attempt.id, question_id: static_question.id, answer: 100.0 }
+      patch :answer, params: { id: test_attempt.id, question_id: static_question.id, answer: 1000.0 }
 
       static_question.reload
       expect(static_question.user_answer).to eq 100.0
     end
 
     it 'saves user answer' do
-      patch :answer, params: { test_id: category.id, id: static_question.id, answer: 100.0 }
+      patch :answer, params: { id: test_attempt.id, question_id: static_question.id, answer: 100.0 }
 
       static_question.reload
       expect(static_question.user_answer).to eq 100.0
     end
 
     it 'redirects to next question' do
-      patch :answer, params: { test_id: category.id, id: static_question.id }
+      patch :answer, params: { id: test_attempt.id, question_id: static_question.id }
 
-      expect(response).to redirect_to test_path(category)
+      expect(response).to redirect_to next_question_test_attempt_path(test_attempt)
     end
 
     it 'redirects to tests list when has exit parameter' do
-      patch :answer, params: { test_id: category.id, id: static_question.id, send_and_quit: true }
+      patch :answer, params: { id: test_attempt.id, question_id: static_question.id, send_and_quit: true }
 
       expect(response).to redirect_to tests_path
     end

@@ -24,7 +24,7 @@ class TestsController < ApplicationController
   end
 
   def answer
-    @static_question = StaticQuestion.find(params[:id])
+    @static_question = StaticQuestion.find(params[:question_id])
     return if @static_question.user_answer
     return unless current_user.author_of?(@static_question)
 
@@ -50,8 +50,8 @@ class TestsController < ApplicationController
     if params[:send_and_quit]
       redirect_to tests_path, notice: t('.test_end')
     else
-      @category = Category.find(params[:test_id])
-      redirect_to test_path(@category)
+      @test_attempt = TestAttempt.find(params[:id])
+      redirect_to next_question_test_attempt_path(@test_attempt)
     end
   end
 end
