@@ -9,6 +9,8 @@ RSpec.describe TestsController, type: :controller do
   let(:categories) { create_list(:category, 5) }
   let(:category) { categories.first }
 
+  let(:test_attempt) { create(:test_attempt, category: category) }
+
   let!(:questions) { create_list(:question, 5, category: category) }
   let(:static_question) { create(:static_question, answer: 10, author: user) }
   let(:static_question_other) { create(:static_question, answer: 10, author: other_user) }
@@ -53,33 +55,39 @@ RSpec.describe TestsController, type: :controller do
     describe 'Authenticated user' do
       before { login(user) }
 
-      it 'sets current category' do
-        get :show, params: { id: category.id }
+      it 'sets current test attempt' do
+        get :show, params: { id: test_attempt.id }
 
-        expect(assigns(:category)).to eq category
+        expect(assigns(:test_attempt)).to eq test_attempt
+      end
+
+      it 'sets current category' do
+        get :show, params: { id: test_attempt.id }
+
+        expect(assigns(:category)).to eq test_attempt.category
       end
 
       it 'sets current score' do
-        get :show, params: { id: category.id }
+        get :show, params: { id: test_attempt.id }
 
         expect(assigns(:score)).to be_zero
       end
 
       it 'creates a new static question' do
         expect do
-          get :show, params: { id: category.id }
+          get :show, params: { id: test_attempt.id }
         end.to change(StaticQuestion, :count).by 1
       end
 
       it 'selects random question' do
         allow(controller).to receive(:random_question_id).and_return(questions[0].id)
-        get :show, params: { id: category.id }
+        get :show, params: { id: test_attempt.id }
 
         expect(assigns(:question)).to eq questions[0]
       end
 
       it 'renders show view' do
-        get :show, params: { id: category.id }
+        get :show, params: { id: test_attempt.id }
 
         expect(response).to render_template :show
       end

@@ -15,8 +15,8 @@ class TestsController < ApplicationController
   end
 
   def show
-    @category = Category.find(params[:id])
-    @question = Question.find(random_question_id)
+    @test_attempt = TestAttempt.find(params[:id])
+    @category = @test_attempt.category
 
     # calculated before creating question, to exclude it from score
     @score = @category.score_of(current_user)
@@ -35,12 +35,13 @@ class TestsController < ApplicationController
   private
 
   def random_question_id
-    Question.where(category: @category).pluck(:id).sample
+    Question.where(category: @test_attempt.category).pluck(:id).sample
   end
 
   def create_static_question
+    @question = Question.find(random_question_id)
     @static_question = StaticQuestion.new_from(@question)
-    @static_question.update(author: current_user)
+    @static_question.update(author: current_user, test_attempt: @test_attempt)
   end
 
   # NOTE: dont use `redirect_to test_path(@static_question.question.category)`, because
