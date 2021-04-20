@@ -34,12 +34,8 @@ RSpec.describe TestsController, type: :controller do
   end
 
   describe 'GET #next_question' do
-    describe 'Unauthenticated user' do
-      before { get :next_question, params: { id: category.id } }
-
-      it 'tries to start testing' do
-        expect(response).to redirect_to new_user_session_path
-      end
+    it_behaves_like 'require_authentication' do
+      let(:action) { get :next_question, params: { id: category.id } }
     end
 
     describe 'Authenticated user' do
