@@ -8,7 +8,7 @@ feature 'User can start test', "
   I would like to start testing
 " do
   given(:category) { create(:category) }
-  given!(:question) { create(:question, category: category) }
+  given!(:question) { create(:question, category: category, completion_time: 1) }
   given(:user) { create(:user) }
 
   scenario 'Unauthenticated user tries to start testing' do
@@ -100,6 +100,19 @@ feature 'User can start test', "
       end
     end
 
-    scenario 'can answer only in shown time interval'
+    describe 'completion time', js: true do
+      background { accept_alert }
+
+      scenario 'has completion timer' do
+        expect(page).to have_content 'Оставшееся время: 1'
+      end
+
+      scenario 'completion timer is changing' do
+        expect(page).to have_content 'Оставшееся время: 0'
+      end
+
+      scenario 'proceed to new question when completion time passed and enter wrong answer'
+      scenario 'proceed to new question when completion time passed and enter correct answer'
+    end
   end
 end
