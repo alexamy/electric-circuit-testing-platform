@@ -20,15 +20,6 @@ class TestsController < ApplicationController
     create_static_question
   end
 
-  def answer
-    @static_question = StaticQuestion.find(params[:question_id])
-    return unless owned?(@static_question)
-    return if @static_question.user_answer
-
-    @static_question.update(user_answer: params[:answer])
-    redirect_after_answer
-  end
-
   private
 
   def random_question_id
@@ -47,15 +38,5 @@ class TestsController < ApplicationController
     @question = Question.find(random_question_id)
     @static_question = StaticQuestion.new_from(@question)
     @static_question.update(author: current_user, test_attempt: @test_attempt)
-  end
-
-  # NOTE: dont use `redirect_to test_path(@static_question.question.category)`, because
-  # in the future *test* might be the collection of questions from any categories
-  def redirect_after_answer
-    if params[:send_and_quit]
-      redirect_to tests_path, notice: t('.test_end')
-    else
-      redirect_to next_question_test_attempt_path(@static_question.test_attempt)
-    end
   end
 end

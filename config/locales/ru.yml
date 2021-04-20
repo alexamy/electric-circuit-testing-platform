@@ -2,6 +2,7 @@ ru:
   tests:
     index:
       start_warning: Каждый неотвеченный вопрос будет засчитан как неправильный. Вы уверены?
+  static_questions:
     answer:
       test_end: Вы вышли из тестирования
   admin:
