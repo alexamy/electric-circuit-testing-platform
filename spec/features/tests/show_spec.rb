@@ -100,7 +100,7 @@ feature 'User can start test', "
       end
     end
 
-    xdescribe 'completion time', js: true do
+    describe 'completion time', js: true do
       background { accept_alert }
 
       scenario 'has completion timer' do
@@ -108,7 +108,7 @@ feature 'User can start test', "
       end
 
       scenario 'completion timer is changing' do
-        page.execute_script('clock.runToLast()')
+        page.execute_script('clock.tick(1000)')
 
         expect(page).to have_content 'Оставшееся время: 1'
       end
