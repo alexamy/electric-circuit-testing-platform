@@ -9,7 +9,6 @@ if(process.env.RAILS_ENV == 'test') {
 }
 
 require("@rails/ujs").start()
-require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
 
