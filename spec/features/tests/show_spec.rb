@@ -100,7 +100,7 @@ feature 'User can start test', "
       end
     end
 
-    describe 'completion time', js: true do
+    xdescribe 'completion time', js: true do
       background { accept_alert }
 
       scenario 'has completion timer' do

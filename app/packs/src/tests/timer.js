@@ -1,9 +1,6 @@
 function setupTimer() {
   const timer = $('#timer');
-  const form = $('#answer-form');
-
-  console.log('hi')
-  form.on('submit', () => console.log('submitted'))
+  const submit = $('input[type="submit"][name="commit"]');
 
   function tick(intervalID) {
     const count = Number(timer.text());
@@ -14,7 +11,7 @@ function setupTimer() {
 
     if(count === 0) {
       clearInterval(intervalID);
-      form.trigger('submit');
+      submit.trigger('click');
     }
     else {
       timer.text(count - 1);
@@ -26,4 +23,4 @@ function setupTimer() {
   }
 }
 
-$(document).on('turbolinks:load', setupTimer);
+$(setupTimer);
