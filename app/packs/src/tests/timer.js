@@ -1,8 +1,8 @@
-$(function() {
+function setupTimer() {
   const timer = $('#timer');
-  const submit = $('input[type="submit"][name="commit"]');
+  const form = $('#answer-form');
 
-  function tick() {
+  function tick(intervalID) {
     const count = Number(timer.text());
 
     if(count <= 10) {
@@ -10,7 +10,8 @@ $(function() {
     }
 
     if(count === 0) {
-      submit.trigger('click');
+      clearInterval(intervalID);
+      form.trigger('submit');
     }
     else {
       timer.text(count - 1);
@@ -18,6 +19,8 @@ $(function() {
   }
 
   if(timer.length) {
-    const interalID = setInterval(tick, 1000);
+    const intervalID = setInterval(() => tick(intervalID), 1000);
   }
-});
+}
+
+$(document).on('turbolinks:load', setupTimer);

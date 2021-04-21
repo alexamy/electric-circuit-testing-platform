@@ -3,7 +3,10 @@
 // a relevant structure within app/javascript and only use these pack files to reference
 // that code so it'll be compiled.
 
-console.log('hello from webpack!')
+if(process.env.RAILS_ENV == 'test') {
+  window.FakeTimers = require('@sinonjs/fake-timers');
+  window.clock = FakeTimers.install();
+}
 
 require("@rails/ujs").start()
 require("turbolinks").start()
@@ -13,11 +16,6 @@ require("channels")
 require("cash-dom")
 
 require('src/tests/timer');
-
-if(process.env.RAILS_ENV == 'test') {
-  window.FakeTimers = require('@sinonjs/fake-timers');
-  window.clock = FakeTimers.install();
-}
 
 // Uncomment to copy all static images under ../images to the output folder and reference
 // them with the image_pack_tag helper in views (e.g <%= image_pack_tag 'rails.png' %>)
