@@ -2,6 +2,9 @@ function setupTimer() {
   const timer = $('#timer');
   const form = $('#answer-form');
 
+  console.log('hi')
+  form.on('submit', () => console.log('submitted'))
+
   function tick(intervalID) {
     const count = Number(timer.text());
 

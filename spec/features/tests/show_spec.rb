@@ -100,7 +100,7 @@ feature 'User can start test', "
       end
     end
 
-    describe 'completion time', slow: true, js: true do
+    describe 'completion time', js: true do
       background { accept_alert }
 
       scenario 'has completion timer' do
@@ -108,17 +108,23 @@ feature 'User can start test', "
       end
 
       scenario 'completion timer is changing' do
+        page.execute_script('clock.runToLast()')
+
         expect(page).to have_content 'Оставшееся время: 1'
       end
 
       scenario 'proceed to new question when completion time passed and enter wrong answer' do
         fill_in 'Ответ', with: 2
-        expect(page).to have_content '-2/', wait: 4
+        page.execute_script('clock.runAll()')
+
+        expect(page).to have_content '-2/'
       end
 
       scenario 'proceed to new question when completion time passed and enter correct answer' do
         fill_in 'Ответ', with: 1
-        expect(page).to have_content '1/', wait: 4
+        page.execute_script('clock.runAll()')
+
+        expect(page).to have_content '1/'
       end
     end
   end
