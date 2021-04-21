@@ -80,6 +80,11 @@ RSpec.configure do |config|
   config.after(:all) do
     FileUtils.rm_rf("#{Rails.root}/tmp/storage")
   end
+
+  # setup page timer
+  config.before(:each, js: true) do
+    PageTimer.bind(page)
+  end
 end
 
 Shoulda::Matchers.configure do |config|

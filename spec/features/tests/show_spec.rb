@@ -108,21 +108,21 @@ feature 'User can start test', "
       end
 
       scenario 'completion timer is changing' do
-        page.execute_script('clock.tick(1000)')
+        PageTimer.tick(1000)
 
         expect(page).to have_content 'Оставшееся время: 1'
       end
 
       scenario 'proceed to new question when completion time passed and enter wrong answer' do
         fill_in 'Ответ', with: 2
-        page.execute_script('clock.runAll()')
+        PageTimer.runAll
 
         expect(page).to have_content '-2/'
       end
 
       scenario 'proceed to new question when completion time passed and enter correct answer' do
         fill_in 'Ответ', with: 1
-        page.execute_script('clock.runAll()')
+        PageTimer.runAll
 
         expect(page).to have_content '1/'
       end
