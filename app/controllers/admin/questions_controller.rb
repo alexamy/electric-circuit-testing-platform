@@ -6,12 +6,17 @@ class Admin::QuestionsController < Admin::BaseController
   end
 
   def create
-    return unless valid_formula?
-    prepare_parameters and return unless formula_parameters_attributes?
-
     @question = Question.new(question_params)
+    render :new and return unless valid_formula?
+    prepare_parameters and render :new and return unless formula_parameters_attributes?
+
     @question.formula = FormulaParser.call(@question.formula_text)
-    redirect_to admin_question_path(@question), notice: t('.successful') if @question.save
+
+    if @question.save
+      redirect_to admin_question_path(@question), notice: t('.successful')
+    else
+      render :new
+    end
   end
 
   def index
@@ -32,7 +37,7 @@ class Admin::QuestionsController < Admin::BaseController
   def valid_formula?
     text = params.dig(:question, :formula_text)
     valid = FormulaValidator.call(text)
-    @alert = t('.formula_error') unless valid
+    flash.now[:alert] = t('.formula_error') unless valid
     valid
   end
 
