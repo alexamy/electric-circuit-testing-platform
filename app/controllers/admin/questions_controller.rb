@@ -5,12 +5,10 @@ class Admin::QuestionsController < Admin::BaseController
     @question = Question.new
   end
 
+  # :reek:DuplicateMethodCall:
   def create
     @question = Question.new(question_params)
-    render :new and return unless valid_formula?
-    prepare_parameters and render :new and return unless formula_parameters_attributes?
-
-    @question.formula = FormulaParser.call(@question.formula_text)
+    render :new and return unless prepare_question
 
     if @question.save
       redirect_to admin_question_path(@question), notice: t('.successful')
@@ -39,6 +37,13 @@ class Admin::QuestionsController < Admin::BaseController
     valid = FormulaValidator.call(text)
     flash.now[:alert] = t('.formula_error') unless valid
     valid
+  end
+
+  def prepare_question
+    return unless valid_formula?
+    prepare_parameters and return unless formula_parameters_attributes?
+
+    @question.formula = FormulaParser.call(@question.formula_text)
   end
 
   def prepare_parameters
