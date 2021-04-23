@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# :reek:UtilityFunction
 module ApplicationHelper
   def seconds_to_minsec(seconds)
     return '00:00' if seconds.negative? || seconds.zero?
