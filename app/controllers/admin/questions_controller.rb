@@ -5,7 +5,7 @@ class Admin::QuestionsController < Admin::BaseController
     @question = Question.new
   end
 
-  # :reek:DuplicateMethodCall:
+  # :reek:DuplicateMethodCall
   def create
     @question = Question.new(question_params)
     render :new and return unless prepare_question
