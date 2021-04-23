@@ -7,7 +7,7 @@
 - if @question.completion_time
   .completion-time
     | Оставшееся время:
-    span#timer< = seconds_to_minsec(@question.completion_time)
+    span#timer<(data-count=@question.completion_time) = seconds_to_minsec(@question.completion_time)
 
 .question-data
   p Параметры схемы

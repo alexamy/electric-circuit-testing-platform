@@ -2,7 +2,7 @@
 
 module ApplicationHelper
   def seconds_to_minsec(seconds)
-    return '00:00' if seconds.negative?
+    return '00:00' if seconds.negative? || seconds.zero?
 
     seconds = seconds.to_i
     minutes = seconds / 60
