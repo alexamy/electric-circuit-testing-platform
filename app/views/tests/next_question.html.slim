@@ -24,7 +24,7 @@
     | Единицы измерения:
     =< @question.answer_unit
 
-= form_with url: answer_path(@static_question), method: :patch, local: true, id: 'answer-form' do |f|
+= form_with url: answer_path(@static_question), method: :patch, id: 'answer-form' do |f|
   .form-group
     = f.label :answer, 'Ответ:'
     = f.text_field :answer
