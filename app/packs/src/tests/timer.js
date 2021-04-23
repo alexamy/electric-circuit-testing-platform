@@ -1,14 +1,12 @@
-function secToPart(seconds) {
-  return seconds.toString().padStart(2, '0');
-}
-
-function secToMS(seconds) {
+function secondsToMinSec(seconds) {
   if(seconds <= 0) return '00:00'
 
-  const minutes = Math.floor(seconds / 60);
-  const secondsLeft = seconds - (minutes * 60);
+  const part = count => count.toString().padStart(2, '0');
 
-  return `${secToPart(minutes)}:${secToPart(secondsLeft)}`;
+  const minutes = Math.floor(seconds / 60);
+  const secondsLeft = seconds - minutes * 60;
+
+  return `${part(minutes)}:${part(secondsLeft)}`;
 }
 
 function setupTimer() {
@@ -26,7 +24,7 @@ function setupTimer() {
       }
       else {
         count -= 1;
-        timer.text(secToMS(count));
+        timer.text(secondsToMinSec(count));
       }
     }
 
