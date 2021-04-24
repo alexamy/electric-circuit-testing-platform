@@ -1,4 +1,9 @@
-nav.navbar
-  span
-    - if user_signed_in?
-      = link_to 'Выйти', destroy_user_session_path, method: :delete, class: 'link'
+nav.h-12.w-full.flex.justify-between.items-center.px-4.bg-gray-400
+  div
+    a.link-navbar href=tests_path
+      | Тесты
+  div
+  div
+  - if user_signed_in?
+    a.link-navbar href=destroy_user_session_path data-method="delete"
+      | Выйти

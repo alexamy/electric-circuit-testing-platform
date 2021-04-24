@@ -10,7 +10,7 @@ html
     = javascript_pack_tag 'application'
 
   body.container.mx-auto
-    p Admin panel
     = render 'shared/navigation'
     = render 'shared/alerts'
-    = yield
+    .px-4.py-2
+      = yield
