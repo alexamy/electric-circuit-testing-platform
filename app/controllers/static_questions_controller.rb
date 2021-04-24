@@ -5,6 +5,7 @@ class StaticQuestionsController < ApplicationController
 
   def answer
     return unless find_question
+    return if time_exceeded?
 
     @static_question.update(user_answer: params[:answer])
     redirect_after_answer
@@ -17,10 +18,12 @@ class StaticQuestionsController < ApplicationController
     return unless owned?(@static_question)
     return if @static_question.user_answer
 
-    answer_time_limit = @static_question.created_at + @static_question.question.completion_time
-    return if Time.current > answer_time_limit
-
     @static_question
+  end
+
+  def time_exceeded?
+    end_time = @static_question.created_at + @static_question.question.completion_time
+    Time.current > end_time
   end
 
   def redirect_after_answer
