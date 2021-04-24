@@ -6,8 +6,8 @@ feature "
   In order to get status information
   As an user
   I'd like to be able to get notifications and interact with them
-", js: true do
-  describe 'Notification' do
+" do
+  describe 'Notification', js: true do
     given(:admin) { create(:admin) }
 
     background do
@@ -25,20 +25,15 @@ feature "
     end
 
     scenario 'hides after some time' do
-      PageTimer.tick(10_000)
+      PageTimer.tick(5000)
 
-      within '.notifications' do
-        expect(page).not_to have_content 'Ошибка'
-      end
+      expect(page).not_to have_content 'Ошибка'
     end
 
     scenario 'hides on close button click' do
-      click_on '.notification__close'
-      PageTimer.tick(1000)
+      find('.notification__close').click
 
-      within '.notifications' do
-        expect(page).not_to have_content 'Ошибка'
-      end
+      expect(page).not_to have_content 'Ошибка'
     end
   end
 end
