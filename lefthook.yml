@@ -9,8 +9,3 @@ pre-push:
       run: bundle exec brakeman -q --no-pager
     rspec:
       bundle exec crystalball --fail-fast
-
-post-checkout:
-  scripts:
-    crystalball-update:
-      tags: rspec backend
