@@ -121,16 +121,21 @@ feature 'User can start test', "
 
       scenario 'proceed to new question when completion time passed and enter wrong answer' do
         fill_in 'Ответ', with: 2
-        PageTimer.runAll
 
-        expect(page).to have_content '-2/'
+        Timecop.travel(Time.current + 65) do
+          PageTimer.runAll
+          expect(page).to have_content '-2/'
+        end
       end
 
-      scenario 'proceed to new question when completion time passed and enter correct answer' do
+      scenario "proceed to new question and dont mark current as correct
+      when completion time passed and enter correct answer" do
         fill_in 'Ответ', with: 1
-        PageTimer.runAll
 
-        expect(page).to have_content '1/'
+        Timecop.travel(Time.current + 65) do
+          PageTimer.runAll
+          expect(page).to have_content '-2/'
+        end
       end
     end
   end
