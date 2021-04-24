@@ -2,7 +2,7 @@
 
 # :reek:MissingSafeMethod { exclude: [ admin_required! ] }
 class Admin::BaseController < ApplicationController
-  layout 'admin'
+  # layout 'admin'
 
   before_action :admin_required!
 
