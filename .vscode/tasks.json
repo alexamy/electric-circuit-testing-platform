@@ -32,10 +32,20 @@
       }
     },
     {
-      "label": "Run all tests",
+      "label": "Run all tests (crystalball)",
       "type": "shell",
       "group": "test",
       "command": "bundle exec crystalball --format p",
+      "problemMatcher": [],
+      "presentation": {
+        "clear": true
+      }
+    },
+    {
+      "label": "Run all tests",
+      "type": "shell",
+      "group": "test",
+      "command": "bundle exec rspec --format p",
       "problemMatcher": [],
       "presentation": {
         "clear": true
