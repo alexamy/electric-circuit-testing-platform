@@ -58,7 +58,9 @@ class Admin::QuestionsController < Admin::BaseController
 
   def question_params
     params.require(:question)
-          .permit(:text, :comment, :formula_text, :precision, :answer_unit, :category_id, :scheme,
+          .permit(:text, :comment, :formula_text,
+                  :precision, :answer_unit, :completion_time,
+                  :scheme, :category_id,
                   formula_parameters_attributes: %i[name minimum maximum step unit])
           .merge(author_id: current_user.id)
   end
