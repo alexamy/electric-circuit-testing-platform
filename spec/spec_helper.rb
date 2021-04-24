@@ -4,7 +4,7 @@
 require 'timecop'
 Timecop.safe_mode = true
 
-# Build test mapping / coverage report
+# Build test mapping
 if ENV['CRYSTALBALL'] == 'true'
   require 'crystalball'
   require 'crystalball/rails'
@@ -14,7 +14,10 @@ if ENV['CRYSTALBALL'] == 'true'
     config.register Crystalball::Rails::MapGenerator::I18nStrategy.new
     config.register Crystalball::MapGenerator::DescribedClassStrategy.new
   end
-else
+end
+
+# Build coverage report
+if ENV['SIMPLECOV'] == 'true' && !ENV['CRYSTALBALL']
   require 'simplecov'
 
   SimpleCov.start
