@@ -42,6 +42,7 @@ end
 
 group :test do
   gem 'capybara', '>= 2.15'
+  gem 'crystalball', '~> 0.7.0'
   gem 'faker', '~> 2.17'
   gem 'selenium-webdriver', '~> 3.142.7'
   gem 'simplecov', '~> 0.21.2', require: false
