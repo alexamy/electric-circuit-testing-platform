@@ -12,5 +12,9 @@ class CreateTestAttempts < ActiveRecord::Migration[6.0]
     change_table :static_questions do |t|
       t.belongs_to :test_attempt, null: false, foreign_key: true
     end
+
+    change_table :questions do |t|
+      t.integer :completion_time
+    end
   end
 end
