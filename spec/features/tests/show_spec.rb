@@ -119,6 +119,17 @@ feature 'User can start test', "
         expect(page).to have_content 'Оставшееся время: 00:05'
       end
 
+      scenario 'proceed to new question with correct answer after some time' do
+        fill_in 'Ответ', with: 1
+
+        Timecop.travel(Time.current + 10) do
+          PageTimer.tick(10_000)
+          click_on 'Отправить'
+
+          expect(page).to have_content '1/'
+        end
+      end
+
       scenario 'proceed to new question when completion time passed and enter wrong answer' do
         fill_in 'Ответ', with: 2
 
