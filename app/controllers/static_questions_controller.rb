@@ -4,15 +4,21 @@ class StaticQuestionsController < ApplicationController
   before_action :authenticate_user!
 
   def answer
-    @static_question = StaticQuestion.find(params[:id])
-    return unless owned?(@static_question)
-    return if @static_question.user_answer
+    return unless find_question
 
     @static_question.update(user_answer: params[:answer])
     redirect_after_answer
   end
 
   private
+
+  def find_question
+    @static_question = StaticQuestion.find(params[:id])
+    return unless owned?(@static_question)
+    return if @static_question.user_answer
+
+    @static_question
+  end
 
   def redirect_after_answer
     if params[:send_and_quit]
