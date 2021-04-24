@@ -49,6 +49,7 @@ ru:
         formula: Формула
         precision: Точность ответа
         scheme: Схема
+        completion_time: Интервал ответа
       static_question:
         arguments: Аргументы
         answer: Ответ
