@@ -3,6 +3,8 @@
 require 'rails_helper'
 
 RSpec.describe Question, type: :model do
+  it_behaves_like 'authorable'
+
   describe 'validations' do
     it { is_expected.to validate_presence_of :text }
     it { is_expected.to validate_presence_of :formula }
@@ -11,6 +13,7 @@ RSpec.describe Question, type: :model do
     it { is_expected.to validate_presence_of :scheme }
 
     it { is_expected.to validate_numericality_of(:precision).only_integer.is_greater_than_or_equal_to(0) }
+    it { is_expected.to validate_numericality_of(:completion_time).only_integer.is_greater_than_or_equal_to(0) }
   end
 
   context 'when uploads scheme' do

@@ -35,7 +35,27 @@
       "label": "Run all tests",
       "type": "shell",
       "group": "test",
-      "command": "rspec --format p",
+      "command": "bundle exec crystalball --format p",
+      "problemMatcher": [],
+      "presentation": {
+        "clear": true
+      }
+    },
+    {
+      "label": "Build test coverage mapping",
+      "type": "shell",
+      "group": "test",
+      "command": "CRYSTALBALL=true bundle exec rspec --format p",
+      "problemMatcher": [],
+      "presentation": {
+        "clear": true
+      }
+    },
+    {
+      "label": "Run all tests (without slow tag)",
+      "type": "shell",
+      "group": "test",
+      "command": "rspec --format p --tag ~slow",
       "problemMatcher": [],
       "presentation": {
         "clear": true

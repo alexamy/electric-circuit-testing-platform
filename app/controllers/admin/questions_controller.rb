@@ -5,13 +5,16 @@ class Admin::QuestionsController < Admin::BaseController
     @question = Question.new
   end
 
+  # :reek:DuplicateMethodCall
   def create
-    return unless valid_formula?
-    prepare_parameters and return unless formula_parameters_attributes?
-
     @question = Question.new(question_params)
-    @question.formula = FormulaParser.call(@question.formula_text)
-    redirect_to admin_question_path(@question), notice: t('.successful') if @question.save
+    render :new and return unless prepare_question
+
+    if @question.save
+      redirect_to admin_question_path(@question), notice: t('.successful')
+    else
+      render :new
+    end
   end
 
   def index
@@ -20,9 +23,7 @@ class Admin::QuestionsController < Admin::BaseController
 
   def show
     @question = Question.find(params[:id])
-
-    solution = ParticularSolutionGenerator.call(@question)
-    @static_question = StaticQuestion.new(**solution)
+    @static_question = StaticQuestion.new_from(@question)
   end
 
   private
@@ -34,8 +35,15 @@ class Admin::QuestionsController < Admin::BaseController
   def valid_formula?
     text = params.dig(:question, :formula_text)
     valid = FormulaValidator.call(text)
-    @alert = t('.formula_error') unless valid
+    flash.now[:alert] = t('.formula_error') unless valid
     valid
+  end
+
+  def prepare_question
+    return unless valid_formula?
+    prepare_parameters and return unless formula_parameters_attributes?
+
+    @question.formula = FormulaParser.call(@question.formula_text)
   end
 
   def prepare_parameters
@@ -50,7 +58,10 @@ class Admin::QuestionsController < Admin::BaseController
 
   def question_params
     params.require(:question)
-          .permit(:text, :comment, :formula_text, :precision, :answer_unit, :category_id, :scheme,
+          .permit(:text, :comment, :formula_text,
+                  :precision, :answer_unit, :completion_time,
+                  :scheme, :category_id,
                   formula_parameters_attributes: %i[name minimum maximum step unit])
+          .merge(author_id: current_user.id)
   end
 end

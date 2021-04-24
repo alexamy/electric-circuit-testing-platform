@@ -20,6 +20,10 @@
     = f.number_field :precision, in: 0..10, step: 1
 
   .form-group
+    = f.label :completion_time
+    = f.number_field :completion_time, in: 0..3600, step: 1
+
+  .form-group
     = f.label :formula_text
     = f.text_area :formula_text
 

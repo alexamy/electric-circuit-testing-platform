@@ -20,6 +20,7 @@ require 'rails/test_unit/railtie'
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
+Webpacker::Compiler.env['TAILWIND_MODE'] = 'build'
 
 module ElectricCurcuitTestingPlatform
   class Application < Rails::Application
@@ -35,5 +36,8 @@ module ElectricCurcuitTestingPlatform
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
+
+    # All forms are local by default
+    config.action_view.form_with_generates_remote_forms = false
   end
 end

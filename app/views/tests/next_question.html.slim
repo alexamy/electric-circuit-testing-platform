@@ -1,0 +1,36 @@
+.test-score
+  | Оценка:
+  =< @score
+  | /
+  = @category.target_score
+
+- if @question.completion_time
+  .completion-time
+    | Оставшееся время:
+    span#timer<(data-count=@question.completion_time) = seconds_to_minsec(@question.completion_time)
+
+.question-data
+  p Параметры схемы
+  - @question.formula_parameters.each do |parameter|
+    p = "#{parameter.name} = #{@static_question.arguments[parameter.name]} #{parameter.unit}"
+
+  p = Question.human_attribute_name('scheme')
+  = image_tag @question.scheme, class: 'question-scheme', size: '512x512'
+
+  p
+    | Количество знаков после запятой:
+    =< @question.precision
+  p
+    | Единицы измерения:
+    =< @question.answer_unit
+
+= form_with url: answer_path(@static_question), method: :patch, id: 'answer-form' do |f|
+  .form-group
+    = f.label :answer, 'Ответ:'
+    = f.text_field :answer
+
+  .form-group
+    = f.submit 'Отправить'
+
+  .form-group
+    = f.submit 'Отправить и завершить', name: 'send_and_quit'

@@ -10,8 +10,6 @@ FactoryBot.define do
     password { '123456' }
     password_confirmation { '123456' }
 
-    factory :admin, class: 'Admin' do
-      email { 'admin@test.com' }
-    end
+    factory :admin, class: 'Admin'
   end
 end

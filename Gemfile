@@ -10,7 +10,6 @@ gem 'jbuilder', '~> 2.7'
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 4.1'
 gem 'rails', '~> 6.0.3', '>= 6.0.3.5'
-gem 'turbolinks', '~> 5'
 gem 'webpacker', '6.0.0.beta.6'
 
 gem 'pry', '~> 0.14.0'
@@ -43,8 +42,12 @@ end
 
 group :test do
   gem 'capybara', '>= 2.15'
-  gem 'selenium-webdriver'
-  gem 'webdrivers'
+  gem 'crystalball', '~> 0.7.0'
+  gem 'faker', '~> 2.17'
+  gem 'selenium-webdriver', '~> 3.142.7'
+  gem 'simplecov', '~> 0.21.2', require: false
+  gem 'timecop', '~> 0.9.4'
+  gem 'webdrivers', '~> 4.6.0'
 
   gem 'launchy', '~> 2.5'
   gem 'rails-controller-testing', '~> 1.0'

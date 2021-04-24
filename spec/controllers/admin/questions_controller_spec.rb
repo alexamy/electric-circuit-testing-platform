@@ -30,15 +30,10 @@ RSpec.describe Admin::QuestionsController, type: :controller do
       expect(validator).to have_received(:call).once
     end
 
-    it 'renders create view' do
-      post :create, params: { question: { formula_text: attributes_for(:text_formula)[:text] } }, format: :js
-      expect(response).to render_template :create
-    end
-
     describe 'with invalid text formula' do
       it 'sets error message to @alert' do
         post :create, params: { question: { formula_text: attributes_for(:text_formula, :invalid)[:text] } }, format: :js
-        expect(assigns(:alert)).to be_instance_of(String)
+        expect(flash[:alert]).to be_present
       end
     end
 
@@ -69,9 +64,9 @@ RSpec.describe Admin::QuestionsController, type: :controller do
         expect(parameters.second.name).to eq 'R2'
       end
 
-      it 'renders create view' do
+      it 'renders new view' do
         post :create, params: { question: { formula_text: attributes_for(:text_formula)[:text] } }, format: :js
-        expect(response).to render_template :create
+        expect(response).to render_template :new
       end
     end
 

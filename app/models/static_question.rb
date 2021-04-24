@@ -1,10 +1,22 @@
 # frozen_string_literal: true
 
 class StaticQuestion < ApplicationRecord
+  include Authorable
+
   validates :arguments, :answer, presence: true
   validate :validates_formula_dependency
 
   belongs_to :question
+  belongs_to :test_attempt
+
+  def correct?
+    user_answer == answer
+  end
+
+  def self.new_from(question)
+    solution = ParticularSolutionGenerator.call(question)
+    new(question: question, **solution)
+  end
 
   private
 
