@@ -6,4 +6,4 @@
     p = question.id
 
     p = Question.human_attribute_name(:text)
-    p = link_to(question.text, admin_question_path(question)), class: 'link'
+    p = link_to question.text, admin_question_path(question), class: 'link'
