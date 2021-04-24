@@ -30,7 +30,7 @@ feature 'User can create question', "
 
       fill_in 'Текст вопроса', with: 'Вычислить показание вольтметра XMM1'
       fill_in 'Формула', with: 'formula with error'
-      click_on 'Создать Вопрос'
+      click_on 'Создать вопрос'
 
       expect(page).to have_content 'Ошибка в формуле'
       expect(page).to have_field 'Формула', with: 'formula with error'
@@ -40,8 +40,8 @@ feature 'User can create question', "
       visit new_admin_question_path
 
       fill_in 'Формула', with: 'V=R'
-      click_on 'Создать Вопрос'
-      click_on 'Создать Вопрос'
+      click_on 'Создать вопрос'
+      click_on 'Создать вопрос'
 
       expect(page).to have_content('Текст вопроса не может быть пустым')
     end
@@ -52,7 +52,7 @@ feature 'User can create question', "
       fill_in 'Текст вопроса', with: 'Вычислить показание вольтметра XMM1'
       fill_in 'Формула', with: 'V=R2/(R1+R2)'
 
-      click_on 'Создать Вопрос'
+      click_on 'Создать вопрос'
 
       expect(page).to have_field 'Название', with: 'R1'
       expect(page).to have_field 'Название', with: 'R2'
@@ -67,7 +67,7 @@ feature 'User can create question', "
       fill_in 'Единица измерения ответа', with: 'В'
       fill_in 'Точность', with: '2'
 
-      click_on 'Создать Вопрос'
+      click_on 'Создать вопрос'
 
       attach_file 'Схема', "#{Rails.root}/spec/support/files/397KB.png"
 
@@ -76,7 +76,7 @@ feature 'User can create question', "
       fill_in 'Шаг', with: 10
       fill_in 'Единица измерения', with: 'В'
 
-      click_on 'Создать Вопрос'
+      click_on 'Создать вопрос'
 
       expect(page).to have_content 'Вопрос успешно создан'
       expect(page).to have_selector 'img.question-scheme'
