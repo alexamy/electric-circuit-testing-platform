@@ -16,3 +16,9 @@
       hover:bg-indigo-600 active:bg-indigo-700 active:shadow-inner;
   }
 }
+
+@layer utilities {
+  .p-out {
+    @apply -mx-4 px-4;
+  }
+}

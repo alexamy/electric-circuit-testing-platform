@@ -9,8 +9,8 @@ html
     = stylesheet_pack_tag 'application', media: 'all'
     = javascript_pack_tag 'application'
 
-  body.container.mx-auto
+  body.container.relative.mx-auto
     = render 'shared/navigation'
     = render 'shared/alerts'
-    .px-4.py-2
+    .py-2
       = yield
