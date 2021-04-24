@@ -8,8 +8,9 @@ RSpec.describe StaticQuestionsController, type: :controller do
 
   let(:category) { create(:category) }
   let(:test_attempt) { create(:test_attempt, category: category, author: user) }
-  let(:static_question) { create(:static_question, answer: 10, test_attempt: test_attempt, author: user) }
-  let(:static_question_other) { create(:static_question, answer: 10, test_attempt: test_attempt, author: other_user) }
+  let(:question) { create(:question) }
+  let!(:static_question) { create(:static_question, answer: 10, test_attempt: test_attempt, question: question, author: user) }
+  let!(:static_question_other) { create(:static_question, answer: 10, test_attempt: test_attempt, question: question, author: other_user) }
 
   describe 'PATCH #answer' do
     it_behaves_like 'require_authentication' do
@@ -28,7 +29,17 @@ RSpec.describe StaticQuestionsController, type: :controller do
       it 'restrict user to answer only his own static question' do
         expect do
           patch :answer, params: { id: static_question_other.id, answer: 100.0 }
+          static_question_other.reload
         end.not_to change(static_question_other, :user_answer)
+      end
+
+      it 'restrict user to answer only in completion time' do
+        Timecop.travel(Time.current + question.completion_time + 1) do
+          expect do
+            patch :answer, params: { id: static_question.id, answer: 100.0 }
+            static_question.reload
+          end.not_to change(static_question, :user_answer)
+        end
       end
 
       it 'allow answer only once' do

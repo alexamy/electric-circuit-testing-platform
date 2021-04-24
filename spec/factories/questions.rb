@@ -12,7 +12,7 @@ FactoryBot.define do
     precision { 0 }
     answer_unit { 'Unit' }
     formula { { target: 'V', dependencies: %w[I R], bodies: { V: 'I*R' } } }
-    completion_time { 1 } # seconds
+    completion_time { 5 } # seconds
     scheme { create_file('spec/support/files/397KB.png') }
     category
     association :author, factory: :admin

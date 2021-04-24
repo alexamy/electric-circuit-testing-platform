@@ -17,6 +17,9 @@ class StaticQuestionsController < ApplicationController
     return unless owned?(@static_question)
     return if @static_question.user_answer
 
+    answer_time_limit = @static_question.created_at + @static_question.question.completion_time
+    return if Time.current > answer_time_limit
+
     @static_question
   end
 
