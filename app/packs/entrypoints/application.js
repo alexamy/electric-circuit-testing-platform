@@ -8,11 +8,12 @@ if(process.env.RAILS_ENV == 'test') {
   window.clock = FakeTimers.install({ shouldAdvanceTime: true });
 }
 
-require("@rails/ujs").start()
-require("@rails/activestorage").start()
-require("channels")
+require('@rails/ujs').start()
+require('@rails/activestorage').start()
+require('channels')
 
-require("cash-dom")
+require('cash-dom')
+
 
 require('src/tests/timer');
 require('src/util/notification');
