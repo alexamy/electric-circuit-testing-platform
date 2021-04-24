@@ -1,4 +1,4 @@
-= link_to "Создать", new_admin_question_path
+= link_to "Создать", new_admin_question_path, class: 'link'
 
 - @questions.each do |question|
   .question
@@ -6,4 +6,4 @@
     p = question.id
 
     p = Question.human_attribute_name(:text)
-    p = link_to(question.text, admin_question_path(question))
+    p = link_to(question.text, admin_question_path(question)), class: 'link'

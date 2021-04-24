@@ -33,7 +33,7 @@
       = f.file_field :scheme
 
   .form-group
-    = f.submit
+    = f.submit 'Создать вопрос', class: 'button'
 
   = f.fields_for :formula_parameters do |l|
     .form-group
