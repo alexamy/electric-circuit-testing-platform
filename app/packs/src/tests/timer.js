@@ -17,7 +17,7 @@ function setupTimer() {
   if(timer.length) {
     function tick(intervalID) {
       if(count <= 10) {
-        timer.parent().addClass('timer-warning');
+        timer.addClass('timer-warning');
       }
 
       if(count === 0) {

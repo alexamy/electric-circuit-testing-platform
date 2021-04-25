@@ -1,36 +1,34 @@
-.test-score
-  | Оценка:
-  =< @score
-  | /
-  = @category.target_score
+.mb-4.text-lg
+      .test-score
+        | Текущий балл:
+        =< @score
+        .inline.mx-2
+          | /
+        = @category.target_score
 
-- if @question.completion_time
-  .completion-time
-    | Оставшееся время:
-    span#timer<(data-count=@question.completion_time) = seconds_to_minsec(@question.completion_time)
+      - if @question.completion_time
+        .completion-time
+          | Оставшееся время:
+          span#timer<(data-count=@question.completion_time) = seconds_to_minsec(@question.completion_time)
 
-.question-data
-  p Параметры схемы
-  - @question.formula_parameters.each do |parameter|
-    p = "#{parameter.name} = #{@static_question.arguments[parameter.name]} #{parameter.unit}"
+.flex.flex-col.md:flex-row
+  .block
+    .mb-4
+      p Параметры схемы
+      - @question.formula_parameters.each do |parameter|
+        p = "#{parameter.name} = #{@static_question.arguments[parameter.name]} #{parameter.unit}"
+    .mb-4
+      p
+        | Количество знаков после запятой:
+        =< @question.precision
+      p
+        | Единицы измерения:
+        =< @question.answer_unit
 
-  p = Question.human_attribute_name('scheme')
-  = image_tag @question.scheme, class: 'question-scheme', size: '512x512'
+    .mb-4.md:hidden
+      = image_tag @question.scheme, class: 'question-scheme'
 
-  p
-    | Количество знаков после запятой:
-    =< @question.precision
-  p
-    | Единицы измерения:
-    =< @question.answer_unit
+    = render partial: 'answer_form'
 
-= form_with url: answer_path(@static_question), method: :patch, id: 'answer-form' do |f|
-  .form-group
-    = f.label :answer, 'Ответ:', class: 'form-label'
-    = f.text_field :answer, class: 'form-input'
-
-  .form-group
-    = f.submit 'Отправить', class: 'button'
-
-  .form-group
-    = f.submit 'Отправить и завершить', name: 'send_and_quit', class: 'button'
+  .mb-4.hidden.md:block
+    = image_tag @question.scheme, class: 'question-scheme'
