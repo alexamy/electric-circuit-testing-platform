@@ -11,6 +11,10 @@
     @apply inline-block p-2 my-1 rounded text-white bg-indigo-500 cursor-pointer
       hover:bg-indigo-600 active:bg-indigo-700 active:shadow-inner;
   }
+
+  .header {
+    @apply text-xl;
+  }
 }
 
 @layer utilities {
