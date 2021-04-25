@@ -1,3 +1,5 @@
+import $ from 'cash-dom';
+
 function secondsToMinSec(seconds) {
   if(seconds <= 0) return '00:00'
 

@@ -12,9 +12,6 @@ require('@rails/ujs').start();
 require('@rails/activestorage').start();
 require('channels');
 
-require('cash-dom');
-require('animejs');
-
 require('src/util/animations');
 require('src/util/notification');
 require('src/tests/timer');
