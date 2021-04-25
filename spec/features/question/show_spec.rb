@@ -13,7 +13,7 @@ feature 'User can view question', "
 
   background { sign_in(admin) }
 
-  scenario 'User views question list' do
+  scenario 'Admin views question list' do
     visit admin_questions_path
 
     questions.each do |question|
@@ -22,7 +22,7 @@ feature 'User can view question', "
     end
   end
 
-  scenario 'User views question' do
+  scenario 'Admin views question' do
     visit admin_question_path(question)
 
     expect(page).to have_content(question.text)
@@ -30,11 +30,9 @@ feature 'User can view question', "
     expect(page).to have_content(question.formula_text)
   end
 
-  scenario 'User views example of question' do
+  scenario 'Admin views example of question' do
     visit admin_question_path(question)
 
-    within('.question-example', text: 'Пример вопроса') do
-      expect(page).to have_content ''
-    end
+    expect(page).to have_selector '.question-example', text: 'Пример задания'
   end
 end
