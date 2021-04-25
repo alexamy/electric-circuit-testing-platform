@@ -1,0 +1,15 @@
+doctype html
+html
+  head
+    title Electric Curcuit Testing Platform
+    meta name="viewport" content="width=device-width, initial-scale=1"
+    = csrf_meta_tags
+    = csp_meta_tag
+
+    = stylesheet_pack_tag 'application', media: 'all'
+    = javascript_pack_tag 'application'
+
+    = yield :head
+
+  body.container.relative.mx-auto
+    = yield :body
