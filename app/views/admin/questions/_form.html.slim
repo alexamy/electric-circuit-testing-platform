@@ -25,9 +25,9 @@
 
   .form-group
     = f.label :formula_text, class: 'form-label'
-    = f.text_area :formula_text, class: 'form-input'
+    = f.text_area :formula_text, readonly: @with_parameters, class: "form-input #{'read-only' if @with_parameters}"
 
-  - if @question.formula_parameters.present?
+  - if @with_parameters
     .form-group
       = f.label :scheme, class: 'form-label'
       = f.file_field :scheme
@@ -35,7 +35,7 @@
   .form-group
     = f.submit 'Создать вопрос', class: 'button'
 
-  - if @question.formula_parameters.present?
+  - if @with_parameters
     .flex.flex-col.md:flex-row
       = f.fields_for :formula_parameters do |l|
         .mr-4

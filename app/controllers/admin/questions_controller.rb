@@ -54,6 +54,8 @@ class Admin::QuestionsController < Admin::BaseController
     formula[:dependencies].each do |name|
       @question.formula_parameters.new(name: name)
     end
+
+    @with_parameters = true
   end
 
   def question_params
