@@ -1,13 +1,17 @@
 $(function() {
   $('.notification').each((_, e) => {
     const notification = $(e);
-    const timerID = setTimeout(() => notification.remove(), 5000);
+
+    const timerID = setTimeout(() => {
+      notification.off('click');
+      anim.fadeOut(notification);
+    }, 5000);
 
     notification
       .find('.notification__close')
       .one('click', () => {
         clearTimeout(timerID);
-        notification.remove();
+        anim.fadeOut(notification);
       });
   });
 });

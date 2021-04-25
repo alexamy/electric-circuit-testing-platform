@@ -8,15 +8,16 @@ if(process.env.RAILS_ENV == 'test') {
   window.clock = FakeTimers.install({ shouldAdvanceTime: true });
 }
 
-require('@rails/ujs').start()
-require('@rails/activestorage').start()
-require('channels')
+require('@rails/ujs').start();
+require('@rails/activestorage').start();
+require('channels');
 
-require('animejs')
-require('cash-dom')
+require('cash-dom');
+require('animejs');
 
-require('src/tests/timer');
+require('src/util/animations');
 require('src/util/notification');
+require('src/tests/timer');
 
 // Uncomment to copy all static images under ../images to the output folder and reference
 // them with the image_pack_tag helper in views (e.g <%= image_pack_tag 'rails.png' %>)
