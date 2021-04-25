@@ -25,7 +25,7 @@ feature 'User can create question', "
   describe 'Admin' do
     background { sign_in(admin) }
 
-    scenario 'sees alert when enters invalid formula', js: true do
+    scenario 'sees alert when enters invalid formula' do
       visit new_admin_question_path
 
       fill_in 'Текст вопроса', with: 'Вычислить показание вольтметра XMM1'
@@ -36,7 +36,7 @@ feature 'User can create question', "
       expect(page).to have_field 'Формула', with: 'formula with error'
     end
 
-    scenario 'sees validation error when skip parameter info', js: true do
+    scenario 'sees validation error when skip parameter info' do
       visit new_admin_question_path
 
       fill_in 'Формула', with: 'V=R'
@@ -46,7 +46,7 @@ feature 'User can create question', "
       expect(page).to have_content('Текст вопроса не может быть пустым')
     end
 
-    scenario 'sees parameters form when enters valid formula', js: true do
+    scenario 'sees parameters form when enters valid formula' do
       visit new_admin_question_path
 
       fill_in 'Текст вопроса', with: 'Вычислить показание вольтметра XMM1'
@@ -58,7 +58,7 @@ feature 'User can create question', "
       expect(page).to have_field 'Название', with: 'R2'
     end
 
-    scenario 'can create question', js: true do
+    scenario 'can create question' do
       visit new_admin_question_path
 
       select category.name, from: 'Категория'
