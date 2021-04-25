@@ -1,7 +1,10 @@
 nav.h-12.p-out.flex.justify-between.items-center.bg-gray-400
-  div
-    a.link-navbar href=tests_path
+  .flex.justify-between.divide-x
+    a.pr-2.link-navbar href=tests_path
       | Тесты
+    - if current_user.admin?
+      a.px-2.link-navbar href=admin_questions_path
+        | Вопросы
   div
   div
   - if user_signed_in?
