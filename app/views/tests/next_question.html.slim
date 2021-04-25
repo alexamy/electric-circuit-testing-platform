@@ -1,10 +1,12 @@
 .mb-4.text-lg
       .test-score
         | Текущий балл:
-        =< @score
+        .test-score__current.inline
+          =< @score
         .inline.mx-2
           | /
-        = @category.target_score
+        .test-score__target.inline
+          = @category.target_score
 
       - if @question.completion_time
         .completion-time

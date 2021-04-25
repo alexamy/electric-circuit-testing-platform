@@ -26,11 +26,11 @@ feature 'User can start test', "
     end
 
     scenario 'starts testing' do
-      expect(page).to have_content 'Схема'
+      expect(page).to have_selector 'img.question-scheme'
       expect(page).to have_content 'Параметры схемы'
       expect(page).to have_field 'Ответ'
-      expect(page).to have_button 'Отправить'
-      expect(page).to have_button 'Отправить и завершить'
+      expect(page).to have_button 'Ответить'
+      expect(page).to have_button 'Ответить и завершить'
     end
 
     scenario 'sees answer precision and units' do
@@ -39,15 +39,15 @@ feature 'User can start test', "
     end
 
     scenario 'proceeds to next question' do
-      click_on 'Отправить'
+      click_on 'Ответить'
 
-      expect(page).to have_content 'Схема'
+      expect(page).to have_selector 'img.question-scheme'
       expect(page).to have_field 'Ответ'
-      expect(page).to have_button 'Отправить'
+      expect(page).to have_button 'Ответить'
     end
 
     scenario 'exits from testing' do
-      click_on 'Отправить и завершить'
+      click_on 'Ответить и завершить'
 
       expect(page).to have_content 'Вы вышли из тестирования'
       expect(page).not_to have_field 'Ответ'
@@ -55,33 +55,37 @@ feature 'User can start test', "
 
     describe 'scoring' do
       scenario 'has score on test' do
-        within '.test-score' do
-          expect(page).to have_content "0/#{category.target_score}"
+        within '.test-score__current' do
+          expect(page).to have_content '0'
+        end
+
+        within '.test-score__target' do
+          expect(page).to have_content category.target_score
         end
       end
 
       scenario 'can increase his score with correct answer' do
         fill_in 'Ответ', with: 1
-        click_on 'Отправить'
+        click_on 'Ответить'
 
-        within '.test-score' do
-          expect(page).to have_content '1/'
+        within '.test-score__current' do
+          expect(page).to have_content '1'
         end
       end
 
       scenario 'can decrease his score with wrong answer' do
         fill_in 'Ответ', with: 2
-        click_on 'Отправить'
+        click_on 'Ответить'
 
-        within '.test-score' do
-          expect(page).to have_content '-2/'
+        within '.test-score__current' do
+          expect(page).to have_content '-2'
         end
       end
 
       scenario 'can pass the test when get enough test score' do
         2.times.each do
           fill_in 'Ответ', with: 1
-          click_on 'Отправить'
+          click_on 'Ответить'
         end
 
         expect(page).to have_content 'Вы успешно прошли тест'
@@ -90,7 +94,7 @@ feature 'User can start test', "
       scenario "can't answer more questions when got test mark" do
         2.times.each do
           fill_in 'Ответ', with: 1
-          click_on 'Отправить'
+          click_on 'Ответить'
         end
 
         visit tests_path
@@ -124,9 +128,11 @@ feature 'User can start test', "
 
         Timecop.travel(Time.current + 10) do
           PageTimer.tick(10_000)
-          click_on 'Отправить'
+          click_on 'Ответить'
 
-          expect(page).to have_content '1/'
+          within '.test-score__current' do
+            expect(page).to have_content '1'
+          end
         end
       end
 
@@ -135,7 +141,10 @@ feature 'User can start test', "
 
         Timecop.travel(Time.current + 65) do
           PageTimer.runAll
-          expect(page).to have_content '-2/'
+
+          within '.test-score__current' do
+            expect(page).to have_content '-2'
+          end
         end
       end
 
@@ -145,7 +154,10 @@ feature 'User can start test', "
 
         Timecop.travel(Time.current + 65) do
           PageTimer.runAll
-          expect(page).to have_content '-2/'
+
+          within '.test-score__current' do
+            expect(page).to have_content '-2'
+          end
         end
       end
     end
