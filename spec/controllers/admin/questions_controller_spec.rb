@@ -123,6 +123,14 @@ RSpec.describe Admin::QuestionsController, type: :controller do
         post :create, params: question_params
         expect(response).to redirect_to admin_question_path(assigns(:question))
       end
+
+      xit 'restrict question creation when has malformed formula' do
+        question_params_malformed = question_params.merge(formula_text: 'V=Vx*Vy')
+
+        expect do
+          post :create, params: question_params_malformed
+        end.not_to change(Question, :count)
+      end
     end
   end
 
