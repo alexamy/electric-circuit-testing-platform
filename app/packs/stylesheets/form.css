@@ -1,0 +1,17 @@
+@layer components {
+  .form-group {
+    @apply py-1;
+  }
+
+  .form-label {
+    @apply block;
+  }
+
+  .form-input {
+    @apply border-gray-300 rounded-md w-72;
+  }
+
+  .read-only {
+    @apply bg-gray-200 text-gray-500;
+  }
+}

@@ -3,23 +3,5 @@
 @import 'tailwindcss/utilities';
 @import 'remixicon/fonts/remixicon.css';
 
-@layer components {
-  .link {
-    @apply text-blue-600 hover:text-blue-800 visited:text-blue-600;
-  }
-
-  .link-navbar {
-    @apply text-white hover:text-gray-200 visited:text-white;
-  }
-
-  .button {
-    @apply p-1 my-1 rounded text-white bg-indigo-500 cursor-pointer
-      hover:bg-indigo-600 active:bg-indigo-700 active:shadow-inner;
-  }
-}
-
-@layer utilities {
-  .p-out {
-    @apply -mx-4 px-4;
-  }
-}
+@import '../stylesheets/main.css';
+@import '../stylesheets/form.css';
