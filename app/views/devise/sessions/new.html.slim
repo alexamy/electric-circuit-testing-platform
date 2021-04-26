@@ -14,7 +14,7 @@ h2.header Вход в систему
       = f.check_box :remember_me, class: 'rounded'
       = f.label :remember_me, class: 'ml-2'
 
-  .actions
+  .form-actions
     = f.submit "Войти", class: 'button'
 
 = render "devise/shared/links"

@@ -17,7 +17,7 @@ h2.header Регистрация
     = f.label :password_confirmation, class: 'form-label'
     = f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-input'
 
-  .actions
+  .form-actions
     = f.submit "Зарегистрироваться", class: 'button'
 
 = render "devise/shared/links"
