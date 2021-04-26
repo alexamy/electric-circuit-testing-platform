@@ -5,15 +5,15 @@
 
 if(process.env.RAILS_ENV == 'test') {
   window.FakeTimers = require('@sinonjs/fake-timers');
-  window.clock = FakeTimers.install();
+  window.clock = FakeTimers.install({ shouldAdvanceTime: true });
 }
 
-require("@rails/ujs").start()
-require("@rails/activestorage").start()
-require("channels")
+require('@rails/ujs').start();
+require('@rails/activestorage').start();
+require('channels');
 
-require("cash-dom")
-
+require('src/util/animations');
+require('src/util/notification');
 require('src/tests/timer');
 
 // Uncomment to copy all static images under ../images to the output folder and reference

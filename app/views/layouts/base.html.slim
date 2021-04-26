@@ -1,7 +1,7 @@
 doctype html
 html
   head
-    title Electric Curcuit Testing Platform - Admin
+    title Electric Curcuit Testing Platform
     meta name="viewport" content="width=device-width, initial-scale=1"
     = csrf_meta_tags
     = csp_meta_tag
@@ -9,8 +9,7 @@ html
     = stylesheet_pack_tag 'application', media: 'all'
     = javascript_pack_tag 'application'
 
-  body.container.mx-auto
-    p Admin panel
-    = render 'shared/navigation'
-    = render 'shared/alerts'
-    = yield
+    = yield :head
+
+  body.container.relative.mx-auto
+    = yield :body

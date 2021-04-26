@@ -46,6 +46,7 @@ class Admin::QuestionsController < Admin::BaseController
     @question.formula = FormulaParser.call(@question.formula_text)
   end
 
+  # :reek:TooManyStatements
   def prepare_parameters
     text = params.dig(:question, :formula_text)
     formula = FormulaParser.call(text)
@@ -54,6 +55,8 @@ class Admin::QuestionsController < Admin::BaseController
     formula[:dependencies].each do |name|
       @question.formula_parameters.new(name: name)
     end
+
+    @with_parameters = true
   end
 
   def question_params

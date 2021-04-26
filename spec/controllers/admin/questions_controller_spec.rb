@@ -25,15 +25,21 @@ RSpec.describe Admin::QuestionsController, type: :controller do
 
       allow(validator).to receive(:call).once
 
-      post :create, params: { question: { formula_text: attributes_for(:text_formula)[:text] } }, format: :js
+      post :create, params: { question: { formula_text: attributes_for(:text_formula)[:text] } }
 
       expect(validator).to have_received(:call).once
     end
 
     describe 'with invalid text formula' do
       it 'sets error message to @alert' do
-        post :create, params: { question: { formula_text: attributes_for(:text_formula, :invalid)[:text] } }, format: :js
+        post :create, params: { question: { formula_text: attributes_for(:text_formula, :invalid)[:text] } }
         expect(flash[:alert]).to be_present
+      end
+
+      it "doesn't set with_parameters flag" do
+        post :create, params: { question: { formula_text: attributes_for(:text_formula, :invalid)[:text] } }
+
+        expect(assigns(:with_parameters)).to be_nil
       end
     end
 
@@ -43,19 +49,19 @@ RSpec.describe Admin::QuestionsController, type: :controller do
 
         allow(parser).to receive(:call).once.and_return(dependencies: [])
 
-        post :create, params: { question: { formula_text: attributes_for(:text_formula)[:text] } }, format: :js
+        post :create, params: { question: { formula_text: attributes_for(:text_formula)[:text] } }
 
         expect(parser).to have_received(:call).once
       end
 
       it 'create new question with provided params' do
-        post :create, params: { question: { formula_text: attributes_for(:text_formula)[:text] } }, format: :js
+        post :create, params: { question: { formula_text: attributes_for(:text_formula)[:text] } }
 
         expect(assigns(:question)).to be_a_new(Question)
       end
 
       it 'create parameters' do
-        post :create, params: { question: { formula_text: 'V=R1/R2' } }, format: :js
+        post :create, params: { question: { formula_text: 'V=R1/R2' } }
 
         parameters = assigns(:question).formula_parameters
 
@@ -64,8 +70,14 @@ RSpec.describe Admin::QuestionsController, type: :controller do
         expect(parameters.second.name).to eq 'R2'
       end
 
+      it 'sets with_parameters flag' do
+        post :create, params: { question: { formula_text: attributes_for(:text_formula)[:text] } }
+
+        expect(assigns(:with_parameters)).to be true
+      end
+
       it 'renders new view' do
-        post :create, params: { question: { formula_text: attributes_for(:text_formula)[:text] } }, format: :js
+        post :create, params: { question: { formula_text: attributes_for(:text_formula)[:text] } }
         expect(response).to render_template :new
       end
     end
@@ -80,6 +92,7 @@ RSpec.describe Admin::QuestionsController, type: :controller do
             text: 'Найдите V',
             precision: 0,
             answer_unit: 'В',
+            completion_time: 2,
             scheme: create_file('spec/support/files/397KB.png'),
             formula_parameters_attributes: {
               "0": {
@@ -96,19 +109,27 @@ RSpec.describe Admin::QuestionsController, type: :controller do
 
       it 'creates question' do
         expect do
-          post :create, params: question_params, format: :js
+          post :create, params: question_params
         end.to change(Question, :count).by(1)
       end
 
       it 'creates formula parameters' do
         expect do
-          post :create, params: question_params, format: :js
+          post :create, params: question_params
         end.to change(FormulaParameter, :count).by(1)
       end
 
       it 'redirects to show view' do
-        post :create, params: question_params, format: :js
+        post :create, params: question_params
         expect(response).to redirect_to admin_question_path(assigns(:question))
+      end
+
+      xit 'restrict question creation when has malformed formula' do
+        question_params_malformed = question_params.merge(formula_text: 'V=Vx*Vy')
+
+        expect do
+          post :create, params: question_params_malformed
+        end.not_to change(Question, :count)
       end
     end
   end

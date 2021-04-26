@@ -3,7 +3,9 @@
 Rails.application.routes.draw do
   root 'home#index'
 
-  devise_for :users
+  devise_for :users, controllers: {
+    registrations: 'users/registrations'
+  }
 
   get '/tests', controller: 'categories', action: 'index_with_questions', as: 'tests'
   patch '/answer/:id', controller: 'static_questions', action: 'answer', as: 'answer'

@@ -1,0 +1,12 @@
+h2.header Повторно выслать инструкцию по сбросу пароля
+= render 'shared/errors', resource: resource
+
+= form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post }) do |f|
+  .form-group
+    = f.label :email, class: 'form-label'
+    = f.email_field :email, autofocus: true, autocomplete: 'email', class: 'form-input'
+
+  .form-actions
+    = f.submit 'Resend unlock instructions', class: 'button'
+
+= render 'devise/shared/links'

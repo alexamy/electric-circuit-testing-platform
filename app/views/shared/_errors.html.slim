@@ -1,5 +1,9 @@
 - if resource&.errors.present?
-  b = "Ошибок возникло - #{resource.errors.size}: "
-  ul
-    - resource.errors.full_messages.each do |message|
-      li = message
+  .w-max.p-4.rounded-lg.bg-red-200.text-red-900
+    h2.mb-2 Неверный формат данных
+    ul
+      - resource.errors.messages.each do |field, messages|
+        li
+          span.font-bold
+            = resource.class.human_attribute_name(field)
+          =< messages.join(', ')

@@ -1,9 +1,17 @@
-= link_to "Создать", new_admin_question_path
+.shadow.overflow-hidden.border-b.border-gray-200.sm:rounded-lg
+  table.min-w-full.divide-y.divide-gray-200
+    thead.bg-gray-50
+      th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider
+        | ID
+      th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider
+        = Question.human_attribute_name(:text)
 
-- @questions.each do |question|
-  .question
-    p id
-    p = question.id
+    tbody.bg-white.divide-y.divide-gray-200
+    - @questions.each do |question|
+      tr
+        td.px-6.py-4.whitespace-nowrap
+          = question.id
+        td.px-6.py-4.whitespace-nowrap
+          = link_to question.text, admin_question_path(question), class: 'link'
 
-    p = Question.human_attribute_name(:text)
-    p = link_to(question.text, admin_question_path(question))
+= link_to 'Создать новый', new_admin_question_path, class: 'button'

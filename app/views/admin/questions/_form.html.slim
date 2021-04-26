@@ -1,57 +1,60 @@
 = form_with model: [:admin, @question] do |f|
   .form-group
-    = f.label :category_id
-    = f.collection_select :category_id, Category.all, :id, :name
+    = f.label :category_id, class: 'form-label'
+    = f.collection_select :category_id, Category.all, :id, :name, {}, class: 'form-input'
 
   .form-group
-    = f.label :text
-    = f.text_field :text
+    = f.label :text, class: 'form-label'
+    = f.text_area :text, class: 'form-input'
 
   .form-group
-    = f.label :comment
-    = f.text_field :comment
+    = f.label :comment, class: 'form-label'
+    = f.text_area :comment, class: 'form-input'
 
   .form-group
-    = f.label :answer_unit
-    = f.text_field :answer_unit
+    = f.label :answer_unit, class: 'form-label'
+    = f.text_field :answer_unit, class: 'form-input'
 
   .form-group
-    = f.label :precision
-    = f.number_field :precision, in: 0..10, step: 1
+    = f.label :precision, class: 'form-label'
+    = f.number_field :precision, in: 0..10, step: 1, class: 'form-input'
 
   .form-group
-    = f.label :completion_time
-    = f.number_field :completion_time, in: 0..3600, step: 1
+    = f.label :completion_time, class: 'form-label'
+    = f.number_field :completion_time, in: 0..3600, step: 1, class: 'form-input'
 
   .form-group
-    = f.label :formula_text
-    = f.text_area :formula_text
+    = f.label :formula_text, class: 'form-label'
+    = f.text_area :formula_text, readonly: @with_parameters, class: "form-input #{'read-only' if @with_parameters}"
 
-  - if @question.formula_parameters.present?
+  - if @with_parameters
     .form-group
-      = f.label :scheme
+      = f.label :scheme, class: 'form-label'
       = f.file_field :scheme
 
-  .form-group
-    = f.submit
+  .form-actions
+    = f.submit 'Создать вопрос', class: 'button'
 
-  = f.fields_for :formula_parameters do |l|
-    .form-group
-      = l.label :name
-      = l.text_field :name, readonly: true
+  - if @with_parameters
+    .flex.flex-col.md:flex-row
+      = f.fields_for :formula_parameters do |l|
+        .mr-4
+          .form-group
+            = l.label :name, class: 'form-label'
+            = l.text_field :name, readonly: true, class: 'form-input read-only'
 
-    .form-group
-      = l.label :minimum
-      = l.number_field :minimum
+          .form-group
+            = l.label :minimum, class: 'form-label'
+            = l.number_field :minimum, class: 'form-input'
 
-    .form-group
-      = l.label :maximum
-      = l.number_field :maximum
+          .form-group
+            = l.label :maximum, class: 'form-label'
+            = l.number_field :maximum, class: 'form-input'
 
-    .form-group
-      = l.label :step
-      = l.number_field :step
+          .form-group
+            = l.label :step, class: 'form-label'
+            = l.number_field :step, class: 'form-input'
 
-    .form-group
-      = l.label :unit
-      = l.text_field :unit
+          .form-group
+            = l.label :unit, class: 'form-label'
+            = l.text_field :unit, class: 'form-input'
