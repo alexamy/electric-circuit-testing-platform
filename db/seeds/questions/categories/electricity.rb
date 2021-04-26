@@ -26,3 +26,22 @@ create_question(
     'VCC' => { minimum: 2, maximum: 50, step: 1, unit: 'В' }
   }
 )
+
+create_question(
+  'db/seeds/schemes/002.png',
+  {
+    text: 'Вычислить показание вольтметра XMM1',
+    answer_unit: 'В',
+    precision: 2,
+    completion_time: 60,
+    category: category,
+    author: admin,
+    formula_text: "Rx=R2*R3/(R2+R3)\r\nVxmm1=VCC*Rx/(R1+Rx)"
+  },
+  {
+    'R1' => { minimum: 100, maximum: 100_000, step: 100, unit: 'Ом' },
+    'R2' => { minimum: 100, maximum: 100_000, step: 100, unit: 'Ом' },
+    'R3' => { minimum: 100, maximum: 100_000, step: 100, unit: 'Ом' },
+    'VCC' => { minimum: 2, maximum: 50, step: 1, unit: 'В' }
+  }
+)
