@@ -41,5 +41,7 @@ RSpec.describe FormulaParser, type: :service do
     it 'assigns solving hash' do
       expect(parser.bodies).to eq expected[:bodies]
     end
+
+    it 'ignores multiple spaces and newlines in start, middle and end of text'
   end
 end

@@ -1,14 +1,38 @@
 # frozen_string_literal: true
 
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+# users
+User.create(email: 'user@test.com', password: 'user')
+admin = Admin.create(email: 'admin@test.com', password: Rails.env.ADMIN_PASSWORD)
 
-Category.create(name: 'Sample category')
+# categories
+Category.create(name: 'Electricity')
 
-User.create(email: 'user@test.com', password: Rails.application.credentials[:passwords][:user])
-Admin.create(email: 'admin@test.com', password: Rails.application.credentials[:passwords][:admin])
+# questions
+question = Question.new(
+  text: 'Вычислить показание вольтметра XMM1',
+  answer_unit: 'В',
+  precision: 2,
+  completion_time: 60,
+  category: category,
+  author: admin,
+  formula_text: 'Vxmm1=VCC*R2/(R1+R2)'
+)
+
+question.formula = FormulaParser.call(question.formula_text)
+parameters = {
+  'R1' => { minimum: 100, maximum: 100_000, step: 100, unit: 'Ом' },
+  'R2' => { minimum: 100, maximum: 100_000, step: 100, unit: 'Ом' },
+  'VCC' => { minimum: 2, maximum: 50, step: 1, unit: 'В' },
+}
+
+question.formula['dependencies'].each do |name|
+  question.formula_parameters.new(name: name, **parameters[name])
+end
+
+question.scheme.attach(
+  io: File.open(Rails.root.join('db/seeds/scheme/001.png')),
+  filename: '001.png',
+  content_type: 'image/png'
+)
+
+question.save
