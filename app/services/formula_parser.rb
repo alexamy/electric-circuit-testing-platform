@@ -6,7 +6,7 @@ class FormulaParser < ApplicationService
   def initialize(text)
     super()
 
-    @text = FormulaNormalizer.call(text)
+    @text = FormulaNormalizer.new(text).text
     @calculator = Dentaku::Calculator.new(case_sensitive: true)
   end
 

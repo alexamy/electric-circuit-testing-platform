@@ -7,7 +7,7 @@ class FormulaValidator < ApplicationService
     super()
 
     @text = text
-    @entries = text.split("\n").map(&:strip)
+    @entries = FormulaNormalizer.new(@text).lines
   end
 
   def call
