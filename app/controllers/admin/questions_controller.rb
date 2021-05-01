@@ -14,7 +14,7 @@ class Admin::QuestionsController < Admin::BaseController
     @question.formula = Formula::Parser.call(@question.formula_text)
     render :new and return unless @question.save
 
-    prepare_parameters
+    create_parameters
     redirect_to admin_question_path(@question), notice: t('.successful')
   end
 
@@ -30,14 +30,13 @@ class Admin::QuestionsController < Admin::BaseController
   private
 
   def valid_formula?
-    text = params.dig(:question, :formula_text)
-    valid = Formula::Validator.call(text)
+    valid = Formula::Validator.call(@question.formula_text)
     flash.now[:alert] = t('.formula_error') unless valid
 
     valid
   end
 
-  def prepare_parameters
+  def create_parameters
     @question.formula['dependencies'].each do |name|
       @question.formula_parameters.create(name: name, **Formula::Parameter.call(name))
     end
