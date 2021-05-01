@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Formula
-  class Parameter
+  class Parameter < ApplicationService
     def initialize(name)
       @name = name
     end
