@@ -17,9 +17,9 @@ RSpec.describe FormulaParser, type: :service do
     }
   end
 
-  before { parser.call }
-
   describe 'initialization' do
+    before { parser.call }
+
     it 'saves provided text' do
       expect(parser.text).to eq formula
     end
@@ -30,6 +30,8 @@ RSpec.describe FormulaParser, type: :service do
   end
 
   describe 'parse' do
+    before { parser.call }
+
     it 'assigns last assigned variable as target' do
       expect(parser.target).to eq expected[:target]
     end
@@ -42,6 +44,18 @@ RSpec.describe FormulaParser, type: :service do
       expect(parser.bodies).to eq expected[:bodies]
     end
 
-    it 'ignores multiple spaces and newlines in start, middle and end of text'
+    describe 'ignores multiple spaces and newlines' do
+      it 'skips whitespace in start' do
+        result = described_class.call("\n\nr=x")
+
+        expect(result[:bodies].keys.size).to eq 1
+      end
+
+      it 'skips whitespace in middle' do
+        result = described_class.call("r=x\n\nz=r")
+
+        expect(result[:bodies].keys.size).to eq 2
+      end
+    end
   end
 end

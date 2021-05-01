@@ -6,12 +6,12 @@ class FormulaParser < ApplicationService
   def initialize(text)
     super()
 
-    @text = text
+    @text = normalize(text)
     @calculator = Dentaku::Calculator.new(case_sensitive: true)
-    @entries = text.split("\n").map { |line| parse_one(line.strip) }
   end
 
   def call
+    find_entries
     find_target
     find_dependencies
     find_bodies
@@ -23,10 +23,20 @@ class FormulaParser < ApplicationService
 
   attr_reader :calculator, :entries
 
+  def normalize(text)
+    text.gsub(/^\n+/, '')
+        .gsub(/\n+$/, '')
+        .gsub(/\n\s*\n/, "\n")
+  end
+
   def parse_one(line)
     target, body = line.split('=').map(&:strip)
     dependencies = calculator.dependencies(body)
     { target: target, body: body, dependencies: dependencies }
+  end
+
+  def find_entries
+    @entries = @text.split("\n").map { |line| parse_one(line.strip) }
   end
 
   def find_target
