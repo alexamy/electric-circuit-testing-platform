@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe FormulaValidator, type: :service do
+RSpec.describe Formula::Validator, type: :service do
   let(:validator) { described_class }
   let(:formula) { "Rx=R2*R3/(R2+R3) \n Vxmm1=VCC*Rx/(R1+Rx)" }
 

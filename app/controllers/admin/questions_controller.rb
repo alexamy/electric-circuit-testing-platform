@@ -34,7 +34,7 @@ class Admin::QuestionsController < Admin::BaseController
 
   def valid_formula?
     text = params.dig(:question, :formula_text)
-    valid = FormulaValidator.call(text)
+    valid = Formula::Validator.call(text)
     flash.now[:alert] = t('.formula_error') unless valid
     valid
   end
@@ -43,13 +43,13 @@ class Admin::QuestionsController < Admin::BaseController
     return unless valid_formula?
     prepare_parameters and return unless formula_parameters_attributes?
 
-    @question.formula = FormulaParser.call(@question.formula_text)
+    @question.formula = Formula::Parser.call(@question.formula_text)
   end
 
   # :reek:TooManyStatements
   def prepare_parameters
     text = params.dig(:question, :formula_text)
-    formula = FormulaParser.call(text)
+    formula = Formula::Parser.call(text)
 
     @question = Question.new(question_params.except(:formula_parameters_attributes))
     formula[:dependencies].each do |name|

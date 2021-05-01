@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe FormulaParser, type: :service do
+RSpec.describe Formula::Parser, type: :service do
   let(:formula) { "Rx=R2*R3/(R2+R3)\nVxmm1=VCC*Rx/(R1+Rx)" }
   let(:parser) { described_class.new(formula) }
 
