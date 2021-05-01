@@ -6,7 +6,7 @@ class FormulaParser < ApplicationService
   def initialize(text)
     super()
 
-    @text = normalize(text)
+    @text = FormulaNormalizer.call(text)
     @calculator = Dentaku::Calculator.new(case_sensitive: true)
   end
 
@@ -22,12 +22,6 @@ class FormulaParser < ApplicationService
   private
 
   attr_reader :calculator, :entries
-
-  def normalize(text)
-    text.gsub(/^\n+/, '')
-        .gsub(/\n+$/, '')
-        .gsub(/\n\s*\n/, "\n")
-  end
 
   def parse_one(line)
     target, body = line.split('=').map(&:strip)
