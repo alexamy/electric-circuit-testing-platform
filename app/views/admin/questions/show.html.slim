@@ -8,6 +8,10 @@
     p = @question.comment
 
 .py-2
+  p.italic = Question.human_attribute_name('completion_time')
+  p = t('plural.seconds', count: @question.completion_time)
+
+.py-2
   p.italic = Question.human_attribute_name('formula_text')
   = simple_format(@question.formula_text)
 
