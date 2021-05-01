@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe FormulaNormalizer, type: :service do
+RSpec.describe Formula::Normalizer, type: :service do
   let(:normalizer) { described_class }
 
   it 'strips whitespace in start' do

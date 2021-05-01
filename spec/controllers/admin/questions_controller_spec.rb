@@ -21,7 +21,7 @@ RSpec.describe Admin::QuestionsController, type: :controller do
 
   describe 'POST #create' do
     it 'calls formula validator' do
-      validator = class_double('FormulaValidator').as_stubbed_const
+      validator = class_double('Formula::Validator').as_stubbed_const
 
       allow(validator).to receive(:call).once
 
@@ -45,7 +45,7 @@ RSpec.describe Admin::QuestionsController, type: :controller do
 
     describe 'with valid text formula, but without formula parameters' do
       it 'calls formula parser' do
-        parser = class_double('FormulaParser').as_stubbed_const
+        parser = class_double('Formula::Parser').as_stubbed_const
 
         allow(parser).to receive(:call).once.and_return(dependencies: [])
 

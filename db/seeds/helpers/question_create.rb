@@ -5,7 +5,7 @@
 def create_question(scheme_path, question_params, parameters)
   question = Question.new(**question_params)
 
-  question.formula = FormulaParser.call(question.formula_text)
+  question.formula = Formula::Parser.call(question.formula_text)
   question.formula['dependencies'].each do |name|
     question.formula_parameters.new(name: name, **parameters[name])
   end
