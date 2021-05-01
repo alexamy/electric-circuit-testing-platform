@@ -30,7 +30,7 @@ RSpec.describe Admin::QuestionsController, type: :controller do
           precision: 0,
           answer_unit: 'В',
           completion_time: 2,
-          scheme: create_file('spec/support/files/397KB.png'),
+          scheme: create_file('spec/support/files/397KB.png')
         }
       }
     end

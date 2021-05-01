@@ -3,6 +3,8 @@
 module Formula
   class Parameter < ApplicationService
     def initialize(name)
+      super()
+
       @name = name
     end
 

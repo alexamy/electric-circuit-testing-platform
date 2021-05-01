@@ -6,18 +6,16 @@ class Admin::QuestionsController < Admin::BaseController
   end
 
   # :reek:DuplicateMethodCall
+  # :reek:TooManyStatements
   def create
     @question = Question.new(question_params)
     render :new and return unless valid_formula?
 
     @question.formula = Formula::Parser.call(@question.formula_text)
+    render :new and return unless @question.save
 
-    if @question.save
-      prepare_parameters
-      redirect_to admin_question_path(@question), notice: t('.successful')
-    else
-      render :new
-    end
+    prepare_parameters
+    redirect_to admin_question_path(@question), notice: t('.successful')
   end
 
   def index
