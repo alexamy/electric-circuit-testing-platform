@@ -59,7 +59,27 @@ feature 'User can create question', "
       click_on 'Создать вопрос'
 
       expect(page).to have_content 'Вопрос успешно создан'
-      expect(page).to have_selector 'img.question-scheme'
+    end
+
+    scenario 'can change parameters default values' do
+      visit new_admin_question_path
+
+      select category.name, from: 'Категория'
+      fill_in 'Текст вопроса', with: 'Вычислить показание вольтметра XMM1'
+      fill_in 'Формула', with: 'V=R1'
+      fill_in 'Единица измерения ответа', with: 'В'
+      fill_in 'Точность', with: '2'
+      fill_in 'Максимальное время ответа', with: '2'
+      attach_file 'Схема', "#{Rails.root}/spec/support/files/397KB.png"
+      click_on 'Создать вопрос'
+
+      fill_in 'Минимум', with: '1'
+      fill_in 'Максимум', with: '100'
+      fill_in 'Шаг', with: '5'
+      fill_in 'Единица измерения', with: 'unit'
+      click_on 'Сохранить параметры'
+
+      expect(page).to have_content 'Параметры успешно обновлены'
     end
   end
 end

@@ -65,9 +65,9 @@ RSpec.describe Admin::QuestionsController, type: :controller do
       expect(parser).to have_received(:call).once
     end
 
-    it 'redirects to show view' do
+    it 'redirects to update parameters view' do
       post :create, params: question_params
-      expect(response).to redirect_to admin_question_path(assigns(:question))
+      expect(response).to redirect_to admin_question_edit_parameters_path(assigns(:question))
     end
 
     describe 'errors' do

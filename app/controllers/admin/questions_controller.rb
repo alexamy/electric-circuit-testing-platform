@@ -15,7 +15,7 @@ class Admin::QuestionsController < Admin::BaseController
     render :new and return unless @question.save
 
     create_parameters
-    redirect_to admin_question_path(@question), notice: t('.successful')
+    redirect_to admin_question_edit_parameters_path(@question), notice: t('.successful')
   end
 
   def index

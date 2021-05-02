@@ -33,26 +33,3 @@
 
   .form-actions
     = f.submit 'Создать вопрос', class: 'button'
-
-  / .flex.flex-col.md:flex-row
-  /   = f.fields_for :formula_parameters do |l|
-  /     .mr-4
-  /       .form-group
-  /         = l.label :name, class: 'form-label'
-  /         = l.text_field :name, readonly: true, class: 'form-input read-only'
-
-  /       .form-group
-  /         = l.label :minimum, class: 'form-label'
-  /         = l.number_field :minimum, class: 'form-input'
-
-  /       .form-group
-  /         = l.label :maximum, class: 'form-label'
-  /         = l.number_field :maximum, class: 'form-input'
-
-  /       .form-group
-  /         = l.label :step, class: 'form-label'
-  /         = l.number_field :step, class: 'form-input'
-
-  /       .form-group
-  /         = l.label :unit, class: 'form-label'
-  /         = l.text_field :unit, class: 'form-input'
