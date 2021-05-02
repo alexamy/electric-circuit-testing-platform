@@ -31,3 +31,6 @@
 
   .form-actions
     = form.submit 'Сохранить параметры', class: 'button'
+
+.mt-4
+  = link_to 'Вернуться к вопросу', admin_question_path(@question), class: 'link'
