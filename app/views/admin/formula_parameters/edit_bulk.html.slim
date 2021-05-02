@@ -1,24 +1,26 @@
-= form_with model: [:admin, @question] do |f|
-  = f.fields_for :formula_parameters do |l|
-    .form-group
-      = l.label :name, class: 'form-label'
-      = l.text_field :name, readonly: true, class: 'form-input read-only'
+= form_with model: [:admin, @question], url: admin_question_update_parameters_path(@question) do |form|
+  .flex.flex-wrap.flex-row
+    = form.fields_for :formula_parameters do |param|
+      .block.w-max.p-4.m-2.border.rounded-lg
+        .form-group
+          = param.label :name, class: 'form-label'
+          = param.text_field :name, readonly: true, class: 'form-input read-only'
 
-    .form-group
-      = l.label :minimum, class: 'form-label'
-      = l.number_field :minimum, class: 'form-input'
+        .form-group
+          = param.label :minimum, class: 'form-label'
+          = param.number_field :minimum, class: 'form-input'
 
-    .form-group
-      = l.label :maximum, class: 'form-label'
-      = l.number_field :maximum, class: 'form-input'
+        .form-group
+          = param.label :maximum, class: 'form-label'
+          = param.number_field :maximum, class: 'form-input'
 
-    .form-group
-      = l.label :step, class: 'form-label'
-      = l.number_field :step, class: 'form-input'
+        .form-group
+          = param.label :step, class: 'form-label'
+          = param.number_field :step, class: 'form-input'
 
-    .form-group
-      = l.label :unit, class: 'form-label'
-      = l.text_field :unit, class: 'form-input'
+        .form-group
+          = param.label :unit, class: 'form-label'
+          = param.text_field :unit, class: 'form-input'
 
   .form-actions
-    = f.submit 'Создать вопрос', class: 'button'
+    = form.submit 'Создать вопрос', class: 'button'

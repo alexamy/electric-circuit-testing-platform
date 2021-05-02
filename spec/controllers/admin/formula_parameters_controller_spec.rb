@@ -9,6 +9,12 @@ RSpec.describe Admin::FormulaParametersController, type: :controller do
   before { login(admin) }
 
   describe 'GET #edit_bulk' do
+    it 'sets question' do
+      get :edit_bulk, params: { question_id: question.id }
+
+      expect(assigns(:question)).to eq question
+    end
+
     it 'renders edit_bulk view' do
       get :edit_bulk, params: { question_id: question.id }
 
