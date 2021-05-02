@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :questions, shallow: true do
       get '/update_parameters', controller: 'formula_parameters', action: 'edit_bulk', as: 'edit_parameters'
-      post '/update_parameters', controller: 'formula_parameters', action: 'update_bulk', as: 'update_parameters'
+      patch '/update_parameters', controller: 'formula_parameters', action: 'update_bulk', as: 'update_parameters'
     end
   end
 end

@@ -1,5 +1,9 @@
+.block
+  p.italic = Question.human_attribute_name('formula_text')
+  p = simple_format @question.formula_text
+
 = form_with model: [:admin, @question], url: admin_question_update_parameters_path(@question) do |form|
-  .flex.flex-wrap.flex-row
+  .flex.flex-row.flex-wrap
     = form.fields_for :formula_parameters do |param|
       .block.w-max.p-4.m-2.border.rounded-lg
         .form-group
@@ -23,4 +27,4 @@
           = param.text_field :unit, class: 'form-input'
 
   .form-actions
-    = form.submit 'Создать вопрос', class: 'button'
+    = form.submit 'Сохранить параметры', class: 'button'

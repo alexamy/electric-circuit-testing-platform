@@ -4,7 +4,11 @@ require 'rails_helper'
 
 RSpec.describe Admin::FormulaParametersController, type: :controller do
   let(:admin) { create(:admin) }
-  let(:question) { create(:question, author: admin) }
+  let(:question) do
+    create(:question, author: admin,
+                      formula_text: 'X=I',
+                      formula: { target: 'X', dependencies: %w[I], bodies: { X: 'I' } })
+  end
 
   before { login(admin) }
 
@@ -22,5 +26,23 @@ RSpec.describe Admin::FormulaParametersController, type: :controller do
     end
   end
 
-  describe 'POST #update_bulk'
+  describe 'PATCH #update_bulk' do
+    let(:update_params) do
+      {
+        question_id: question.id
+      }
+    end
+
+    it 'sets question' do
+      patch :update_bulk, params: update_params
+
+      expect(assigns(:question)).to eq question
+    end
+
+    it 'renders edit_bulk view' do
+      patch :update_bulk, params: update_params
+
+      expect(response).to render_template :edit_bulk
+    end
+  end
 end
