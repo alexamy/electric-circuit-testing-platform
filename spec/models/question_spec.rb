@@ -5,6 +5,8 @@ require 'rails_helper'
 RSpec.describe Question, type: :model do
   it_behaves_like 'authorable'
 
+  it { is_expected.to accept_nested_attributes_for :formula_parameters }
+
   describe 'validations' do
     it { is_expected.to validate_presence_of :text }
     it { is_expected.to validate_presence_of :formula }
@@ -43,6 +45,4 @@ RSpec.describe Question, type: :model do
   it 'have one attached scheme' do
     expect(described_class.new.scheme).to be_an_instance_of ActiveStorage::Attached::One
   end
-
-  it { is_expected.to accept_nested_attributes_for :formula_parameters }
 end

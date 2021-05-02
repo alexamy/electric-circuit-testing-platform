@@ -6,15 +6,16 @@ class Admin::QuestionsController < Admin::BaseController
   end
 
   # :reek:DuplicateMethodCall
+  # :reek:TooManyStatements
   def create
     @question = Question.new(question_params)
-    render :new and return unless prepare_question
+    render :new and return unless valid_formula?
 
-    if @question.save
-      redirect_to admin_question_path(@question), notice: t('.successful')
-    else
-      render :new
-    end
+    @question.formula = Formula::Parser.call(@question.formula_text)
+    render :new and return unless @question.save
+
+    create_parameters
+    redirect_to admin_question_edit_parameters_path(@question), notice: t('.successful')
   end
 
   def index
@@ -28,43 +29,24 @@ class Admin::QuestionsController < Admin::BaseController
 
   private
 
-  def formula_parameters_attributes?
-    params.dig(:question, :formula_parameters_attributes).present?
-  end
-
   def valid_formula?
-    text = params.dig(:question, :formula_text)
-    valid = Formula::Validator.call(text)
+    valid = Formula::Validator.call(@question.formula_text)
     flash.now[:alert] = t('.formula_error') unless valid
+
     valid
   end
 
-  def prepare_question
-    return unless valid_formula?
-    prepare_parameters and return unless formula_parameters_attributes?
-
-    @question.formula = Formula::Parser.call(@question.formula_text)
-  end
-
-  # :reek:TooManyStatements
-  def prepare_parameters
-    text = params.dig(:question, :formula_text)
-    formula = Formula::Parser.call(text)
-
-    @question = Question.new(question_params.except(:formula_parameters_attributes))
-    formula[:dependencies].each do |name|
-      @question.formula_parameters.new(name: name)
+  def create_parameters
+    @question.formula['dependencies'].each do |name|
+      @question.formula_parameters.create(name: name, **Formula::Parameter.call(name))
     end
-
-    @with_parameters = true
   end
 
   def question_params
     params.require(:question)
           .permit(:text, :comment, :formula_text,
                   :precision, :answer_unit, :completion_time,
-                  :scheme, :category_id,
-                  formula_parameters_attributes: %i[name minimum maximum step unit])
+                  :scheme, :category_id)
           .merge(author_id: current_user.id)
   end
 end

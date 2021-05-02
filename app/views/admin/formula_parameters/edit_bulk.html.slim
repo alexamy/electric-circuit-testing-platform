@@ -1,0 +1,36 @@
+.block
+  = render 'shared/errors', resource: @question
+
+.block
+  p.italic = Question.human_attribute_name('formula_text')
+  p = simple_format @question.formula_text
+
+= form_with model: [:admin, @question], url: admin_question_update_parameters_path(@question) do |form|
+  .flex.flex-row.flex-wrap
+    = form.fields_for :formula_parameters do |param|
+      .block.w-max.p-4.m-2.border.rounded-lg
+        .form-group
+          = param.label :name, class: 'form-label'
+          = param.text_field :name, readonly: true, class: 'form-input read-only'
+
+        .form-group
+          = param.label :minimum, class: 'form-label'
+          = param.number_field :minimum, class: 'form-input'
+
+        .form-group
+          = param.label :maximum, class: 'form-label'
+          = param.number_field :maximum, class: 'form-input'
+
+        .form-group
+          = param.label :step, class: 'form-label'
+          = param.number_field :step, class: 'form-input'
+
+        .form-group
+          = param.label :unit, class: 'form-label'
+          = param.text_field :unit, class: 'form-input'
+
+  .form-actions
+    = form.submit 'Сохранить параметры', class: 'button'
+
+.mt-4
+  = link_to 'Вернуться к вопросу', admin_question_path(@question), class: 'link'

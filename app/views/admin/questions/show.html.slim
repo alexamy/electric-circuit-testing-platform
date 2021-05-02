@@ -23,3 +23,6 @@
   .py-2.md:ml-4
     p.italic = Question.human_attribute_name('scheme')
     = image_tag @question.scheme, class: 'question-scheme'
+
+.mt-4
+  = link_to 'Изменить параметры формулы', admin_question_edit_parameters_path(@question), class: 'link'
