@@ -1,4 +1,7 @@
 .block
+  = render 'shared/errors', resource: @question
+
+.block
   p.italic = Question.human_attribute_name('formula_text')
   p = simple_format @question.formula_text
 

@@ -8,6 +8,7 @@ class Admin::FormulaParametersController < Admin::BaseController
   def update_bulk
     find_question
 
+    flash.now[:notice] = t('.successful') if @question.update(parameters_params)
     render :edit_bulk
   end
 
@@ -19,6 +20,6 @@ class Admin::FormulaParametersController < Admin::BaseController
 
   def parameters_params
     params.require(:question)
-          .permit(formula_parameters_attributes: %i[name minimum maximum step unit])
+          .permit(formula_parameters_attributes: %i[id minimum maximum step unit])
   end
 end

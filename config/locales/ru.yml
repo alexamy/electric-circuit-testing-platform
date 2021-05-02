@@ -22,6 +22,9 @@ ru:
       create:
         formula_error: Ошибка в формуле
         successful: Вопрос успешно создан
+    formula_parameters:
+      update_bulk:
+        successful: Параметры успешно обновлены
   activerecord:
     models:
       user: Пользователь
