@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   get '/test_attempt/:id', controller: 'tests', action: 'next_question', as: 'next_question_test_attempt'
 
   namespace :admin do
-    resources :categories, shallow: true
+    resources :categories, shallow: true, except: [:show]
 
     resources :questions, shallow: true do
       get '/update_parameters', controller: 'formula_parameters', action: 'edit_bulk', as: 'edit_parameters'
