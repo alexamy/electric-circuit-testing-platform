@@ -18,6 +18,10 @@ class Admin::QuestionsController < Admin::BaseController
     redirect_to admin_question_edit_parameters_path(@question), notice: t('.successful')
   end
 
+  def edit
+    @question = Question.find(params[:id])
+  end
+
   def index
     @questions = Question.includes(:category).all
   end
@@ -28,7 +32,7 @@ class Admin::QuestionsController < Admin::BaseController
   end
 
   def destroy
-    Question.find(params[:id]).destroy
+    Question.find_by(id: params[:id])&.destroy
 
     redirect_to admin_questions_path
   end
