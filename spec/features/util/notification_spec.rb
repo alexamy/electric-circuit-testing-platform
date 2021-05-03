@@ -15,7 +15,7 @@ feature "
       visit new_admin_question_path
 
       fill_in 'Формула', with: 'x='
-      click_on 'Создать вопрос'
+      click_on 'Сохранить вопрос'
     end
 
     scenario 'is shown' do
