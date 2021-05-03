@@ -27,6 +27,12 @@ class Admin::QuestionsController < Admin::BaseController
     @static_question = StaticQuestion.new_from(@question)
   end
 
+  def destroy
+    Question.find(params[:id]).destroy
+
+    redirect_to admin_questions_path
+  end
+
   private
 
   def valid_formula?

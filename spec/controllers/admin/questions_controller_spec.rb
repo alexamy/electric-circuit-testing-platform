@@ -115,4 +115,20 @@ RSpec.describe Admin::QuestionsController, type: :controller do
       expect(response).to render_template :index
     end
   end
+
+  describe 'DELETE #destroy' do
+    let!(:question) { create(:question, author: admin) }
+
+    it 'deletes the question' do
+      expect do
+        delete :destroy, params: { id: question.id }
+      end.to change(Question, :count).by(-1)
+    end
+
+    it 'redirects to questions list' do
+      delete :destroy, params: { id: question.id }
+
+      expect(response).to redirect_to admin_questions_path
+    end
+  end
 end

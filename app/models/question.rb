@@ -17,6 +17,7 @@ class Question < ApplicationRecord
   belongs_to :category
 
   has_many :formula_parameters, dependent: :destroy
+  has_many :static_questions, dependent: :destroy
 
   has_one_attached :scheme
 

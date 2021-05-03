@@ -5,8 +5,6 @@ require 'rails_helper'
 RSpec.describe Question, type: :model do
   it_behaves_like 'authorable'
 
-  it { is_expected.to accept_nested_attributes_for :formula_parameters }
-
   describe 'validations' do
     it { is_expected.to validate_presence_of :text }
     it { is_expected.to validate_presence_of :formula }
@@ -16,6 +14,14 @@ RSpec.describe Question, type: :model do
 
     it { is_expected.to validate_numericality_of(:precision).only_integer.is_greater_than_or_equal_to(0) }
     it { is_expected.to validate_numericality_of(:completion_time).only_integer.is_greater_than_or_equal_to(0) }
+  end
+
+  describe 'associations' do
+    it { is_expected.to belong_to :category }
+    it { is_expected.to have_many(:formula_parameters).dependent(:destroy) }
+    it { is_expected.to have_many(:static_questions).dependent(:destroy) }
+
+    it { is_expected.to accept_nested_attributes_for :formula_parameters }
   end
 
   context 'when uploads scheme' do
@@ -38,9 +44,6 @@ RSpec.describe Question, type: :model do
       expect(question.errors.messages[:scheme]).to eq ['должна занимать не более 1 мегабайта']
     end
   end
-
-  it { is_expected.to belong_to :category }
-  it { is_expected.to have_many(:formula_parameters).dependent(:destroy) }
 
   it 'have one attached scheme' do
     expect(described_class.new.scheme).to be_an_instance_of ActiveStorage::Attached::One
