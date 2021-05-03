@@ -142,5 +142,13 @@ RSpec.describe Admin::QuestionsController, type: :controller do
     end
   end
 
-  describe 'PATCH #update'
+  describe 'PATCH #update' do
+    it 'finds question'
+    it 'changes question fields'
+    it 'removes unused parameters'
+    it 'adds new parameter if presented in formula'
+    it 'redirects to index with notice on success'
+    it 'redirects to parameters edit when formula is changed'
+    it 'rerenders new on save error'
+  end
 end

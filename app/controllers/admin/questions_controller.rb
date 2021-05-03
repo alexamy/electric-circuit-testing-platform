@@ -22,6 +22,8 @@ class Admin::QuestionsController < Admin::BaseController
     @question = Question.find(params[:id])
   end
 
+  def update; end
+
   def index
     @questions = Question.includes(:category).all
   end

@@ -16,7 +16,7 @@ feature 'Admin can edit question', "
 
   background { sign_in(admin) }
 
-  scenario 'Admin can edit question fields other than formula' do
+  xscenario 'Admin can edit question fields other than formula' do
     visit admin_questions_path
 
     click_on 'Редактировать'
@@ -27,7 +27,7 @@ feature 'Admin can edit question', "
     expect(page).to have_selector 'td', text: 'Sample question text'
   end
 
-  scenario 'Admin can edit question formula' do
+  xscenario 'Admin can edit question formula' do
     visit admin_questions_path
 
     click_on 'Редактировать'
