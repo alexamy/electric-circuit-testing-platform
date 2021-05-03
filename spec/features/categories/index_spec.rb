@@ -3,9 +3,9 @@
 require 'rails_helper'
 
 feature 'Admin can view list of categories', "
-  In order to control category resource
+  In order to select needed category
   As an authenticated admin
-  I'd like to be able to perform crud operations on categories
+  I'd like to be able to view list of categories
 " do
   given(:admin) { create(:admin) }
   given!(:categories) { create_list(:category, 5) }
