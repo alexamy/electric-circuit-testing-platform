@@ -17,7 +17,7 @@ feature 'Admin can create category', "
 
     fill_in 'Название', with: 'TestCategory'
     fill_in 'Порог для зачета', with: '10'
-    click_on 'Создать категорию'
+    click_on 'Сохранить категорию'
 
     expect(page).to have_selector 'td', text: 'TestCategory'
   end
@@ -29,7 +29,7 @@ feature 'Admin can create category', "
 
       fill_in 'Название', with: ''
       fill_in 'Порог для зачета', with: '1'
-      click_on 'Создать категорию'
+      click_on 'Сохранить категорию'
 
       expect(page).to have_content 'Название не может быть пустым'
     end
@@ -40,7 +40,7 @@ feature 'Admin can create category', "
 
       fill_in 'Название', with: 'TestCategory'
       fill_in 'Порог для зачета', with: '0'
-      click_on 'Создать категорию'
+      click_on 'Сохранить категорию'
 
       expect(page).to have_content 'Порог для зачета может иметь значение большее 0'
     end

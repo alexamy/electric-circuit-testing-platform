@@ -19,6 +19,20 @@ class Admin::CategoriesController < Admin::BaseController
     end
   end
 
+  def edit
+    @category = Category.find(params[:id])
+  end
+
+  def update
+    @category = Category.find(params[:id])
+
+    if @category.update(category_params)
+      redirect_to admin_categories_path
+    else
+      render :edit
+    end
+  end
+
   def destroy
     Category.find_by(id: params[:id])&.destroy
 

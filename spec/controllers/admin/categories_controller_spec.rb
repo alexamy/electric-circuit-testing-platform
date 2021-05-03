@@ -70,4 +70,45 @@ RSpec.describe Admin::CategoriesController, type: :controller do
       expect(response).to render_template :new
     end
   end
+
+  describe 'GET #edit' do
+    it 'finds the category' do
+      get :edit, params: { id: category.id }
+
+      expect(assigns(:category)).to eq category
+    end
+
+    it 'renders edit view' do
+      get :edit, params: { id: category.id }
+
+      expect(response).to render_template :edit
+    end
+  end
+
+  describe 'PATCH #update' do
+    it 'finds the category' do
+      patch :update, params: { id: category.id, category: attributes_for(:category) }
+
+      expect(assigns(:category)).to eq category
+    end
+
+    it 'changes category fields' do
+      patch :update, params: { id: category.id, category: { name: 'newcategory' } }
+
+      category.reload
+      expect(category.name).to eq 'newcategory'
+    end
+
+    it 'redirects to index on success' do
+      patch :update, params: { id: category.id, category: attributes_for(:category) }
+
+      expect(response).to redirect_to admin_categories_path
+    end
+
+    it 'rerenders new on failure' do
+      patch :update, params: { id: category.id, category: attributes_for(:category, :invalid) }
+
+      expect(response).to render_template :edit
+    end
+  end
 end
