@@ -21,7 +21,7 @@
           = question.category.name
         td.table-cell.space-x-4
           / = link_to 'Редактировать', edit_admin_question_path(question), class: 'link'
-          = link_to 'Удалить', admin_question_path(question), method: :delete, data: { confirm: 'Вы уверены? Все сгенерированные вопросы будут удалены, результаты тестов изменятся.' }, class: 'link'
+          = link_to 'Удалить', admin_question_path(question), method: :delete, data: { confirm: 'Вы уверены?' }, class: 'link'
 
 
 = link_to 'Создать новый', new_admin_question_path, class: 'button'
