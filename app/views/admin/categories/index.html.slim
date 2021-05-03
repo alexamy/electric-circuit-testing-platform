@@ -1,0 +1,30 @@
+.table-wrapper
+  table.table
+    thead.table-head
+      th.table-header
+        | ID
+      th.table-header
+        = Category.human_attribute_name(:name)
+      th.table-header
+        = Category.human_attribute_name(:target_score)
+      th.table-header
+        | Количество вопросов
+      th.table-header
+        | Действия
+
+    tbody.table-body
+    - @categories.each do |category|
+      tr.table-row
+        td.table-cell
+          = category.id
+        td.category.table-cell
+          = category.name
+        td.table-cell
+          = category.target_score
+        td.table-cell
+          = category.questions.count
+        td.table-cell.space-x-4
+          = link_to 'Редактировать', edit_admin_category_path(category), class: 'link'
+          = link_to 'Удалить', admin_category_path(category), method: :delete, data: { confirm: 'Вы уверены?' }, class: 'link'
+
+= link_to 'Создать новую', new_admin_category_path, class: 'button'

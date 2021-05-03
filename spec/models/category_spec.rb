@@ -15,6 +15,7 @@ RSpec.describe Category, type: :model do
 
   it { is_expected.to validate_presence_of :name }
   it { is_expected.to validate_presence_of :target_score }
+  it { is_expected.to validate_numericality_of(:target_score).only_integer.is_greater_than(0) }
 
   it { is_expected.to have_many(:questions).dependent(:destroy) }
 

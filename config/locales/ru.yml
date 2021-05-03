@@ -39,6 +39,7 @@ ru:
         remember_me: Запомнить?
       category:
         name: Название
+        target_score: Порог для зачета
       formula_parameter: &formula_parameter
         name: Название
         minimum: Минимум

@@ -5,6 +5,10 @@ class Category < ApplicationRecord
   WRONG_SCORE = -2
 
   validates :name, :target_score, presence: true
+  validates :target_score, numericality: {
+    only_integer: true,
+    greater_than: 0
+  }
 
   has_many :questions, dependent: :destroy
 

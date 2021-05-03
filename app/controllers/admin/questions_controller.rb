@@ -19,7 +19,7 @@ class Admin::QuestionsController < Admin::BaseController
   end
 
   def index
-    @questions = Question.all
+    @questions = Question.includes(:category).all
   end
 
   def show
