@@ -6,6 +6,8 @@
       th.table-header
         = Category.human_attribute_name(:name)
       th.table-header
+        = Category.human_attribute_name(:target_score)
+      th.table-header
         | Количество вопросов
       th.table-header
         | Действия
@@ -17,6 +19,8 @@
           = category.id
         td.category.table-cell
           = link_to category.name, admin_category_path(category), class: 'link'
+        td.table-cell
+          = category.target_score
         td.table-cell
           = category.questions.count
         td.table-cell
