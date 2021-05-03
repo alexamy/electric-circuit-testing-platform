@@ -36,4 +36,38 @@ RSpec.describe Admin::CategoriesController, type: :controller do
       expect(response).to redirect_to admin_categories_path
     end
   end
+
+  describe 'GET #new' do
+    it 'setup new category' do
+      get :new
+
+      expect(assigns(:category)).to be_a_new Category
+    end
+
+    it 'renders new view' do
+      get :new
+
+      expect(response).to render_template :new
+    end
+  end
+
+  describe 'POST #create' do
+    it 'create new category in database' do
+      expect do
+        post :create, params: { category: attributes_for(:category) }
+      end.to change(Category, :count).by(1)
+    end
+
+    it 'redirects to index on success' do
+      post :create, params: { category: attributes_for(:category) }
+
+      expect(response).to redirect_to admin_categories_path
+    end
+
+    it 'rerenders new on failure' do
+      post :create, params: { category: attributes_for(:category, :invalid) }
+
+      expect(response).to render_template :new
+    end
+  end
 end

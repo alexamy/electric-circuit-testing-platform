@@ -8,5 +8,10 @@ FactoryBot.define do
   factory :category do
     name
     target_score { 2 }
+
+    trait :invalid do
+      name { nil }
+      target_score { -1 }
+    end
   end
 end
