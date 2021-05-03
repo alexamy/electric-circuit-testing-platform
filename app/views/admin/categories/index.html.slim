@@ -7,6 +7,8 @@
         = Category.human_attribute_name(:name)
       th.table-header
         | Количество вопросов
+      th.table-header
+        | Действия
 
     tbody.table-body
     - @categories.each do |category|
@@ -17,3 +19,5 @@
           = link_to category.name, admin_category_path(category), class: 'link'
         td.table-cell
           = category.questions.count
+        td.table-cell
+          = link_to 'Удалить', admin_category_path(category), method: :delete, data: { confirm: 'Вы уверены?' }, class: 'link'
