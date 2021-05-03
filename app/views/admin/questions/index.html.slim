@@ -1,21 +1,21 @@
-.shadow.overflow-hidden.border-b.border-gray-200.sm:rounded-lg
-  table.min-w-full.divide-y.divide-gray-200
-    thead.bg-gray-50
-      th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider
+.table-wrapper
+  table.table
+    thead.table-head
+      th.table-header
         | ID
-      th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider
+      th.table-header
         = Question.human_attribute_name(:text)
-      th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider
+      th.table-header
         = Question.human_attribute_name(:category)
 
-    tbody.bg-white.divide-y.divide-gray-200
+    tbody.table-body
     - @questions.each do |question|
       tr
-        td.px-6.py-4.whitespace-nowrap
+        td.table-cell
           = question.id
-        td.px-6.py-4.whitespace-nowrap
+        td.table-cell
           = link_to question.text, admin_question_path(question), class: 'link'
-        td.px-6.py-4.whitespace-nowrap
+        td.table-cell
           = question.category.name
 
 = link_to 'Создать новый', new_admin_question_path, class: 'button'
