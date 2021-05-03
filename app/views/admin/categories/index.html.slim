@@ -5,6 +5,8 @@
         | ID
       th.table-header
         = Category.human_attribute_name(:name)
+      th.table-header
+        | Количество вопросов
 
     tbody.table-body
     - @categories.each do |category|
@@ -13,3 +15,5 @@
           = category.id
         td.category.table-cell
           = link_to category.name, admin_category_path(category), class: 'link'
+        td.table-cell
+          = category.questions.count
