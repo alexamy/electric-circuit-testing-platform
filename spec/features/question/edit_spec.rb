@@ -16,14 +16,14 @@ feature 'Admin can edit question', "
 
   background { sign_in(admin) }
 
-  xscenario 'Admin can edit question fields other than formula' do
+  scenario 'Admin can edit question fields other than formula' do
     visit admin_questions_path
 
     click_on 'Редактировать'
     fill_in 'Текст вопроса', with: 'Sample question text'
     click_on 'Сохранить вопрос'
 
-    expect(page).to have_content 'Вопрос успешно изменен'
+    expect(page).to have_content 'Вопрос успешно сохранен'
     expect(page).to have_selector 'td', text: 'Sample question text'
   end
 

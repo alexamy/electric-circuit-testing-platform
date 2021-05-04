@@ -4,6 +4,7 @@ require 'rails_helper'
 
 RSpec.describe Admin::QuestionsController, type: :controller do
   let(:admin) { create(:admin) }
+  let(:category) { create(:category) }
   let!(:questions) { create_list(:question, 3) }
   let(:question) { questions.first }
 
@@ -22,7 +23,6 @@ RSpec.describe Admin::QuestionsController, type: :controller do
   end
 
   describe 'POST #create' do
-    let(:category) { create(:category) }
     let(:question_params) do
       {
         question: {
@@ -143,12 +143,49 @@ RSpec.describe Admin::QuestionsController, type: :controller do
   end
 
   describe 'PATCH #update' do
-    it 'finds question'
-    it 'changes question fields'
+    let(:question_params) do
+      {
+        id: question.id,
+        question: {
+          category_id: category.id,
+          formula_text: 'x=y',
+          text: 'Найдите x',
+          precision: 2,
+          answer_unit: 'Unit',
+          completion_time: 20,
+          scheme: create_file('spec/support/files/397KB.png')
+        }
+      }
+    end
+
+    it 'finds question' do
+      patch :update, params: { id: question.id, question: { text: 'find var' } }
+
+      expect(assigns(:question)).to eq question
+    end
+
+    it 'changes question fields' do
+      patch :update, params: { id: question.id, question: { text: 'find var' } }
+      question.reload
+
+      expect(question.text).to eq 'find var'
+    end
+
+    it 'redirects to index with notice on success' do
+      patch :update, params: { id: question.id, question: { text: 'find var' } }
+
+      expect(flash[:notice]).to be_present
+      expect(response).to redirect_to admin_questions_path
+    end
+
+    it 'rerenders edit on save error' do
+      patch :update, params: { id: question.id, question: { precision: -1 } }
+
+      expect(response).to render_template :edit
+    end
+
     it 'removes unused parameters'
     it 'adds new parameter if presented in formula'
-    it 'redirects to index with notice on success'
     it 'redirects to parameters edit when formula is changed'
-    it 'rerenders new on save error'
   end
 end

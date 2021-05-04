@@ -20,7 +20,7 @@
         td.table-cell
           = question.category.name
         td.table-cell.space-x-4
-          / = link_to 'Редактировать', edit_admin_question_path(question), class: 'link'
+          = link_to 'Редактировать', edit_admin_question_path(question), class: 'link'
           = link_to 'Удалить', admin_question_path(question), method: :delete, data: { confirm: 'Вы уверены?' }, class: 'link'
 
 

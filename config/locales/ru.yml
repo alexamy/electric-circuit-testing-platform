@@ -22,6 +22,8 @@ ru:
       create:
         formula_error: Ошибка в формуле
         successful: Вопрос успешно создан
+      update:
+        successful: Вопрос успешно сохранен
     formula_parameters:
       update_bulk:
         successful: Параметры успешно обновлены

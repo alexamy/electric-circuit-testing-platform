@@ -22,7 +22,15 @@ class Admin::QuestionsController < Admin::BaseController
     @question = Question.find(params[:id])
   end
 
-  def update; end
+  def update
+    @question = Question.find(params[:id])
+
+    if @question.update(question_params)
+      redirect_to admin_questions_path, notice: t('.successful')
+    else
+      render :edit
+    end
+  end
 
   def index
     @questions = Question.includes(:category).all
