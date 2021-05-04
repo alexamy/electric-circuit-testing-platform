@@ -62,6 +62,12 @@ class Admin::QuestionsController < Admin::BaseController
     end
   end
 
+  def update_parameters
+    return if question_params[:formula_text].nil? || question_params[:formula_text] == @question.formula_text
+
+    @question.update(formula: Formula::Parser.call(@question.formula_text))
+  end
+
   def question_params
     params.require(:question)
           .permit(:text, :comment, :formula_text,

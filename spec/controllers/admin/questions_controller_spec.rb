@@ -5,8 +5,6 @@ require 'rails_helper'
 RSpec.describe Admin::QuestionsController, type: :controller do
   let(:admin) { create(:admin) }
   let(:category) { create(:category) }
-  let!(:questions) { create_list(:question, 3) }
-  let(:question) { questions.first }
 
   before { login(admin) }
 
@@ -87,6 +85,8 @@ RSpec.describe Admin::QuestionsController, type: :controller do
   end
 
   describe 'GET #show' do
+    let(:question) { create(:question) }
+
     before { get :show, params: { id: question.id } }
 
     it 'assigns requested question' do
@@ -103,6 +103,8 @@ RSpec.describe Admin::QuestionsController, type: :controller do
   end
 
   describe 'GET #index' do
+    let!(:questions) { create_list(:question, 3) }
+
     before { get :index }
 
     it 'assigns all questions' do
@@ -115,6 +117,8 @@ RSpec.describe Admin::QuestionsController, type: :controller do
   end
 
   describe 'DELETE #destroy' do
+    let!(:question) { create(:question) }
+
     it 'deletes the question' do
       expect do
         delete :destroy, params: { id: question.id }
@@ -129,6 +133,8 @@ RSpec.describe Admin::QuestionsController, type: :controller do
   end
 
   describe 'GET #edit' do
+    let(:question) { create(:question) }
+
     it 'setups question' do
       get :edit, params: { id: question.id }
 
@@ -143,20 +149,7 @@ RSpec.describe Admin::QuestionsController, type: :controller do
   end
 
   describe 'PATCH #update' do
-    let(:question_params) do
-      {
-        id: question.id,
-        question: {
-          category_id: category.id,
-          formula_text: 'x=y',
-          text: 'Найдите x',
-          precision: 2,
-          answer_unit: 'Unit',
-          completion_time: 20,
-          scheme: create_file('spec/support/files/397KB.png')
-        }
-      }
-    end
+    let(:question) { create(:question, formula_text: 'x=z') }
 
     it 'finds question' do
       patch :update, params: { id: question.id, question: { text: 'find var' } }
@@ -174,8 +167,8 @@ RSpec.describe Admin::QuestionsController, type: :controller do
     it 'redirects to index with notice on success' do
       patch :update, params: { id: question.id, question: { text: 'find var' } }
 
-      expect(flash[:notice]).to be_present
       expect(response).to redirect_to admin_questions_path
+      expect(flash[:notice]).to be_present
     end
 
     it 'rerenders edit on save error' do
@@ -184,8 +177,19 @@ RSpec.describe Admin::QuestionsController, type: :controller do
       expect(response).to render_template :edit
     end
 
-    it 'removes unused parameters'
-    it 'adds new parameter if presented in formula'
-    it 'redirects to parameters edit when formula is changed'
+    describe 'updates formula' do
+      xit 'updates formula attribute' do
+        expect do
+          patch :update, params: { id: question.id, question: { formula_text: 'x=y' } }
+
+          question.reload
+        end.to change(question, :formula)
+      end
+
+      it 'shows error for invalid formula'
+      it 'removes unused parameters'
+      it 'adds new parameter if presented'
+      it 'redirects to parameters edit'
+    end
   end
 end
