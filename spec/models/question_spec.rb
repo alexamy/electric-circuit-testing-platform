@@ -8,6 +8,7 @@ RSpec.describe Question, type: :model do
   describe 'validations' do
     it { is_expected.to validate_presence_of :text }
     it { is_expected.to validate_presence_of :formula }
+    it { is_expected.to validate_presence_of :formula_text }
     it { is_expected.to validate_presence_of :precision }
     it { is_expected.to validate_presence_of :answer_unit }
     it { is_expected.to validate_presence_of :scheme }
