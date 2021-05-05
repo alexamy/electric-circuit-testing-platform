@@ -149,7 +149,10 @@ RSpec.describe Admin::QuestionsController, type: :controller do
   end
 
   describe 'PATCH #update' do
-    let(:question) { create(:question, formula_text: 'x=z') }
+    let(:question) do
+      create(:question, formula_text: 'x=z',
+                        formula: { target: 'x', dependencies: %w[z], bodies: { x: 'z' } })
+    end
 
     it 'finds question' do
       patch :update, params: { id: question.id, question: { text: 'find var', formula_text: 'x=z' } }
@@ -178,7 +181,7 @@ RSpec.describe Admin::QuestionsController, type: :controller do
     end
 
     describe 'updates formula' do
-      xit 'updates formula attribute' do
+      it 'updates formula attribute' do
         expect do
           patch :update, params: { id: question.id, question: { formula_text: 'x=y' } }
 
@@ -193,9 +196,30 @@ RSpec.describe Admin::QuestionsController, type: :controller do
         expect(response).to render_template :edit
       end
 
-      it 'removes unused parameters'
-      it 'adds new parameter if presented'
-      it 'redirects to parameters edit'
+      it 'dont delete old parameters' do
+        expect do
+          patch :update, params: { id: question.id, question: { formula_text: 'x=y*z' } }
+          question.reload
+        end.not_to change(question.formula_parameters.find_by(name: 'z'), :id)
+      end
+
+      it 'adds new parameter if presented' do
+        expect do
+          patch :update, params: { id: question.id, question: { formula_text: 'x=y*z' } }
+        end.to change(FormulaParameter, :count).by(1)
+      end
+
+      it 'removes unused parameters' do
+        expect do
+          patch :update, params: { id: question.id, question: { formula_text: 'x=y' } }
+        end.to change(FormulaParameter, :count).by(-1)
+      end
+
+      it 'redirects to parameters edit' do
+        patch :update, params: { id: question.id, question: { formula_text: 'x=y' } }
+
+        expect(response).to redirect_to admin_question_edit_parameters_path(question)
+      end
     end
   end
 end
