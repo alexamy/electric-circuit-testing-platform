@@ -22,12 +22,16 @@ class Admin::QuestionsController < Admin::BaseController
     @question = Question.find(params[:id])
   end
 
+  # :reek:DuplicateMethodCall
+  # :reek:TooManyStatements
   # rubocop:disable Metrics/AbcSize
   def update
     @question = Question.find(params[:id])
-    render :edit and return unless valid_formula?(question_params[:formula_text])
+    formula_text = question_params[:formula_text]
 
-    if @question.update(**question_params, formula: Formula::Parser.call(question_params[:formula_text]))
+    render :edit and return unless valid_formula?(formula_text)
+
+    if @question.update(**question_params, formula: Formula::Parser.call(formula_text))
       redirect_to admin_question_edit_parameters_path(@question) and return if update_parameters
 
       redirect_to admin_questions_path, notice: t('.successful')
@@ -67,6 +71,8 @@ class Admin::QuestionsController < Admin::BaseController
     end
   end
 
+  # :reek:TooManyStatements
+  # :reek:FeatureEnvy - TODO move to formula_parameters controller
   # rubocop:disable Metrics/AbcSize
   def update_parameters
     dependencies = @question.formula['dependencies']
