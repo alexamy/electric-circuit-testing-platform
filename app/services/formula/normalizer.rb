@@ -8,7 +8,7 @@ module Formula
       end
 
       def lines(text)
-        text.split("\n").map(&:strip)
+        normalize(text).split("\n").map(&:strip)
       end
     end
   end
