@@ -149,7 +149,7 @@ RSpec.describe Admin::QuestionsController, type: :controller do
   end
 
   describe 'PATCH #update' do
-    let(:question) do
+    let!(:question) do
       create(:question, formula_text: 'x=z',
                         formula: { target: 'x', dependencies: %w[z], bodies: { x: 'z' } })
     end
@@ -212,7 +212,7 @@ RSpec.describe Admin::QuestionsController, type: :controller do
       it 'removes unused parameters' do
         expect do
           patch :update, params: { id: question.id, question: { formula_text: 'x=y' } }
-        end.to change(FormulaParameter, :count).by(-1)
+        end.to change(FormulaParameter, :count).by(0) # remove z + add y = 0
       end
 
       it 'redirects to parameters edit' do

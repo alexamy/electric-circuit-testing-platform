@@ -22,16 +22,20 @@ class Admin::QuestionsController < Admin::BaseController
     @question = Question.find(params[:id])
   end
 
+  # rubocop:disable Metrics/AbcSize
   def update
     @question = Question.find(params[:id])
     render :edit and return unless valid_formula?(question_params[:formula_text])
 
-    if @question.update(question_params)
+    if @question.update(**question_params, formula: Formula::Parser.call(question_params[:formula_text]))
+      redirect_to admin_question_edit_parameters_path(@question) and return if update_parameters
+
       redirect_to admin_questions_path, notice: t('.successful')
     else
       render :edit
     end
   end
+  # rubocop:enable Metrics/AbcSize
 
   def index
     @questions = Question.includes(:category).all
@@ -63,9 +67,21 @@ class Admin::QuestionsController < Admin::BaseController
     end
   end
 
+  # rubocop:disable Metrics/AbcSize
   def update_parameters
-    @question.update(formula: Formula::Parser.call(@question.formula_text))
+    dependencies = @question.formula['dependencies']
+
+    parameters = @question.formula_parameters
+    parameter_names = parameters.map(&:name)
+    return if parameter_names.sort == dependencies.sort
+
+    parameters.reject { |parameter| dependencies.include?(parameter.name) }.each(&:destroy)
+
+    dependencies.reject { |name| parameter_names.include?(name) }.each do |name|
+      parameters.create(name: name, **Formula::Parameter.call(name))
+    end
   end
+  # rubocop:enable Metrics/AbcSize
 
   def question_params
     params.require(:question)
