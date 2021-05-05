@@ -9,7 +9,7 @@ class Admin::QuestionsController < Admin::BaseController
   # :reek:TooManyStatements
   def create
     @question = Question.new(question_params)
-    render :new and return unless valid_formula?
+    render :new and return unless valid_formula?(@question.formula_text)
 
     @question.formula = Formula::Parser.call(@question.formula_text)
     render :new and return unless @question.save
@@ -24,6 +24,7 @@ class Admin::QuestionsController < Admin::BaseController
 
   def update
     @question = Question.find(params[:id])
+    render :edit and return unless valid_formula?(question_params[:formula_text])
 
     if @question.update(question_params)
       redirect_to admin_questions_path, notice: t('.successful')
@@ -49,8 +50,8 @@ class Admin::QuestionsController < Admin::BaseController
 
   private
 
-  def valid_formula?
-    valid = Formula::Validator.call(@question.formula_text)
+  def valid_formula?(formula_text)
+    valid = Formula::Validator.call(formula_text)
     flash.now[:alert] = t('.formula_error') unless valid
 
     valid
@@ -63,8 +64,6 @@ class Admin::QuestionsController < Admin::BaseController
   end
 
   def update_parameters
-    return if question_params[:formula_text].nil? || question_params[:formula_text] == @question.formula_text
-
     @question.update(formula: Formula::Parser.call(@question.formula_text))
   end
 

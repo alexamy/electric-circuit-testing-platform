@@ -152,27 +152,27 @@ RSpec.describe Admin::QuestionsController, type: :controller do
     let(:question) { create(:question, formula_text: 'x=z') }
 
     it 'finds question' do
-      patch :update, params: { id: question.id, question: { text: 'find var' } }
+      patch :update, params: { id: question.id, question: { text: 'find var', formula_text: 'x=z' } }
 
       expect(assigns(:question)).to eq question
     end
 
     it 'changes question fields' do
-      patch :update, params: { id: question.id, question: { text: 'find var' } }
+      patch :update, params: { id: question.id, question: { text: 'find var', formula_text: 'x=z' } }
       question.reload
 
       expect(question.text).to eq 'find var'
     end
 
     it 'redirects to index with notice on success' do
-      patch :update, params: { id: question.id, question: { text: 'find var' } }
+      patch :update, params: { id: question.id, question: { text: 'find var', formula_text: 'x=z' } }
 
       expect(response).to redirect_to admin_questions_path
       expect(flash[:notice]).to be_present
     end
 
     it 'rerenders edit on save error' do
-      patch :update, params: { id: question.id, question: { precision: -1 } }
+      patch :update, params: { id: question.id, question: { precision: -1, formula_text: 'x=z' } }
 
       expect(response).to render_template :edit
     end
@@ -186,7 +186,13 @@ RSpec.describe Admin::QuestionsController, type: :controller do
         end.to change(question, :formula)
       end
 
-      it 'shows error for invalid formula'
+      it 'rerenders edit with error for invalid formula' do
+        patch :update, params: { id: question.id, question: { formula_text: 'x=' } }
+
+        expect(flash[:alert]).to be_present
+        expect(response).to render_template :edit
+      end
+
       it 'removes unused parameters'
       it 'adds new parameter if presented'
       it 'redirects to parameters edit'

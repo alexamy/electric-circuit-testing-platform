@@ -5,7 +5,7 @@ module Formula
     attr_reader :text, :lines
 
     def initialize(text)
-      @text = text
+      @text = text || ''
 
       normalize
       split_lines
