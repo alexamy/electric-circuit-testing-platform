@@ -22,12 +22,10 @@ class Admin::QuestionsController < Admin::BaseController
   def update
     @question = Question.find(params[:id])
     @question.attributes = question_params
-    formula_text_changed = @question.formula_text_changed?
+    redirect_path = update_redirect_path
 
     if @question.save
-      redirect_to admin_question_edit_parameters_path(@question) and return if formula_text_changed
-
-      redirect_to admin_questions_path, notice: t('.successful')
+      redirect_to redirect_path, notice: t('.successful')
     else
       render :edit
     end
@@ -49,6 +47,15 @@ class Admin::QuestionsController < Admin::BaseController
   end
 
   private
+
+  # NB: call before @question.save
+  def update_redirect_path
+    if @question.formula_text_changed?
+      admin_question_edit_parameters_path(@question)
+    else
+      admin_questions_path
+    end
+  end
 
   def question_params
     params.require(:question)
