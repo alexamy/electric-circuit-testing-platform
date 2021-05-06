@@ -8,7 +8,7 @@ module Formula
       super()
 
       @text = text
-      @entries = Formula::Normalizer.new(@text).lines
+      @entries = Formula::Normalizer.lines(@text)
     end
 
     def call

@@ -7,6 +7,8 @@
         = Question.human_attribute_name(:text)
       th.table-header
         = Question.human_attribute_name(:category)
+      th.table-header
+        | Действия
 
     tbody.table-body
     - @questions.each do |question|
@@ -17,5 +19,9 @@
           = link_to question.text, admin_question_path(question), class: 'link'
         td.table-cell
           = question.category.name
+        td.table-cell.space-x-4
+          = link_to 'Редактировать', edit_admin_question_path(question), class: 'link'
+          = link_to 'Удалить', admin_question_path(question), method: :delete, data: { confirm: 'Вы уверены?' }, class: 'link'
+
 
 = link_to 'Создать новый', new_admin_question_path, class: 'button'

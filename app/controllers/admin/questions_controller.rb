@@ -5,17 +5,30 @@ class Admin::QuestionsController < Admin::BaseController
     @question = Question.new
   end
 
-  # :reek:DuplicateMethodCall
-  # :reek:TooManyStatements
   def create
     @question = Question.new(question_params)
-    render :new and return unless valid_formula?
 
-    @question.formula = Formula::Parser.call(@question.formula_text)
-    render :new and return unless @question.save
+    if @question.save
+      redirect_to admin_question_edit_parameters_path(@question), notice: t('.successful')
+    else
+      render :new
+    end
+  end
 
-    create_parameters
-    redirect_to admin_question_edit_parameters_path(@question), notice: t('.successful')
+  def edit
+    @question = Question.find(params[:id])
+  end
+
+  def update
+    @question = Question.find(params[:id])
+    @question.attributes = question_params
+    redirect_path = update_redirect_path
+
+    if @question.save
+      redirect_to redirect_path, notice: t('.successful')
+    else
+      render :edit
+    end
   end
 
   def index
@@ -27,18 +40,20 @@ class Admin::QuestionsController < Admin::BaseController
     @static_question = StaticQuestion.new_from(@question)
   end
 
-  private
+  def destroy
+    Question.find_by(id: params[:id])&.destroy
 
-  def valid_formula?
-    valid = Formula::Validator.call(@question.formula_text)
-    flash.now[:alert] = t('.formula_error') unless valid
-
-    valid
+    redirect_to admin_questions_path
   end
 
-  def create_parameters
-    @question.formula['dependencies'].each do |name|
-      @question.formula_parameters.create(name: name, **Formula::Parameter.call(name))
+  private
+
+  # NB: call before @question.save
+  def update_redirect_path
+    if @question.formula_text_changed?
+      admin_question_edit_parameters_path(@question)
+    else
+      admin_questions_path
     end
   end
 

@@ -7,7 +7,7 @@ module Formula
     def initialize(text)
       super()
 
-      @text = Formula::Normalizer.new(text).text
+      @text = Formula::Normalizer.normalize(text)
       @calculator = Dentaku::Calculator.new(case_sensitive: true)
     end
 

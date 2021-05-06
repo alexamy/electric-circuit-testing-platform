@@ -11,6 +11,7 @@ class Category < ApplicationRecord
   }
 
   has_many :questions, dependent: :destroy
+  has_many :test_attempts, dependent: :nullify
 
   scope :with_questions, -> { joins(:questions).distinct }
 

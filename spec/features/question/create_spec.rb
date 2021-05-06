@@ -32,16 +32,16 @@ feature 'User can create question', "
 
       fill_in 'Текст вопроса', with: 'Вычислить показание вольтметра XMM1'
       fill_in 'Формула', with: 'formula with error'
-      click_on 'Создать вопрос'
+      click_on 'Сохранить вопрос'
 
-      expect(page).to have_content 'Ошибка в формуле'
+      expect(page).to have_content 'Формула содержит ошибки'
     end
 
     scenario 'sees validation error' do
       visit new_admin_question_path
 
       fill_in 'Формула', with: 'V=R'
-      click_on 'Создать вопрос'
+      click_on 'Сохранить вопрос'
 
       expect(page).to have_content('Текст вопроса не может быть пустым')
     end
@@ -56,7 +56,7 @@ feature 'User can create question', "
       fill_in 'Точность', with: '2'
       fill_in 'Максимальное время ответа', with: '2'
       attach_file 'Схема', "#{Rails.root}/spec/support/files/397KB.png"
-      click_on 'Создать вопрос'
+      click_on 'Сохранить вопрос'
 
       expect(page).to have_content 'Вопрос успешно создан'
     end
@@ -71,7 +71,7 @@ feature 'User can create question', "
       fill_in 'Точность', with: '2'
       fill_in 'Максимальное время ответа', with: '2'
       attach_file 'Схема', "#{Rails.root}/spec/support/files/397KB.png"
-      click_on 'Создать вопрос'
+      click_on 'Сохранить вопрос'
 
       fill_in 'Минимум', with: '1'
       fill_in 'Максимум', with: '100'
@@ -92,7 +92,7 @@ feature 'User can create question', "
       fill_in 'Точность', with: '2'
       fill_in 'Максимальное время ответа', with: '2'
       attach_file 'Схема', "#{Rails.root}/spec/support/files/397KB.png"
-      click_on 'Создать вопрос'
+      click_on 'Сохранить вопрос'
 
       fill_in 'Минимум', with: ''
       fill_in 'Максимум', with: '100'
