@@ -16,6 +16,8 @@ module Formula
         resistance
       when /^d/i
         diameter
+      when /^_test$/
+        test
       else
         default
       end
@@ -37,6 +39,10 @@ module Formula
 
     def diameter
       { minimum: 5, maximum: 20, step: 1, unit: 'мм' }
+    end
+
+    def test
+      { minimum: 1, maximum: 1, step: 1, unit: 'test' }
     end
   end
 end

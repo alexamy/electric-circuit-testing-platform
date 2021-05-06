@@ -22,4 +22,42 @@ class Question < ApplicationRecord
   has_one_attached :scheme
 
   accepts_nested_attributes_for :formula_parameters
+
+  before_validation :set_formula
+  after_create :create_parameters
+  after_update :remove_unused_parameters, :add_new_parameters
+
+  private
+
+  def set_formula
+    return unless formula_text_changed?
+
+    self.formula = Formula::Parser.call(formula_text)
+  end
+
+  def create_parameters
+    formula['dependencies'].each do |name|
+      formula_parameters.create(name: name, **Formula::Parameter.call(name))
+    end
+  end
+
+  def remove_unused_parameters
+    parameters = formula_parameters.reject do |parameter|
+      formula['dependencies'].include?(parameter.name)
+    end
+
+    parameters.each(&:destroy)
+  end
+
+  def add_new_parameters
+    parameter_names = formula_parameters.pluck(:name)
+
+    parameters = formula['dependencies'].reject do |name|
+      parameter_names.include?(name)
+    end
+
+    parameters.each do |name|
+      formula_parameters.create(name: name, **Formula::Parameter.call(name))
+    end
+  end
 end

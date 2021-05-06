@@ -18,6 +18,10 @@ RSpec.describe Formula::Parameter, type: :service do
     expect(generator.new('Dосн').call[:unit]).to eq 'мм'
   end
 
+  it 'has test parameter info' do
+    expect(generator.new('_test').call[:unit]).to eq 'test'
+  end
+
   it 'has default fallback' do
     expect(generator.new('x').call).to be_an_instance_of Hash
   end
