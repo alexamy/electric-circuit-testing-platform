@@ -2,6 +2,13 @@
 
 module Formula
   class Parameter < ApplicationService
+    MAPPING = {
+      /^[uv]/i => :voltage,
+      /^r/i => :resistance,
+      /^d/i => :diameter,
+      /^_test$/ => :test
+    }.freeze
+
     def initialize(name)
       super()
 
@@ -9,18 +16,11 @@ module Formula
     end
 
     def call
-      case @name
-      when /^[uv]/i
-        voltage
-      when /^r/i
-        resistance
-      when /^d/i
-        diameter
-      when /^_test$/
-        test
-      else
-        default
+      MAPPING.each do |regex, method|
+        return send(method) if @name.match(regex)
       end
+
+      default
     end
 
     private

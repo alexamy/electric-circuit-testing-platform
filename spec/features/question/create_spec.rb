@@ -34,7 +34,7 @@ feature 'User can create question', "
       fill_in 'Формула', with: 'formula with error'
       click_on 'Сохранить вопрос'
 
-    expect(page).to have_content 'Формула содержит ошибки'
+      expect(page).to have_content 'Формула содержит ошибки'
     end
 
     scenario 'sees validation error' do
