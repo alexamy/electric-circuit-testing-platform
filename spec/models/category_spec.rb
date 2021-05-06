@@ -18,6 +18,7 @@ RSpec.describe Category, type: :model do
   it { is_expected.to validate_numericality_of(:target_score).only_integer.is_greater_than(0) }
 
   it { is_expected.to have_many(:questions).dependent(:destroy) }
+  it { is_expected.to have_many(:test_attempts).dependent(:nullify) }
 
   describe '.with_questions' do
     it 'returns only categories with questions' do

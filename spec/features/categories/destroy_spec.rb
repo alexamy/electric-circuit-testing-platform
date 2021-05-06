@@ -8,8 +8,11 @@ feature 'Admin can delete category', "
   I'd like to be able to delete category
 " do
   given(:admin) { create(:admin) }
-  given!(:categories) { create_list(:category, 5) }
-  given(:category) { categories.first }
+  given(:category) { create(:category) }
+
+  given(:question) { create(:question, category: category) }
+  given(:test_attempt) { create(:test_attempt, author: admin, category: category) }
+  given!(:static_question) { create(:static_question, question: question, test_attempt: test_attempt) }
 
   background { sign_in(admin) }
 
@@ -17,7 +20,7 @@ feature 'Admin can delete category', "
     visit admin_categories_path
 
     within 'table' do
-      click_on 'Удалить', match: :first
+      click_on 'Удалить'
 
       expect(page).not_to have_content category.name
     end

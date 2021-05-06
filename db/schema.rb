@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_01_215224) do
+ActiveRecord::Schema.define(version: 2021_05_06_094447) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -81,7 +81,7 @@ ActiveRecord::Schema.define(version: 2021_05_01_215224) do
   create_table "static_questions", force: :cascade do |t|
     t.json "arguments"
     t.float "answer"
-    t.bigint "question_id", null: false
+    t.bigint "question_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.float "user_answer"
@@ -93,7 +93,7 @@ ActiveRecord::Schema.define(version: 2021_05_01_215224) do
   end
 
   create_table "test_attempts", force: :cascade do |t|
-    t.bigint "category_id", null: false
+    t.bigint "category_id"
     t.bigint "author_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
