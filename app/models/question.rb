@@ -13,6 +13,7 @@ class Question < ApplicationRecord
     only_integer: true,
     greater_than_or_equal_to: 0
   }
+  validate :validates_formula_text
 
   belongs_to :category
 
@@ -28,6 +29,13 @@ class Question < ApplicationRecord
   before_update :remove_unused_parameters, :add_new_parameters, if: :formula_changed?
 
   private
+
+  def validates_formula_text
+    return unless formula_text
+    return if Formula::Validator.call(formula_text)
+
+    errors.add :formula_text, :wrong
+  end
 
   def set_formula
     return unless formula_text_changed?

@@ -20,7 +20,6 @@ ru:
       restricted: Доступ к ресурсу запрещен
     questions:
       create:
-        formula_error: Ошибка в формуле
         successful: Вопрос успешно создан
       update:
         successful: Вопрос успешно сохранен
@@ -80,6 +79,8 @@ ru:
             scheme:
               content_type: должна быть изображением
               max_size_error: должна занимать не более 1 мегабайта
+            formula_text:
+              wrong: содержит ошибки
       messages:
         record_invalid: 'Возникли ошибки: %{errors}'
         restrict_dependent_destroy:

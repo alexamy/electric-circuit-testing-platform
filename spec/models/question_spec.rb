@@ -3,6 +3,8 @@
 require 'rails_helper'
 
 RSpec.describe Question, type: :model do
+  let(:author) { create(:admin) }
+  let(:category) { create(:category) }
   let(:model) { described_class }
 
   it_behaves_like 'authorable'
@@ -18,7 +20,13 @@ RSpec.describe Question, type: :model do
     it { is_expected.to validate_numericality_of(:precision).only_integer.is_greater_than_or_equal_to(0) }
     it { is_expected.to validate_numericality_of(:completion_time).only_integer.is_greater_than_or_equal_to(0) }
 
-    it 'validates formula text'
+    it 'isnt valid with wrong formula' do
+      expect(build(:question, formula_text: 'x=')).not_to be_valid
+    end
+
+    it 'is valid for correct formula' do
+      expect(build(:question, formula_text: 'x=y')).to be_valid
+    end
   end
 
   describe 'associations' do
@@ -55,9 +63,6 @@ RSpec.describe Question, type: :model do
   end
 
   describe 'formula parameters creation' do
-    let(:author) { create(:admin) }
-    let(:category) { create(:category) }
-
     it 'parses formula text' do
       question = model.create!(**attributes_for(:question), author: author, category: category)
 
