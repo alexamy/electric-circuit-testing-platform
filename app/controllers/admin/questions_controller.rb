@@ -7,7 +7,6 @@ class Admin::QuestionsController < Admin::BaseController
 
   def create
     @question = Question.new(question_params)
-    render :new and return unless valid_formula?(@question.formula_text)
 
     if @question.save
       redirect_to admin_question_edit_parameters_path(@question), notice: t('.successful')
@@ -22,14 +21,11 @@ class Admin::QuestionsController < Admin::BaseController
 
   def update
     @question = Question.find(params[:id])
-    formula_text = question_params[:formula_text]
+    @question.attributes = question_params
+    formula_text_changed = @question.formula_text_changed?
 
-    render :edit and return unless valid_formula?(formula_text)
-
-    new_formula = formula_text != @question.formula_text
-
-    if @question.update(question_params)
-      redirect_to admin_question_edit_parameters_path(@question) and return if new_formula
+    if @question.save
+      redirect_to admin_question_edit_parameters_path(@question) and return if formula_text_changed
 
       redirect_to admin_questions_path, notice: t('.successful')
     else
@@ -53,13 +49,6 @@ class Admin::QuestionsController < Admin::BaseController
   end
 
   private
-
-  def valid_formula?(formula_text)
-    valid = Formula::Validator.call(formula_text)
-    flash.now[:alert] = t('.formula_error') unless valid
-
-    valid
-  end
 
   def question_params
     params.require(:question)

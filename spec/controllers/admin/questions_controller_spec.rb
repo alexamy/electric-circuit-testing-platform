@@ -70,17 +70,9 @@ RSpec.describe Admin::QuestionsController, type: :controller do
       expect(response).to redirect_to admin_question_edit_parameters_path(assigns(:question))
     end
 
-    describe 'errors' do
-      it 'sets error message to @alert for invalid text formula' do
-        post :create, params: { question: { formula_text: attributes_for(:text_formula, :invalid)[:text] } }
-
-        expect(flash[:alert]).to be_present
-      end
-
-      it 'renders new view for missing attributes' do
-        post :create, params: { question: { formula_text: 'v=x' } }
-        expect(response).to render_template :new
-      end
+    it 'renders new view for missing attributes' do
+      post :create, params: { question: { formula_text: 'v=x' } }
+      expect(response).to render_template :new
     end
   end
 
@@ -149,10 +141,7 @@ RSpec.describe Admin::QuestionsController, type: :controller do
   end
 
   describe 'PATCH #update' do
-    let!(:question) do
-      create(:question, formula_text: 'x=z',
-                        formula: { target: 'x', dependencies: %w[z], bodies: { x: 'z' } })
-    end
+    let!(:question) { create(:question, formula_text: 'x=z') }
 
     it 'finds question' do
       patch :update, params: { id: question.id, question: { text: 'find var', formula_text: 'x=z' } }
@@ -189,10 +178,9 @@ RSpec.describe Admin::QuestionsController, type: :controller do
         end.to change(question, :formula)
       end
 
-      it 'rerenders edit with error for invalid formula' do
+      it 'rerenders edit for invalid formula' do
         patch :update, params: { id: question.id, question: { formula_text: 'x=' } }
 
-        expect(flash[:alert]).to be_present
         expect(response).to render_template :edit
       end
 

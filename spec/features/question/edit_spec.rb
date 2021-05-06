@@ -9,9 +9,7 @@ feature 'Admin can edit question', "
 " do
   given(:admin) { create(:admin) }
   given!(:question) do
-    create(:question,
-           formula_text: 'x=y',
-           formula: { target: 'x', dependencies: %w[y], bodies: { x: 'y' } })
+    create(:question, formula_text: 'x=y')
   end
 
   background { sign_in(admin) }
