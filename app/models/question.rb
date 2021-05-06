@@ -25,7 +25,7 @@ class Question < ApplicationRecord
 
   before_validation :set_formula
   after_create :create_parameters
-  after_update :remove_unused_parameters, :add_new_parameters
+  before_update :remove_unused_parameters, :add_new_parameters, if: :formula_changed?
 
   private
 
