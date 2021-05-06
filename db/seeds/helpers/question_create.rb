@@ -1,23 +1,14 @@
 # frozen_string_literal: true
 
-# rubocop:disable Metrics/AbcSize
-# rubocop:disable Metrics/MethodLength
 def create_question(scheme_path, question_params, parameters)
   question = Question.new(**question_params)
 
-  question.formula = Formula::Parser.call(question.formula_text)
-  question.formula['dependencies'].each do |name|
-    question.formula_parameters.new(name: name, **parameters[name])
-  end
-
   scheme = Rails.root.join(scheme_path)
-  question.scheme.attach(
-    io: File.open(scheme),
-    filename: scheme.basename,
-    content_type: 'image/png'
-  )
+  question.scheme.attach(io: File.open(scheme), filename: scheme.basename, content_type: 'image/png')
 
-  question.save
+  question.save!
+
+  parameters.each do |name, attributes|
+    question.formula_parameters.find_by(name: name).update(**attributes)
+  end
 end
-# rubocop:enable Metrics/AbcSize
-# rubocop:enable Metrics/MethodLength
