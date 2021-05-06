@@ -24,7 +24,7 @@ class Question < ApplicationRecord
 
   accepts_nested_attributes_for :formula_parameters
 
-  before_validation :set_formula
+  before_validation :set_formula, if: :formula_text_changed?
   after_create :create_parameters
   before_update :remove_unused_parameters, :add_new_parameters, if: :formula_changed?
 
@@ -38,8 +38,6 @@ class Question < ApplicationRecord
   end
 
   def set_formula
-    return unless formula_text_changed?
-
     self.formula = Formula::Parser.call(formula_text)
   end
 
