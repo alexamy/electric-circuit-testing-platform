@@ -12,6 +12,8 @@ amazon:
   secret_access_key: <%= ENV.fetch("AWS_SECRET_ACCESS_KEY") %>
   region: eu-central-1
   bucket: electric-testing-platform
+  upload:
+    cache_control: 'max-age=86400, private'
 
 # Remember not to checkin your GCS keyfile to a repository
 # google:
