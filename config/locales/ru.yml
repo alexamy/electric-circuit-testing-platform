@@ -32,12 +32,14 @@ ru:
       category: Категория
       question: Вопрос
       formula_parameter: Параметр формулы
+      group: Группа
     attributes:
       user:
         email: Email
         password: Пароль
         password_confirmation: Подтверждение пароля
         remember_me: Запомнить?
+        group: Группа
       category:
         name: Название
         target_score: Порог для зачета
@@ -64,6 +66,9 @@ ru:
         arguments: Аргументы
         answer: Ответ
         question: Вопрос
+      group:
+        name: Название
+        year: Год обучения
     errors:
       models:
         static_question:
