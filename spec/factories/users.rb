@@ -12,5 +12,6 @@ FactoryBot.define do
     group
 
     factory :admin, class: 'Admin'
+    factory :student, class: 'Student'
   end
 end
