@@ -40,6 +40,9 @@ ru:
         password_confirmation: Подтверждение пароля
         remember_me: Запомнить?
         group: Группа
+        first_name: Имя
+        middle_name: Отчество
+        last_name: Фамилия
       category:
         name: Название
         target_score: Порог для зачета
