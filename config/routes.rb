@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :categories, shallow: true, except: %i[show]
     resources :users, shallow: true, except: %i[show]
+    resources :groups, shallow: true, except: %i[show]
 
     resources :questions, shallow: true do
       get '/update_parameters', controller: 'formula_parameters', action: 'edit_bulk', as: 'edit_parameters'
