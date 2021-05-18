@@ -7,7 +7,13 @@ RSpec.describe Admin::UsersController, type: :controller do
 
   before { login(admin) }
 
-  describe 'GET #index'
+  describe 'GET #index' do
+    before { get :index }
+
+    it 'renders index view' do
+      expect(response).to render_template :index
+    end
+  end
 
   describe 'GET #new'
 
