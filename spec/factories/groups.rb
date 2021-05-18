@@ -5,4 +5,8 @@ FactoryBot.define do
     name { 'Group' }
     year { 2021 }
   end
+
+  trait :invalid do
+    year { nil }
+  end
 end
