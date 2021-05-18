@@ -1,0 +1,26 @@
+.table-wrapper
+  table.table
+    thead.table-head
+      th.table-header
+        | ID
+      th.table-header
+        = Group.human_attribute_name(:name)
+      th.table-header
+        = Group.human_attribute_name(:year)
+      th.table-header
+        | Действия
+
+    tbody.table-body
+    - @groups.each do |group|
+      tr.table-row
+        td.table-cell
+          = group.id
+        td.table-cell
+          = group.name
+        td.table-cell
+          = group.year
+        td.table-cell.space-x-4
+          = link_to 'Редактировать', edit_admin_group_path(group), class: 'link'
+          = link_to 'Удалить', admin_group_path(group), method: :delete, data: { confirm: 'Вы уверены?' }, class: 'link'
+
+= link_to 'Создать новую', new_admin_group_path, class: 'button'
