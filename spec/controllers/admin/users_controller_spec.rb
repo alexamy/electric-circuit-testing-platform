@@ -66,7 +66,32 @@ RSpec.describe Admin::UsersController, type: :controller do
     end
   end
 
-  describe 'PATCH #update'
+  describe 'PATCH #update' do
+    it 'finds a user' do
+      patch :update, params: { id: student.id, user: attributes_for(:student) }
+
+      expect(assigns(:user)).to eq student
+    end
+
+    it 'updates a user' do
+      patch :update, params: { id: student.id, user: { first_name: 'first_name_new' } }
+
+      student.reload
+      expect(student.first_name).to eq 'first_name_new'
+    end
+
+    it 'redirects to index view' do
+      patch :update, params: { id: student.id, user: attributes_for(:student) }
+
+      expect(response).to redirect_to admin_users_path
+    end
+
+    it 'rerenders edit view on failure' do
+      patch :update, params: { id: student.id, user: attributes_for(:student, first_name: '') }
+
+      expect(response).to render_template :edit
+    end
+  end
 
   describe 'DELETE #destroy' do
     it 'deletes a user' do
