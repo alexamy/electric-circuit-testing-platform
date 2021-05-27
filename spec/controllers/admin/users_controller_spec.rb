@@ -3,6 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe Admin::UsersController, type: :controller do
+  let(:group) { create(:group) }
   let!(:admin) { create(:admin) }
   let!(:student) { create(:student) }
   let(:users) { [admin, student] }
@@ -33,7 +34,25 @@ RSpec.describe Admin::UsersController, type: :controller do
     end
   end
 
-  describe 'POST #create'
+  describe 'POST #create' do
+    it 'creates a new user' do
+      expect do
+        post :create, params: { user: attributes_for(:student, group_id: group.id) }
+      end.to change(User, :count).by(1)
+    end
+
+    it 'redirects to index view' do
+      post :create, params: { user: attributes_for(:student, group_id: group.id) }
+
+      expect(response).to redirect_to admin_users_path
+    end
+
+    it 'rerender new view on failure' do
+      post :create, params: { user: attributes_for(:student, first_name: '') }
+
+      expect(response).to render_template :new
+    end
+  end
 
   describe 'GET #edit' do
     before { get :edit, params: { id: student.id } }
