@@ -26,6 +26,9 @@ ru:
     formula_parameters:
       update_bulk:
         successful: Параметры успешно обновлены
+    students:
+      create:
+        successful: Студент успешно создан
   activerecord:
     models:
       user: Пользователь

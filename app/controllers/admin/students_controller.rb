@@ -13,7 +13,7 @@ class Admin::StudentsController < ApplicationController
     @student = Student.new(student_params)
 
     if @student.save
-      redirect_to admin_students_path
+      redirect_to admin_students_path, notice: t('.successful')
     else
       render :new
     end
@@ -42,7 +42,7 @@ class Admin::StudentsController < ApplicationController
   private
 
   def student_params
-    params.require(:user)
+    params.require(:student)
           .permit(:email, :password,
                   :group_id,
                   :first_name, :middle_name, :last_name)

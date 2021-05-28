@@ -17,7 +17,7 @@ RSpec.describe Group, type: :model do
     let(:group) { create(:group, name: 'ExampleGroup', year: 2000) }
 
     it 'joins all attributes' do
-      expect(group.to_s).to eq 'ExampleGroup / 2000'
+      expect(group.to_s).to eq 'ExampleGroup (2000)'
     end
   end
 end

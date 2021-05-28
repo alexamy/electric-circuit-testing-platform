@@ -36,18 +36,18 @@ RSpec.describe Admin::StudentsController, type: :controller do
   describe 'POST #create' do
     it 'creates a new user' do
       expect do
-        post :create, params: { user: attributes_for(:student, group_id: group.id) }
+        post :create, params: { student: attributes_for(:student, group_id: group.id) }
       end.to change(User, :count).by(1)
     end
 
     it 'redirects to index view' do
-      post :create, params: { user: attributes_for(:student, group_id: group.id) }
+      post :create, params: { student: attributes_for(:student, group_id: group.id) }
 
       expect(response).to redirect_to admin_students_path
     end
 
     it 'rerender new view on failure' do
-      post :create, params: { user: attributes_for(:student, first_name: '') }
+      post :create, params: { student: attributes_for(:student, first_name: '') }
 
       expect(response).to render_template :new
     end
@@ -67,26 +67,26 @@ RSpec.describe Admin::StudentsController, type: :controller do
 
   describe 'PATCH #update' do
     it 'finds a user' do
-      patch :update, params: { id: student.id, user: attributes_for(:student) }
+      patch :update, params: { id: student.id, student: attributes_for(:student) }
 
       expect(assigns(:student)).to eq student
     end
 
     it 'updates a user' do
-      patch :update, params: { id: student.id, user: { first_name: 'first_name_new' } }
+      patch :update, params: { id: student.id, student: { first_name: 'first_name_new' } }
 
       student.reload
       expect(student.first_name).to eq 'first_name_new'
     end
 
     it 'redirects to index view' do
-      patch :update, params: { id: student.id, user: attributes_for(:student) }
+      patch :update, params: { id: student.id, student: attributes_for(:student) }
 
       expect(response).to redirect_to admin_students_path
     end
 
     it 'rerenders edit view on failure' do
-      patch :update, params: { id: student.id, user: attributes_for(:student, first_name: '') }
+      patch :update, params: { id: student.id, student: attributes_for(:student, first_name: '') }
 
       expect(response).to render_template :edit
     end
