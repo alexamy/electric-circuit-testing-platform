@@ -4,9 +4,8 @@ require 'rails_helper'
 
 RSpec.describe Admin::UsersController, type: :controller do
   let(:group) { create(:group) }
-  let!(:admin) { create(:admin) }
+  let(:admin) { create(:admin) }
   let!(:student) { create(:student) }
-  let(:users) { [admin, student] }
 
   before { login(admin) }
 
@@ -14,7 +13,7 @@ RSpec.describe Admin::UsersController, type: :controller do
     before { get :index }
 
     it 'sets users' do
-      expect(assigns(:users)).to match_array users
+      expect(assigns(:users)).to contain_exactly student
     end
 
     it 'renders index view' do
