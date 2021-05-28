@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Admin::GroupsController < ApplicationController
+class Admin::GroupsController < Admin::BaseController
   def index
     @groups = Group.all
   end
