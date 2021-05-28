@@ -30,6 +30,8 @@ h2.header.mb-2 Редактирование учетной записи
 
     .form-group
       = f.label :middle_name, class: 'form-label'
+      em.block.mb-1
+        | (при наличии)
       = f.text_field :middle_name, class: 'form-input'
 
     .form-group

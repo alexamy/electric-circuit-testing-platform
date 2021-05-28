@@ -7,6 +7,8 @@
 
   .form-group
     = f.label :password, class: 'form-label'
+    em.block.mb-1
+      | (оставьте пустым, если не требует изменения)
     = f.text_field :password, class: 'form-input'
 
   .form-group
@@ -15,6 +17,8 @@
 
   .form-group
     = f.label :middle_name, class: 'form-label'
+    em.block.mb-1
+      | (при наличии)
     = f.text_field :middle_name, class: 'form-input'
 
   .form-group

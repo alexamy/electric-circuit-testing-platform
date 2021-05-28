@@ -23,6 +23,8 @@ h2.header Регистрация
 
   .form-group
     = f.label :middle_name, class: 'form-label'
+    em.block.mb-1
+      | (при наличии)
     = f.text_field :middle_name, class: 'form-input'
 
   .form-group
@@ -35,5 +37,3 @@ h2.header Регистрация
 
   .form-actions
     = f.submit "Зарегистрироваться", class: 'button'
-
-= render "devise/shared/links"
