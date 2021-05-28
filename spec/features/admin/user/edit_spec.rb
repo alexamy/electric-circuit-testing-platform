@@ -16,7 +16,7 @@ feature 'Admin can edit student', "
   scenario 'Admin creates student' do
     visit edit_admin_student_path(student)
 
-  fill_in 'Имя', with: 'Steve'
+    fill_in 'Имя', with: 'Steve'
     click_on 'Сохранить'
 
     expect(page).to have_content 'Студент успешно сохранен'
