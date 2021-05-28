@@ -23,10 +23,10 @@ class Admin::StudentsController < ApplicationController
     @student = Student.find(params[:id])
   end
 
+  # :reek:DuplicateMethodCall
   def update
     @student = Student.find(params[:id])
-    student_params = params[:student]
-    student_params.delete(:password) if student_params[:password].blank?
+    params[:student].delete(:password) if params[:student][:password].blank?
 
     if @student.update(student_params)
       redirect_to admin_students_path, notice: t('.successful')
