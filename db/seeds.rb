@@ -1,8 +1,17 @@
 # frozen_string_literal: true
 
+# groups
+group = Group.find_or_create_by!(name: 'Группа') do |g|
+  g.year = Time.current.year
+end
+
 # users
-User.find_or_create_by!(email: 'user@test.com') do |user|
-  user.password = 'user123'
+Student.find_or_create_by!(email: 'student@test.com') do |student|
+  student.password = 'testtest'
+  student.first_name = 'Иван'
+  student.middle_name = 'Иванович'
+  student.last_name = 'Иванов'
+  student.group = group
 end
 
 if Rails.env.development?
