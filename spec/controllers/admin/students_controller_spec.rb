@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Admin::UsersController, type: :controller do
+RSpec.describe Admin::StudentsController, type: :controller do
   let(:group) { create(:group) }
   let(:admin) { create(:admin) }
   let!(:student) { create(:student) }
@@ -43,7 +43,7 @@ RSpec.describe Admin::UsersController, type: :controller do
     it 'redirects to index view' do
       post :create, params: { user: attributes_for(:student, group_id: group.id) }
 
-      expect(response).to redirect_to admin_users_path
+      expect(response).to redirect_to admin_students_path
     end
 
     it 'rerender new view on failure' do
@@ -82,7 +82,7 @@ RSpec.describe Admin::UsersController, type: :controller do
     it 'redirects to index view' do
       patch :update, params: { id: student.id, user: attributes_for(:student) }
 
-      expect(response).to redirect_to admin_users_path
+      expect(response).to redirect_to admin_students_path
     end
 
     it 'rerenders edit view on failure' do
@@ -102,7 +102,7 @@ RSpec.describe Admin::UsersController, type: :controller do
     it 'redirects to index view' do
       delete :destroy, params: { id: student.id }
 
-      expect(response).to redirect_to admin_users_path
+      expect(response).to redirect_to admin_students_path
     end
   end
 end

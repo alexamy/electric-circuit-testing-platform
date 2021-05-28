@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Admin::UsersController < ApplicationController
+class Admin::StudentsController < ApplicationController
   def index
     @users = Student.all
   end
@@ -13,7 +13,7 @@ class Admin::UsersController < ApplicationController
     @user = Student.new(user_params)
 
     if @user.save
-      redirect_to admin_users_path
+      redirect_to admin_students_path
     else
       render :new
     end
@@ -27,7 +27,7 @@ class Admin::UsersController < ApplicationController
     @user = Student.find(params[:id])
 
     if @user.update(user_params)
-      redirect_to admin_users_path
+      redirect_to admin_students_path
     else
       render :edit
     end
@@ -36,7 +36,7 @@ class Admin::UsersController < ApplicationController
   def destroy
     Student.find_by(id: params[:id])&.destroy
 
-    redirect_to admin_users_path
+    redirect_to admin_students_path
   end
 
   private
