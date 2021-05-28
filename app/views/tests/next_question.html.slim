@@ -16,6 +16,11 @@
 .flex.flex-col.md:flex-row
   .block
     .mb-4
+      p Задание
+      p = @question.text
+    .mb-4
+      = @question.comment
+    .mb-4
       p Параметры схемы
       - @question.formula_parameters.each do |parameter|
         p = "#{parameter.name} = #{@static_question.arguments[parameter.name]} #{parameter.unit}"
