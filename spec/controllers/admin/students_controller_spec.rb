@@ -13,7 +13,7 @@ RSpec.describe Admin::StudentsController, type: :controller do
     before { get :index }
 
     it 'sets users' do
-      expect(assigns(:users)).to contain_exactly student
+      expect(assigns(:students)).to contain_exactly student
     end
 
     it 'renders index view' do
@@ -25,7 +25,7 @@ RSpec.describe Admin::StudentsController, type: :controller do
     before { get :new }
 
     it 'sets a new student' do
-      expect(assigns(:user)).to be_a_new Student
+      expect(assigns(:student)).to be_a_new Student
     end
 
     it 'renders new view' do
@@ -57,7 +57,7 @@ RSpec.describe Admin::StudentsController, type: :controller do
     before { get :edit, params: { id: student.id } }
 
     it 'finds the student' do
-      expect(assigns(:user)).to eq student
+      expect(assigns(:student)).to eq student
     end
 
     it 'renders edit view' do
@@ -69,7 +69,7 @@ RSpec.describe Admin::StudentsController, type: :controller do
     it 'finds a user' do
       patch :update, params: { id: student.id, user: attributes_for(:student) }
 
-      expect(assigns(:user)).to eq student
+      expect(assigns(:student)).to eq student
     end
 
     it 'updates a user' do

@@ -2,17 +2,17 @@
 
 class Admin::StudentsController < ApplicationController
   def index
-    @users = Student.all
+    @students = Student.all
   end
 
   def new
-    @user = Student.new
+    @student = Student.new
   end
 
   def create
-    @user = Student.new(user_params)
+    @student = Student.new(student_params)
 
-    if @user.save
+    if @student.save
       redirect_to admin_students_path
     else
       render :new
@@ -20,13 +20,13 @@ class Admin::StudentsController < ApplicationController
   end
 
   def edit
-    @user = Student.find(params[:id])
+    @student = Student.find(params[:id])
   end
 
   def update
-    @user = Student.find(params[:id])
+    @student = Student.find(params[:id])
 
-    if @user.update(user_params)
+    if @student.update(student_params)
       redirect_to admin_students_path
     else
       render :edit
@@ -41,7 +41,7 @@ class Admin::StudentsController < ApplicationController
 
   private
 
-  def user_params
+  def student_params
     params.require(:user)
           .permit(:email, :password,
                   :group_id,
