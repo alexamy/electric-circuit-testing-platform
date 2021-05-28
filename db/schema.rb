@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_06_094447) do
+ActiveRecord::Schema.define(version: 2021_05_17_114249) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -62,6 +62,13 @@ ActiveRecord::Schema.define(version: 2021_05_06_094447) do
     t.index ["question_id"], name: "index_formula_parameters_on_question_id"
   end
 
+  create_table "groups", force: :cascade do |t|
+    t.string "name", null: false
+    t.integer "year", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "questions", force: :cascade do |t|
     t.string "text"
     t.string "comment"
@@ -109,8 +116,13 @@ ActiveRecord::Schema.define(version: 2021_05_06_094447) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "type", default: "User", null: false
+    t.string "type", default: "Student", null: false
+    t.bigint "group_id"
+    t.string "first_name"
+    t.string "middle_name"
+    t.string "last_name"
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["group_id"], name: "index_users_on_group_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["type"], name: "index_users_on_type"
   end
@@ -125,4 +137,5 @@ ActiveRecord::Schema.define(version: 2021_05_06_094447) do
   add_foreign_key "static_questions", "users", column: "author_id"
   add_foreign_key "test_attempts", "categories"
   add_foreign_key "test_attempts", "users", column: "author_id"
+  add_foreign_key "users", "groups"
 end

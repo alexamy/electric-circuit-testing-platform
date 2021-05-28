@@ -26,18 +26,28 @@ ru:
     formula_parameters:
       update_bulk:
         successful: Параметры успешно обновлены
+    students:
+      create:
+        successful: Студент успешно создан
+      update:
+        successful: Студент успешно сохранен
   activerecord:
     models:
       user: Пользователь
       category: Категория
       question: Вопрос
       formula_parameter: Параметр формулы
+      group: Группа
     attributes:
       user:
         email: Email
         password: Пароль
         password_confirmation: Подтверждение пароля
         remember_me: Запомнить?
+        group: Группа
+        first_name: Имя
+        middle_name: Отчество
+        last_name: Фамилия
       category:
         name: Название
         target_score: Порог для зачета
@@ -64,6 +74,9 @@ ru:
         arguments: Аргументы
         answer: Ответ
         question: Вопрос
+      group:
+        name: Название
+        year: Год обучения
     errors:
       models:
         static_question:

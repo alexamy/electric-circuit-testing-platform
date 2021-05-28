@@ -5,7 +5,7 @@
       "label": "Run test line",
       "type": "shell",
       "group": "test",
-      "command": "rspec ${file}:${lineNumber} --format p",
+      "command": "bundle exec rspec ${file}:${lineNumber} --format p",
       "problemMatcher": [],
       "presentation": {
         "clear": true
@@ -15,7 +15,7 @@
       "label": "Run test file",
       "type": "shell",
       "group": "test",
-      "command": "rspec ${file} --format p",
+      "command": "bundle exec rspec ${file} --format p",
       "problemMatcher": [],
       "presentation": {
         "clear": true
@@ -25,7 +25,7 @@
       "label": "Run test folder",
       "type": "shell",
       "group": "test",
-      "command": "rspec ${fileDirname} --format p",
+      "command": "bundle exec rspec ${fileDirname} --format p",
       "problemMatcher": [],
       "presentation": {
         "clear": true
@@ -65,7 +65,7 @@
       "label": "Run all tests (without slow tag)",
       "type": "shell",
       "group": "test",
-      "command": "rspec --format p --tag ~slow",
+      "command": "bundle exec rspec --format p --tag ~slow",
       "problemMatcher": [],
       "presentation": {
         "clear": true
@@ -75,7 +75,7 @@
       "label": "Run all tests with report",
       "type": "shell",
       "group": "test",
-      "command": "rspec --format f",
+      "command": "bundle exec rspec --format f",
       "presentation": {
         "reveal": "always",
         "revealProblems": "onProblem",

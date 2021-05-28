@@ -5,11 +5,19 @@ FactoryBot.define do
     "user#{n}@test.com"
   end
 
-  factory :user do
+  factory :user, aliases: [:student], class: 'Student' do
     email
     password { '123456' }
     password_confirmation { '123456' }
+    first_name { 'John' }
+    middle_name { '' }
+    last_name { 'Doe' }
+    group
+  end
 
-    factory :admin, class: 'Admin'
+  factory :admin do
+    email
+    password { '123456' }
+    password_confirmation { '123456' }
   end
 end

@@ -1,12 +1,18 @@
+- current_page = 'font-bold'
+
 nav.h-12.p-out.flex.justify-between.items-center.bg-gray-400
   .flex.justify-between.divide-x
-    a.link-navbar.pr-2 href=tests_path
+    a.link-navbar.pr-2 href=tests_path class="#{current_page if current_page?(tests_path)}"
       | Тесты
     - if current_user&.admin?
-      a.link-navbar.px-2.italic href=admin_questions_path
+      a.link-navbar.px-2.italic href=admin_questions_path class="#{current_page if current_page?(admin_questions_path)}"
         | Вопросы
-      a.link-navbar.px-2.italic href=admin_categories_path
-        | Категории
+      a.link-navbar.px-2.italic href=admin_categories_path class="#{current_page if current_page?(admin_categories_path)}"
+        | Тесты (управление)
+      a.link-navbar.px-2.italic href=admin_groups_path class="#{current_page if current_page?(admin_groups_path)}"
+        | Группы
+      a.link-navbar.px-2.italic href=admin_students_path class="#{current_page if current_page?(admin_students_path)}"
+        | Студенты
   div
   div
   - if user_signed_in?

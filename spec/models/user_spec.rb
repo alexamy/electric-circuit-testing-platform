@@ -3,21 +3,31 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
+  let(:student) { create(:student) }
+  let(:admin) { create(:admin) }
+
   describe 'associations' do
     it { is_expected.to have_many(:static_questions).with_foreign_key('author_id') }
     it { is_expected.to have_many(:test_attempts).with_foreign_key('author_id') }
   end
 
   describe '#admin?' do
-    let(:user) { create(:user) }
-    let(:admin) { create(:admin) }
-
-    it 'is false for normal user' do
-      expect(user).not_to be_admin
+    it 'is false for student' do
+      expect(student).not_to be_admin
     end
 
-    it 'is true for admin user' do
+    it 'is true for admin' do
       expect(admin).to be_admin
+    end
+  end
+
+  describe '#student?' do
+    it 'is false for admin' do
+      expect(admin).not_to be_student
+    end
+
+    it 'is true for student' do
+      expect(student).to be_student
     end
   end
 

@@ -9,6 +9,7 @@ feature 'User can sign up', "
 " do
 
   given(:user) { create(:user) }
+  given!(:group) { create(:group, name: 'Group', year: 2000) }
 
   describe 'Unauthenticated user' do
     scenario 'tries to sign up' do
@@ -17,6 +18,12 @@ feature 'User can sign up', "
       fill_in 'Email', with: 'test@example.com'
       fill_in 'Пароль', with: '12345678'
       fill_in 'Подтверждение пароля', with: '12345678'
+
+      fill_in 'Имя', with: 'Александр'
+      fill_in 'Отчество', with: ''
+      fill_in 'Фамилия', with: 'Александров'
+      select 'Group (2000)', from: 'user_group_id'
+
       click_on 'Зарегистрироваться'
 
       expect(page).to have_content 'Вы успешно зарегистрировались.'
