@@ -29,6 +29,8 @@ ru:
     students:
       create:
         successful: Студент успешно создан
+      update:
+        successful: Студент успешно сохранен
   activerecord:
     models:
       user: Пользователь

@@ -9,9 +9,9 @@ FactoryBot.define do
     email
     password { '123456' }
     password_confirmation { '123456' }
-    first_name { 'Alex' }
+    first_name { 'John' }
     middle_name { '' }
-    last_name { 'Rails' }
+    last_name { 'Doe' }
     group
   end
 

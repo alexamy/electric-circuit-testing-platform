@@ -79,6 +79,12 @@ RSpec.describe Admin::StudentsController, type: :controller do
       expect(student.first_name).to eq 'first_name_new'
     end
 
+    it 'exclude password key if it is empty' do
+      patch :update, params: { id: student.id, student: { first_name: 'test', password: '' } }
+
+      expect(controller.params[:student][:password]).to be_nil
+    end
+
     it 'redirects to index view' do
       patch :update, params: { id: student.id, student: attributes_for(:student) }
 

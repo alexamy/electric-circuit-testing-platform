@@ -25,9 +25,10 @@ class Admin::StudentsController < ApplicationController
 
   def update
     @student = Student.find(params[:id])
+    params[:student].delete(:password) if params[:student][:password].blank?
 
     if @student.update(student_params)
-      redirect_to admin_students_path
+      redirect_to admin_students_path, notice: t('.successful')
     else
       render :edit
     end
