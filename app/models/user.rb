@@ -15,6 +15,10 @@ class User < ApplicationRecord
     is_a?(Admin)
   end
 
+  def student?
+    is_a?(Student)
+  end
+
   def author_of?(resource)
     id == resource&.author_id
   end
