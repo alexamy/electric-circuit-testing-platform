@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   post '/test_attempt/:category_id', controller: 'tests', action: 'start', as: 'start_test_attempt'
   get '/test_attempt/:id', controller: 'tests', action: 'next_question', as: 'next_question_test_attempt'
 
+  get '/reports', controller: 'reports', action: 'student', as: 'reports'
+
   namespace :admin do
     resources :categories, shallow: true, except: %i[show]
     resources :students, shallow: true, except: %i[show]

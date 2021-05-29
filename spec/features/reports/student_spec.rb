@@ -7,7 +7,12 @@ feature 'Student can view his report', "
   As an authenticated student
   I'd like to be able to view report of all tests
 " do
-  scenario 'Unauthenticated user cant view report'
+  scenario 'Unauthenticated user cant view report' do
+    visit reports_path
+
+    expect(page).to have_content 'Вам необходимо войти в систему или зарегистрироваться'
+  end
+
   scenario 'Student can view report'
   scenario 'Student cant view report of other students'
   scenario 'Admin can view report of all students'
