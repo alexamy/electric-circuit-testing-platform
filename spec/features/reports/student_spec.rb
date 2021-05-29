@@ -7,14 +7,32 @@ feature 'Student can view his report', "
   As an authenticated student
   I'd like to be able to view report of all tests
 " do
+  given(:admin) { create(:admin) }
+  given(:student) { create(:student) }
+
   scenario 'Unauthenticated user cant view report' do
     visit reports_path
 
     expect(page).to have_content 'Вам необходимо войти в систему или зарегистрироваться'
   end
 
-  scenario 'Student can view report'
-  scenario 'Student cant view report of other students'
-  scenario 'Admin can view report of all students'
-  scenario 'Report has data only for current student'
+  describe 'Student' do
+    background { sign_in(student) }
+
+    scenario 'can view report' do
+      visit reports_path
+    end
+
+    scenario 'cant view report of other students'
+  end
+
+  describe 'Admin' do
+    background { sign_in(admin) }
+
+    scenario 'can view report of all students'
+  end
+
+  describe 'Report' do
+    scenario 'has data only for current student'
+  end
 end
