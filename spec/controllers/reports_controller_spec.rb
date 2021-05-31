@@ -23,5 +23,9 @@ RSpec.describe ReportsController, type: :controller do
     it 'sets attempts' do
       expect(assigns(:attempts)).to contain_exactly test_attempt
     end
+
+    it 'renders student template' do
+      expect(response).to render_template :student
+    end
   end
 end

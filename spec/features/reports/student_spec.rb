@@ -25,7 +25,7 @@ feature 'Student can view his report', "
   describe 'Student' do
     background do
       sign_in(student)
-      visit reports_path
+      visit reports_student_path
     end
 
     scenario 'can view report' do
