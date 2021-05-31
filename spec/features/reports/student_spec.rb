@@ -11,8 +11,9 @@ feature 'Student can view his report', "
   given(:student) { create(:student) }
 
   given!(:test) { create(:category, name: 'Test example', target_score: 6) }
-  given(:test_attempt) { create(:test_attempt, category: test) }
-  given(:answers) { create(:static_question, :correct, test_attempt: test_attempt, author: student) }
+  given!(:test_attempt) { create(:test_attempt, category: test, author: student) }
+  given!(:question) { create(:question, category: test) }
+  given!(:answer) { create(:static_question, :correct, question: question, test_attempt: test_attempt, author: student) }
 
   scenario 'Unauthenticated user cant view report' do
     visit reports_path
@@ -21,21 +22,24 @@ feature 'Student can view his report', "
   end
 
   describe 'Student' do
-    background { sign_in(student) }
+    background do
+      sign_in(student)
+      visit reports_path
+    end
 
     scenario 'can view report' do
-      visit reports_path
-
       expect(page).to have_content 'Test example'
     end
 
-    scenario 'can view tries count'
+    scenario 'can view tries count' do
+      within '.tries-count' do
+        expect(page).to have_content '1'
+      end
+    end
 
     scenario 'can view correctness percentage'
 
     scenario 'can view score'
-
-    scenario 'cant view report of other students'
   end
 
   describe 'Admin' do

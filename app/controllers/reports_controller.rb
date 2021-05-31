@@ -5,5 +5,6 @@ class ReportsController < ApplicationController
 
   def student
     @tests = Category.all
+    @attempts = TestAttempt.all.where(author: current_user)
   end
 end
