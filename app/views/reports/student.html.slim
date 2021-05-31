@@ -9,6 +9,7 @@
     tbody.table-body
     - @tests.each do |test|
       - score = test.score_of(current_user)
+      - answers = test.questions.includes(:static_questions).map(&:static_questions).flatten.partition(&:correct?).map(&:count)
       tr.table-row
         td.table-cell
           = test.name
@@ -18,3 +19,6 @@
       tr.table-row
         td.table-cell.score
           = score
+      tr.table-row
+        td.table-cell.correctness-percentage
+          = "#{((answers.first / answers.sum.to_f) * 100).to_i}%"

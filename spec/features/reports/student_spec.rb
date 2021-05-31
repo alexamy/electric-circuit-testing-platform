@@ -44,7 +44,7 @@ feature 'Student can view his report', "
       end
     end
 
-    xscenario 'can view correctness percentage' do
+    scenario 'can view correctness percentage' do
       within '.correctness-percentage' do
         expect(page).to have_content '50%'
       end
