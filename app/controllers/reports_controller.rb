@@ -6,5 +6,6 @@ class ReportsController < ApplicationController
   def student
     @tests = Category.all
     @attempts = TestAttempt.all.where(author: current_user)
+    # test.questions.includes(:static_questions).map(&:static_questions).flatten
   end
 end

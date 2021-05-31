@@ -8,6 +8,7 @@
 
     tbody.table-body
     - @tests.each do |test|
+      - score = test.score_of(current_user)
       tr.table-row
         td.table-cell
           = test.name
@@ -16,4 +17,4 @@
           = @attempts.where(category: test).count
       tr.table-row
         td.table-cell.score
-          = test.score_of(current_user)
+          = score
