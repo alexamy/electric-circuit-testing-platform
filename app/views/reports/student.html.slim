@@ -4,6 +4,12 @@
       th.table-header
         = Category.human_attribute_name(:name)
       th.table-header
+        = Category.human_attribute_name(:target_score)
+      th.table-header
+        | Набрано баллов
+      th.table-header
+        | Процент правильных ответов
+      th.table-header
         | Количество попыток
 
     tbody.table-body
@@ -14,11 +20,14 @@
         td.table-cell
           = test.name
       tr.table-row
-        td.table-cell.tries-count
-          = @attempts.where(category: test).count
+        td.table-cell.target-score
+          = test.target_score
       tr.table-row
         td.table-cell.score
           = score
       tr.table-row
         td.table-cell.correctness-percentage
           = "#{((answers.first / answers.sum.to_f) * 100).to_i}%"
+      tr.table-row
+        td.table-cell.tries-count
+          = @attempts.where(category: test).count

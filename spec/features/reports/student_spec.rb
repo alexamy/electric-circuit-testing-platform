@@ -49,6 +49,12 @@ feature 'Student can view his report', "
         expect(page).to have_content '50%'
       end
     end
+
+    scenario 'can view target score' do
+      within '.target-score' do
+        expect(page).to have_content '6'
+      end
+    end
   end
 
   describe 'Admin' do
