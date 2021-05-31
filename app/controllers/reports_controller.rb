@@ -3,5 +3,7 @@
 class ReportsController < ApplicationController
   before_action :authenticate_user!
 
-  def student; end
+  def student
+    @tests = Category.all
+  end
 end

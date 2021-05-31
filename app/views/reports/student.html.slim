@@ -1,0 +1,11 @@
+.table-wrapper
+  table.table
+    thead.table-head
+      th.table-header
+        = Category.human_attribute_name(:name)
+
+    tbody.table-body
+    - @tests.each do |test|
+      tr.table-row
+        td.table-cell
+          = test.name
