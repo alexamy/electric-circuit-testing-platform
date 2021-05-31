@@ -14,6 +14,7 @@ feature 'Student can view his report', "
   given!(:test_attempt) { create(:test_attempt, category: test, author: student) }
   given!(:question) { create(:question, category: test) }
   given!(:answer) { create(:static_question, :correct, question: question, test_attempt: test_attempt, author: student) }
+  given!(:answer_wrong) { create(:static_question, :wrong, question: question, test_attempt: test_attempt, author: student) }
 
   scenario 'Unauthenticated user cant view report' do
     visit reports_path
@@ -37,9 +38,13 @@ feature 'Student can view his report', "
       end
     end
 
-    scenario 'can view correctness percentage'
+    scenario 'can view score' do
+      within '.score' do
+        expect(page).to have_content '1'
+      end
+    end
 
-    scenario 'can view score'
+    scenario 'can view correctness percentage'
   end
 
   describe 'Admin' do
