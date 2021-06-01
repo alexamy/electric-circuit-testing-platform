@@ -13,7 +13,7 @@ FactoryBot.define do
     answer_unit { 'Unit' }
     completion_time { 5 } # seconds
     scheme { create_file('spec/support/files/397KB.png') }
-    category
+    test
     association :author, factory: :admin
   end
 end

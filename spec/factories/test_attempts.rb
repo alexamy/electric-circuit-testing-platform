@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :test_attempt do
-    category
+    test
     association :author, factory: :user
   end
 end
