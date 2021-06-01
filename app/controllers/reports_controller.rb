@@ -8,6 +8,9 @@ class ReportsController < ApplicationController
     @reports = Category.all.map { |test| Report::Student.new(current_user, test) }
   end
 
+  private
+
+  # :reek:DuplicateMethodCall
   def find_user
     @user = current_user
     return unless params[:id]
