@@ -7,7 +7,7 @@ class StaticQuestion < ApplicationRecord
   validate :validates_formula_dependency
 
   belongs_to :question
-  belongs_to :test_attempt
+  belongs_to :attempt
 
   def correct?
     user_answer == answer
