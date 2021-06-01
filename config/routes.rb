@@ -27,4 +27,10 @@ Rails.application.routes.draw do
       patch '/update_parameters', controller: 'formula_parameters', action: 'update_bulk', as: 'update_parameters'
     end
   end
+
+  scope :admin, as: 'admin' do
+    scope :reports, controller: 'reports', as: 'reports' do
+      get 'student/:id', action: 'student', as: 'student'
+    end
+  end
 end
