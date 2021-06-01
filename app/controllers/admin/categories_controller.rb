@@ -42,7 +42,7 @@ class Admin::CategoriesController < Admin::BaseController
   private
 
   def category_params
-    params.require(:category)
+    params.require(:test)
           .permit(:name, :target_score)
   end
 end

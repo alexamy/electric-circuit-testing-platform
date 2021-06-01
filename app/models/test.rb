@@ -17,7 +17,7 @@ class Test < ApplicationRecord
 
   def score_of(user)
     corrects, wrongs = StaticQuestion.joins(:question)
-                                     .where(author: user, questions: { category: self })
+                                     .where(author: user, questions: { test: self })
                                      .partition(&:correct?)
                                      .map(&:count)
 

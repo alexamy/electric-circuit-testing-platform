@@ -46,7 +46,7 @@ module Report
     end
 
     def attempts
-      @attempts ||= TestAttempt.all.where(author: user).where(category: test)
+      @attempts ||= TestAttempt.all.where(author: user).where(test: test)
     end
   end
 end

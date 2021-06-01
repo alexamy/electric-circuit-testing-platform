@@ -27,7 +27,7 @@ RSpec.describe Admin::CategoriesController, type: :controller do
     it 'deletes category' do
       expect do
         delete :destroy, params: { id: category.id }
-      end.to change(Category, :count).by(-1)
+      end.to change(Test, :count).by(-1)
     end
 
     it 'redirects to index view' do
@@ -41,7 +41,7 @@ RSpec.describe Admin::CategoriesController, type: :controller do
     it 'setup new category' do
       get :new
 
-      expect(assigns(:category)).to be_a_new Category
+      expect(assigns(:category)).to be_a_new Test
     end
 
     it 'renders new view' do
@@ -54,18 +54,18 @@ RSpec.describe Admin::CategoriesController, type: :controller do
   describe 'POST #create' do
     it 'create new category in database' do
       expect do
-        post :create, params: { test: attributes_for(:category) }
-      end.to change(Category, :count).by(1)
+        post :create, params: { test: attributes_for(:test) }
+      end.to change(Test, :count).by(1)
     end
 
     it 'redirects to index on success' do
-      post :create, params: { test: attributes_for(:category) }
+      post :create, params: { test: attributes_for(:test) }
 
       expect(response).to redirect_to admin_categories_path
     end
 
     it 'rerenders new on failure' do
-      post :create, params: { test: attributes_for(:category, :invalid) }
+      post :create, params: { test: attributes_for(:test, :invalid) }
 
       expect(response).to render_template :new
     end
@@ -87,7 +87,7 @@ RSpec.describe Admin::CategoriesController, type: :controller do
 
   describe 'PATCH #update' do
     it 'finds the category' do
-      patch :update, params: { id: category.id, test: attributes_for(:category) }
+      patch :update, params: { id: category.id, test: attributes_for(:test) }
 
       expect(assigns(:category)).to eq category
     end
@@ -100,13 +100,13 @@ RSpec.describe Admin::CategoriesController, type: :controller do
     end
 
     it 'redirects to index on success' do
-      patch :update, params: { id: category.id, test: attributes_for(:category) }
+      patch :update, params: { id: category.id, test: attributes_for(:test) }
 
       expect(response).to redirect_to admin_categories_path
     end
 
     it 'rerenders new on failure' do
-      patch :update, params: { id: category.id, test: attributes_for(:category, :invalid) }
+      patch :update, params: { id: category.id, test: attributes_for(:test, :invalid) }
 
       expect(response).to render_template :edit
     end

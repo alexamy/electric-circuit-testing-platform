@@ -15,7 +15,7 @@ class TestsController < ApplicationController
     @category = Test.find(params[:category_id])
     redirect_to tests_path, notice: t('.already_passed') and return if @category.passed?(current_user)
 
-    @test_attempt = TestAttempt.create(category: @category, author: current_user)
+    @test_attempt = TestAttempt.create(test: @category, author: current_user)
     redirect_to next_question_test_attempt_path(@test_attempt)
   end
 
@@ -32,7 +32,7 @@ class TestsController < ApplicationController
   private
 
   def random_question_id
-    Question.where(category: @test_attempt.category).pluck(:id).sample
+    Question.where(test: @test_attempt.category).pluck(:id).sample
   end
 
   def find_test_attempt
