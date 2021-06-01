@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Report
-  class Student < ApplicationService
+  class Student
     attr_reader :user, :test
 
     def initialize(user, test)
@@ -9,18 +9,14 @@ module Report
 
       @user = user
       @test = test
-      answers
     end
 
-    def call
-      {
-        name: test.name,
-        target_score: test.target_score,
-        score: score,
-        correctness: correctness,
-        correctness_percentage: correctness_percentage,
-        attempts: attempts
-      }
+    def name
+      @name ||= test.name
+    end
+
+    def target_score
+      @target_score ||= test.target_score
     end
 
     def score
