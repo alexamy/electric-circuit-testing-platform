@@ -1,0 +1,43 @@
+.block.mb-4
+  h1.mb-2.font-bold Отчёт по темам
+
+  p
+    | Email:
+    =< @user.email
+
+  - if @user.student?
+    p
+      | ФИО:
+      =< "#{@user.first_name} #{@user.last_name}"
+
+.table-wrapper
+  table.table
+    thead.table-head
+      th.table-header
+        = Category.human_attribute_name(:name)
+      th.table-header
+        | Баллы на зачёт
+      th.table-header
+        | Набрано баллов
+      th.table-header
+        | Количество ответов
+      th.table-header
+        | Процент правильных ответов
+      th.table-header
+        | Количество попыток
+
+    tbody.table-body
+    - @reports.each do |report|
+      tr.table-row class="test-#{report.id}"
+        td.table-cell
+          = report.name
+        td.table-cell.target-score
+          = report.target_score
+        td.table-cell.score
+          = report.score
+        td.table-cell.answer-count
+          = report.answer_count
+        td.table-cell.correctness-percentage
+          | #{(report.correctness * 100).to_i}%
+        td.table-cell.attempts-count
+          = report.attempts.count
