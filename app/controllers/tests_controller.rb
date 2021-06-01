@@ -3,12 +3,10 @@
 class TestsController < ApplicationController
   before_action :authenticate_user!
 
-  skip_before_action :authenticate_user!, only: [:index_with_questions]
+  skip_before_action :authenticate_user!, only: [:index]
 
-  def index_with_questions
-    @categories = Test.with_questions
-
-    render :index
+  def index
+    @tests = Test.with_questions
   end
 
   def start

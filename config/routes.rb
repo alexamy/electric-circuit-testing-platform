@@ -7,7 +7,7 @@ Rails.application.routes.draw do
     registrations: 'users/registrations'
   }
 
-  get '/tests', controller: 'tests', action: 'index_with_questions', as: 'tests'
+  get '/tests', controller: 'tests', action: 'index', as: 'tests'
   patch '/answer/:id', controller: 'static_questions', action: 'answer', as: 'answer'
 
   post '/test_attempt/:category_id', controller: 'tests', action: 'start', as: 'start_test_attempt'

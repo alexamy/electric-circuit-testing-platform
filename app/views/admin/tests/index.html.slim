@@ -13,18 +13,18 @@
         | Действия
 
     tbody.table-body
-    - @categories.each do |category|
+    - @tests.each do |test|
       tr.table-row
         td.table-cell
-          = category.id
+          = test.id
         td.category.table-cell
-          = category.name
+          = test.name
         td.table-cell
-          = category.target_score
+          = test.target_score
         td.table-cell
-          = category.questions.count
+          = test.questions.count
         td.table-cell.space-x-4
-          = link_to 'Редактировать', edit_admin_test_path(category), class: 'link'
-          = link_to 'Удалить', admin_test_path(category), method: :delete, data: { confirm: 'Вы уверены?' }, class: 'link'
+          = link_to 'Редактировать', edit_admin_test_path(test), class: 'link'
+          = link_to 'Удалить', admin_test_path(test), method: :delete, data: { confirm: 'Вы уверены?' }, class: 'link'
 
 = link_to 'Создать', new_admin_test_path, class: 'button'

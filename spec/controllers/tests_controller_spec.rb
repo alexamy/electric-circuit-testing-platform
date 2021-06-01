@@ -18,10 +18,10 @@ RSpec.describe TestsController, type: :controller do
   let(:static_question_other) { create(:static_question, answer: 10, test_attempt: test_attempt, author: other_user) }
 
   describe 'GET #index_with_questions' do
-    before { get :index_with_questions }
+    before { get :index }
 
-    it 'load categories with questions' do
-      expect(assigns(:categories)).to contain_exactly category
+    it 'load tests with questions' do
+      expect(assigns(:tests)).to contain_exactly category
     end
 
     it 'renders index view' do
