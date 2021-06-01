@@ -1,4 +1,4 @@
-- @categories.each do |category|
-  = link_to start_test_attempt_path(category), method: :post,
+- @tests.each do |test|
+  = link_to start_test_attempt_path(test), method: :post,
             class: 'link block', data: { confirm: t('.start_warning') }
-    = category.name
+    = test.name

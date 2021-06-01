@@ -4,16 +4,16 @@ require 'rails_helper'
 
 RSpec.describe Admin::TestsController, type: :controller do
   let(:admin) { create(:admin) }
-  let!(:categories) { create_list(:test, 5) }
-  let(:category) { categories.first }
+  let!(:tests) { create_list(:test, 5) }
+  let(:test) { tests.first }
 
   before { login(admin) }
 
   describe 'GET #index' do
-    it 'sets categories' do
+    it 'sets tests' do
       get :index
 
-      expect(assigns(:categories)).to match_array categories
+      expect(assigns(:tests)).to match_array tests
     end
 
     it 'renders index view' do
@@ -24,24 +24,24 @@ RSpec.describe Admin::TestsController, type: :controller do
   end
 
   describe 'DELETE #destroy' do
-    it 'deletes category' do
+    it 'deletes test' do
       expect do
-        delete :destroy, params: { id: category.id }
+        delete :destroy, params: { id: test.id }
       end.to change(Test, :count).by(-1)
     end
 
     it 'redirects to index view' do
-      delete :destroy, params: { id: category.id }
+      delete :destroy, params: { id: test.id }
 
       expect(response).to redirect_to admin_tests_path
     end
   end
 
   describe 'GET #new' do
-    it 'setup new category' do
+    it 'setup new test' do
       get :new
 
-      expect(assigns(:category)).to be_a_new Test
+      expect(assigns(:test)).to be_a_new Test
     end
 
     it 'renders new view' do
@@ -52,7 +52,7 @@ RSpec.describe Admin::TestsController, type: :controller do
   end
 
   describe 'POST #create' do
-    it 'create new category in database' do
+    it 'create new test in database' do
       expect do
         post :create, params: { test: attributes_for(:test) }
       end.to change(Test, :count).by(1)
@@ -72,41 +72,41 @@ RSpec.describe Admin::TestsController, type: :controller do
   end
 
   describe 'GET #edit' do
-    it 'finds the category' do
-      get :edit, params: { id: category.id }
+    it 'finds the test' do
+      get :edit, params: { id: test.id }
 
-      expect(assigns(:category)).to eq category
+      expect(assigns(:test)).to eq test
     end
 
     it 'renders edit view' do
-      get :edit, params: { id: category.id }
+      get :edit, params: { id: test.id }
 
       expect(response).to render_template :edit
     end
   end
 
   describe 'PATCH #update' do
-    it 'finds the category' do
-      patch :update, params: { id: category.id, test: attributes_for(:test) }
+    it 'finds the test' do
+      patch :update, params: { id: test.id, test: attributes_for(:test) }
 
-      expect(assigns(:category)).to eq category
+      expect(assigns(:test)).to eq test
     end
 
-    it 'changes category fields' do
-      patch :update, params: { id: category.id, test: { name: 'newcategory' } }
+    it 'changes test fields' do
+      patch :update, params: { id: test.id, test: { name: 'newtest' } }
 
-      category.reload
-      expect(category.name).to eq 'newcategory'
+      test.reload
+      expect(test.name).to eq 'newtest'
     end
 
     it 'redirects to index on success' do
-      patch :update, params: { id: category.id, test: attributes_for(:test) }
+      patch :update, params: { id: test.id, test: attributes_for(:test) }
 
       expect(response).to redirect_to admin_tests_path
     end
 
     it 'rerenders new on failure' do
-      patch :update, params: { id: category.id, test: attributes_for(:test, :invalid) }
+      patch :update, params: { id: test.id, test: attributes_for(:test, :invalid) }
 
       expect(response).to render_template :edit
     end

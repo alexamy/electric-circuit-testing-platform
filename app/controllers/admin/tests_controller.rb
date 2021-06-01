@@ -2,17 +2,17 @@
 
 class Admin::TestsController < Admin::BaseController
   def index
-    @categories = Test.includes(:questions).all
+    @tests = Test.includes(:questions).all
   end
 
   def new
-    @category = Test.new
+    @test = Test.new
   end
 
   def create
-    @category = Test.new(category_params)
+    @test = Test.new(test_params)
 
-    if @category.save
+    if @test.save
       redirect_to admin_tests_path
     else
       render :new
@@ -20,13 +20,13 @@ class Admin::TestsController < Admin::BaseController
   end
 
   def edit
-    @category = Test.find(params[:id])
+    @test = Test.find(params[:id])
   end
 
   def update
-    @category = Test.find(params[:id])
+    @test = Test.find(params[:id])
 
-    if @category.update(category_params)
+    if @test.update(test_params)
       redirect_to admin_tests_path
     else
       render :edit
@@ -41,7 +41,7 @@ class Admin::TestsController < Admin::BaseController
 
   private
 
-  def category_params
+  def test_params
     params.require(:test)
           .permit(:name, :target_score)
   end

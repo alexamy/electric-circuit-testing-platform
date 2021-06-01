@@ -7,13 +7,13 @@ RSpec.describe TestsController, type: :controller do
   let(:user) { create(:user) }
   let(:other_user) { create(:user) }
 
-  let!(:categories) { create_list(:test, 5) }
-  let(:category) { categories.first }
+  let!(:tests) { create_list(:test, 5) }
+  let(:test) { tests.first }
 
-  let!(:test_attempt) { create(:test_attempt, test: category, author: user) }
-  let(:other_test_attempt) { create(:test_attempt, test: category, author: other_user) }
+  let!(:test_attempt) { create(:test_attempt, test: test, author: user) }
+  let(:other_test_attempt) { create(:test_attempt, test: test, author: other_user) }
 
-  let!(:questions) { create_list(:question, 5, test: category) }
+  let!(:questions) { create_list(:question, 5, test: test) }
   let(:static_question) { create(:static_question, answer: 10, test_attempt: test_attempt, author: user) }
   let(:static_question_other) { create(:static_question, answer: 10, test_attempt: test_attempt, author: other_user) }
 
@@ -21,7 +21,7 @@ RSpec.describe TestsController, type: :controller do
     before { get :index }
 
     it 'load tests with questions' do
-      expect(assigns(:tests)).to contain_exactly category
+      expect(assigns(:tests)).to contain_exactly test
     end
 
     it 'renders index view' do
@@ -34,12 +34,12 @@ RSpec.describe TestsController, type: :controller do
 
     it 'creates test attempt' do
       expect do
-        get :start, params: { category_id: category.id }
+        get :start, params: { test_id: test.id }
       end.to change(TestAttempt, :count).by 1
     end
 
     it 'redirects to show view' do
-      get :start, params: { category_id: category.id }
+      get :start, params: { test_id: test.id }
 
       expect(response).to redirect_to next_question_test_attempt_path(assigns(:test_attempt))
     end
@@ -48,7 +48,7 @@ RSpec.describe TestsController, type: :controller do
       10.times.each do
         create(:static_question, :correct, question: questions.first, test_attempt: test_attempt, author: user)
       end
-      get :start, params: { category_id: category.id }
+      get :start, params: { test_id: test.id }
 
       expect(response).to redirect_to tests_path
     end
@@ -56,7 +56,7 @@ RSpec.describe TestsController, type: :controller do
 
   describe 'GET #next_question' do
     it_behaves_like 'require_authentication' do
-      let(:action) { get :next_question, params: { id: category.id } }
+      let(:action) { get :next_question, params: { id: test.id } }
     end
 
     describe 'Authenticated user' do
@@ -68,10 +68,10 @@ RSpec.describe TestsController, type: :controller do
         expect(assigns(:test_attempt)).to eq test_attempt
       end
 
-      it 'sets current category' do
+      it 'sets current test' do
         get :next_question, params: { id: test_attempt.id }
 
-        expect(assigns(:category)).to eq test_attempt.test
+        expect(assigns(:test)).to eq test_attempt.test
       end
 
       it 'sets current score' do
@@ -88,7 +88,7 @@ RSpec.describe TestsController, type: :controller do
 
       it 'can proceed on the latest test attempt only' do
         Timecop.travel(5.minutes.from_now) do
-          create(:test_attempt, test: category, author: user)
+          create(:test_attempt, test: test, author: user)
         end
 
         expect do
