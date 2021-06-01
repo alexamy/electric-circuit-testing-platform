@@ -13,15 +13,15 @@ RSpec.describe Attempt, type: :model do
   describe '#latest?' do
     let(:user) { create(:user) }
     let(:other_user) { create(:user) }
-    let!(:test_attempt) { create(:attempt, author: user) }
+    let!(:attempt) { create(:attempt, author: user) }
 
     Timecop.travel(5.minutes.from_now) do
-      let!(:test_attempt_last) { create(:attempt, author: user) }
+      let!(:attempt_last) { create(:attempt, author: user) }
     end
 
     it 'is true for latest test attempt' do
-      expect(test_attempt).not_to be_latest
-      expect(test_attempt_last).to be_latest
+      expect(attempt).not_to be_latest
+      expect(attempt_last).to be_latest
     end
 
     it 'only checks attempts authored by user' do
@@ -29,7 +29,7 @@ RSpec.describe Attempt, type: :model do
         create(:attempt, author: other_user)
       end
 
-      expect(test_attempt_last).to be_latest
+      expect(attempt_last).to be_latest
     end
   end
 end

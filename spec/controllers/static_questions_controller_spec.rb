@@ -7,10 +7,10 @@ RSpec.describe StaticQuestionsController, type: :controller do
   let(:other_user) { create(:user) }
 
   let(:test) { create(:test) }
-  let(:test_attempt) { create(:attempt, test: test, author: user) }
+  let(:attempt) { create(:attempt, test: test, author: user) }
   let(:question) { create(:question) }
-  let!(:static_question) { create(:static_question, answer: 10, attempt: test_attempt, question: question, author: user) }
-  let!(:static_question_other) { create(:static_question, answer: 10, attempt: test_attempt, question: question, author: other_user) }
+  let!(:static_question) { create(:static_question, answer: 10, attempt: attempt, question: question, author: user) }
+  let!(:static_question_other) { create(:static_question, answer: 10, attempt: attempt, question: question, author: other_user) }
 
   describe 'PATCH #answer' do
     it_behaves_like 'require_authentication' do
@@ -60,7 +60,7 @@ RSpec.describe StaticQuestionsController, type: :controller do
       it 'redirects to next question' do
         patch :answer, params: { id: static_question.id }
 
-        expect(response).to redirect_to next_question_attempt_path(test_attempt)
+        expect(response).to redirect_to next_question_attempt_path(attempt)
       end
 
       it 'redirects to tests list when has exit parameter' do
