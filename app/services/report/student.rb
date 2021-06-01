@@ -5,8 +5,6 @@ module Report
     attr_reader :user, :test
 
     def initialize(user, test)
-      super()
-
       @user = user
       @test = test
     end
