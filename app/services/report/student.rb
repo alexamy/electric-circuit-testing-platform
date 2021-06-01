@@ -31,18 +31,18 @@ module Report
                        .filter { |answer| answer.author == user }
     end
 
-    def answer_counts
-      @answer_counts ||= answers.partition(&:correct?).map(&:count)
+    def answer_partition
+      @answer_partition ||= answers.partition(&:correct?).map(&:count)
     end
 
     def answer_count
-      @answer_count = answer_counts.sum
+      @answer_count = answer_partition.sum
     end
 
     def correctness
-      return 0 if answer_counts.all?(&:zero?)
+      return 0 if answer_count.zero?
 
-      @correctness ||= answer_counts.first / answer_count.to_f
+      @correctness ||= answer_partition.first / answer_count.to_f
     end
 
     def attempts
