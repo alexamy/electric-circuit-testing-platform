@@ -15,6 +15,6 @@ feature 'User can view list of tests', "
     visit tests_path
 
     expect(page).not_to have_content test_without_questions.name
-    expect(page).to have_link test.name, href: start_test_attempt_path(test)
+    expect(page).to have_link test.name, href: start_attempt_path(test)
   end
 end

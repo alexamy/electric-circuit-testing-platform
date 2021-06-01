@@ -41,7 +41,7 @@ RSpec.describe TestsController, type: :controller do
     it 'redirects to show view' do
       get :start, params: { test_id: test.id }
 
-      expect(response).to redirect_to next_question_test_attempt_path(assigns(:test_attempt))
+      expect(response).to redirect_to next_question_attempt_path(assigns(:test_attempt))
     end
 
     it 'stops when get enough score' do

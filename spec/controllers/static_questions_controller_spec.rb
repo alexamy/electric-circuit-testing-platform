@@ -60,7 +60,7 @@ RSpec.describe StaticQuestionsController, type: :controller do
       it 'redirects to next question' do
         patch :answer, params: { id: static_question.id }
 
-        expect(response).to redirect_to next_question_test_attempt_path(test_attempt)
+        expect(response).to redirect_to next_question_attempt_path(test_attempt)
       end
 
       it 'redirects to tests list when has exit parameter' do

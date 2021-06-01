@@ -14,7 +14,7 @@ class TestsController < ApplicationController
     redirect_to tests_path, notice: t('.already_passed') and return if @test.passed?(current_user)
 
     @test_attempt = TestAttempt.create(test: @test, author: current_user)
-    redirect_to next_question_test_attempt_path(@test_attempt)
+    redirect_to next_question_attempt_path(@test_attempt)
   end
 
   def next_question
