@@ -11,12 +11,14 @@ feature 'Student can view his report', "
   given(:student) { create(:student, email: 'js@example.com', first_name: 'John', last_name: 'Smith') }
 
   given!(:test) { create(:category, name: 'Test example', target_score: 6) }
-  given!(:test_attempt) { create(:test_attempt, category: test, author: student) }
   given!(:question) { create(:question, category: test) }
+
+  given!(:test_attempt) { create(:test_attempt, category: test, author: student) }
   given!(:answer) { create(:static_question, :correct, question: question, test_attempt: test_attempt, author: student) }
   given!(:answer_wrong) { create(:static_question, :wrong, question: question, test_attempt: test_attempt, author: student) }
 
   given!(:test_attempts_admin) { create_list(:test_attempt, 5, category: test, author: admin) }
+  given!(:answers_admin) { create_list(:static_question, 5, :correct, question: question, test_attempt: test_attempt, author: student) }
 
   scenario 'Unauthenticated user cant view report' do
     visit reports_student_path
