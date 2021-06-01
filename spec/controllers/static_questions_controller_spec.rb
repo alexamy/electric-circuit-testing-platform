@@ -7,7 +7,7 @@ RSpec.describe StaticQuestionsController, type: :controller do
   let(:other_user) { create(:user) }
 
   let(:category) { create(:test) }
-  let(:test_attempt) { create(:test_attempt, category: category, author: user) }
+  let(:test_attempt) { create(:test_attempt, test: category, author: user) }
   let(:question) { create(:question) }
   let!(:static_question) { create(:static_question, answer: 10, test_attempt: test_attempt, question: question, author: user) }
   let!(:static_question_other) { create(:static_question, answer: 10, test_attempt: test_attempt, question: question, author: other_user) }

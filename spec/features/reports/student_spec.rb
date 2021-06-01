@@ -12,13 +12,13 @@ feature 'Student can view his report', "
 
   given!(:test) { create(:test, name: 'Test example', target_score: 6) }
   given!(:test_empty) { create(:test, name: 'Test example empty') }
-  given!(:question) { create(:question, category: test) }
+  given!(:question) { create(:question, test: test) }
 
-  given!(:test_attempt) { create(:test_attempt, category: test, author: student) }
+  given!(:test_attempt) { create(:test_attempt, test: test, author: student) }
   given!(:answer) { create(:static_question, :correct, question: question, test_attempt: test_attempt, author: student) }
   given!(:answer_wrong) { create(:static_question, :wrong, question: question, test_attempt: test_attempt, author: student) }
 
-  given!(:test_attempt_admin) { create(:test_attempt, category: test, author: admin) }
+  given!(:test_attempt_admin) { create(:test_attempt, test: test, author: admin) }
   given!(:answers_admin) { create_list(:static_question, 5, :correct, question: question, test_attempt: test_attempt_admin, author: admin) }
 
   scenario 'Unauthenticated user cant view report' do

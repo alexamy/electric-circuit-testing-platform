@@ -10,10 +10,10 @@ RSpec.describe TestsController, type: :controller do
   let!(:categories) { create_list(:test, 5) }
   let(:category) { categories.first }
 
-  let!(:test_attempt) { create(:test_attempt, category: category, author: user) }
-  let(:other_test_attempt) { create(:test_attempt, category: category, author: other_user) }
+  let!(:test_attempt) { create(:test_attempt, test: category, author: user) }
+  let(:other_test_attempt) { create(:test_attempt, test: category, author: other_user) }
 
-  let!(:questions) { create_list(:question, 5, category: category) }
+  let!(:questions) { create_list(:question, 5, test: category) }
   let(:static_question) { create(:static_question, answer: 10, test_attempt: test_attempt, author: user) }
   let(:static_question_other) { create(:static_question, answer: 10, test_attempt: test_attempt, author: other_user) }
 
@@ -88,7 +88,7 @@ RSpec.describe TestsController, type: :controller do
 
       it 'can proceed on the latest test attempt only' do
         Timecop.travel(5.minutes.from_now) do
-          create(:test_attempt, category: category, author: user)
+          create(:test_attempt, test: category, author: user)
         end
 
         expect do

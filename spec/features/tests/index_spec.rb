@@ -9,7 +9,7 @@ feature 'User can view list of categories', "
 " do
   given!(:category) { create(:test, name: 'with questions') }
   given!(:category_without_questions) { create(:test, name: 'without questions') }
-  given!(:questions) { create_list(:question, 3, category: category) }
+  given!(:questions) { create_list(:question, 3, test: category) }
 
   scenario 'User views list of categories' do
     visit tests_path

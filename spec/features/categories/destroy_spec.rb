@@ -10,8 +10,8 @@ feature 'Admin can delete category', "
   given(:admin) { create(:admin) }
   given(:category) { create(:test) }
 
-  given(:question) { create(:question, category: category) }
-  given(:test_attempt) { create(:test_attempt, author: admin, category: category) }
+  given(:question) { create(:question, test: category) }
+  given(:test_attempt) { create(:test_attempt, author: admin, test: category) }
   given!(:static_question) { create(:static_question, question: question, test_attempt: test_attempt) }
 
   background { sign_in(admin) }

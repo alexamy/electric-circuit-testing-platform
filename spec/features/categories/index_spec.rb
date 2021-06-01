@@ -10,7 +10,7 @@ feature 'Admin can view list of categories', "
   given(:admin) { create(:admin) }
   given!(:categories) { create_list(:test, 5) }
   given(:category) { categories.first }
-  given!(:questions) { create_list(:question, 3, category: category) }
+  given!(:questions) { create_list(:question, 3, test: category) }
 
   background { sign_in(admin) }
 

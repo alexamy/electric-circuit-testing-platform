@@ -10,8 +10,8 @@ RSpec.describe Test, type: :model do
   let(:category_other) { create(:test) }
   let(:category_empty) { create(:test) }
 
-  let!(:question) { create(:question, category: category) }
-  let!(:question_other) { create(:question, category: category_other) }
+  let!(:question) { create(:question, test: category) }
+  let!(:question_other) { create(:question, test: category_other) }
 
   it { is_expected.to validate_presence_of :name }
   it { is_expected.to validate_presence_of :target_score }

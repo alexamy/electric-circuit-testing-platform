@@ -64,19 +64,19 @@ RSpec.describe Question, type: :model do
 
   describe 'formula parameters creation' do
     it 'parses formula text' do
-      question = model.create!(**attributes_for(:question), author: author, category: category)
+      question = model.create!(**attributes_for(:question), author: author, test: category)
 
       expect(question.formula).to be_present
     end
 
     it 'creates parameters' do
       expect do
-        model.create!(**attributes_for(:question), formula_text: 'x=y', author: author, category: category)
+        model.create!(**attributes_for(:question), formula_text: 'x=y', author: author, test: category)
       end.to change(FormulaParameter, :count).by(1)
     end
 
     describe 'formula update' do
-      let!(:question) { create(:question, formula_text: 'x=y*z', author: author, category: category) }
+      let!(:question) { create(:question, formula_text: 'x=y*z', author: author, test: category) }
 
       it 'removes unused parameters' do
         expect do

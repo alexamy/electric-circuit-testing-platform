@@ -7,8 +7,8 @@ RSpec.describe ReportsController, type: :controller do
   let!(:student) { create(:student) }
 
   let!(:test) { create(:test, name: 'Test example', target_score: 6) }
-  let!(:test_attempt) { create(:test_attempt, category: test, author: student) }
-  let!(:question) { create(:question, category: test) }
+  let!(:test_attempt) { create(:test_attempt, test: test, author: student) }
+  let!(:question) { create(:question, test: test) }
   let(:answer) { create(:static_question, :correct, question: question, test_attempt: test_attempt, author: student) }
   let(:answer_wrong) { create(:static_question, :wrong, question: question, test_attempt: test_attempt, author: student) }
 
