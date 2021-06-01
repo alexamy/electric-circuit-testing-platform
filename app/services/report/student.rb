@@ -9,6 +9,10 @@ module Report
       @test = test
     end
 
+    def id
+      @id ||= test.id
+    end
+
     def name
       @name ||= test.name
     end
@@ -32,6 +36,8 @@ module Report
     end
 
     def correctness
+      return 0 if answer_counts.all?(&:zero?)
+
       @correctness ||= answer_counts.first / answer_counts.sum.to_f
     end
 

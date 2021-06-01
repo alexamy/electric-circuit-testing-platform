@@ -27,6 +27,10 @@ RSpec.describe Report::Student, type: :service do
     expect(report.test).to eq test
   end
 
+  it 'sets test id' do
+    expect(report.id).to eq test.id
+  end
+
   it 'sets name' do
     expect(report.name).to eq test.name
   end

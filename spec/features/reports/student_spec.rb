@@ -11,6 +11,7 @@ feature 'Student can view his report', "
   given(:student) { create(:student, email: 'js@example.com', first_name: 'John', last_name: 'Smith') }
 
   given!(:test) { create(:category, name: 'Test example', target_score: 6) }
+  given!(:test_empty) { create(:category, name: 'Test example empty') }
   given!(:question) { create(:question, category: test) }
 
   given!(:test_attempt) { create(:test_attempt, category: test, author: student) }
@@ -71,6 +72,12 @@ feature 'Student can view his report', "
     scenario 'can view target score' do
       within '.target-score' do
         expect(page).to have_content '6'
+      end
+    end
+
+    scenario 'sees 0% when no answers given' do
+      within ".test-#{test_empty.id}" do
+        expect(page).to have_content '0%'
       end
     end
   end
