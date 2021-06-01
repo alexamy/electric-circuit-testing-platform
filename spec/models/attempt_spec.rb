@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe TestAttempt, type: :model do
+RSpec.describe Attempt, type: :model do
   it_behaves_like 'authorable'
 
   describe 'associations' do

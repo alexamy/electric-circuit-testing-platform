@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class TestAttempt < ApplicationRecord
+class Attempt < ApplicationRecord
   include Authorable
 
   belongs_to :test
@@ -8,6 +8,6 @@ class TestAttempt < ApplicationRecord
   has_many :static_questions, dependent: :destroy
 
   def latest?
-    TestAttempt.where(author: author).maximum(:created_at) == created_at
+    Attempt.where(author: author).maximum(:created_at) == created_at
   end
 end

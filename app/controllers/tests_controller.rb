@@ -13,7 +13,7 @@ class TestsController < ApplicationController
     @test = Test.find(params[:test_id])
     redirect_to tests_path, notice: t('.already_passed') and return if @test.passed?(current_user)
 
-    @test_attempt = TestAttempt.create(test: @test, author: current_user)
+    @test_attempt = Attempt.create(test: @test, author: current_user)
     redirect_to next_question_attempt_path(@test_attempt)
   end
 
@@ -34,7 +34,7 @@ class TestsController < ApplicationController
   end
 
   def find_test_attempt
-    @test_attempt = TestAttempt.find(params[:id])
+    @test_attempt = Attempt.find(params[:id])
     return unless owned?(@test_attempt)
     return unless @test_attempt.latest?
 
