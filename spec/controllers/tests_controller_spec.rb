@@ -21,7 +21,7 @@ RSpec.describe TestsController, type: :controller do
     before { get :index_with_questions }
 
     it 'load categories with questions' do
-      expect(assigns(:categories)).to match_array categories
+      expect(assigns(:categories)).to contain_exactly category
     end
 
     it 'renders index view' do
