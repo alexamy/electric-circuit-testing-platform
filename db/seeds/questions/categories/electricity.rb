@@ -6,7 +6,7 @@ require Rails.root.join('db/seeds/helpers/question_create')
 admin = Admin.find_by(email: 'admin@test.com')
 
 # categories
-category = Category.find_or_create_by(name: 'Электричество', target_score: 5)
+category = Test.find_or_create_by(name: 'Электричество', target_score: 5)
 
 # questions
 create_question(

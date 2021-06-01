@@ -6,13 +6,13 @@ class TestsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index_with_questions]
 
   def index_with_questions
-    @categories = Category.with_questions
+    @categories = Test.with_questions
 
     render :index
   end
 
   def start
-    @category = Category.find(params[:category_id])
+    @category = Test.find(params[:category_id])
     redirect_to tests_path, notice: t('.already_passed') and return if @category.passed?(current_user)
 
     @test_attempt = TestAttempt.create(category: @category, author: current_user)

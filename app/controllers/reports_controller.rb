@@ -5,7 +5,7 @@ class ReportsController < ApplicationController
 
   def student
     find_user
-    @reports = Category.all.map { |test| Report::Student.new(@user, test) }
+    @reports = Test.all.map { |test| Report::Student.new(@user, test) }
   end
 
   private
