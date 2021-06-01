@@ -52,25 +52,25 @@ feature 'Student can view his report', "
     end
 
     scenario 'can view attempts count' do
-      within '.attempts-count' do
+      within ".test-#{test.id} .attempts-count" do
         expect(page).to have_content '1'
       end
     end
 
     scenario 'can view score' do
-      within '.score' do
+      within ".test-#{test.id} .score" do
         expect(page).to have_content '1'
       end
     end
 
     scenario 'can view correctness percentage' do
-      within '.correctness-percentage' do
+      within ".test-#{test.id} .correctness-percentage" do
         expect(page).to have_content '50%'
       end
     end
 
     scenario 'can view target score' do
-      within '.target-score' do
+      within ".test-#{test.id} .target-score" do
         expect(page).to have_content '6'
       end
     end
