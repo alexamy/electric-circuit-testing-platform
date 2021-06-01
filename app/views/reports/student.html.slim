@@ -20,6 +20,8 @@
       th.table-header
         | Набрано баллов
       th.table-header
+        | Количество ответов
+      th.table-header
         | Процент правильных ответов
       th.table-header
         | Количество попыток
@@ -33,6 +35,8 @@
           = report.target_score
         td.table-cell.score
           = report.score
+        td.table-cell.answer-count
+          = report.answer_count
         td.table-cell.correctness-percentage
           | #{(report.correctness * 100).to_i}%
         td.table-cell.attempts-count

@@ -48,6 +48,10 @@ RSpec.describe Report::Student, type: :service do
     expect(report.correctness).to be 0.5
   end
 
+  it 'sets answers count' do
+    expect(report.answer_count).to eq 2
+  end
+
   it 'sets attempts count' do
     expect(report.attempts).to contain_exactly test_attempt
   end

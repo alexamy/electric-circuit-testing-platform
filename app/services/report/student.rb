@@ -35,10 +35,14 @@ module Report
       @answer_counts ||= answers.partition(&:correct?).map(&:count)
     end
 
+    def answer_count
+      @answer_count = answer_counts.sum
+    end
+
     def correctness
       return 0 if answer_counts.all?(&:zero?)
 
-      @correctness ||= answer_counts.first / answer_counts.sum.to_f
+      @correctness ||= answer_counts.first / answer_count.to_f
     end
 
     def attempts

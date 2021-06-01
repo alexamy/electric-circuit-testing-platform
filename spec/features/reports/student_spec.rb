@@ -63,6 +63,12 @@ feature 'Student can view his report', "
       end
     end
 
+    scenario 'can view answers count' do
+      within ".test-#{test.id} .answer-count" do
+        expect(page).to have_content '2'
+      end
+    end
+
     scenario 'can view correctness percentage' do
       within ".test-#{test.id} .correctness-percentage" do
         expect(page).to have_content '50%'
