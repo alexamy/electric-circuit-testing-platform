@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_17_114249) do
+ActiveRecord::Schema.define(version: 2021_06_01_222344) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,13 +43,6 @@ ActiveRecord::Schema.define(version: 2021_05_17_114249) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "categories", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.integer "target_score", null: false
-  end
-
   create_table "formula_parameters", force: :cascade do |t|
     t.string "name"
     t.integer "minimum"
@@ -74,7 +67,7 @@ ActiveRecord::Schema.define(version: 2021_05_17_114249) do
     t.string "comment"
     t.text "formula_text"
     t.json "formula"
-    t.bigint "category_id", null: false
+    t.bigint "test_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "precision"
@@ -82,7 +75,7 @@ ActiveRecord::Schema.define(version: 2021_05_17_114249) do
     t.bigint "author_id", null: false
     t.integer "completion_time", null: false
     t.index ["author_id"], name: "index_questions_on_author_id"
-    t.index ["category_id"], name: "index_questions_on_category_id"
+    t.index ["test_id"], name: "index_questions_on_test_id"
   end
 
   create_table "static_questions", force: :cascade do |t|
@@ -100,12 +93,19 @@ ActiveRecord::Schema.define(version: 2021_05_17_114249) do
   end
 
   create_table "test_attempts", force: :cascade do |t|
-    t.bigint "category_id"
+    t.bigint "test_id"
     t.bigint "author_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["author_id"], name: "index_test_attempts_on_author_id"
-    t.index ["category_id"], name: "index_test_attempts_on_category_id"
+    t.index ["test_id"], name: "index_test_attempts_on_test_id"
+  end
+
+  create_table "tests", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "target_score", null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -130,12 +130,12 @@ ActiveRecord::Schema.define(version: 2021_05_17_114249) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "formula_parameters", "questions"
-  add_foreign_key "questions", "categories"
+  add_foreign_key "questions", "tests"
   add_foreign_key "questions", "users", column: "author_id"
   add_foreign_key "static_questions", "questions"
   add_foreign_key "static_questions", "test_attempts"
   add_foreign_key "static_questions", "users", column: "author_id"
-  add_foreign_key "test_attempts", "categories"
+  add_foreign_key "test_attempts", "tests"
   add_foreign_key "test_attempts", "users", column: "author_id"
   add_foreign_key "users", "groups"
 end
