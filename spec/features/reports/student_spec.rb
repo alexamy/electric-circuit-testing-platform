@@ -8,13 +8,15 @@ feature 'Student can view his report', "
   I'd like to be able to view report of all tests
 " do
   given(:admin) { create(:admin) }
-  given(:student) { create(:student) }
+  given(:student) { create(:student, first_name: 'John', last_name: 'Smith') }
 
   given!(:test) { create(:category, name: 'Test example', target_score: 6) }
   given!(:test_attempt) { create(:test_attempt, category: test, author: student) }
   given!(:question) { create(:question, category: test) }
   given!(:answer) { create(:static_question, :correct, question: question, test_attempt: test_attempt, author: student) }
   given!(:answer_wrong) { create(:static_question, :wrong, question: question, test_attempt: test_attempt, author: student) }
+
+  given!(:test_attempts_admin) { create_list(:test_attempt, 5, category: test, author: admin) }
 
   scenario 'Unauthenticated user cant view report' do
     visit reports_student_path
@@ -26,6 +28,10 @@ feature 'Student can view his report', "
     background do
       sign_in(student)
       visit reports_student_path
+    end
+
+    scenario 'can view his name' do
+      expect(page).to have_content 'John Smith'
     end
 
     scenario 'can view report' do
@@ -58,12 +64,11 @@ feature 'Student can view his report', "
   end
 
   describe 'Admin' do
-    background { sign_in(admin) }
+    background do
+      sign_in(admin)
+      visit admin_reports_student_path(student)
+    end
 
     scenario 'can view report of all students'
-  end
-
-  describe 'Report' do
-    scenario 'has data only for current student'
   end
 end
