@@ -71,7 +71,7 @@ RSpec.describe TestsController, type: :controller do
       it 'sets current category' do
         get :next_question, params: { id: test_attempt.id }
 
-        expect(assigns(:category)).to eq test_attempt.category
+        expect(assigns(:category)).to eq test_attempt.test
       end
 
       it 'sets current score' do

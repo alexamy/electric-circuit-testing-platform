@@ -18,7 +18,7 @@
         td.table-cell
           = link_to question.text, admin_question_path(question), class: 'link'
         td.table-cell
-          = question.category.name
+          = question.test.name
         td.table-cell.space-x-4
           = link_to 'Редактировать', edit_admin_question_path(question), class: 'link'
           = link_to 'Удалить', admin_question_path(question), method: :delete, data: { confirm: 'Вы уверены?' }, class: 'link'

@@ -22,7 +22,7 @@ class TestsController < ApplicationController
   def next_question
     return unless find_test_attempt
 
-    @category = @test_attempt.category
+    @category = @test_attempt.test
     redirect_to tests_path, notice: t('.passed') and return if @category.passed?(current_user)
 
     @score = @category.score_of(current_user) # calculated before creating question, to exclude it from score
@@ -32,7 +32,7 @@ class TestsController < ApplicationController
   private
 
   def random_question_id
-    Question.where(test: @test_attempt.category).pluck(:id).sample
+    Question.where(test: @test_attempt.test).pluck(:id).sample
   end
 
   def find_test_attempt
