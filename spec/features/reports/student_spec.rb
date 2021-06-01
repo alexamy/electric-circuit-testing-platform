@@ -17,7 +17,7 @@ feature 'Student can view his report', "
   given!(:answer_wrong) { create(:static_question, :wrong, question: question, test_attempt: test_attempt, author: student) }
 
   scenario 'Unauthenticated user cant view report' do
-    visit reports_path
+    visit reports_student_path
 
     expect(page).to have_content 'Вам необходимо войти в систему или зарегистрироваться'
   end
@@ -32,8 +32,8 @@ feature 'Student can view his report', "
       expect(page).to have_content 'Test example'
     end
 
-    scenario 'can view tries count' do
-      within '.tries-count' do
+    scenario 'can view attempts count' do
+      within '.attempts-count' do
         expect(page).to have_content '1'
       end
     end

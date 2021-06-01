@@ -16,12 +16,8 @@ RSpec.describe ReportsController, type: :controller do
   describe 'GET #student' do
     before { get :student }
 
-    it 'sets tests' do
-      expect(assigns(:tests)).to contain_exactly test
-    end
-
-    it 'sets attempts' do
-      expect(assigns(:attempts)).to contain_exactly test_attempt
+    it 'sets reports' do
+      expect(assigns(:reports)).to all be_an_instance_of(Report::Student)
     end
 
     it 'renders student template' do

@@ -13,17 +13,15 @@
         | Количество попыток
 
     tbody.table-body
-    - @tests.each do |test|
-      - score = test.score_of(current_user)
-      - answers = test.questions.includes(:static_questions).map(&:static_questions).flatten.partition(&:correct?).map(&:count)
+    - @reports.each do |report|
       tr.table-row
         td.table-cell
-          = test.name
+          = report.name
         td.table-cell.target-score
-          = test.target_score
+          = report.target_score
         td.table-cell.score
-          = score
+          = report.score
         td.table-cell.correctness-percentage
-          = "#{((answers.first / answers.sum.to_f) * 100).to_i}%"
-        td.table-cell.tries-count
-          = @attempts.where(category: test).count
+          | #{(report.correctness * 100).to_i}%
+        td.table-cell.attempts-count
+          = report.attempts.count

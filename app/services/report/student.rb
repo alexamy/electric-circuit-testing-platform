@@ -36,12 +36,8 @@ module Report
       @correctness ||= answer_counts.first / answer_counts.sum.to_f
     end
 
-    def correctness_percentage
-      @correctness_percentage ||= "#{(correctness * 100).to_i}%"
-    end
-
     def attempts
-      @attempts ||= TestAttempt.all.where(author: user).where(category: test).count
+      @attempts ||= TestAttempt.all.where(author: user).where(category: test)
     end
   end
 end
