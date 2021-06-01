@@ -30,6 +30,12 @@ feature 'Student can view his report', "
       visit reports_student_path
     end
 
+    scenario 'can go to report page through navigation bar' do
+      click_on 'Статистика'
+
+      expect(page).to have_content 'Отчёт по темам'
+    end
+
     scenario 'can see his email' do
       expect(page).to have_content 'js@example.com'
     end
