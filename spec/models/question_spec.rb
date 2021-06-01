@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe Question, type: :model do
   let(:author) { create(:admin) }
-  let(:category) { create(:test) }
+  let(:test) { create(:test) }
   let(:model) { described_class }
 
   it_behaves_like 'authorable'
@@ -64,19 +64,19 @@ RSpec.describe Question, type: :model do
 
   describe 'formula parameters creation' do
     it 'parses formula text' do
-      question = model.create!(**attributes_for(:question), author: author, test: category)
+      question = model.create!(**attributes_for(:question), author: author, test: test)
 
       expect(question.formula).to be_present
     end
 
     it 'creates parameters' do
       expect do
-        model.create!(**attributes_for(:question), formula_text: 'x=y', author: author, test: category)
+        model.create!(**attributes_for(:question), formula_text: 'x=y', author: author, test: test)
       end.to change(FormulaParameter, :count).by(1)
     end
 
     describe 'formula update' do
-      let!(:question) { create(:question, formula_text: 'x=y*z', author: author, test: category) }
+      let!(:question) { create(:question, formula_text: 'x=y*z', author: author, test: test) }
 
       it 'removes unused parameters' do
         expect do

@@ -7,12 +7,12 @@ feature 'User can start test', "
   As an authenticated user
   I would like to start testing
 " do
-  given(:category) { create(:test) }
-  given!(:question) { create(:question, test: category, completion_time: 65, formula_text: 'x=_test') }
+  given(:test) { create(:test) }
+  given!(:question) { create(:question, test: test, completion_time: 65, formula_text: 'x=_test') }
   given(:user) { create(:user) }
 
   scenario 'Unauthenticated user tries to start testing' do
-    visit start_test_attempt_path(category)
+    visit start_test_attempt_path(test)
 
     expect(page).to have_content 'Вам необходимо войти в систему'
   end
@@ -22,7 +22,7 @@ feature 'User can start test', "
 
     background do
       visit tests_path
-      click_link category.name
+      click_link test.name
     end
 
     scenario 'starts testing' do
@@ -60,7 +60,7 @@ feature 'User can start test', "
         end
 
         within '.test-score__target' do
-          expect(page).to have_content category.target_score
+          expect(page).to have_content test.target_score
         end
       end
 
@@ -98,7 +98,7 @@ feature 'User can start test', "
         end
 
         visit tests_path
-        click_link category.name
+        click_link test.name
 
         expect(page).to have_content 'Тест уже пройден'
       end

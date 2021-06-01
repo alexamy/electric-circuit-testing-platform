@@ -2,30 +2,30 @@
 
 require 'rails_helper'
 
-feature 'Admin can edit category', "
-  In order to change category data
+feature 'Admin can edit test', "
+  In order to change test data
   As an authenticated admin
-  I'd like to be able to edit category
+  I'd like to be able to edit test
 " do
   given(:admin) { create(:admin) }
-  given!(:category) { create(:test, name: 'Test', target_score: 10) }
+  given!(:test) { create(:test, name: 'Test', target_score: 10) }
 
   background { sign_in(admin) }
 
-  scenario 'Admin edits category' do
+  scenario 'Admin edits test' do
     visit admin_tests_path
 
     click_on 'Редактировать'
-    fill_in 'Название', with: 'TestCategory'
+    fill_in 'Название', with: 'Test'
     fill_in 'Порог для зачета', with: 50
     click_on 'Сохранить категорию'
 
-    expect(page).to have_selector 'td', text: 'TestCategory'
+    expect(page).to have_selector 'td', text: 'Test'
     expect(page).to have_selector 'td', text: 50
   end
 
   describe 'errors' do
-    scenario 'Admin edits category with name error' do
+    scenario 'Admin edits test with name error' do
       visit admin_tests_path
       click_on 'Редактировать'
 
