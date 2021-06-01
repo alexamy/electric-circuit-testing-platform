@@ -5,8 +5,8 @@ require Rails.root.join('db/seeds/helpers/question_create')
 # author
 admin = Admin.find_by(email: 'admin@test.com')
 
-# categories
-category = Category.find_or_create_by(name: 'Электричество', target_score: 5)
+# tests
+test = Test.find_or_create_by(name: 'Электричество', target_score: 5)
 
 # questions
 create_question(
@@ -16,7 +16,7 @@ create_question(
     answer_unit: 'В',
     precision: 2,
     completion_time: 60,
-    category: category,
+    test: test,
     author: admin,
     formula_text: 'Vxmm1=VCC*R2/(R1+R2)'
   },
@@ -34,7 +34,7 @@ create_question(
     answer_unit: 'В',
     precision: 2,
     completion_time: 60,
-    category: category,
+    test: test,
     author: admin,
     formula_text: "Rx=R2*R3/(R2+R3)\nVxmm1=VCC*Rx/(R1+Rx)"
   },

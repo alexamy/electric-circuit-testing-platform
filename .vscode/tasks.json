@@ -52,6 +52,16 @@
       }
     },
     {
+      "label": "Run all tests (fail only 3)",
+      "type": "shell",
+      "group": "test",
+      "command": "bundle exec rspec --format p --fail-fast=3",
+      "problemMatcher": [],
+      "presentation": {
+        "clear": true
+      }
+    },
+    {
       "label": "Build test coverage mapping",
       "type": "shell",
       "group": "test",

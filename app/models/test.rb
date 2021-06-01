@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Category < ApplicationRecord
+class Test < ApplicationRecord
   CORRECT_SCORE = 1
   WRONG_SCORE = -2
 
@@ -17,7 +17,7 @@ class Category < ApplicationRecord
 
   def score_of(user)
     corrects, wrongs = StaticQuestion.joins(:question)
-                                     .where(author: user, questions: { category: self })
+                                     .where(author: user, questions: { test: self })
                                      .partition(&:correct?)
                                      .map(&:count)
 

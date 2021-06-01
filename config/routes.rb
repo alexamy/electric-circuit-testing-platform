@@ -7,10 +7,10 @@ Rails.application.routes.draw do
     registrations: 'users/registrations'
   }
 
-  get '/tests', controller: 'categories', action: 'index_with_questions', as: 'tests'
+  get '/tests', controller: 'tests', action: 'index', as: 'tests'
   patch '/answer/:id', controller: 'static_questions', action: 'answer', as: 'answer'
 
-  post '/test_attempt/:category_id', controller: 'tests', action: 'start', as: 'start_test_attempt'
+  post '/test_attempt/:test_id', controller: 'tests', action: 'start', as: 'start_test_attempt'
   get '/test_attempt/:id', controller: 'tests', action: 'next_question', as: 'next_question_test_attempt'
 
   scope :reports, controller: 'reports', as: 'reports' do
@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    resources :categories, shallow: true, except: %i[show]
+    resources :tests, shallow: true, except: %i[show]
     resources :students, shallow: true, except: %i[show]
     resources :groups, shallow: true, except: %i[show]
 

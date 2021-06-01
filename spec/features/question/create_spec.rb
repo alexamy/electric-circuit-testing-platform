@@ -9,7 +9,7 @@ feature 'User can create question', "
 " do
   given(:user) { create(:user) }
   given(:admin) { create(:admin) }
-  given!(:category) { create(:category) }
+  given!(:test) { create(:test) }
 
   scenario 'Unauthenticated user cant create question' do
     visit new_admin_question_path
@@ -49,7 +49,7 @@ feature 'User can create question', "
     scenario 'can create question' do
       visit new_admin_question_path
 
-      select category.name, from: 'Категория'
+      select test.name, from: 'Тест'
       fill_in 'Текст вопроса', with: 'Вычислить показание вольтметра XMM1'
       fill_in 'Формула', with: 'V=R1'
       fill_in 'Единица измерения ответа', with: 'В'
@@ -64,7 +64,7 @@ feature 'User can create question', "
     scenario 'can change parameters default values' do
       visit new_admin_question_path
 
-      select category.name, from: 'Категория'
+      select test.name, from: 'Тест'
       fill_in 'Текст вопроса', with: 'Вычислить показание вольтметра XMM1'
       fill_in 'Формула', with: 'V=R1'
       fill_in 'Единица измерения ответа', with: 'В'
@@ -85,7 +85,7 @@ feature 'User can create question', "
     scenario 'see error when has empty fields' do
       visit new_admin_question_path
 
-      select category.name, from: 'Категория'
+      select test.name, from: 'Тест'
       fill_in 'Текст вопроса', with: 'Вычислить показание вольтметра XMM1'
       fill_in 'Формула', with: 'V=R1'
       fill_in 'Единица измерения ответа', with: 'В'

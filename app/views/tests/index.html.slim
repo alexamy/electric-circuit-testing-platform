@@ -1,0 +1,4 @@
+- @tests.each do |test|
+  = link_to start_test_attempt_path(test), method: :post,
+            class: 'link block', data: { confirm: t('.start_warning') }
+    = test.name

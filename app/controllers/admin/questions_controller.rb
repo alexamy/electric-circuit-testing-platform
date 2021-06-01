@@ -32,7 +32,7 @@ class Admin::QuestionsController < Admin::BaseController
   end
 
   def index
-    @questions = Question.includes(:category).all
+    @questions = Question.includes(:test).all
   end
 
   def show
@@ -61,7 +61,7 @@ class Admin::QuestionsController < Admin::BaseController
     params.require(:question)
           .permit(:text, :comment, :formula_text,
                   :precision, :answer_unit, :completion_time,
-                  :scheme, :category_id)
+                  :scheme, :test_id)
           .merge(author_id: current_user.id)
   end
 end

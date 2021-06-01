@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe Admin::QuestionsController, type: :controller do
   let(:admin) { create(:admin) }
-  let(:category) { create(:category) }
+  let(:test) { create(:test) }
 
   before { login(admin) }
 
@@ -24,7 +24,7 @@ RSpec.describe Admin::QuestionsController, type: :controller do
     let(:question_params) do
       {
         question: {
-          category_id: category.id,
+          test_id: test.id,
           formula_text: 'V=Vx',
           text: 'Найдите V',
           precision: 0,

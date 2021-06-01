@@ -10,14 +10,14 @@ RSpec.describe Report::Student, type: :service do
   let(:student) { create(:student) }
   let(:student_other) { create(:student) }
 
-  let(:test) { create(:category, name: 'Test example', target_score: 6) }
-  let(:question) { create(:question, category: test) }
+  let(:test) { create(:test, name: 'Test example', target_score: 6) }
+  let(:question) { create(:question, test: test) }
 
-  let(:test_attempt) { create(:test_attempt, category: test, author: student) }
+  let(:test_attempt) { create(:test_attempt, test: test, author: student) }
   let!(:answer) { create(:static_question, :correct, question: question, test_attempt: test_attempt, author: student) }
   let!(:answer_wrong) { create(:static_question, :wrong, question: question, test_attempt: test_attempt, author: student) }
 
-  let!(:test_attempt_other) { create(:test_attempt, category: test, author: student_other) }
+  let!(:test_attempt_other) { create(:test_attempt, test: test, author: student_other) }
   let!(:answers_other) { create_list(:static_question, 5, :correct, question: question, test_attempt: test_attempt_other, author: student_other) }
 
   it 'sets user' do
