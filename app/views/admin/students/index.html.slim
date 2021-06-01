@@ -18,7 +18,7 @@
 
     tbody.table-body
     - @students.each do |student|
-      tr.table-row
+      tr.table-row class="student-#{student.id}"
         td.table-cell
           = student.id
         td.table-cell
@@ -32,6 +32,7 @@
         td.table-cell
           = student.group
         td.table-cell.space-x-4
+          = link_to 'Статистика', admin_reports_student_path(student), class: 'link'
           = link_to 'Редактировать', edit_admin_student_path(student), class: 'link'
           = link_to 'Удалить', admin_student_path(student), method: :delete, data: { confirm: 'Вы уверены?' }, class: 'link'
 

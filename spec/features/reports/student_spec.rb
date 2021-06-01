@@ -74,12 +74,22 @@ feature 'Student can view his report', "
   end
 
   describe 'Admin' do
-    background do
-      sign_in(admin)
-      visit admin_reports_student_path(student)
-    end
+    background { sign_in(admin) }
 
     scenario 'can view report of all students' do
+      visit admin_reports_student_path(student)
+
+      expect(page).to have_content 'John Smith'
+    end
+
+    scenario 'can view report through link on users page' do
+      visit admin_students_path
+
+      within ".student-#{student.id}" do
+        click_on 'Статистика'
+      end
+
+      expect(page).to have_content 'Отчёт по темам'
       expect(page).to have_content 'John Smith'
     end
   end
