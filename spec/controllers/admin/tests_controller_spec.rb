@@ -33,7 +33,7 @@ RSpec.describe Admin::TestsController, type: :controller do
     it 'redirects to index view' do
       delete :destroy, params: { id: category.id }
 
-      expect(response).to redirect_to admin_categories_path
+      expect(response).to redirect_to admin_tests_path
     end
   end
 
@@ -61,7 +61,7 @@ RSpec.describe Admin::TestsController, type: :controller do
     it 'redirects to index on success' do
       post :create, params: { test: attributes_for(:test) }
 
-      expect(response).to redirect_to admin_categories_path
+      expect(response).to redirect_to admin_tests_path
     end
 
     it 'rerenders new on failure' do
@@ -102,7 +102,7 @@ RSpec.describe Admin::TestsController, type: :controller do
     it 'redirects to index on success' do
       patch :update, params: { id: category.id, test: attributes_for(:test) }
 
-      expect(response).to redirect_to admin_categories_path
+      expect(response).to redirect_to admin_tests_path
     end
 
     it 'rerenders new on failure' do

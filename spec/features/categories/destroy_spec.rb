@@ -17,7 +17,7 @@ feature 'Admin can delete category', "
   background { sign_in(admin) }
 
   scenario 'Admin destroys category' do
-    visit admin_categories_path
+    visit admin_tests_path
 
     within 'table' do
       click_on 'Удалить'

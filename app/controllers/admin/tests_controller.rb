@@ -13,7 +13,7 @@ class Admin::TestsController < Admin::BaseController
     @category = Test.new(category_params)
 
     if @category.save
-      redirect_to admin_categories_path
+      redirect_to admin_tests_path
     else
       render :new
     end
@@ -27,7 +27,7 @@ class Admin::TestsController < Admin::BaseController
     @category = Test.find(params[:id])
 
     if @category.update(category_params)
-      redirect_to admin_categories_path
+      redirect_to admin_tests_path
     else
       render :edit
     end
@@ -36,7 +36,7 @@ class Admin::TestsController < Admin::BaseController
   def destroy
     Test.find_by(id: params[:id])&.destroy
 
-    redirect_to admin_categories_path
+    redirect_to admin_tests_path
   end
 
   private

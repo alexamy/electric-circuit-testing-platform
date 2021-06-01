@@ -16,14 +16,14 @@ feature 'Admin can view list of categories', "
 
   describe 'Admin views list of categories' do
     scenario 'can see list of categories' do
-      visit admin_categories_path
+      visit admin_tests_path
 
       categories_on_page = page.all('.category').map(&:text)
       expect(categories_on_page).to match_array categories.map(&:name)
     end
 
     scenario 'can see question count for category' do
-      visit admin_categories_path
+      visit admin_tests_path
 
       expect(page).to have_selector 'td', text: questions.size
     end

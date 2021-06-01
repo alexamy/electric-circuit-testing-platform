@@ -13,7 +13,7 @@ feature 'Admin can edit category', "
   background { sign_in(admin) }
 
   scenario 'Admin edits category' do
-    visit admin_categories_path
+    visit admin_tests_path
 
     click_on 'Редактировать'
     fill_in 'Название', with: 'TestCategory'
@@ -26,7 +26,7 @@ feature 'Admin can edit category', "
 
   describe 'errors' do
     scenario 'Admin edits category with name error' do
-      visit admin_categories_path
+      visit admin_tests_path
       click_on 'Редактировать'
 
       fill_in 'Название', with: ''
