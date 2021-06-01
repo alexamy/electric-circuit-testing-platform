@@ -7,7 +7,7 @@ feature 'User can start test', "
   As an authenticated user
   I would like to start testing
 " do
-  given(:category) { create(:category) }
+  given(:category) { create(:test) }
   given!(:question) { create(:question, category: category, completion_time: 65, formula_text: 'x=_test') }
   given(:user) { create(:user) }
 

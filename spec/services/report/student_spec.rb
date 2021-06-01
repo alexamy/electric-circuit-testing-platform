@@ -10,7 +10,7 @@ RSpec.describe Report::Student, type: :service do
   let(:student) { create(:student) }
   let(:student_other) { create(:student) }
 
-  let(:test) { create(:category, name: 'Test example', target_score: 6) }
+  let(:test) { create(:test, name: 'Test example', target_score: 6) }
   let(:question) { create(:question, category: test) }
 
   let(:test_attempt) { create(:test_attempt, category: test, author: student) }

@@ -7,7 +7,7 @@ RSpec.describe TestsController, type: :controller do
   let(:user) { create(:user) }
   let(:other_user) { create(:user) }
 
-  let(:categories) { create_list(:category, 5) }
+  let(:categories) { create_list(:test, 5) }
   let(:category) { categories.first }
 
   let!(:test_attempt) { create(:test_attempt, category: category, author: user) }

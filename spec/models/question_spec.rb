@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe Question, type: :model do
   let(:author) { create(:admin) }
-  let(:category) { create(:category) }
+  let(:category) { create(:test) }
   let(:model) { described_class }
 
   it_behaves_like 'authorable'
@@ -30,7 +30,7 @@ RSpec.describe Question, type: :model do
   end
 
   describe 'associations' do
-    it { is_expected.to belong_to :category }
+    it { is_expected.to belong_to :test }
     it { is_expected.to have_many(:formula_parameters).dependent(:destroy) }
     it { is_expected.to have_many(:static_questions).dependent(:nullify) }
 

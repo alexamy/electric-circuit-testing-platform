@@ -7,8 +7,8 @@ feature 'User can view list of categories', "
   As an unauthenticated user
   I would like to select a category
 " do
-  given!(:category) { create(:category, name: 'with questions') }
-  given!(:category_without_questions) { create(:category, name: 'without questions') }
+  given!(:category) { create(:test, name: 'with questions') }
+  given!(:category_without_questions) { create(:test, name: 'without questions') }
   given!(:questions) { create_list(:question, 3, category: category) }
 
   scenario 'User views list of categories' do

@@ -9,7 +9,7 @@ feature 'User can create question', "
 " do
   given(:user) { create(:user) }
   given(:admin) { create(:admin) }
-  given!(:category) { create(:category) }
+  given!(:category) { create(:test) }
 
   scenario 'Unauthenticated user cant create question' do
     visit new_admin_question_path

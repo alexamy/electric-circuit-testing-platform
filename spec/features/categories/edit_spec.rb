@@ -8,7 +8,7 @@ feature 'Admin can edit category', "
   I'd like to be able to edit category
 " do
   given(:admin) { create(:admin) }
-  given!(:category) { create(:category, name: 'Test', target_score: 10) }
+  given!(:category) { create(:test, name: 'Test', target_score: 10) }
 
   background { sign_in(admin) }
 

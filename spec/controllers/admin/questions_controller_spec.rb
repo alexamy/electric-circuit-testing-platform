@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe Admin::QuestionsController, type: :controller do
   let(:admin) { create(:admin) }
-  let(:category) { create(:category) }
+  let(:category) { create(:test) }
 
   before { login(admin) }
 

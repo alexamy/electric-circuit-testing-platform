@@ -2,13 +2,13 @@
 
 require 'rails_helper'
 
-RSpec.describe Category, type: :model do
+RSpec.describe Test, type: :model do
   let(:model) { described_class }
   let(:user) { create(:user) }
 
-  let(:category) { create(:category) }
-  let(:category_other) { create(:category) }
-  let(:category_empty) { create(:category) }
+  let(:category) { create(:test) }
+  let(:category_other) { create(:test) }
+  let(:category_empty) { create(:test) }
 
   let!(:question) { create(:question, category: category) }
   let!(:question_other) { create(:question, category: category_other) }

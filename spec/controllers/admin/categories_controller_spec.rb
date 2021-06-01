@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe Admin::CategoriesController, type: :controller do
   let(:admin) { create(:admin) }
-  let!(:categories) { create_list(:category, 5) }
+  let!(:categories) { create_list(:test, 5) }
   let(:category) { categories.first }
 
   before { login(admin) }

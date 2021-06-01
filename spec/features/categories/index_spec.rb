@@ -8,7 +8,7 @@ feature 'Admin can view list of categories', "
   I'd like to be able to view list of categories
 " do
   given(:admin) { create(:admin) }
-  given!(:categories) { create_list(:category, 5) }
+  given!(:categories) { create_list(:test, 5) }
   given(:category) { categories.first }
   given!(:questions) { create_list(:question, 3, category: category) }
 

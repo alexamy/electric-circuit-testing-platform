@@ -2,10 +2,10 @@
 
 FactoryBot.define do
   sequence :name do |n|
-    "Test category \##{n}"
+    "Test \##{n}"
   end
 
-  factory :category do
+  factory :test do
     name
     target_score { 2 }
 

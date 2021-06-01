@@ -3,7 +3,7 @@
 class TestAttempt < ApplicationRecord
   include Authorable
 
-  belongs_to :category
+  belongs_to :test
 
   has_many :static_questions, dependent: :destroy
 

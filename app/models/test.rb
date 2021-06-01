@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Category < ApplicationRecord
+class Test < ApplicationRecord
   CORRECT_SCORE = 1
   WRONG_SCORE = -2
 

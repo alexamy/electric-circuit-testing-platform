@@ -15,7 +15,7 @@ class Question < ApplicationRecord
   }
   validate :validates_formula_text
 
-  belongs_to :category
+  belongs_to :test
 
   has_many :formula_parameters, dependent: :destroy
   has_many :static_questions, dependent: :nullify

@@ -8,7 +8,7 @@ feature 'Admin can delete category', "
   I'd like to be able to delete category
 " do
   given(:admin) { create(:admin) }
-  given(:category) { create(:category) }
+  given(:category) { create(:test) }
 
   given(:question) { create(:question, category: category) }
   given(:test_attempt) { create(:test_attempt, author: admin, category: category) }
