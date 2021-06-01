@@ -24,6 +24,7 @@ module Report
     def answers
       @answers ||= test.questions.includes(:static_questions)
                        .map(&:static_questions).flatten
+                       .filter { |answer| answer.author == user }
     end
 
     def answer_counts
