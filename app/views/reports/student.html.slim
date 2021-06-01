@@ -1,5 +1,14 @@
-- if @user.student?
-  p | #{@user.first_name} #{@user.last_name}
+.block.mb-4
+  h1.mb-2.font-bold Отчёт по темам
+
+  p
+    | Email:
+    =< @user.email
+
+  - if @user.student?
+    p
+      | ФИО:
+      =< "#{@user.first_name} #{@user.last_name}"
 
 .table-wrapper
   table.table

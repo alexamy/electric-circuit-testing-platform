@@ -8,7 +8,7 @@ feature 'Student can view his report', "
   I'd like to be able to view report of all tests
 " do
   given(:admin) { create(:admin) }
-  given(:student) { create(:student, first_name: 'John', last_name: 'Smith') }
+  given(:student) { create(:student, email: 'js@example.com', first_name: 'John', last_name: 'Smith') }
 
   given!(:test) { create(:category, name: 'Test example', target_score: 6) }
   given!(:test_attempt) { create(:test_attempt, category: test, author: student) }
@@ -30,7 +30,11 @@ feature 'Student can view his report', "
       visit reports_student_path
     end
 
-    scenario 'can view his name' do
+    scenario 'can see his email' do
+      expect(page).to have_content 'js@example.com'
+    end
+
+    scenario 'can see his name' do
       expect(page).to have_content 'John Smith'
     end
 
@@ -69,6 +73,8 @@ feature 'Student can view his report', "
       visit admin_reports_student_path(student)
     end
 
-    scenario 'can view report of all students'
+    scenario 'can view report of all students' do
+      expect(page).to have_content 'John Smith'
+    end
   end
 end
