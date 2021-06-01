@@ -7,7 +7,7 @@ RSpec.describe TestsController, type: :controller do
   let(:user) { create(:user) }
   let(:other_user) { create(:user) }
 
-  let(:categories) { create_list(:test, 5) }
+  let!(:categories) { create_list(:test, 5) }
   let(:category) { categories.first }
 
   let!(:test_attempt) { create(:test_attempt, category: category, author: user) }
@@ -16,6 +16,18 @@ RSpec.describe TestsController, type: :controller do
   let!(:questions) { create_list(:question, 5, category: category) }
   let(:static_question) { create(:static_question, answer: 10, test_attempt: test_attempt, author: user) }
   let(:static_question_other) { create(:static_question, answer: 10, test_attempt: test_attempt, author: other_user) }
+
+  describe 'GET #index_with_questions' do
+    before { get :index_with_questions }
+
+    it 'load categories with questions' do
+      expect(assigns(:categories)).to match_array categories
+    end
+
+    it 'renders index view' do
+      expect(response).to render_template :index
+    end
+  end
 
   describe 'GET #start' do
     before { login(user) }
