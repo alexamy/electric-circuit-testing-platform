@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    resources :categories, shallow: true, except: %i[show]
+    resources :tests, shallow: true, except: %i[show]
     resources :students, shallow: true, except: %i[show]
     resources :groups, shallow: true, except: %i[show]
 

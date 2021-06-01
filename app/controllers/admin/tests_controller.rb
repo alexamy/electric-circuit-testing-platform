@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Admin::CategoriesController < Admin::BaseController
+class Admin::TestsController < Admin::BaseController
   def index
     @categories = Test.includes(:questions).all
   end
