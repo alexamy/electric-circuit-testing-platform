@@ -14,8 +14,8 @@ RSpec.describe TestsController, type: :controller do
   let(:other_test_attempt) { create(:attempt, test: test, author: other_user) }
 
   let!(:questions) { create_list(:question, 5, test: test) }
-  let(:static_question) { create(:static_question, answer: 10, test_attempt: test_attempt, author: user) }
-  let(:static_question_other) { create(:static_question, answer: 10, test_attempt: test_attempt, author: other_user) }
+  let(:static_question) { create(:static_question, answer: 10, attempt: test_attempt, author: user) }
+  let(:static_question_other) { create(:static_question, answer: 10, attempt: test_attempt, author: other_user) }
 
   describe 'GET #index_with_questions' do
     before { get :index }
@@ -35,7 +35,7 @@ RSpec.describe TestsController, type: :controller do
     it 'creates test attempt' do
       expect do
         get :start, params: { test_id: test.id }
-      end.to change(TestAttempt, :count).by 1
+      end.to change(Attempt, :count).by 1
     end
 
     it 'redirects to show view' do
@@ -46,7 +46,7 @@ RSpec.describe TestsController, type: :controller do
 
     it 'stops when get enough score' do
       10.times.each do
-        create(:static_question, :correct, question: questions.first, test_attempt: test_attempt, author: user)
+        create(:static_question, :correct, question: questions.first, attempt: test_attempt, author: user)
       end
       get :start, params: { test_id: test.id }
 
@@ -111,7 +111,7 @@ RSpec.describe TestsController, type: :controller do
 
       it 'stops when get enough score' do
         10.times.each do
-          create(:static_question, :correct, question: questions.first, test_attempt: test_attempt, author: user)
+          create(:static_question, :correct, question: questions.first, attempt: test_attempt, author: user)
         end
         get :next_question, params: { id: test_attempt.id }
 
