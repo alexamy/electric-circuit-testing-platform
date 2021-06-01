@@ -13,7 +13,7 @@ feature 'Admin can create category', "
 
   scenario 'Admin creates category' do
     visit admin_tests_path
-    click_on 'Создать новую'
+    click_on 'Создать'
 
     fill_in 'Название', with: 'TestCategory'
     fill_in 'Порог для зачета', with: '10'
@@ -25,7 +25,7 @@ feature 'Admin can create category', "
   describe 'errors' do
     scenario 'Admin creates category with name error' do
       visit admin_tests_path
-      click_on 'Создать новую'
+      click_on 'Создать'
 
       fill_in 'Название', with: ''
       fill_in 'Порог для зачета', with: '1'
@@ -36,7 +36,7 @@ feature 'Admin can create category', "
 
     scenario 'Admin creates category with completion time error' do
       visit admin_tests_path
-      click_on 'Создать новую'
+      click_on 'Создать'
 
       fill_in 'Название', with: 'TestCategory'
       fill_in 'Порог для зачета', with: '0'

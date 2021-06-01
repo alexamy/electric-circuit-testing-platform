@@ -4,10 +4,9 @@ ru:
       one: "%{count} секунда"
       few: "%{count} секунды"
       many: "%{count} секунд"
-  categories:
+  tests:
     index:
       start_warning: Каждый неотвеченный вопрос будет засчитан как неправильный. Вы уверены?
-  tests:
     start:
       already_passed: Тест уже пройден
     next_question:
@@ -34,7 +33,7 @@ ru:
   activerecord:
     models:
       user: Пользователь
-      category: Категория
+      test: Тест
       question: Вопрос
       formula_parameter: Параметр формулы
       group: Группа
@@ -48,7 +47,7 @@ ru:
         first_name: Имя
         middle_name: Отчество
         last_name: Фамилия
-      category:
+      test:
         name: Название
         target_score: Порог для зачета
       formula_parameter: &formula_parameter
@@ -60,8 +59,8 @@ ru:
       formula_parameters:
         <<: *formula_parameter
       question:
-        category: Категория
-        category_id: Категория
+        test: Тест
+        test_id: Тест
         formula_text: Формула
         text: Текст вопроса
         comment: Комментарий

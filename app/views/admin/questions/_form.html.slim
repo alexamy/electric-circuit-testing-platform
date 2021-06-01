@@ -1,7 +1,7 @@
 = form_with model: [:admin, @question] do |f|
   .form-group
-    = f.label :category_id, class: 'form-label'
-    = f.collection_select :category_id, Test.all, :id, :name, {}, class: 'form-input'
+    = f.label :test_id, class: 'form-label'
+    = f.collection_select :test_id, Test.all, :id, :name, {}, class: 'form-input'
 
   .form-group
     = f.label :text, class: 'form-label'

@@ -24,7 +24,7 @@
         td.table-cell
           = category.questions.count
         td.table-cell.space-x-4
-          = link_to 'Редактировать', edit_admin_category_path(category), class: 'link'
-          = link_to 'Удалить', admin_category_path(category), method: :delete, data: { confirm: 'Вы уверены?' }, class: 'link'
+          = link_to 'Редактировать', edit_admin_test_path(category), class: 'link'
+          = link_to 'Удалить', admin_test_path(category), method: :delete, data: { confirm: 'Вы уверены?' }, class: 'link'
 
 = link_to 'Создать', new_admin_test_path, class: 'button'
