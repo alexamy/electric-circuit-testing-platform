@@ -17,8 +17,8 @@ feature 'Student can view his report', "
   given!(:answer) { create(:static_question, :correct, question: question, test_attempt: test_attempt, author: student) }
   given!(:answer_wrong) { create(:static_question, :wrong, question: question, test_attempt: test_attempt, author: student) }
 
-  given!(:test_attempts_admin) { create_list(:test_attempt, 5, category: test, author: admin) }
-  given!(:answers_admin) { create_list(:static_question, 5, :correct, question: question, test_attempt: test_attempt, author: student) }
+  given!(:test_attempt_admin) { create(:test_attempt, category: test, author: admin) }
+  given!(:answers_admin) { create_list(:static_question, 5, :correct, question: question, test_attempt: test_attempt_admin, author: admin) }
 
   scenario 'Unauthenticated user cant view report' do
     visit reports_student_path

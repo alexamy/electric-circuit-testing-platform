@@ -2,15 +2,22 @@
 
 require 'rails_helper'
 
+# rubocop:disable RSpec/MultipleMemoizedHelpers
 RSpec.describe Report::Student, type: :service do
   let(:report) { described_class.new(student, test) }
 
   let(:student) { create(:student) }
+  let(:student_other) { create(:student) }
+
   let(:test) { create(:category, name: 'Test example', target_score: 6) }
-  let(:test_attempt) { create(:test_attempt, category: test, author: student) }
   let(:question) { create(:question, category: test) }
+
+  let(:test_attempt) { create(:test_attempt, category: test, author: student) }
   let!(:answer) { create(:static_question, :correct, question: question, test_attempt: test_attempt, author: student) }
   let!(:answer_wrong) { create(:static_question, :wrong, question: question, test_attempt: test_attempt, author: student) }
+
+  let!(:test_attempt_other) { create(:test_attempt, category: test, author: student_other) }
+  let!(:answers_other) { create_list(:static_question, 5, :correct, question: question, test_attempt: test_attempt_other, author: student_other) }
 
   it 'sets user' do
     expect(report.user).to eq student
@@ -44,3 +51,4 @@ RSpec.describe Report::Student, type: :service do
     expect(report.answers).to contain_exactly answer, answer_wrong
   end
 end
+# rubocop:enable RSpec/MultipleMemoizedHelpers
