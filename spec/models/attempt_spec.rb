@@ -19,7 +19,7 @@ RSpec.describe Attempt, type: :model do
       let!(:attempt_last) { create(:attempt, author: user) }
     end
 
-    it 'is true for latest test attempt' do
+    it 'is true for latest attempt' do
       expect(attempt).not_to be_latest
       expect(attempt_last).to be_latest
     end

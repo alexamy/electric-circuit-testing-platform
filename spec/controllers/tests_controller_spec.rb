@@ -32,7 +32,7 @@ RSpec.describe TestsController, type: :controller do
   describe 'GET #start' do
     before { login(user) }
 
-    it 'creates test attempt' do
+    it 'creates attempt' do
       expect do
         get :start, params: { test_id: test.id }
       end.to change(Attempt, :count).by 1
@@ -62,7 +62,7 @@ RSpec.describe TestsController, type: :controller do
     describe 'Authenticated user' do
       before { login(user) }
 
-      it 'sets current test attempt' do
+      it 'sets current attempt' do
         get :next_question, params: { id: attempt.id }
 
         expect(assigns(:attempt)).to eq attempt
@@ -80,13 +80,13 @@ RSpec.describe TestsController, type: :controller do
         expect(assigns(:score)).to be_zero
       end
 
-      it 'can proceed only on his test attempt' do
+      it 'can proceed only on his attempt' do
         expect do
           get :next_question, params: { id: other_attempt.id }
         end.not_to change(StaticQuestion, :count)
       end
 
-      it 'can proceed on the latest test attempt only' do
+      it 'can proceed on the latest attempt only' do
         Timecop.travel(5.minutes.from_now) do
           create(:attempt, test: test, author: user)
         end
