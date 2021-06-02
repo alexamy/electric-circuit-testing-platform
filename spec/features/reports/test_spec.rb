@@ -21,10 +21,22 @@ feature 'Student can view report for test', "
   given!(:attempt_admin) { create(:attempt, test: test, author: admin) }
   given!(:answers_admin) { create_list(:static_question, 5, :correct, question: question, attempt: attempt_admin, author: admin) }
 
-  scenario 'Unauthenticated user cant view report'
+  scenario 'Unauthenticated user cant view report' do
+    visit reports_student_path
+
+    expect(page).to have_content 'Вам необходимо войти в систему или зарегистрироваться'
+  end
 
   describe 'Student' do
-    scenario 'can go to report page through all tests report'
+    before { sign_in(student) }
+
+    scenario 'can go to report page through all tests report' do
+      visit reports_student_path
+
+      click_on 'Test example'
+
+      expect(page).to have_content 'Отчёт по тесту'
+    end
 
     scenario 'can see answers from all attempts'
 

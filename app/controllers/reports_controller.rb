@@ -8,6 +8,8 @@ class ReportsController < ApplicationController
     @reports = Test.all.map { |test| Report::Student.new(@user, test) }
   end
 
+  def test; end
+
   private
 
   # :reek:DuplicateMethodCall

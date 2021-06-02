@@ -55,4 +55,18 @@ RSpec.describe ReportsController, type: :controller do
       end
     end
   end
+
+  describe 'GET #test' do
+    describe 'Student' do
+      before { login(student) }
+
+      it 'render test template' do
+        get :test, params: { id: attempt.id }
+
+        expect(response).to render_template :test
+      end
+    end
+
+    describe 'Admin'
+  end
 end
