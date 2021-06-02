@@ -51,7 +51,11 @@ feature 'Student can view report for test', "
       expect(page).to have_content 'I = 1, R = 1'
     end
 
-    scenario 'can see right answer'
+    scenario 'can see correct answer' do
+      within '.correct-answer', match: :first do
+        expect(page).to have_content '1'
+      end
+    end
 
     scenario 'can see his answer'
 

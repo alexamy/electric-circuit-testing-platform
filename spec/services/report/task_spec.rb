@@ -29,11 +29,15 @@ RSpec.describe Report::Task, type: :service do
   end
 
   it 'sets arguments' do
-    expect(report.arguments).to eq({ 'I' => 1, 'R' => 1 })
+    expect(report.arguments).to eq answer.arguments
   end
 
   it 'sets arguments text' do
     expect(report.arguments_text).to eq 'I = 1, R = 1'
+  end
+
+  it 'sets correct answer' do
+    expect(report.correct_answer).to eq answer.answer
   end
 
   describe '.answers' do

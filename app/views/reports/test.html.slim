@@ -11,6 +11,8 @@
         | Схема
       th.table-header
         | Условия
+      th.table-header
+        | Правильный ответ
 
     tbody.table-body
       - @reports.each do |report|
@@ -21,3 +23,5 @@
             | Схема
           td.table-cell
             = report.arguments_text
+          td.table-cell.correct-answer
+            = report.correct_answer

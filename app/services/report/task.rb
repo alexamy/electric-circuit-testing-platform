@@ -25,5 +25,9 @@ module Report
     def arguments_text
       @arguments_text ||= arguments.map { |name, value| "#{name} = #{value}" }.join(', ')
     end
+
+    def correct_answer
+      @correct_answer ||= task.answer
+    end
   end
 end
