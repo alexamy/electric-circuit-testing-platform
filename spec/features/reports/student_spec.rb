@@ -44,7 +44,7 @@ feature 'Student can view his report', "
     end
 
     scenario 'can see his name' do
-      expect(page).to have_content 'John Smith'
+      expect(page).to have_content 'Smith John'
     end
 
     scenario 'can view report' do
@@ -94,7 +94,7 @@ feature 'Student can view his report', "
     scenario 'can view report of all students' do
       visit admin_reports_student_path(student)
 
-      expect(page).to have_content 'John Smith'
+      expect(page).to have_content 'Smith John'
     end
 
     scenario 'can view report through link on users page' do
@@ -105,7 +105,7 @@ feature 'Student can view his report', "
       end
 
       expect(page).to have_content 'Отчёт по темам'
-      expect(page).to have_content 'John Smith'
+      expect(page).to have_content 'Smith John'
     end
   end
 end

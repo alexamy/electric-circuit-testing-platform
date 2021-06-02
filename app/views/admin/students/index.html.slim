@@ -6,11 +6,11 @@
       th.table-header
         = User.human_attribute_name(:email)
       th.table-header
+        = User.human_attribute_name(:last_name)
+      th.table-header
         = User.human_attribute_name(:first_name)
       th.table-header
         = User.human_attribute_name(:middle_name)
-      th.table-header
-        = User.human_attribute_name(:last_name)
       th.table-header
         = User.human_attribute_name(:group)
       th.table-header
@@ -24,11 +24,11 @@
         td.table-cell
           = student.email
         td.table-cell
+          = student.last_name
+        td.table-cell
           = student.first_name
         td.table-cell
           = student.middle_name
-        td.table-cell
-          = student.last_name
         td.table-cell
           = student.group
         td.table-cell.space-x-4
