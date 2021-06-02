@@ -11,10 +11,9 @@
         | Схема
 
     tbody.table-body
-      - @report.answers.each do |answer|
+      - @reports.each do |report|
         tr.table-row.answer
           td.table-cell
-            = answer.question.text
-        tr.table-row.answer
+            = report.question.text
           td.table-cell
             | Схема

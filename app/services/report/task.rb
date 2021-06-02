@@ -13,5 +13,9 @@ module Report
           .map(&:static_questions).flatten
           .filter { |answer| answer.author == user }
     end
+
+    def question
+      @question ||= task.question
+    end
   end
 end

@@ -24,9 +24,13 @@ RSpec.describe Report::Task, type: :service do
     expect(report.task).to eq answer
   end
 
+  it 'sets question' do
+    expect(report.question).to eq question
+  end
+
   describe '.answers' do
     it 'returns answers' do
-      expect(Report::Task.answers(student, test)).to contain_exactly answer, answer_wrong
+      expect(described_class.answers(student, test)).to contain_exactly answer, answer_wrong
     end
   end
 end
