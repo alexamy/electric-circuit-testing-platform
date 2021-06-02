@@ -18,7 +18,7 @@ class TestsController < ApplicationController
   end
 
   def next_question
-    return unless find_attempt
+    head :forbidden and return unless find_attempt
 
     @test = @attempt.test
     redirect_to tests_path, notice: t('.passed') and return if @test.passed?(current_user)

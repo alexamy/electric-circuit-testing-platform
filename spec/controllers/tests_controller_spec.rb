@@ -91,6 +91,16 @@ RSpec.describe TestsController, type: :controller do
           create(:attempt, test: test, author: user)
         end
 
+        get :next_question, params: { id: attempt.id }
+
+        expect(response).to have_http_status :forbidden
+      end
+
+      it 'dont create new attempts' do
+        Timecop.travel(5.minutes.from_now) do
+          create(:attempt, test: test, author: user)
+        end
+
         expect do
           get :next_question, params: { id: attempt.id }
         end.not_to change(StaticQuestion, :count)
