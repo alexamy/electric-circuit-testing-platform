@@ -14,5 +14,9 @@ module Report
                        .map(&:static_questions).flatten
                        .filter { |answer| answer.author == user }
     end
+
+    def conidition
+
+    end
   end
 end

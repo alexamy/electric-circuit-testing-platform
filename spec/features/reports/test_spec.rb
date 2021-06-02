@@ -47,7 +47,9 @@ feature 'Student can view report for test', "
       expect(page).to have_content 'Sample question'
     end
 
-    scenario 'can see generated task conditions'
+    xscenario 'can see generated task conditions' do
+      expect(page).to have_content 'I = 1, R = 1'
+    end
 
     scenario 'can see right answer'
 

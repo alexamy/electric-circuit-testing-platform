@@ -7,9 +7,14 @@
     thead.table-head
       th.table-header
         = Question.human_attribute_name(:text)
+      th.table-header
+        | Схема
 
     tbody.table-body
       - @report.answers.each do |answer|
         tr.table-row.answer
           td.table-cell
             = answer.question.text
+        tr.table-row.answer
+          td.table-cell
+            | Схема
