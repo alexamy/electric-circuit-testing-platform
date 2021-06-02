@@ -63,7 +63,19 @@ feature 'Student can view report for test', "
   end
 
   describe 'Admin' do
-    scenario 'can view report of a specific student'
+    before { sign_in(admin) }
+
+    scenario 'can view report of a specific student' do
+      visit admin_students_path
+
+      within ".student-#{student.id}" do
+        click_on 'Статистика'
+      end
+
+      click_on 'Test example'
+
+      expect(page).to have_content 'Smith John'
+    end
 
     scenario 'can delete static question'
   end

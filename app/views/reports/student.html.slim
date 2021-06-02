@@ -22,7 +22,7 @@
     - @reports.each do |report|
       tr.table-row class="test-#{report.id}"
         td.table-cell
-          = link_to report.name, reports_test_path(report.id), class: 'link'
+          = link_to report.name, current_user.admin? ? admin_reports_test_path(@user, report.id) : reports_test_path(report.id), class: 'link'
         td.table-cell.target-score
           = report.target_score
         td.table-cell.score
