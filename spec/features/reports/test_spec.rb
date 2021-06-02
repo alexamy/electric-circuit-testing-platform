@@ -12,7 +12,7 @@ feature 'Student can view report for test', "
 
   given!(:test) { create(:test, name: 'Test example', target_score: 6) }
   given!(:test_empty) { create(:test, name: 'Test example empty') }
-  given!(:question) { create(:question, test: test) }
+  given!(:question) { create(:question, text: 'Sample question', test: test) }
 
   given!(:attempt) { create(:attempt, test: test, author: student) }
   given!(:answer) { create(:static_question, :correct, question: question, attempt: attempt, author: student) }
@@ -43,7 +43,9 @@ feature 'Student can view report for test', "
       expect(all('tr.answer').count).to eq 2
     end
 
-    scenario 'can see task name'
+    scenario 'can see question text' do
+      expect(page).to have_content 'Sample question'
+    end
 
     scenario 'can see task creation date and time'
 
