@@ -12,7 +12,7 @@ feature 'User can start test', "
   given(:user) { create(:user) }
 
   scenario 'Unauthenticated user tries to start testing' do
-    visit start_test_attempt_path(test)
+    visit start_attempt_path(test)
 
     expect(page).to have_content 'Вам необходимо войти в систему'
   end

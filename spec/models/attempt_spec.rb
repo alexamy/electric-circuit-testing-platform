@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe TestAttempt, type: :model do
+RSpec.describe Attempt, type: :model do
   it_behaves_like 'authorable'
 
   describe 'associations' do
@@ -13,23 +13,23 @@ RSpec.describe TestAttempt, type: :model do
   describe '#latest?' do
     let(:user) { create(:user) }
     let(:other_user) { create(:user) }
-    let!(:test_attempt) { create(:test_attempt, author: user) }
+    let!(:attempt) { create(:attempt, author: user) }
 
     Timecop.travel(5.minutes.from_now) do
-      let!(:test_attempt_last) { create(:test_attempt, author: user) }
+      let!(:attempt_last) { create(:attempt, author: user) }
     end
 
-    it 'is true for latest test attempt' do
-      expect(test_attempt).not_to be_latest
-      expect(test_attempt_last).to be_latest
+    it 'is true for latest attempt' do
+      expect(attempt).not_to be_latest
+      expect(attempt_last).to be_latest
     end
 
     it 'only checks attempts authored by user' do
       Timecop.travel(10.minutes.from_now) do
-        create(:test_attempt, author: other_user)
+        create(:attempt, author: other_user)
       end
 
-      expect(test_attempt_last).to be_latest
+      expect(attempt_last).to be_latest
     end
   end
 end
