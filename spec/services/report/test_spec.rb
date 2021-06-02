@@ -2,6 +2,8 @@
 
 require 'rails_helper'
 
+# rubocop:disable RSpec/MultipleMemoizedHelpers
+# rubocop:disable RSpec/LetSetup
 RSpec.describe Report::Test, type: :service do
   let(:report) { described_class.new(student, test) }
 
@@ -30,3 +32,5 @@ RSpec.describe Report::Test, type: :service do
     expect(report.answers).to contain_exactly answer, answer_wrong
   end
 end
+# rubocop:enable RSpec/MultipleMemoizedHelpers
+# rubocop:enable RSpec/LetSetup
