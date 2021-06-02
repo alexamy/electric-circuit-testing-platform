@@ -28,6 +28,14 @@ RSpec.describe Report::Task, type: :service do
     expect(report.question).to eq question
   end
 
+  it 'sets arguments' do
+    expect(report.arguments).to eq({ 'I' => 1, 'R' => 1 })
+  end
+
+  it 'sets arguments text' do
+    expect(report.arguments_text).to eq 'I = 1, R = 1'
+  end
+
   describe '.answers' do
     it 'returns answers' do
       expect(described_class.answers(student, test)).to contain_exactly answer, answer_wrong

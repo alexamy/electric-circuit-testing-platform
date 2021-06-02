@@ -9,6 +9,8 @@
         = Question.human_attribute_name(:text)
       th.table-header
         | Схема
+      th.table-header
+        | Условия
 
     tbody.table-body
       - @reports.each do |report|
@@ -17,3 +19,5 @@
             = report.question.text
           td.table-cell
             | Схема
+          td.table-cell
+            = report.arguments_text

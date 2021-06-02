@@ -17,5 +17,13 @@ module Report
     def question
       @question ||= task.question
     end
+
+    def arguments
+      @arguments ||= task.arguments
+    end
+
+    def arguments_text
+      @arguments_text ||= arguments.map { |name, value| "#{name} = #{value}" }.join(', ')
+    end
   end
 end
