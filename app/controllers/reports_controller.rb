@@ -11,7 +11,7 @@ class ReportsController < ApplicationController
   def test
     head :no_content and return unless find_test
 
-    @report = Report::Test.new(@user, @test)
+    @reports = Report::Task.answers(@user, @test).map { |answer| Report::Task.new(answer) }
   end
 
   private

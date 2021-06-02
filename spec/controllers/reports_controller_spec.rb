@@ -68,7 +68,7 @@ RSpec.describe ReportsController, type: :controller do
       end
 
       it 'sets report' do
-        expect(assigns(:report)).to be_an_instance_of Report::Test
+        expect(assigns(:reports)).to all be_an_instance_of Report::Task
       end
 
       it 'sets test' do

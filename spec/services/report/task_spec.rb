@@ -4,8 +4,8 @@ require 'rails_helper'
 
 # rubocop:disable RSpec/MultipleMemoizedHelpers
 # rubocop:disable RSpec/LetSetup
-RSpec.describe Report::Test, type: :service do
-  let(:report) { described_class.new(student, test) }
+RSpec.describe Report::Task, type: :service do
+  let(:report) { described_class.new(answer) }
 
   let(:student) { create(:student) }
   let(:student_other) { create(:student) }
@@ -20,16 +20,14 @@ RSpec.describe Report::Test, type: :service do
   let!(:attempt_other) { create(:attempt, test: test, author: student_other) }
   let!(:answers_other) { create_list(:static_question, 5, :correct, question: question, attempt: attempt_other, author: student_other) }
 
-  it 'sets user' do
-    expect(report.user).to eq student
+  it 'sets task' do
+    expect(report.task).to eq answer
   end
 
-  it 'sets test' do
-    expect(report.test).to eq test
-  end
-
-  it 'sets answers' do
-    expect(report.answers).to contain_exactly answer, answer_wrong
+  describe '.answers' do
+    it 'returns answers' do
+      expect(Report::Task.answers(student, test)).to contain_exactly answer, answer_wrong
+    end
   end
 end
 # rubocop:enable RSpec/MultipleMemoizedHelpers
