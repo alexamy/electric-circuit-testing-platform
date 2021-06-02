@@ -15,7 +15,7 @@ Rails.application.routes.draw do
 
   scope :reports, controller: 'reports', as: 'reports' do
     get 'student'
-    get 'test/:id', action: 'test', as: 'test'
+    get 'test/:test_id', action: 'test', as: 'test'
   end
 
   namespace :admin do

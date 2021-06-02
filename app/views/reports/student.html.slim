@@ -1,14 +1,6 @@
 .block.mb-4
   h1.mb-2.font-bold Отчёт по темам
-
-  p
-    | Email:
-    =< @user.email
-
-  - if @user.student?
-    p
-      | ФИО:
-      =< "#{@user.last_name} #{@user.first_name}"
+  = render partial: 'account_info'
 
 .table-wrapper
   table.table

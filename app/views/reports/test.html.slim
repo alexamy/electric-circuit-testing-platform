@@ -1,2 +1,13 @@
 .block.mb-4
   h1.mb-2.font-bold Отчёт по тесту
+  = render partial: 'account_info'
+
+.table-wrapper
+  table.table
+    thead.table-head
+      th.table-header
+
+    tbody.table-body
+      - @report.answers.each do |answer|
+        tr.table-row.answer
+          td.table-cell

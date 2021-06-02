@@ -2,13 +2,17 @@
 
 class ReportsController < ApplicationController
   before_action :authenticate_user!
+  before_action :find_user
 
   def student
-    find_user
     @reports = Test.all.map { |test| Report::Student.new(@user, test) }
   end
 
-  def test; end
+  def test
+    head :no_content and return unless find_test
+
+    @report = Report::Test.new(@user, @test)
+  end
 
   private
 
@@ -18,5 +22,9 @@ class ReportsController < ApplicationController
     return unless params[:id]
 
     @user = User.find(params[:id]) if current_user.admin?
+  end
+
+  def find_test
+    @test = Test.find_by(id: params[:test_id])
   end
 end

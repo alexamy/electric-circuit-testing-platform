@@ -28,17 +28,20 @@ feature 'Student can view report for test', "
   end
 
   describe 'Student' do
-    before { sign_in(student) }
+    before do
+      sign_in(student)
 
-    scenario 'can go to report page through all tests report' do
       visit reports_student_path
-
       click_on 'Test example'
+    end
 
+    scenario 'can open report page' do
       expect(page).to have_content 'Отчёт по тесту'
     end
 
-    scenario 'can see answers from all attempts'
+    scenario 'can see answers from all attempts' do
+      expect(all('tr.answer').count).to eq 2
+    end
 
     scenario 'can see task name'
 

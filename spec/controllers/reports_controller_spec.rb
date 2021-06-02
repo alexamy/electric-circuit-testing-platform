@@ -58,15 +58,35 @@ RSpec.describe ReportsController, type: :controller do
 
   describe 'GET #test' do
     describe 'Student' do
-      before { login(student) }
+      before do
+        login(student)
+        get :test, params: { test_id: test.id }
+      end
+
+      it 'sets current user' do
+        expect(assigns(:user)).to eq student
+      end
+
+      it 'sets report' do
+        expect(assigns(:report)).to be_an_instance_of Report::Test
+      end
+
+      it 'sets test' do
+        expect(assigns(:test)).to eq test
+      end
 
       it 'render test template' do
-        get :test, params: { id: attempt.id }
-
         expect(response).to render_template :test
       end
     end
 
     describe 'Admin'
+
+    it 'returns no content when test isnt found' do
+      login(student)
+      get :test, params: { test_id: 0 }
+
+      expect(response).to have_http_status :no_content
+    end
   end
 end
