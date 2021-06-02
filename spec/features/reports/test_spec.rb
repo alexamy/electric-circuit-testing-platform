@@ -47,18 +47,24 @@ feature 'Student can view report for test', "
       expect(page).to have_content 'Sample question'
     end
 
+    scenario 'can see generated task conditions'
+
+    scenario 'can see right answer'
+
+    scenario 'can see his answer'
+
+    scenario 'can see if his answer is correct'
+
     scenario 'can see task creation date and time'
 
     scenario 'can see answer date and time'
 
-    scenario 'can see generated task conditions'
-
-    scenario 'can see his answer'
-
-    scenario 'can see right answer'
+    scenario 'can see scheme in popup window'
   end
 
   describe 'Admin' do
     scenario 'can view report of a specific student'
+
+    scenario 'can delete static question'
   end
 end
