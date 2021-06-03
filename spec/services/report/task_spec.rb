@@ -87,8 +87,16 @@ RSpec.describe Report::Task, type: :service do
   end
 
   describe '.answers' do
+    let(:report_answers) { described_class.answers(student, test) }
+
     it 'returns answers' do
-      expect(described_class.answers(student, test)).to eq [answer, answer_wrong, answer_empty]
+      expect(report_answers).to eq [answer, answer_wrong, answer_empty]
+    end
+
+    it 'return only expired answers' do
+      Timecop.freeze(Time.zone.local(2021, 1, 31, 12, 19, 2)) do
+        expect(report_answers).not_to include answer_empty
+      end
     end
   end
 end

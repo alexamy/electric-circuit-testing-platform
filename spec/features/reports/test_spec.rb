@@ -69,7 +69,6 @@ feature 'Student can view report for test', "
       # 3 seconds after task creation
       Timecop.freeze(Time.zone.local(2021, 1, 31, 12, 19, 2)) do
         expect(page).not_to have_content '12:18:59 31.01.21'
-        expect(all('tr.answer').count).to eq 2
       end
     end
 

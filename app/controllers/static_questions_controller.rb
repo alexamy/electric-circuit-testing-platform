@@ -20,6 +20,7 @@ class StaticQuestionsController < ApplicationController
     @static_question
   end
 
+  # TODO: move to model
   def time_exceeded?
     end_time = @static_question.created_at + @static_question.question.completion_time
     Time.current > end_time
