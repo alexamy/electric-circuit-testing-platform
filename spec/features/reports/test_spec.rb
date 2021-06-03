@@ -52,12 +52,16 @@ feature 'Student can view report for test', "
     end
 
     scenario 'can see correct answer' do
-      within '.correct-answer', match: :first do
+      within ".answer-#{answer.id} .correct-answer" do
         expect(page).to have_content '1'
       end
     end
 
-    scenario 'can see his answer'
+    scenario 'can see his answer' do
+      within ".answer-#{answer_wrong.id} .user-answer" do
+        expect(page).to have_content '2'
+      end
+    end
 
     scenario 'can see if his answer is correct'
 

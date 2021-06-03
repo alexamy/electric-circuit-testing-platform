@@ -14,6 +14,10 @@ module Report
           .filter { |answer| answer.author == user }
     end
 
+    def id
+      @id ||= task.id
+    end
+
     def question
       @question ||= task.question
     end
@@ -28,6 +32,10 @@ module Report
 
     def correct_answer
       @correct_answer ||= task.answer
+    end
+
+    def user_answer
+      @user_answer ||= task.user_answer
     end
   end
 end

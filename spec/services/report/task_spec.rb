@@ -24,6 +24,10 @@ RSpec.describe Report::Task, type: :service do
     expect(report.task).to eq answer
   end
 
+  it 'sets id' do
+    expect(report.id).to eq answer.id
+  end
+
   it 'sets question' do
     expect(report.question).to eq question
   end
@@ -38,6 +42,10 @@ RSpec.describe Report::Task, type: :service do
 
   it 'sets correct answer' do
     expect(report.correct_answer).to eq answer.answer
+  end
+
+  it 'sets user answer' do
+    expect(report.user_answer).to eq answer.user_answer
   end
 
   describe '.answers' do
