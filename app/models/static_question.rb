@@ -13,6 +13,10 @@ class StaticQuestion < ApplicationRecord
     user_answer == answer
   end
 
+  def expired?
+    Time.current > created_at + question.completion_time
+  end
+
   def self.new_from(question)
     solution = ParticularSolutionGenerator.call(question)
     new(question: question, **solution)
