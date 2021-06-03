@@ -27,7 +27,7 @@ module Report
     end
 
     def arguments_text
-      @arguments_text ||= arguments.map { |name, value| "#{name} = #{value}" }.join(', ')
+      @arguments_text ||= arguments.map { |name, value| "#{name} = #{value}" }.join("\n")
     end
 
     def correct_answer

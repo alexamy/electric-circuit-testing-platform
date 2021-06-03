@@ -49,7 +49,7 @@ feature 'Student can view report for test', "
     end
 
     scenario 'can see generated task arguments' do
-      expect(page).to have_content 'I = 1, R = 1'
+      expect(page).to have_content 'I = 1 R = 1'
     end
 
     scenario 'can see correct answer' do
