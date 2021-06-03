@@ -65,7 +65,7 @@ feature 'Student can view report for test', "
       ]
     end
 
-    scenario 'see only tasks with expired answer time' do
+    scenario 'can see only tasks with expired answer time' do
       # 3 seconds after task creation
       Timecop.freeze(Time.zone.local(2021, 1, 31, 12, 19, 2)) do
         visit current_path
@@ -73,6 +73,8 @@ feature 'Student can view report for test', "
         expect(page).not_to have_content '12:18:59 31.01.21'
       end
     end
+
+    scenario 'can see unexpired tasks with answer'
 
     describe 'in each task' do
       scenario 'can see question text' do
