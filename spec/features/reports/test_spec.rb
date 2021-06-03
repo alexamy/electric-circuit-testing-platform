@@ -125,17 +125,15 @@ feature 'Student can view report for test', "
   end
 
   describe 'Admin' do
-    before { sign_in(admin) }
-
-    scenario 'can view report of a specific student' do
+    before do
+      sign_in(admin)
       visit admin_students_path
 
-      within ".student-#{student.id}" do
-        click_on 'Статистика'
-      end
-
+      within(".student-#{student.id}") { click_on 'Статистика' }
       click_on 'Test example'
+    end
 
+    scenario 'can view report of a specific student' do
       expect(page).to have_content 'Smith John'
     end
 
