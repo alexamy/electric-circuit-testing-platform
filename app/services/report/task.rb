@@ -51,6 +51,10 @@ module Report
       @answered_at ||= task.updated_at
     end
 
+    def answer_duration
+      @answer_duration ||= user_answer ? (answered_at - created_at).seconds : nil
+    end
+
     def scheme
       @scheme ||= task.question.scheme
     end

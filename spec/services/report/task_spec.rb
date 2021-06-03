@@ -17,13 +17,16 @@ RSpec.describe Report::Task, type: :service do
 
   let!(:answer) do
     create(:static_question, :correct, question: question, attempt: attempt, author: student,
-                                       created_at: Time.zone.local(2021, 1, 31, 12, 15, 0))
+                                       created_at: Time.zone.local(2021, 1, 31, 12, 15, 0),
+                                       updated_at: Time.zone.local(2021, 1, 31, 12, 16, 0))
   end
 
   let!(:answer_wrong) do
     create(:static_question, :wrong, question: question, attempt: attempt, author: student,
                                      created_at: Time.zone.local(2021, 1, 31, 12, 14, 0))
   end
+
+  let!(:answer_empty) { create(:static_question, question: question, attempt: attempt, author: student) }
 
   let!(:attempt_other) { create(:attempt, test: test, author: student_other) }
   let!(:answers_other) { create_list(:static_question, 5, :correct, question: question, attempt: attempt_other, author: student_other) }
@@ -66,6 +69,14 @@ RSpec.describe Report::Task, type: :service do
 
   it 'sets answered at' do
     expect(report.answered_at).to eq answer.updated_at
+  end
+
+  it 'sets answer duration' do
+    expect(report.answer_duration).to eq 60
+  end
+
+  it 'sets answer duration to nil when has no answer' do
+    expect(described_class.new(answer_empty).answer_duration).to be_nil
   end
 
   it 'sets scheme' do
