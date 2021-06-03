@@ -14,8 +14,16 @@ RSpec.describe Report::Task, type: :service do
   let(:question) { create(:question, test: test) }
 
   let(:attempt) { create(:attempt, test: test, author: student) }
-  let!(:answer) { create(:static_question, :correct, question: question, attempt: attempt, author: student) }
-  let!(:answer_wrong) { create(:static_question, :wrong, question: question, attempt: attempt, author: student) }
+
+  let!(:answer) do
+    create(:static_question, :correct, question: question, attempt: attempt, author: student,
+                                       created_at: Time.zone.local(2021, 1, 31, 12, 15, 0))
+  end
+
+  let!(:answer_wrong) do
+    create(:static_question, :wrong, question: question, attempt: attempt, author: student,
+                                     created_at: Time.zone.local(2021, 1, 31, 12, 14, 0))
+  end
 
   let!(:attempt_other) { create(:attempt, test: test, author: student_other) }
   let!(:answers_other) { create_list(:static_question, 5, :correct, question: question, attempt: attempt_other, author: student_other) }
@@ -62,7 +70,7 @@ RSpec.describe Report::Task, type: :service do
 
   describe '.answers' do
     it 'returns answers' do
-      expect(described_class.answers(student, test)).to contain_exactly answer, answer_wrong
+      expect(described_class.answers(student, test)).to eq [answer_wrong, answer]
     end
   end
 end

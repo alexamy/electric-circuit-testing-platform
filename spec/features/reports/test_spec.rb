@@ -15,8 +15,17 @@ feature 'Student can view report for test', "
   given!(:question) { create(:question, text: 'Sample question', test: test) }
 
   given!(:attempt) { create(:attempt, test: test, author: student) }
-  given!(:answer_wrong) { create(:static_question, :wrong, question: question, attempt: attempt, author: student) }
-  given!(:answer_empty) { create(:static_question, question: question, attempt: attempt, author: student) }
+
+  given!(:answer_wrong) do
+    create(:static_question, :wrong, question: question, attempt: attempt, author: student,
+                                     created_at: Time.zone.local(2021, 1, 31, 12, 18, 0))
+  end
+
+  given!(:answer_empty) do
+    create(:static_question, question: question, attempt: attempt, author: student,
+                             created_at: Time.zone.local(2021, 1, 31, 12, 18, 59))
+  end
+
   given!(:answer) do
     create(:static_question, :correct, question: question, attempt: attempt, author: student,
                                        created_at: Time.zone.local(2021, 1, 31, 12, 15, 0),
@@ -100,7 +109,13 @@ feature 'Student can view report for test', "
       end
     end
 
-    scenario 'can see all answers ordered by creation date'
+    scenario 'can see all answers ordered by creation date' do
+      expect(all('.created-at').map(&:text)).to eq [
+        '12:15:00 31.01.21',
+        '12:18:00 31.01.21',
+        '12:18:59 31.01.21'
+      ]
+    end
 
     scenario 'can see scheme in popup window'
   end
