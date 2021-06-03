@@ -18,7 +18,7 @@
 
     tbody.table-body
       - @reports.each do |report|
-        tr.table-row class="answer-#{report.id}"
+        tr.table-row.answer class="answer-#{report.id}"
           td.table-cell
             = report.question.text
           td.table-cell
@@ -28,4 +28,4 @@
           td.table-cell.correct-answer
             = report.correct_answer
           td.table-cell.user-answer
-            = report.user_answer
+            = report.user_answer || '-'

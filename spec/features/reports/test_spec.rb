@@ -17,6 +17,7 @@ feature 'Student can view report for test', "
   given!(:attempt) { create(:attempt, test: test, author: student) }
   given!(:answer) { create(:static_question, :correct, question: question, attempt: attempt, author: student) }
   given!(:answer_wrong) { create(:static_question, :wrong, question: question, attempt: attempt, author: student) }
+  given!(:answer_empty) { create(:static_question, question: question, attempt: attempt, author: student) }
 
   given!(:attempt_admin) { create(:attempt, test: test, author: admin) }
   given!(:answers_admin) { create_list(:static_question, 5, :correct, question: question, attempt: attempt_admin, author: admin) }
@@ -40,7 +41,7 @@ feature 'Student can view report for test', "
     end
 
     scenario 'can see answers from all attempts' do
-      expect(all('tr.answer').count).to eq 2
+      expect(all('tr.answer').count).to eq 3
     end
 
     scenario 'can see question text' do
@@ -60,6 +61,12 @@ feature 'Student can view report for test', "
     scenario 'can see his answer' do
       within ".answer-#{answer_wrong.id} .user-answer" do
         expect(page).to have_content '2'
+      end
+    end
+
+    scenario 'can see hypnen as no answer' do
+      within ".answer-#{answer_empty.id} .user-answer" do
+        expect(page).to have_content '-'
       end
     end
 
