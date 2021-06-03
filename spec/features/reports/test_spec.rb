@@ -19,8 +19,8 @@ feature 'Student can view report for test', "
   given!(:answer_empty) { create(:static_question, question: question, attempt: attempt, author: student) }
   given!(:answer) do
     create(:static_question, :correct, question: question, attempt: attempt, author: student,
-                                       created_at: Time.zone.local(2021, 1, 1, 12, 15, 0),
-                                       updated_at: Time.zone.local(2021, 1, 1, 12, 16, 15))
+                                       created_at: Time.zone.local(2021, 1, 31, 12, 15, 0),
+                                       updated_at: Time.zone.local(2021, 1, 31, 12, 16, 15))
   end
 
   given!(:attempt_admin) { create(:attempt, test: test, author: admin) }
@@ -84,7 +84,7 @@ feature 'Student can view report for test', "
 
     scenario 'can see task creation datetime' do
       within ".answer-#{answer.id} .created-at" do
-        expect(page).to have_content '12:15:00 01/01/21'
+        expect(page).to have_content '12:15:00 31.01.21'
       end
     end
 

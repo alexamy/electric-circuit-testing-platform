@@ -34,6 +34,6 @@
           td.table-cell.user-answer
             = report.user_answer || '-'
           td.table-cell.created-at
-            = report.created_at.strftime('%T %D')
+            = report.created_at.strftime('%T %d.%m.%y')
           td.table-cell.answer-duration
             = report.user_answer ? seconds_to_minsec((report.answered_at - report.created_at).seconds) : '-'
