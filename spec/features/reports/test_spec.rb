@@ -78,9 +78,9 @@ feature 'Student can view report for test', "
       expect(page).to have_css ".answer-#{answer_wrong.id}.bg-red-100"
     end
 
-    scenario 'can see task creation date and time'
+    scenario 'can see task creation datetime'
 
-    scenario 'can see answer date and time'
+    scenario 'can see answer duration'
 
     scenario 'can see scheme in popup window'
   end

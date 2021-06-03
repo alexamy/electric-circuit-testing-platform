@@ -52,6 +52,14 @@ RSpec.describe Report::Task, type: :service do
     expect(report.correct?).to eq answer.correct?
   end
 
+  it 'sets created at' do
+    expect(report.created_at).to eq answer.created_at
+  end
+
+  it 'sets answered at' do
+    expect(report.answered_at).to eq answer.updated_at
+  end
+
   describe '.answers' do
     it 'returns answers' do
       expect(described_class.answers(student, test)).to contain_exactly answer, answer_wrong

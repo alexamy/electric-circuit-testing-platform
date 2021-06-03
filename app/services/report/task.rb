@@ -41,5 +41,13 @@ module Report
     def correct?
       @correct ||= task.correct?
     end
+
+    def created_at
+      @created_at ||= task.created_at
+    end
+
+    def answered_at
+      @answered_at ||= task.updated_at
+    end
   end
 end

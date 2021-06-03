@@ -15,6 +15,10 @@
         | Правильный ответ
       th.table-header
         | Ответ
+      th.table-header
+        | Время ответа
+      th.table-header
+        | Длительность
 
     tbody.table-body
       - @reports.each do |report|
@@ -29,3 +33,7 @@
             = report.correct_answer
           td.table-cell.user-answer
             = report.user_answer || '-'
+          td.table-cell.user-answer
+            = report.created_at
+          td.table-cell.user-answer
+            = report.answered_at
