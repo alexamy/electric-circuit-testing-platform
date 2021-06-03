@@ -37,5 +37,9 @@ module Report
     def user_answer
       @user_answer ||= task.user_answer
     end
+
+    def correct?
+      @correct ||= task.correct?
+    end
   end
 end

@@ -48,6 +48,10 @@ RSpec.describe Report::Task, type: :service do
     expect(report.user_answer).to eq answer.user_answer
   end
 
+  it 'sets correct flag' do
+    expect(report.correct?).to eq answer.correct?
+  end
+
   describe '.answers' do
     it 'returns answers' do
       expect(described_class.answers(student, test)).to contain_exactly answer, answer_wrong

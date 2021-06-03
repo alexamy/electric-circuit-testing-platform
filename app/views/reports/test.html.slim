@@ -18,7 +18,7 @@
 
     tbody.table-body
       - @reports.each do |report|
-        tr.table-row.answer class="answer-#{report.id}"
+        tr.table-row.answer class="answer-#{report.id} #{report.correct? ? 'bg-green-100' : 'bg-red-100'}"
           td.table-cell
             = report.question.text
           td.table-cell

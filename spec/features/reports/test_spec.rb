@@ -70,7 +70,13 @@ feature 'Student can view report for test', "
       end
     end
 
-    scenario 'can see if his answer is correct'
+    scenario 'can see if his answer is correct' do
+      expect(page).to have_css ".answer-#{answer.id}.bg-green-100"
+    end
+
+    scenario 'can see if his answer is wrong' do
+      expect(page).to have_css ".answer-#{answer_wrong.id}.bg-red-100"
+    end
 
     scenario 'can see task creation date and time'
 
