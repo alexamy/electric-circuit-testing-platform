@@ -100,6 +100,8 @@ feature 'Student can view report for test', "
       end
     end
 
+    scenario 'can see all answers ordered by creation date'
+
     scenario 'can see scheme in popup window'
   end
 
