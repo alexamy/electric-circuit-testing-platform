@@ -15,9 +15,13 @@ feature 'Student can view report for test', "
   given!(:question) { create(:question, text: 'Sample question', test: test) }
 
   given!(:attempt) { create(:attempt, test: test, author: student) }
-  given!(:answer) { create(:static_question, :correct, question: question, attempt: attempt, author: student) }
   given!(:answer_wrong) { create(:static_question, :wrong, question: question, attempt: attempt, author: student) }
   given!(:answer_empty) { create(:static_question, question: question, attempt: attempt, author: student) }
+  given!(:answer) do
+    create(:static_question, :correct, question: question, attempt: attempt, author: student,
+                                       created_at: Time.zone.local(2021, 1, 1, 12, 15, 0),
+                                       updated_at: Time.zone.local(2021, 1, 1, 12, 16, 15))
+  end
 
   given!(:attempt_admin) { create(:attempt, test: test, author: admin) }
   given!(:answers_admin) { create_list(:static_question, 5, :correct, question: question, attempt: attempt_admin, author: admin) }
@@ -78,9 +82,23 @@ feature 'Student can view report for test', "
       expect(page).to have_css ".answer-#{answer_wrong.id}.bg-red-100"
     end
 
-    scenario 'can see task creation datetime'
+    scenario 'can see task creation datetime' do
+      within ".answer-#{answer.id} .created-at" do
+        expect(page).to have_content '12:15:00 01/01/21'
+      end
+    end
 
-    scenario 'can see answer duration'
+    scenario 'can see answer duration' do
+      within ".answer-#{answer.id} .answer-duration" do
+        expect(page).to have_content '01:15'
+      end
+    end
+
+    scenario 'can see hypnen as answer duration if no answer' do
+      within ".answer-#{answer_empty.id} .answer-duration" do
+        expect(page).to have_content '-'
+      end
+    end
 
     scenario 'can see scheme in popup window'
   end
