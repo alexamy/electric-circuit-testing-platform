@@ -12,7 +12,7 @@ feature 'Student can view report for test', "
 
   given!(:test) { create(:test, name: 'Test example', target_score: 6) }
   given!(:test_empty) { create(:test, name: 'Test example empty') }
-  given!(:question) { create(:question, text: 'Sample question', test: test) }
+  given!(:question) { create(:question, text: 'Sample question', completion_time: 60, test: test) }
 
   given!(:attempt) { create(:attempt, test: test, author: student) }
 
@@ -57,60 +57,6 @@ feature 'Student can view report for test', "
       expect(all('tr.answer').count).to eq 3
     end
 
-    scenario 'can see question text' do
-      expect(page).to have_content 'Sample question'
-    end
-
-    scenario 'can see generated task arguments' do
-      within ".answer-#{answer.id} .arguments" do
-        expect(page).to have_content 'I = 1 R = 1'
-      end
-    end
-
-    scenario 'can see correct answer' do
-      within ".answer-#{answer.id} .correct-answer" do
-        expect(page).to have_content '1'
-      end
-    end
-
-    scenario 'can see his answer' do
-      within ".answer-#{answer_wrong.id} .user-answer" do
-        expect(page).to have_content '2'
-      end
-    end
-
-    scenario 'can see hypnen as no answer' do
-      within ".answer-#{answer_empty.id} .user-answer" do
-        expect(page).to have_content '-'
-      end
-    end
-
-    scenario 'can see if his answer is correct' do
-      expect(page).to have_css ".answer-#{answer.id}.bg-green-100"
-    end
-
-    scenario 'can see if his answer is wrong' do
-      expect(page).to have_css ".answer-#{answer_wrong.id}.bg-red-100"
-    end
-
-    scenario 'can see task creation datetime' do
-      within ".answer-#{answer.id} .created-at" do
-        expect(page).to have_content '12:15:00 31.01.21'
-      end
-    end
-
-    scenario 'can see answer duration' do
-      within ".answer-#{answer.id} .answer-duration" do
-        expect(page).to have_content '01:15'
-      end
-    end
-
-    scenario 'can see hypnen as answer duration if no answer' do
-      within ".answer-#{answer_empty.id} .answer-duration" do
-        expect(page).to have_content '-'
-      end
-    end
-
     scenario 'can see all answers ordered by creation date' do
       expect(all('.created-at').map(&:text)).to eq [
         '12:15:00 31.01.21',
@@ -119,8 +65,72 @@ feature 'Student can view report for test', "
       ]
     end
 
-    scenario 'can see scheme' do
-      expect(page).to have_selector "td[data-tooltip-image='#{rails_blob_path(question.scheme)}']"
+    scenario 'see only tasks with expired answer time' do
+      # 3 seconds after task creation
+      Timecop.freeze(Time.zone.local(2021, 1, 31, 12, 19, 2)) do
+        expect(page).not_to have_content '12:18:59 31.01.21'
+        expect(all('tr.answer').count).to eq 2
+      end
+    end
+
+    describe 'in each task' do
+      scenario 'can see question text' do
+        expect(page).to have_content 'Sample question'
+      end
+
+      scenario 'can see generated task arguments' do
+        within ".answer-#{answer.id} .arguments" do
+          expect(page).to have_content 'I = 1 R = 1'
+        end
+      end
+
+      scenario 'can see correct answer' do
+        within ".answer-#{answer.id} .correct-answer" do
+          expect(page).to have_content '1'
+        end
+      end
+
+      scenario 'can see his answer' do
+        within ".answer-#{answer_wrong.id} .user-answer" do
+          expect(page).to have_content '2'
+        end
+      end
+
+      scenario 'can see hypnen as no answer' do
+        within ".answer-#{answer_empty.id} .user-answer" do
+          expect(page).to have_content '-'
+        end
+      end
+
+      scenario 'can see if his answer is correct' do
+        expect(page).to have_css ".answer-#{answer.id}.bg-green-100"
+      end
+
+      scenario 'can see if his answer is wrong' do
+        expect(page).to have_css ".answer-#{answer_wrong.id}.bg-red-100"
+      end
+
+      scenario 'can see task creation datetime' do
+        within ".answer-#{answer.id} .created-at" do
+          expect(page).to have_content '12:15:00 31.01.21'
+        end
+      end
+
+      scenario 'can see answer duration' do
+        within ".answer-#{answer.id} .answer-duration" do
+          expect(page).to have_content '01:15'
+        end
+      end
+
+      scenario 'can see hypnen as answer duration if no answer' do
+        within ".answer-#{answer_empty.id} .answer-duration" do
+          expect(page).to have_content '-'
+        end
+      end
+
+      scenario 'can see scheme' do
+        expect(page).to have_selector "td[data-tooltip-image='#{rails_blob_path(question.scheme)}']"
+      end
     end
   end
 
@@ -136,7 +146,5 @@ feature 'Student can view report for test', "
     scenario 'can view report of a specific student' do
       expect(page).to have_content 'Smith John'
     end
-
-    scenario 'can delete static question'
   end
 end
