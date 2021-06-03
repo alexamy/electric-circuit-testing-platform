@@ -68,6 +68,10 @@ RSpec.describe Report::Task, type: :service do
     expect(report.answered_at).to eq answer.updated_at
   end
 
+  it 'sets scheme' do
+    expect(report.scheme).to eq question.scheme
+  end
+
   describe '.answers' do
     it 'returns answers' do
       expect(described_class.answers(student, test)).to eq [answer_wrong, answer]

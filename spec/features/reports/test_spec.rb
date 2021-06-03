@@ -62,7 +62,9 @@ feature 'Student can view report for test', "
     end
 
     scenario 'can see generated task arguments' do
-      expect(page).to have_content 'I = 1 R = 1'
+      within ".answer-#{answer.id} .arguments" do
+        expect(page).to have_content 'I = 1 R = 1'
+      end
     end
 
     scenario 'can see correct answer' do
@@ -117,7 +119,9 @@ feature 'Student can view report for test', "
       ]
     end
 
-    scenario 'can see scheme in popup window'
+    scenario 'can see scheme' do
+      expect(page).to have_selector ".scheme[data-report-id='#{answer.id}']"
+    end
   end
 
   describe 'Admin' do

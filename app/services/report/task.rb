@@ -50,5 +50,9 @@ module Report
     def answered_at
       @answered_at ||= task.updated_at
     end
+
+    def scheme
+      @scheme ||= task.question.scheme
+    end
   end
 end

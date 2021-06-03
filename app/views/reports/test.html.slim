@@ -2,13 +2,15 @@
   h1.mb-2.font-bold Отчёт по тесту
   = render partial: 'account_info'
 
+.block.schemes
+  - @reports.each do |report|
+    = image_tag report.scheme, class: 'scheme', data: { report_id: report.id }
+
 .table-wrapper
   table.table
     thead.table-head
       th.table-header
         = Question.human_attribute_name(:text)
-      th.table-header
-        | Схема
       th.table-header
         | Условия
       th.table-header
@@ -22,12 +24,10 @@
 
     tbody.table-body
       - @reports.each do |report|
-        tr.table-row.answer class="answer-#{report.id} #{report.correct? ? 'bg-green-100' : 'bg-red-100'}"
+        tr.table-row.answer data-report-id=report.id class="answer-#{report.id} #{report.correct? ? 'bg-green-100' : 'bg-red-100'}"
           td.table-cell
             = report.question.text
-          td.table-cell
-            | Схема
-          td.table-cell
+          td.table-cell.arguments
             = simple_format(report.arguments_text)
           td.table-cell.correct-answer
             = report.correct_answer
