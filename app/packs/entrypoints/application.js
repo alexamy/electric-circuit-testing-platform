@@ -14,6 +14,7 @@ require('channels');
 
 require('src/util/animations');
 require('src/util/notification');
+require('src/util/tooltip');
 require('src/tests/timer');
 
 // Uncomment to copy all static images under ../images to the output folder and reference

@@ -120,7 +120,7 @@ feature 'Student can view report for test', "
     end
 
     scenario 'can see scheme' do
-      expect(page).to have_selector ".scheme[data-tooltip-id='#{answer.id}']"
+      expect(page).to have_selector "td[data-tooltip-image='#{rails_blob_path(question.scheme)}']"
     end
   end
 
