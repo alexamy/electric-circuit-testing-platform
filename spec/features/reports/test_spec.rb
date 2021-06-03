@@ -16,6 +16,12 @@ feature 'Student can view report for test', "
 
   given!(:attempt) { create(:attempt, test: test, author: student) }
 
+  given!(:answer) do
+    create(:static_question, :correct, question: question, attempt: attempt, author: student,
+                                       created_at: Time.zone.local(2021, 1, 31, 12, 15, 0),
+                                       updated_at: Time.zone.local(2021, 1, 31, 12, 16, 15))
+  end
+
   given!(:answer_wrong) do
     create(:static_question, :wrong, question: question, attempt: attempt, author: student,
                                      created_at: Time.zone.local(2021, 1, 31, 12, 18, 0))
@@ -24,12 +30,6 @@ feature 'Student can view report for test', "
   given!(:answer_empty) do
     create(:static_question, question: question, attempt: attempt, author: student,
                              created_at: Time.zone.local(2021, 1, 31, 12, 18, 59))
-  end
-
-  given!(:answer) do
-    create(:static_question, :correct, question: question, attempt: attempt, author: student,
-                                       created_at: Time.zone.local(2021, 1, 31, 12, 15, 0),
-                                       updated_at: Time.zone.local(2021, 1, 31, 12, 16, 15))
   end
 
   given!(:attempt_admin) { create(:attempt, test: test, author: admin) }
@@ -68,6 +68,8 @@ feature 'Student can view report for test', "
     scenario 'see only tasks with expired answer time' do
       # 3 seconds after task creation
       Timecop.freeze(Time.zone.local(2021, 1, 31, 12, 19, 2)) do
+        visit current_path
+
         expect(page).not_to have_content '12:18:59 31.01.21'
       end
     end

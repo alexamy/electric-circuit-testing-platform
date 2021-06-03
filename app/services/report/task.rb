@@ -13,6 +13,7 @@ module Report
         .includes(:attempt)
         .where(author: user, attempts: { test: test })
         .order(:created_at)
+        .filter(&:expired?)
     end
 
     def id
