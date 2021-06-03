@@ -4,7 +4,7 @@
 
 .block.schemes
   - @reports.each do |report|
-    = image_tag report.scheme, class: 'scheme', data: { report_id: report.id }
+    = image_tag report.scheme, class: 'scheme', data: { tooltip_id: report.id }
 
 .table-wrapper
   table.table
@@ -24,7 +24,7 @@
 
     tbody.table-body
       - @reports.each do |report|
-        tr.table-row.answer data-report-id=report.id class="answer-#{report.id} #{report.correct? ? 'bg-green-100' : 'bg-red-100'}"
+        tr.table-row.answer data-tooltip-parent-id=report.id class="answer-#{report.id} #{report.correct? ? 'bg-green-100' : 'bg-red-100'}"
           td.table-cell
             = report.question.text
           td.table-cell.arguments

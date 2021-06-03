@@ -120,7 +120,7 @@ feature 'Student can view report for test', "
     end
 
     scenario 'can see scheme' do
-      expect(page).to have_selector ".scheme[data-report-id='#{answer.id}']"
+      expect(page).to have_selector ".scheme[data-tooltip-id='#{answer.id}']"
     end
   end
 
