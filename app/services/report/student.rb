@@ -26,9 +26,8 @@ module Report
     end
 
     def answers
-      @answers ||= test.questions.includes(:static_questions)
-                       .map(&:static_questions).flatten
-                       .filter { |answer| answer.author == user }
+      @answers ||= StaticQuestion.includes(:attempt)
+                                 .where(author: @user, attempts: { test: @test })
     end
 
     def answer_partition

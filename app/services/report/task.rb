@@ -9,10 +9,10 @@ module Report
     end
 
     def self.answers(user, test)
-      test.questions.includes(:static_questions)
-          .map(&:static_questions).flatten
-          .filter { |answer| answer.author == user }
-          .sort_by(&:created_at)
+      StaticQuestion
+        .includes(:attempt)
+        .where(author: user, attempts: { test: test })
+        .order(:created_at)
     end
 
     def id
