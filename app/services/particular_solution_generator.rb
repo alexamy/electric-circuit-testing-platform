@@ -24,7 +24,7 @@ class ParticularSolutionGenerator < ApplicationService
   attr_writer :arguments, :answer
 
   def set_arguments
-    question.formula_parameters.each do |parameter|
+    question.parameters.each do |parameter|
       arguments[parameter.name] = parameter.generate_value
     end
   end

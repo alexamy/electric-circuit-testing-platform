@@ -1,7 +1,7 @@
 .w-max.p-2.md:px-6.md:py-3.border.rounded-lg
   .py-2
     p.italic Аргументы
-    - @question.formula_parameters.each do |parameter|
+    - @question.parameters.each do |parameter|
       p = "#{parameter.name} = #{@task.arguments[parameter.name]} #{parameter.unit}"
 
   .py-2

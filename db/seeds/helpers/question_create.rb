@@ -9,6 +9,6 @@ def create_question(scheme_path, question_params, parameters)
   question.save!
 
   parameters.each do |name, attributes|
-    question.formula_parameters.find_by(name: name).update(**attributes)
+    question.parameters.find_by(name: name).update(**attributes)
   end
 end

@@ -31,9 +31,9 @@ RSpec.describe Admin::FormulaParametersController, type: :controller do
       {
         question_id: question.id,
         question: {
-          formula_parameters_attributes: {
+          parameters_attributes: {
             '0' => {
-              id: question.formula_parameters.first.id,
+              id: question.parameters.first.id,
               name: 'I',
               minimum: 5,
               maximum: 50,
@@ -49,9 +49,9 @@ RSpec.describe Admin::FormulaParametersController, type: :controller do
       {
         question_id: question.id,
         question: {
-          formula_parameters_attributes: {
+          parameters_attributes: {
             '0' => {
-              id: question.formula_parameters.first.id,
+              id: question.parameters.first.id,
               name: 'Iyy',
               minimum: 5,
               maximum: 50,
@@ -79,7 +79,7 @@ RSpec.describe Admin::FormulaParametersController, type: :controller do
     it 'changes parameter values' do
       patch :update_bulk, params: update_params
 
-      parameter = question.formula_parameters.first
+      parameter = question.parameters.first
       parameter.reload
 
       expect(parameter.minimum).to eq 5
@@ -99,13 +99,13 @@ RSpec.describe Admin::FormulaParametersController, type: :controller do
       it 'dont create new parameters' do
         expect do
           patch :update_bulk, params: update_params_invalid
-        end.not_to change(FormulaParameter, :count)
+        end.not_to change(Parameter, :count)
       end
 
       it 'dont change parameter name' do
         expect do
           patch :update_bulk, params: update_params_invalid
-        end.not_to change(question.formula_parameters.first, :name)
+        end.not_to change(question.parameters.first, :name)
       end
 
       it 'renders edit_bulk view' do

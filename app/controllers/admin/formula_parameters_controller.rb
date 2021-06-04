@@ -20,6 +20,6 @@ class Admin::FormulaParametersController < Admin::BaseController
 
   def parameters_params
     params.require(:question)
-          .permit(formula_parameters_attributes: %i[id minimum maximum step unit])
+          .permit(parameters_attributes: %i[id minimum maximum step unit])
   end
 end

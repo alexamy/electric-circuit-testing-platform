@@ -22,7 +22,7 @@ class Question < ApplicationRecord
 
   has_one_attached :scheme
 
-  accepts_nested_attributes_for :formula_parameters
+  accepts_nested_attributes_for :parameters
 
   before_validation :set_formula, if: :formula_text_changed?
   after_create :create_parameters
@@ -43,27 +43,27 @@ class Question < ApplicationRecord
 
   def create_parameters
     formula['dependencies'].each do |name|
-      formula_parameters.create(name: name, **Formula::Parameter.call(name))
+      parameters.create(name: name, **Formula::Parameter.call(name))
     end
   end
 
   def remove_unused_parameters
-    parameters = formula_parameters.reject do |parameter|
+    parameters_unused = parameters.reject do |parameter|
       formula['dependencies'].include?(parameter.name)
     end
 
-    parameters.each(&:destroy)
+    parameters_unused.each(&:destroy)
   end
 
   def add_new_parameters
-    parameter_names = formula_parameters.pluck(:name)
+    parameter_names = parameters.pluck(:name)
 
-    parameters = formula['dependencies'].reject do |name|
+    parameters_new = formula['dependencies'].reject do |name|
       parameter_names.include?(name)
     end
 
-    parameters.each do |name|
-      formula_parameters.create(name: name, **Formula::Parameter.call(name))
+    parameters_new.each do |name|
+      parameters.create(name: name, **Formula::Parameter.call(name))
     end
   end
 end
