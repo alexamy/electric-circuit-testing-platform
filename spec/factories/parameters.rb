@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
-  factory :formula_parameter do
+  factory :parameter do
     name { 'Parameter' }
     minimum { 1 }
     maximum { 100 }

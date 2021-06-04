@@ -1,15 +1,15 @@
 # frozen_string_literal: true
 
-class Admin::FormulaParametersController < Admin::BaseController
-  def edit_bulk
-    find_question
-  end
+# NB: This controller is used for bulk parameters processing
 
-  def update_bulk
-    find_question
+class Admin::ParametersController < Admin::BaseController
+  before_action :find_question
 
+  def edit; end
+
+  def update
     flash.now[:notice] = t('.successful') if @question.update(parameters_params)
-    render :edit_bulk
+    render :edit
   end
 
   private
@@ -20,6 +20,6 @@ class Admin::FormulaParametersController < Admin::BaseController
 
   def parameters_params
     params.require(:question)
-          .permit(formula_parameters_attributes: %i[id minimum maximum step unit])
+          .permit(parameters_attributes: %i[id minimum maximum step unit])
   end
 end

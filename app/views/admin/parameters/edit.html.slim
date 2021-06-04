@@ -5,9 +5,9 @@
   p.italic = Question.human_attribute_name('formula_text')
   p = simple_format @question.formula_text
 
-= form_with model: [:admin, @question], url: admin_question_update_parameters_path(@question) do |form|
+= form_with model: [:admin, @question], url: admin_question_parameters_path(@question) do |form|
   .flex.flex-row.flex-wrap
-    = form.fields_for :formula_parameters do |param|
+    = form.fields_for :parameters do |param|
       .block.w-max.p-4.m-2.border.rounded-lg
         .form-group
           = param.label :name, class: 'form-label'

@@ -26,7 +26,7 @@ class Task < ApplicationRecord
 
   def validates_formula_dependency
     return unless question
-    return if arguments.keys.difference(question.formula_parameters.pluck(:name)).blank?
+    return if arguments.keys.difference(question.parameters.pluck(:name)).blank?
 
     errors.add :arguments, :not_in_dependencies
   end

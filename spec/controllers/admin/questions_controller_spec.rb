@@ -44,7 +44,7 @@ RSpec.describe Admin::QuestionsController, type: :controller do
     it 'creates formula parameters' do
       expect do
         post :create, params: question_params
-      end.to change(FormulaParameter, :count).by(1)
+      end.to change(Parameter, :count).by(1)
     end
 
     it 'calls formula validator' do
@@ -67,7 +67,7 @@ RSpec.describe Admin::QuestionsController, type: :controller do
 
     it 'redirects to update parameters view' do
       post :create, params: question_params
-      expect(response).to redirect_to admin_question_edit_parameters_path(assigns(:question))
+      expect(response).to redirect_to edit_admin_question_parameters_path(assigns(:question))
     end
 
     it 'renders new view for missing attributes' do
@@ -188,25 +188,25 @@ RSpec.describe Admin::QuestionsController, type: :controller do
         expect do
           patch :update, params: { id: question.id, question: { formula_text: 'x=y*z' } }
           question.reload
-        end.not_to change(question.formula_parameters.find_by(name: 'z'), :id)
+        end.not_to change(question.parameters.find_by(name: 'z'), :id)
       end
 
       it 'adds new parameter if presented' do
         expect do
           patch :update, params: { id: question.id, question: { formula_text: 'x=y*z' } }
-        end.to change(FormulaParameter, :count).by(1)
+        end.to change(Parameter, :count).by(1)
       end
 
       it 'removes unused parameters' do
         expect do
           patch :update, params: { id: question.id, question: { formula_text: 'x=y' } }
-        end.to change(FormulaParameter, :count).by(0) # remove z + add y = 0
+        end.to change(Parameter, :count).by(0) # remove z + add y = 0
       end
 
       it 'redirects to parameters edit' do
         patch :update, params: { id: question.id, question: { formula_text: 'x=y' } }
 
-        expect(response).to redirect_to admin_question_edit_parameters_path(question)
+        expect(response).to redirect_to edit_admin_question_parameters_path(question)
       end
     end
   end

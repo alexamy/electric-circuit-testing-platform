@@ -22,8 +22,8 @@ ru:
         successful: Вопрос успешно создан
       update:
         successful: Вопрос успешно сохранен
-    formula_parameters:
-      update_bulk:
+    parameters:
+      update:
         successful: Параметры успешно обновлены
     students:
       create:
@@ -35,7 +35,7 @@ ru:
       user: Пользователь
       test: Тест
       question: Вопрос
-      formula_parameter: Параметр формулы
+      parameter: Параметр формулы
       group: Группа
     attributes:
       user:
@@ -50,14 +50,14 @@ ru:
       test:
         name: Название
         target_score: Порог для зачета
-      formula_parameter: &formula_parameter
+      parameter: &parameter
         name: Название
         minimum: Минимум
         maximum: Максимум
         step: Шаг
         unit: Единица измерения
-      formula_parameters:
-        <<: *formula_parameter
+      parameters:
+        <<: *parameter
       question:
         test: Тест
         test_id: Тест
@@ -82,7 +82,7 @@ ru:
           attributes:
             arguments:
               not_in_dependencies: не содержится в зависимостях формулы
-        formula_parameter:
+        parameter:
           attributes:
             name:
               not_in_dependencies: не содержится в зависимостях формулы

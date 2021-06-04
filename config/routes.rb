@@ -30,9 +30,11 @@ Rails.application.routes.draw do
     resources :students, shallow: true, except: %i[show]
     resources :groups, shallow: true, except: %i[show]
 
-    resources :questions, shallow: true do
-      get '/update_parameters', controller: 'formula_parameters', action: 'edit_bulk', as: 'edit_parameters'
-      patch '/update_parameters', controller: 'formula_parameters', action: 'update_bulk', as: 'update_parameters'
+    resources :questions do
+      resources :parameters, only: [] do
+        get :edit, on: :collection
+        patch :update, on: :collection
+      end
     end
   end
 end

@@ -31,10 +31,10 @@ RSpec.describe Question, type: :model do
 
   describe 'associations' do
     it { is_expected.to belong_to :test }
-    it { is_expected.to have_many(:formula_parameters).dependent(:destroy) }
+    it { is_expected.to have_many(:parameters).dependent(:destroy) }
     it { is_expected.to have_many(:tasks).dependent(:nullify) }
 
-    it { is_expected.to accept_nested_attributes_for :formula_parameters }
+    it { is_expected.to accept_nested_attributes_for :parameters }
   end
 
   context 'when uploads scheme' do
@@ -72,7 +72,7 @@ RSpec.describe Question, type: :model do
     it 'creates parameters' do
       expect do
         model.create!(**attributes_for(:question), formula_text: 'x=y', author: author, test: test)
-      end.to change(FormulaParameter, :count).by(1)
+      end.to change(Parameter, :count).by(1)
     end
 
     describe 'formula update' do
@@ -81,13 +81,13 @@ RSpec.describe Question, type: :model do
       it 'removes unused parameters' do
         expect do
           question.update!(formula_text: 'x=y')
-        end.to change(FormulaParameter, :count).by(-1)
+        end.to change(Parameter, :count).by(-1)
       end
 
       it 'adds new parameters' do
         expect do
           question.update!(formula_text: 'x=y*z*r')
-        end.to change(FormulaParameter, :count).by(1)
+        end.to change(Parameter, :count).by(1)
       end
     end
   end
