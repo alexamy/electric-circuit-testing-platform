@@ -16,7 +16,7 @@ class Test < ApplicationRecord
   scope :with_questions, -> { joins(:questions).distinct }
 
   def score_of(user)
-    corrects, wrongs = StaticQuestion.joins(:question)
+    corrects, wrongs = Task.joins(:question)
                                      .where(author: user, questions: { test: self })
                                      .partition(&:correct?)
                                      .map(&:count)

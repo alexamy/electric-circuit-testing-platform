@@ -7,7 +7,7 @@ RSpec.describe Attempt, type: :model do
 
   describe 'associations' do
     it { is_expected.to belong_to :test }
-    it { is_expected.to have_many :static_questions }
+    it { is_expected.to have_many :tasks }
   end
 
   describe '#latest?' do

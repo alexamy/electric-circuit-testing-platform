@@ -43,7 +43,7 @@ class TestsController < ApplicationController
 
   def create_static_question
     @question = Question.find(random_question_id)
-    @static_question = StaticQuestion.new_from(@question)
+    @static_question = Task.new_from(@question)
     @static_question.update(author: current_user, attempt: @attempt)
   end
 end

@@ -18,7 +18,7 @@ class Question < ApplicationRecord
   belongs_to :test
 
   has_many :formula_parameters, dependent: :destroy
-  has_many :static_questions, dependent: :nullify
+  has_many :tasks, dependent: :nullify
 
   has_one_attached :scheme
 

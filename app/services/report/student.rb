@@ -26,8 +26,8 @@ module Report
     end
 
     def answers
-      @answers ||= StaticQuestion.includes(:attempt)
-                                 .where(author: @user, attempts: { test: @test })
+      @answers ||= ::Task.includes(:attempt)
+                         .where(author: @user, attempts: { test: @test })
     end
 
     def answer_partition

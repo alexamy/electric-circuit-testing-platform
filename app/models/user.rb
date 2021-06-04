@@ -8,7 +8,7 @@ class User < ApplicationRecord
 
   validates :type, exclusion: { in: %w[User] }
 
-  has_many :static_questions, foreign_key: 'author_id', inverse_of: 'author', dependent: :destroy
+  has_many :tasks, foreign_key: 'author_id', inverse_of: 'author', dependent: :destroy
   has_many :attempts, foreign_key: 'author_id', inverse_of: 'author', dependent: :destroy
 
   def admin?

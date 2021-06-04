@@ -37,7 +37,7 @@ class Admin::QuestionsController < Admin::BaseController
 
   def show
     @question = Question.find(params[:id])
-    @static_question = StaticQuestion.new_from(@question)
+    @static_question = Task.new_from(@question)
   end
 
   def destroy

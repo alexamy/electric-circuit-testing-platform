@@ -13,7 +13,7 @@ class StaticQuestionsController < ApplicationController
   private
 
   def find_question
-    @static_question = StaticQuestion.find(params[:id])
+    @static_question = Task.find(params[:id])
     return unless owned?(@static_question)
     return if @static_question.user_answer
 

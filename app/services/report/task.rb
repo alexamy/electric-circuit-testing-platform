@@ -9,7 +9,7 @@ module Report
     end
 
     def self.answers(user, test)
-      StaticQuestion
+      ::Task
         .includes(:attempt)
         .where(author: user, attempts: { test: test })
         .order(:created_at)

@@ -14,11 +14,11 @@ RSpec.describe Report::Student, type: :service do
   let(:question) { create(:question, test: test) }
 
   let(:attempt) { create(:attempt, test: test, author: student) }
-  let!(:answer) { create(:static_question, :correct, question: question, attempt: attempt, author: student) }
-  let!(:answer_wrong) { create(:static_question, :wrong, question: question, attempt: attempt, author: student) }
+  let!(:answer) { create(:task, :correct, question: question, attempt: attempt, author: student) }
+  let!(:answer_wrong) { create(:task, :wrong, question: question, attempt: attempt, author: student) }
 
   let!(:attempt_other) { create(:attempt, test: test, author: student_other) }
-  let!(:answers_other) { create_list(:static_question, 5, :correct, question: question, attempt: attempt_other, author: student_other) }
+  let!(:answers_other) { create_list(:task, 5, :correct, question: question, attempt: attempt_other, author: student_other) }
 
   it 'sets user' do
     expect(report.user).to eq student

@@ -32,19 +32,19 @@ RSpec.describe Test, type: :model do
     end
 
     it 'increases score when user has correct answers' do
-      create(:static_question, :correct, author: user, question: question)
+      create(:task, :correct, author: user, question: question)
 
       expect(test.score_of(user)).to be_positive
     end
 
     it 'decreases score when user has wrong answers' do
-      create(:static_question, :wrong, author: user, question: question)
+      create(:task, :wrong, author: user, question: question)
 
       expect(test.score_of(user)).to be_negative
     end
 
     it 'counts only its own answers' do
-      create(:static_question, :correct, author: user, question: question_other)
+      create(:task, :correct, author: user, question: question_other)
 
       expect(test.score_of(user)).to be_zero
     end

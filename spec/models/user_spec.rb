@@ -7,7 +7,7 @@ RSpec.describe User, type: :model do
   let(:admin) { create(:admin) }
 
   describe 'associations' do
-    it { is_expected.to have_many(:static_questions).with_foreign_key('author_id') }
+    it { is_expected.to have_many(:tasks).with_foreign_key('author_id') }
     it { is_expected.to have_many(:attempts).with_foreign_key('author_id') }
   end
 

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class StaticQuestion < ApplicationRecord
+class Task < ApplicationRecord
   include Authorable
 
   validates :arguments, :answer, presence: true

@@ -2,9 +2,9 @@
 
 require 'rails_helper'
 
-RSpec.describe StaticQuestion, type: :model do
+RSpec.describe Task, type: :model do
   let!(:question) { create(:question, formula: { dependencies: %w[R] }, completion_time: 10) }
-  let(:task) { create(:static_question, question: question, created_at: Time.zone.local(2021, 1, 31, 12, 0, 0)) }
+  let(:task) { create(:task, question: question, created_at: Time.zone.local(2021, 1, 31, 12, 0, 0)) }
 
   it_behaves_like 'authorable'
 
@@ -18,7 +18,7 @@ RSpec.describe StaticQuestion, type: :model do
     it { is_expected.to validate_presence_of :answer }
 
     it "isn't valid when have no corresponding question formula dependency" do
-      expect(build(:static_question, arguments: { 'V' => 1 }, question: question)).not_to be_valid
+      expect(build(:task, arguments: { 'V' => 1 }, question: question)).not_to be_valid
     end
   end
 
