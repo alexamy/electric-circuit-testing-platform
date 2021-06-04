@@ -24,7 +24,7 @@ class TestsController < ApplicationController
     redirect_to tests_path, notice: t('.passed') and return if @test.passed?(current_user)
 
     @score = @test.score_of(current_user) # calculated before creating question, to exclude it from score
-    create_static_question
+    create_task
   end
 
   private
@@ -41,9 +41,9 @@ class TestsController < ApplicationController
     @attempt
   end
 
-  def create_static_question
+  def create_task
     @question = Question.find(random_question_id)
-    @static_question = StaticQuestion.new_from(@question)
-    @static_question.update(author: current_user, attempt: @attempt)
+    @task = Task.new_from(@question)
+    @task.update(author: current_user, attempt: @attempt)
   end
 end

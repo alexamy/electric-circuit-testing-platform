@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_01_234518) do
+ActiveRecord::Schema.define(version: 2021_06_04_095707) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -87,7 +87,7 @@ ActiveRecord::Schema.define(version: 2021_06_01_234518) do
     t.index ["test_id"], name: "index_questions_on_test_id"
   end
 
-  create_table "static_questions", force: :cascade do |t|
+  create_table "tasks", force: :cascade do |t|
     t.json "arguments"
     t.float "answer"
     t.bigint "question_id"
@@ -96,9 +96,9 @@ ActiveRecord::Schema.define(version: 2021_06_01_234518) do
     t.float "user_answer"
     t.bigint "author_id", null: false
     t.bigint "attempt_id", null: false
-    t.index ["attempt_id"], name: "index_static_questions_on_attempt_id"
-    t.index ["author_id"], name: "index_static_questions_on_author_id"
-    t.index ["question_id"], name: "index_static_questions_on_question_id"
+    t.index ["attempt_id"], name: "index_tasks_on_attempt_id"
+    t.index ["author_id"], name: "index_tasks_on_author_id"
+    t.index ["question_id"], name: "index_tasks_on_question_id"
   end
 
   create_table "tests", force: :cascade do |t|
@@ -134,8 +134,8 @@ ActiveRecord::Schema.define(version: 2021_06_01_234518) do
   add_foreign_key "formula_parameters", "questions"
   add_foreign_key "questions", "tests"
   add_foreign_key "questions", "users", column: "author_id"
-  add_foreign_key "static_questions", "attempts"
-  add_foreign_key "static_questions", "questions"
-  add_foreign_key "static_questions", "users", column: "author_id"
+  add_foreign_key "tasks", "attempts"
+  add_foreign_key "tasks", "questions"
+  add_foreign_key "tasks", "users", column: "author_id"
   add_foreign_key "users", "groups"
 end

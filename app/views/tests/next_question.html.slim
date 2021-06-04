@@ -23,7 +23,7 @@
     .mb-4
       p Параметры схемы
       - @question.formula_parameters.each do |parameter|
-        p = "#{parameter.name} = #{@static_question.arguments[parameter.name]} #{parameter.unit}"
+        p = "#{parameter.name} = #{@task.arguments[parameter.name]} #{parameter.unit}"
     .mb-4
       p
         | Количество знаков после запятой:

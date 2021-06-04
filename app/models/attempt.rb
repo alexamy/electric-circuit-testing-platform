@@ -5,7 +5,7 @@ class Attempt < ApplicationRecord
 
   belongs_to :test
 
-  has_many :static_questions, dependent: :destroy
+  has_many :tasks, dependent: :destroy
 
   def latest?
     Attempt.where(author: author).maximum(:created_at) == created_at

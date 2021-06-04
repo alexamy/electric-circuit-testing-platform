@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   }
 
   get '/tests', controller: 'tests', action: 'index', as: 'tests'
-  patch '/answer/:id', controller: 'static_questions', action: 'answer', as: 'answer'
+  patch '/answer/:id', controller: 'tasks', action: 'answer', as: 'answer'
 
   post '/attempt/:test_id', controller: 'tests', action: 'start', as: 'start_attempt'
   get '/attempt/:id', controller: 'tests', action: 'next_question', as: 'next_question_attempt'

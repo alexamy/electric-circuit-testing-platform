@@ -17,23 +17,23 @@ feature 'Student can view report for test', "
   given!(:attempt) { create(:attempt, test: test, author: student) }
 
   given!(:answer) do
-    create(:static_question, :correct, question: question, attempt: attempt, author: student,
-                                       created_at: Time.zone.local(2021, 1, 31, 12, 15, 0),
-                                       updated_at: Time.zone.local(2021, 1, 31, 12, 16, 15))
+    create(:task, :correct, question: question, attempt: attempt, author: student,
+                            created_at: Time.zone.local(2021, 1, 31, 12, 15, 0),
+                            updated_at: Time.zone.local(2021, 1, 31, 12, 16, 15))
   end
 
   given!(:answer_wrong) do
-    create(:static_question, :wrong, question: question, attempt: attempt, author: student,
-                                     created_at: Time.zone.local(2021, 1, 31, 12, 18, 0))
+    create(:task, :wrong, question: question, attempt: attempt, author: student,
+                          created_at: Time.zone.local(2021, 1, 31, 12, 18, 0))
   end
 
   given!(:answer_empty) do
-    create(:static_question, question: question, attempt: attempt, author: student,
-                             created_at: Time.zone.local(2021, 1, 31, 12, 18, 59))
+    create(:task, question: question, attempt: attempt, author: student,
+                  created_at: Time.zone.local(2021, 1, 31, 12, 18, 59))
   end
 
   given!(:attempt_admin) { create(:attempt, test: test, author: admin) }
-  given!(:answers_admin) { create_list(:static_question, 5, :correct, question: question, attempt: attempt_admin, author: admin) }
+  given!(:answers_admin) { create_list(:task, 5, :correct, question: question, attempt: attempt_admin, author: admin) }
 
   scenario 'Unauthenticated user cant view report' do
     visit reports_student_path

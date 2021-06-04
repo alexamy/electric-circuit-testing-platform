@@ -11,7 +11,7 @@ ru:
       already_passed: Тест уже пройден
     next_question:
       passed: Вы успешно прошли тест
-  static_questions:
+  tasks:
     answer:
       test_end: Вы вышли из тестирования
   admin:
@@ -69,7 +69,7 @@ ru:
         precision: Точность ответа
         scheme: Схема
         completion_time: Максимальное время ответа
-      static_question:
+      task:
         arguments: Аргументы
         answer: Ответ
         question: Вопрос
@@ -78,7 +78,7 @@ ru:
         year: Год обучения
     errors:
       models:
-        static_question:
+        task:
           attributes:
             arguments:
               not_in_dependencies: не содержится в зависимостях формулы

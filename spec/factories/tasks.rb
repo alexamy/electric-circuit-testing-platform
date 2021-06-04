@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
-  factory :static_question do
+  factory :task do
     arguments { { 'I' => 1, 'R' => 1 } }
     answer { 1 }
     user_answer { nil }

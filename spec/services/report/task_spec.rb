@@ -16,23 +16,23 @@ RSpec.describe Report::Task, type: :service do
   let(:attempt) { create(:attempt, test: test, author: student) }
 
   let!(:answer_wrong) do
-    create(:static_question, :wrong, question: question, attempt: attempt, author: student,
-                                     created_at: Time.zone.local(2021, 1, 31, 12, 18, 0))
+    create(:task, :wrong, question: question, attempt: attempt, author: student,
+                          created_at: Time.zone.local(2021, 1, 31, 12, 18, 0))
   end
 
   let!(:answer_empty) do
-    create(:static_question, question: question, attempt: attempt, author: student,
-                             created_at: Time.zone.local(2021, 1, 31, 12, 18, 59))
+    create(:task, question: question, attempt: attempt, author: student,
+                  created_at: Time.zone.local(2021, 1, 31, 12, 18, 59))
   end
 
   let!(:answer) do
-    create(:static_question, :correct, question: question, attempt: attempt, author: student,
-                                       created_at: Time.zone.local(2021, 1, 31, 12, 15, 0),
-                                       updated_at: Time.zone.local(2021, 1, 31, 12, 16, 15))
+    create(:task, :correct, question: question, attempt: attempt, author: student,
+                            created_at: Time.zone.local(2021, 1, 31, 12, 15, 0),
+                            updated_at: Time.zone.local(2021, 1, 31, 12, 16, 15))
   end
 
   let!(:attempt_other) { create(:attempt, test: test, author: student_other) }
-  let!(:answers_other) { create_list(:static_question, 5, :correct, question: question, attempt: attempt_other, author: student_other) }
+  let!(:answers_other) { create_list(:task, 5, :correct, question: question, attempt: attempt_other, author: student_other) }
 
   it 'sets task' do
     expect(report.task).to eq answer

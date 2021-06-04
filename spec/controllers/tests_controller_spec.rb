@@ -14,8 +14,8 @@ RSpec.describe TestsController, type: :controller do
   let(:other_attempt) { create(:attempt, test: test, author: other_user) }
 
   let!(:questions) { create_list(:question, 5, test: test) }
-  let(:static_question) { create(:static_question, answer: 10, attempt: attempt, author: user) }
-  let(:static_question_other) { create(:static_question, answer: 10, attempt: attempt, author: other_user) }
+  let(:task) { create(:task, answer: 10, attempt: attempt, author: user) }
+  let(:task_other) { create(:task, answer: 10, attempt: attempt, author: other_user) }
 
   describe 'GET #index_with_questions' do
     before { get :index }
@@ -46,7 +46,7 @@ RSpec.describe TestsController, type: :controller do
 
     it 'stops when get enough score' do
       10.times.each do
-        create(:static_question, :correct, question: questions.first, attempt: attempt, author: user)
+        create(:task, :correct, question: questions.first, attempt: attempt, author: user)
       end
       get :start, params: { test_id: test.id }
 
@@ -83,7 +83,7 @@ RSpec.describe TestsController, type: :controller do
       it 'can proceed only on his attempt' do
         expect do
           get :next_question, params: { id: other_attempt.id }
-        end.not_to change(StaticQuestion, :count)
+        end.not_to change(Task, :count)
       end
 
       it 'can proceed on the latest attempt only' do
@@ -103,13 +103,13 @@ RSpec.describe TestsController, type: :controller do
 
         expect do
           get :next_question, params: { id: attempt.id }
-        end.not_to change(StaticQuestion, :count)
+        end.not_to change(Task, :count)
       end
 
       it 'creates a new static question' do
         expect do
           get :next_question, params: { id: attempt.id }
-        end.to change(StaticQuestion, :count).by 1
+        end.to change(Task, :count).by 1
       end
 
       it 'selects random question' do
@@ -121,7 +121,7 @@ RSpec.describe TestsController, type: :controller do
 
       it 'stops when get enough score' do
         10.times.each do
-          create(:static_question, :correct, question: questions.first, attempt: attempt, author: user)
+          create(:task, :correct, question: questions.first, attempt: attempt, author: user)
         end
         get :next_question, params: { id: attempt.id }
 
