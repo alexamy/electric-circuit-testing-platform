@@ -2,6 +2,8 @@
   h1.mb-2.font-bold Отчёт по тесту
   = render partial: 'account_info'
 
+= paginate @reports
+
 .table-wrapper
   table.table
     thead.table-head

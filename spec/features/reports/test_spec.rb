@@ -82,6 +82,16 @@ feature 'Student can view report for test', "
       end
     end
 
+    describe 'pagination' do
+      given!(:tasks_more) { create_list(:task, 11, :correct, question: question, attempt: attempt, author: student) }
+
+      scenario 'can see paginated report' do
+        visit current_path
+
+        expect(page).to have_selector 'nav.pagination'
+      end
+    end
+
     describe 'in each task' do
       scenario 'can see question text' do
         expect(page).to have_content 'Sample question'
