@@ -74,7 +74,13 @@ feature 'Student can view report for test', "
       end
     end
 
-    scenario 'can see unexpired tasks with answer'
+    scenario 'can see unexpired tasks with answer' do
+      Timecop.freeze(Time.zone.local(2021, 1, 31, 12, 18, 1)) do
+        visit current_path
+
+        expect(page).to have_content '12:18:00 31.01.21'
+      end
+    end
 
     describe 'in each task' do
       scenario 'can see question text' do

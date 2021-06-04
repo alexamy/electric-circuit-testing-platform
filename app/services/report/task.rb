@@ -13,7 +13,7 @@ module Report
         .includes(:attempt)
         .where(author: user, attempts: { test: test })
         .order(:created_at)
-        .filter(&:expired?)
+        .filter { |task| task.user_answer || task.expired? }
     end
 
     def id

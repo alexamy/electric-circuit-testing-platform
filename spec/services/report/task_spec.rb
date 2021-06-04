@@ -93,9 +93,15 @@ RSpec.describe Report::Task, type: :service do
       expect(report_answers).to eq [answer, answer_wrong, answer_empty]
     end
 
-    it 'return only expired answers' do
+    it 'doesnt return unexpired answers without answer' do
       Timecop.freeze(Time.zone.local(2021, 1, 31, 12, 19, 2)) do
         expect(report_answers).not_to include answer_empty
+      end
+    end
+
+    it 'return unexpired answers with answer' do
+      Timecop.freeze(Time.zone.local(2021, 1, 31, 12, 18, 1)) do
+        expect(report_answers).to include answer_wrong
       end
     end
   end
