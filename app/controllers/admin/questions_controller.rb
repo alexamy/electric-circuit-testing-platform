@@ -9,7 +9,7 @@ class Admin::QuestionsController < Admin::BaseController
     @question = Question.new(question_params)
 
     if @question.save
-      redirect_to admin_question_edit_parameters_path(@question), notice: t('.successful')
+      redirect_to edit_admin_question_parameters_path(@question), notice: t('.successful')
     else
       render :new
     end
@@ -51,7 +51,7 @@ class Admin::QuestionsController < Admin::BaseController
   # NB: call before @question.save
   def update_redirect_path
     if @question.formula_text_changed?
-      admin_question_edit_parameters_path(@question)
+      edit_admin_question_parameters_path(@question)
     else
       admin_questions_path
     end

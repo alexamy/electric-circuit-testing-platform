@@ -67,7 +67,7 @@ RSpec.describe Admin::QuestionsController, type: :controller do
 
     it 'redirects to update parameters view' do
       post :create, params: question_params
-      expect(response).to redirect_to admin_question_edit_parameters_path(assigns(:question))
+      expect(response).to redirect_to edit_admin_question_parameters_path(assigns(:question))
     end
 
     it 'renders new view for missing attributes' do
@@ -206,7 +206,7 @@ RSpec.describe Admin::QuestionsController, type: :controller do
       it 'redirects to parameters edit' do
         patch :update, params: { id: question.id, question: { formula_text: 'x=y' } }
 
-        expect(response).to redirect_to admin_question_edit_parameters_path(question)
+        expect(response).to redirect_to edit_admin_question_parameters_path(question)
       end
     end
   end

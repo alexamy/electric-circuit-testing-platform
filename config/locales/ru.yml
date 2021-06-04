@@ -23,7 +23,7 @@ ru:
       update:
         successful: Вопрос успешно сохранен
     parameters:
-      update_bulk:
+      update:
         successful: Параметры успешно обновлены
     students:
       create:

@@ -1,15 +1,15 @@
 # frozen_string_literal: true
 
+# NB: This controller is used for bulk parameters processing
+
 class Admin::ParametersController < Admin::BaseController
-  def edit_bulk
-    find_question
-  end
+  before_action :find_question
 
-  def update_bulk
-    find_question
+  def edit; end
 
+  def update
     flash.now[:notice] = t('.successful') if @question.update(parameters_params)
-    render :edit_bulk
+    render :edit
   end
 
   private
