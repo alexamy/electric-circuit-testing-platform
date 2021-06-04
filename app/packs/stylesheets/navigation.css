@@ -1,0 +1,23 @@
+.pagination {
+  @apply flex;
+
+  span {
+    @apply h-8 px-1 flex justify-center items-center;
+  }
+
+  span:not(.page) {
+    @apply px-2;
+  }
+
+  span:not(.current):hover {
+    @apply bg-gray-100;
+  }
+
+  .page {
+    @apply w-8 border;
+
+    &.current {
+      @apply bg-gray-100;
+    }
+  }
+}

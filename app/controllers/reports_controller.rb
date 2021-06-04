@@ -11,7 +11,8 @@ class ReportsController < ApplicationController
   def test
     head :no_content and return unless find_test
 
-    @reports = Report::Task.answers(@user, @test).map { |answer| Report::Task.new(answer) }
+    reports = Report::Task.answers(@user, @test).map { |answer| Report::Task.new(answer) }
+    @reports = Kaminari.paginate_array(reports).page(params[:page]).per(10)
   end
 
   private

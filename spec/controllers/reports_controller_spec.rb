@@ -71,6 +71,10 @@ RSpec.describe ReportsController, type: :controller do
         expect(assigns(:reports)).to all be_an_instance_of Report::Task
       end
 
+      it 'paginate reports array' do
+        expect(assigns(:reports)).to be_an_instance_of Kaminari::PaginatableArray
+      end
+
       it 'sets test' do
         expect(assigns(:test)).to eq test
       end
