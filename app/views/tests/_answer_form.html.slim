@@ -1,4 +1,4 @@
-= form_with url: answer_path(@static_question), method: :patch, id: 'answer-form' do |f|
+= form_with url: answer_path(@task), method: :patch, id: 'answer-form' do |f|
   .form-group
     = f.label :answer, 'Ответ:', class: 'form-label'
     = f.text_field :answer, class: 'form-input'

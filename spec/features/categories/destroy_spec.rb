@@ -12,7 +12,7 @@ feature 'Admin can delete test', "
 
   given(:question) { create(:question, test: test) }
   given(:attempt) { create(:attempt, author: admin, test: test) }
-  given!(:static_question) { create(:task, question: question, attempt: attempt) }
+  given!(:task) { create(:task, question: question, attempt: attempt) }
 
   background { sign_in(admin) }
 

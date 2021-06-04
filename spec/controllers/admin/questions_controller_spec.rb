@@ -86,7 +86,7 @@ RSpec.describe Admin::QuestionsController, type: :controller do
     end
 
     it 'generates new static question' do
-      expect(assigns(:static_question)).to be_a_new Task
+      expect(assigns(:task)).to be_a_new Task
     end
 
     it 'renders show view' do

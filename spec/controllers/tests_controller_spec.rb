@@ -14,8 +14,8 @@ RSpec.describe TestsController, type: :controller do
   let(:other_attempt) { create(:attempt, test: test, author: other_user) }
 
   let!(:questions) { create_list(:question, 5, test: test) }
-  let(:static_question) { create(:task, answer: 10, attempt: attempt, author: user) }
-  let(:static_question_other) { create(:task, answer: 10, attempt: attempt, author: other_user) }
+  let(:task) { create(:task, answer: 10, attempt: attempt, author: user) }
+  let(:task_other) { create(:task, answer: 10, attempt: attempt, author: other_user) }
 
   describe 'GET #index_with_questions' do
     before { get :index }

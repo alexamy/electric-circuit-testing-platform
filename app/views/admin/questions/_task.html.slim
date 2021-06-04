@@ -2,12 +2,12 @@
   .py-2
     p.italic Аргументы
     - @question.formula_parameters.each do |parameter|
-      p = "#{parameter.name} = #{@static_question.arguments[parameter.name]} #{parameter.unit}"
+      p = "#{parameter.name} = #{@task.arguments[parameter.name]} #{parameter.unit}"
 
   .py-2
     p.italic
       | Ответ (знаков после запятой - #{@question.precision}):
-    p = "#{@static_question.answer} #{@question.answer_unit}"
+    p = "#{@task.answer} #{@question.answer_unit}"
 
   .py-2
     = link_to 'Сгенерировать новый', admin_question_path(@question), class: 'button'
