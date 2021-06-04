@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Admin::FormulaParametersController < Admin::BaseController
+class Admin::ParametersController < Admin::BaseController
   def edit_bulk
     find_question
   end

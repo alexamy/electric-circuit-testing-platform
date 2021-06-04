@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
-
-RSpec.describe Admin::FormulaParametersController, type: :controller do
+\
+RSpec.describe Admin::ParametersController, type: :controller do
   let(:admin) { create(:admin) }
   let!(:question) do
     create(:question, author: admin,
