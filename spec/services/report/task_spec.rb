@@ -17,18 +17,18 @@ RSpec.describe Report::Task, type: :service do
 
   let!(:answer_wrong) do
     create(:task, :wrong, question: question, attempt: attempt, author: student,
-                                     created_at: Time.zone.local(2021, 1, 31, 12, 18, 0))
+                          created_at: Time.zone.local(2021, 1, 31, 12, 18, 0))
   end
 
   let!(:answer_empty) do
     create(:task, question: question, attempt: attempt, author: student,
-                             created_at: Time.zone.local(2021, 1, 31, 12, 18, 59))
+                  created_at: Time.zone.local(2021, 1, 31, 12, 18, 59))
   end
 
   let!(:answer) do
     create(:task, :correct, question: question, attempt: attempt, author: student,
-                                       created_at: Time.zone.local(2021, 1, 31, 12, 15, 0),
-                                       updated_at: Time.zone.local(2021, 1, 31, 12, 16, 15))
+                            created_at: Time.zone.local(2021, 1, 31, 12, 15, 0),
+                            updated_at: Time.zone.local(2021, 1, 31, 12, 16, 15))
   end
 
   let!(:attempt_other) { create(:attempt, test: test, author: student_other) }

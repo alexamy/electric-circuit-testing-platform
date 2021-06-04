@@ -18,18 +18,18 @@ feature 'Student can view report for test', "
 
   given!(:answer) do
     create(:task, :correct, question: question, attempt: attempt, author: student,
-                                       created_at: Time.zone.local(2021, 1, 31, 12, 15, 0),
-                                       updated_at: Time.zone.local(2021, 1, 31, 12, 16, 15))
+                            created_at: Time.zone.local(2021, 1, 31, 12, 15, 0),
+                            updated_at: Time.zone.local(2021, 1, 31, 12, 16, 15))
   end
 
   given!(:answer_wrong) do
     create(:task, :wrong, question: question, attempt: attempt, author: student,
-                                     created_at: Time.zone.local(2021, 1, 31, 12, 18, 0))
+                          created_at: Time.zone.local(2021, 1, 31, 12, 18, 0))
   end
 
   given!(:answer_empty) do
     create(:task, question: question, attempt: attempt, author: student,
-                             created_at: Time.zone.local(2021, 1, 31, 12, 18, 59))
+                  created_at: Time.zone.local(2021, 1, 31, 12, 18, 59))
   end
 
   given!(:attempt_admin) { create(:attempt, test: test, author: admin) }

@@ -17,9 +17,9 @@ class Test < ApplicationRecord
 
   def score_of(user)
     corrects, wrongs = Task.joins(:question)
-                                     .where(author: user, questions: { test: self })
-                                     .partition(&:correct?)
-                                     .map(&:count)
+                           .where(author: user, questions: { test: self })
+                           .partition(&:correct?)
+                           .map(&:count)
 
     corrects * CORRECT_SCORE + wrongs * WRONG_SCORE
   end
