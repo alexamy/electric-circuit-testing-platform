@@ -31,7 +31,7 @@ RSpec.describe Question, type: :model do
 
   describe 'associations' do
     it { is_expected.to belong_to :test }
-    it { is_expected.to have_many(:formula_parameters).dependent(:destroy) }
+    it { is_expected.to have_many(:parameters).dependent(:destroy) }
     it { is_expected.to have_many(:tasks).dependent(:nullify) }
 
     it { is_expected.to accept_nested_attributes_for :formula_parameters }

@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe FormulaParameter, type: :model do
+RSpec.describe Parameter, type: :model do
   describe 'validations' do
     let!(:question) { create(:question, formula_text: 'x=y') }
 
