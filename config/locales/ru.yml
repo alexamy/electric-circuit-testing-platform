@@ -267,6 +267,13 @@ ru:
         few: "%{model}: сохранение не удалось из-за %{count} ошибок"
         many: "%{model}: сохранение не удалось из-за %{count} ошибок"
         other: "%{model}: сохранение не удалось из-за %{count} ошибки"
+  views:
+    pagination:
+      first: "&laquo; Первый"
+      last: "Последний &raquo;"
+      previous: "&lsaquo; Пред"
+      next: "След &rsaquo;"
+      truncate: "&hellip;"
   helpers:
     select:
       prompt: 'Выберите: '
@@ -274,6 +281,14 @@ ru:
       create: Создать %{model}
       submit: Сохранить %{model}
       update: Сохранить %{model}
+    page_entries_info:
+      one_page:
+        display_entries:
+          zero: "Не найдено %{entry_name}"
+          one: "Отображение <b>1</b> %{entry_name}"
+          other: "Отображение <b>всех %{count}</b> %{entry_name}"
+      more_pages:
+        display_entries: "Отображение %{entry_name} <b>%{first}&nbsp;-&nbsp;%{last}</b> из <b>%{total}</b>"
   number:
     currency:
       format:
