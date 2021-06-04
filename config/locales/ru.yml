@@ -269,8 +269,8 @@ ru:
         other: "%{model}: сохранение не удалось из-за %{count} ошибки"
   views:
     pagination:
-      first: "&laquo; Первый"
-      last: "Последний &raquo;"
+      first: "&laquo; Первая"
+      last: "Последняя &raquo;"
       previous: "&lsaquo; Пред"
       next: "След &rsaquo;"
       truncate: "&hellip;"
