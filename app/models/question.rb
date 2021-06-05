@@ -25,8 +25,13 @@ class Question < ApplicationRecord
   accepts_nested_attributes_for :parameters
 
   before_validation :set_formula, if: :formula_text_changed?
-  after_create :create_parameters
   before_update :remove_unused_parameters, :add_new_parameters, if: :formula_changed?
+
+  def create_parameters
+    formula['dependencies'].each do |name|
+      parameters.create(name: name, **Formula::Parameter.call(name))
+    end
+  end
 
   private
 
@@ -39,12 +44,6 @@ class Question < ApplicationRecord
 
   def set_formula
     self.formula = Formula::Parser.call(formula_text)
-  end
-
-  def create_parameters
-    formula['dependencies'].each do |name|
-      parameters.create(name: name, **Formula::Parameter.call(name))
-    end
   end
 
   def remove_unused_parameters

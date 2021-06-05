@@ -141,7 +141,7 @@ RSpec.describe Admin::QuestionsController, type: :controller do
   end
 
   describe 'PATCH #update' do
-    let!(:question) { create(:question, formula_text: 'x=z') }
+    let!(:question) { create(:question, formula_text: 'x=z', parameters: { 'z' => {} }) }
 
     it 'finds question' do
       patch :update, params: { id: question.id, question: { text: 'find var', formula_text: 'x=z' } }

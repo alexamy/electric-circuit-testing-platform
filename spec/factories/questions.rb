@@ -8,6 +8,12 @@ FactoryBot.define do
   factory :question do
     transient do
       scheme_path { 'spec/support/files/397KB.png' }
+      parameters do
+        {
+          'I' => { minimum: 2, maximum: 50, step: 1, unit: 'А' },
+          'R' => { minimum: 100, maximum: 100_000, step: 100, unit: 'Ом' }
+        }
+      end
     end
 
     formula_text { 'V=I*R' }
@@ -20,20 +26,9 @@ FactoryBot.define do
     test
     association :author, factory: :admin
 
-    factory :question_with_parameters do
-      transient do
-        parameters do
-          {
-            'I' => { minimum: 2, maximum: 50, step: 1, unit: 'А' },
-            'R' => { minimum: 100, maximum: 100_000, step: 100, unit: 'Ом' }
-          }
-        end
-      end
-
-      after(:create) do |question, evaluator|
-        evaluator.parameters.each do |name, info|
-          create(:parameter, question: question, name: name, **info)
-        end
+    after(:create) do |question, evaluator|
+      evaluator.parameters.each do |name, info|
+        create(:parameter, question: question, name: name, **info)
       end
     end
   end
