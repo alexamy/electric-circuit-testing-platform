@@ -8,7 +8,7 @@ feature 'User can start test', "
   I would like to start testing
 " do
   given(:test) { create(:test) }
-  given!(:question) { create(:question, test: test, completion_time: 65, formula_text: 'x=_test') }
+  given!(:question) { create(:question, test: test, completion_time: 65, formula_text: 'x=_test', parameters: { '_test' => {} }) }
   given(:user) { create(:user) }
 
   scenario 'Unauthenticated user tries to start testing' do
