@@ -11,5 +11,10 @@ RSpec.describe QuestionSeed, type: :task do
         described_class.seed
       end.to change(Question, :count).by(2)
     end
+
+    it 'start with specified index' do
+      described_class.seed
+      expect(Question.first.id).to eq 1
+    end
   end
 end
