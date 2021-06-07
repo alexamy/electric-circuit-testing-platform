@@ -7,9 +7,8 @@ module Questions
       name: 'Раздел 1',
       target_score: 6
     }
-    START_ID = 1
-    QUESTIONS = [
-      {
+    QUESTIONS = {
+      1 => {
         scheme_path: 'lib/assets/schemes/101.png',
         text: 'Вычислить показание вольтметра XMM1',
         answer_unit: 'В',
@@ -22,7 +21,7 @@ module Questions
           'VCC' => { minimum: 2, maximum: 50, step: 1, unit: 'В' }
         }
       },
-      {
+      2 => {
         scheme_path: 'lib/assets/schemes/102.png',
         text: 'Вычислить показание вольтметра XMM1',
         answer_unit: 'В',
@@ -36,6 +35,6 @@ module Questions
           'VCC' => { minimum: 2, maximum: 50, step: 1, unit: 'В' }
         }
       }
-    ]
+    }
   end
 end

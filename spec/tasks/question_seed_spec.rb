@@ -36,7 +36,7 @@ RSpec.describe QuestionSeed, type: :task do
       end
     end
 
-    it 'throws if no admin email provided' do
+    it 'raises if no admin email provided' do
       expect { factory.seed('') }.to raise_error ArgumentError
     end
   end
@@ -54,9 +54,8 @@ RSpec.describe QuestionSeed, type: :task do
 
     it 'returns valid modules' do
       factory.data.each do |result|
-        expect(result::QUESTIONS).to be_present
-        expect(result::START_ID).to be_present
         expect(result::TEST).to be_present
+        expect(result::QUESTIONS).to be_present
       end
     end
   end

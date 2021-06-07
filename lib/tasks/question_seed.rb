@@ -10,15 +10,15 @@ class QuestionSeed
 
     data.each do |collection|
       test = Test.find_or_create_by(**collection::TEST)
-      seed_by(collection::QUESTIONS, collection::START_ID, test: test, author: admin)
+      seed_by(collection::QUESTIONS, test: test, author: admin)
     end
   end
 
-  def self.seed_by(questions, start_id, **kwargs)
-    questions.map.with_index(start_id) do |info, id|
+  def self.seed_by(questions, **attributes)
+    questions.map do |id, info|
       next if Question.find_by(id: id)
 
-      FactoryBot.create(:question, id: id, **info, **kwargs)
+      FactoryBot.create(:question, id: id, **info, **attributes)
     end
   end
 
