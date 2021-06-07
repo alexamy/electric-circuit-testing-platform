@@ -6,12 +6,14 @@ require:
 AllCops:
   NewCops: enable
   Exclude:
-    - db/**/*
-    - config/**/*
-    - bin/**/*
-    - node_modules/**/*
-    - lib/tasks/questions/**/*
-    - !ruby/regexp /old_and_unused\.rb$/
+    - '**/tmp/**/*'
+    - '**/templates/**/*'
+    - '**/vendor/**/*'
+    - '**/node_modules/**/*'
+    - 'bin/**/*'
+    - 'db/**/*'
+    - 'config/**/*'
+    - 'lib/tasks/questions/**/*'
 
 Layout/EmptyLinesAroundBlockBody:
   Enabled: false
