@@ -38,7 +38,7 @@ RSpec.describe QuestionSeed, type: :task do
 
   describe '.seed_by' do
     it 'returns questions' do
-      expect(factory.seed_by({1 => attributes_for(:question)})).to all be_instance_of(Question)
+      expect(factory.seed_by({ 1 => attributes_for(:question) })).to all be_instance_of(Question)
     end
   end
 
