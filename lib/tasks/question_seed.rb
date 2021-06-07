@@ -3,6 +3,10 @@
 require_relative 'questions/chapter_1'
 
 class QuestionSeed
+  def self.data
+    [Questions::Chapter1]
+  end
+
   def self.seed(author_email)
     raise ArgumentError, 'Blank email argument!' if author_email.blank?
 
@@ -15,14 +19,10 @@ class QuestionSeed
   end
 
   def self.seed_by(questions, **attributes)
-    questions.map do |id, info|
+    questions.each do |id, info|
       next if Question.find_by(id: id)
 
       FactoryBot.create(:question, id: id, **info, **attributes)
     end
-  end
-
-  def self.data
-    [Questions::Chapter1]
   end
 end
