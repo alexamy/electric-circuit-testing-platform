@@ -37,5 +37,12 @@ RSpec.describe QuestionSeed, type: :task do
     it 'returns modules' do
       expect(factory.data).to all be_instance_of(Module)
     end
+
+    it 'returns valid modules' do
+      factory.data.each do |result|
+        expect(result::QUESTIONS).to be_present
+        expect(result::START_ID).to be_present
+      end
+    end
   end
 end
