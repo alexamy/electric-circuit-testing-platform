@@ -35,7 +35,7 @@ module Questions
       },
       3 => {
         scheme_path: 'lib/assets/schemes/203.png',
-        text: 'Определить мощность, рассеиваемую резистором R1',
+        text: 'Определить мощность, рассеиваемую резистором R2',
         answer_unit: 'Вт',
         precision: 2,
         completion_time: 60,
@@ -43,6 +43,7 @@ module Questions
         parameters: {
           'R1' => { minimum: 100, maximum: 10_000, step: 100, unit: 'Ом' },
           'R2' => { minimum: 100, maximum: 10_000, step: 100, unit: 'Ом' },
+          'R5' => { minimum: 100, maximum: 10_000, step: 100, unit: 'Ом' },
           'VCC' => { minimum: 10, maximum: 50, step: 1, unit: 'В' }
         }
       },
@@ -56,6 +57,53 @@ module Questions
         parameters: {
           'R1' => { minimum: 100, maximum: 10_000, step: 100, unit: 'Ом' },
           'R2' => { minimum: 100, maximum: 10_000, step: 100, unit: 'Ом' },
+          'R3' => { minimum: 100, maximum: 10_000, step: 100, unit: 'Ом' },
+          'R5' => { minimum: 100, maximum: 10_000, step: 100, unit: 'Ом' },
+          'VCC' => { minimum: 10, maximum: 50, step: 1, unit: 'В' }
+        }
+      },
+      5 => {
+        scheme_path: 'lib/assets/schemes/204.png',
+        text: 'Определить мощность, рассеиваемую резистором R5',
+        answer_unit: 'Вт',
+        precision: 2,
+        completion_time: 60,
+        formula_text: "Rx=R1*R5/(R1+R5)\nRy=R2*R3/(R2+R3)\nI=Vcc/(Rx+Ry)\nP=(Vcc-I*Ry)^2/R5",
+        parameters: {
+          'R1' => { minimum: 100, maximum: 10_000, step: 100, unit: 'Ом' },
+          'R2' => { minimum: 100, maximum: 10_000, step: 100, unit: 'Ом' },
+          'R3' => { minimum: 100, maximum: 10_000, step: 100, unit: 'Ом' },
+          'R5' => { minimum: 100, maximum: 10_000, step: 100, unit: 'Ом' },
+          'VCC' => { minimum: 10, maximum: 50, step: 1, unit: 'В' }
+        }
+      },
+      6 => {
+        scheme_path: 'lib/assets/schemes/204.png',
+        text: 'Определить мощность, рассеиваемую резистором R2',
+        answer_unit: 'Вт',
+        precision: 2,
+        completion_time: 60,
+        formula_text: "Rx=R1*R5/(R1+R5)\nRy=R2*R3/(R2+R3)\nI=Vcc/(Rx+Ry)\nP=(Vcc-I*Rx)^2/R2",
+        parameters: {
+          'R1' => { minimum: 100, maximum: 10_000, step: 100, unit: 'Ом' },
+          'R2' => { minimum: 100, maximum: 10_000, step: 100, unit: 'Ом' },
+          'R3' => { minimum: 100, maximum: 10_000, step: 100, unit: 'Ом' },
+          'R5' => { minimum: 100, maximum: 10_000, step: 100, unit: 'Ом' },
+          'VCC' => { minimum: 10, maximum: 50, step: 1, unit: 'В' }
+        }
+      },
+      7 => {
+        scheme_path: 'lib/assets/schemes/204.png',
+        text: 'Определить мощность, рассеиваемую резистором R3',
+        answer_unit: 'Вт',
+        precision: 2,
+        completion_time: 60,
+        formula_text: "Rx=R1*R5/(R1+R5)\nRy=R2*R3/(R2+R3)\nI=Vcc/(Rx+Ry)\nP=(Vcc-I*Rx)^2/R3",
+        parameters: {
+          'R1' => { minimum: 100, maximum: 10_000, step: 100, unit: 'Ом' },
+          'R2' => { minimum: 100, maximum: 10_000, step: 100, unit: 'Ом' },
+          'R3' => { minimum: 100, maximum: 10_000, step: 100, unit: 'Ом' },
+          'R5' => { minimum: 100, maximum: 10_000, step: 100, unit: 'Ом' },
           'VCC' => { minimum: 10, maximum: 50, step: 1, unit: 'В' }
         }
       }
