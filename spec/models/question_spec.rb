@@ -71,7 +71,8 @@ RSpec.describe Question, type: :model do
 
     it 'creates parameters' do
       expect do
-        model.create!(**attributes_for(:question), formula_text: 'x=y', author: author, test: test)
+        question = model.create!(**attributes_for(:question), formula_text: 'x=y', author: author, test: test)
+        question.create_parameters
       end.to change(Parameter, :count).by(1)
     end
 
