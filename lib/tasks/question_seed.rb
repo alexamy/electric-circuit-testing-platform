@@ -3,11 +3,12 @@
 require 'require_all'
 require_rel 'questions'
 
-class QuestionSeed
+module QuestionSeed
   def self.data
     [Questions::Chapter1]
   end
 
+  # :reek:TooManyStatements
   def self.seed(author_email)
     raise ArgumentError, 'Blank email argument!' if author_email.blank?
 
