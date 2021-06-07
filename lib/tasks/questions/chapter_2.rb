@@ -53,7 +53,7 @@ module Questions
         answer_unit: 'Вт',
         precision: 2,
         completion_time: 60,
-        formula_text: "Rx=R1*R5/(R1+R5)\nRy=R2*R3/(R2+R3)\nI=Vcc/(Rx+Ry)\nP=(Vcc-I*Ry)^2/R1",
+        formula_text: "Rx=R1*R5/(R1+R5)\nRy=R2*R3/(R2+R3)\nI=VCC/(Rx+Ry)\nP=(VCC-I*Ry)^2/R1",
         parameters: {
           'R1' => { minimum: 100, maximum: 10_000, step: 100, unit: 'Ом' },
           'R2' => { minimum: 100, maximum: 10_000, step: 100, unit: 'Ом' },
@@ -68,7 +68,7 @@ module Questions
         answer_unit: 'Вт',
         precision: 2,
         completion_time: 60,
-        formula_text: "Rx=R1*R5/(R1+R5)\nRy=R2*R3/(R2+R3)\nI=Vcc/(Rx+Ry)\nP=(Vcc-I*Ry)^2/R5",
+        formula_text: "Rx=R1*R5/(R1+R5)\nRy=R2*R3/(R2+R3)\nI=VCC/(Rx+Ry)\nP=(VCC-I*Ry)^2/R5",
         parameters: {
           'R1' => { minimum: 100, maximum: 10_000, step: 100, unit: 'Ом' },
           'R2' => { minimum: 100, maximum: 10_000, step: 100, unit: 'Ом' },
@@ -83,7 +83,7 @@ module Questions
         answer_unit: 'Вт',
         precision: 2,
         completion_time: 60,
-        formula_text: "Rx=R1*R5/(R1+R5)\nRy=R2*R3/(R2+R3)\nI=Vcc/(Rx+Ry)\nP=(Vcc-I*Rx)^2/R2",
+        formula_text: "Rx=R1*R5/(R1+R5)\nRy=R2*R3/(R2+R3)\nI=VCC/(Rx+Ry)\nP=(VCC-I*Rx)^2/R2",
         parameters: {
           'R1' => { minimum: 100, maximum: 10_000, step: 100, unit: 'Ом' },
           'R2' => { minimum: 100, maximum: 10_000, step: 100, unit: 'Ом' },
@@ -98,7 +98,7 @@ module Questions
         answer_unit: 'Вт',
         precision: 2,
         completion_time: 60,
-        formula_text: "Rx=R1*R5/(R1+R5)\nRy=R2*R3/(R2+R3)\nI=Vcc/(Rx+Ry)\nP=(Vcc-I*Rx)^2/R3",
+        formula_text: "Rx=R1*R5/(R1+R5)\nRy=R2*R3/(R2+R3)\nI=VCC/(Rx+Ry)\nP=(VCC-I*Rx)^2/R3",
         parameters: {
           'R1' => { minimum: 100, maximum: 10_000, step: 100, unit: 'Ом' },
           'R2' => { minimum: 100, maximum: 10_000, step: 100, unit: 'Ом' },
