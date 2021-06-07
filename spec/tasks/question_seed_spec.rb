@@ -6,22 +6,34 @@ Rails.application.load_tasks
 
 RSpec.describe QuestionSeed, type: :task do
   let(:factory) { described_class }
+  let!(:admin) { create(:admin, email: 'test@test.com') }
 
   describe '.seed' do
-    it 'populate questions' do
-      expect do
-        factory.seed
-      end.to change(Question, :count).by_at_least(1)
+    let(:seed) { factory.seed('test@test.com') }
+
+    it 'populates tests' do
+      expect { seed }.to change(Test, :count).by_at_least(1)
     end
 
-    it 'start with specified index' do
-      factory.seed
+    it 'populates questions' do
+      expect { seed }.to change(Question, :count).by_at_least(1)
+    end
+
+    it 'starts with specified index' do
+      seed
       expect(Question.first.id).to eq 1
     end
 
-    it 'ignores existing questions' do
-      factory.seed
-      expect { factory.seed }.not_to change(Question, :count)
+    it 'ignores existing records' do
+      factory.seed('test@test.com')
+      expect { factory.seed('test@test.com') }.not_to raise_error
+    end
+
+    it 'set author of questions to provided admin' do
+      seed
+      Question.all.each do |question|
+        expect(question.author).to eq admin
+      end
     end
   end
 
@@ -40,6 +52,7 @@ RSpec.describe QuestionSeed, type: :task do
       factory.data.each do |result|
         expect(result::QUESTIONS).to be_present
         expect(result::START_ID).to be_present
+        expect(result::TEST).to be_present
       end
     end
   end

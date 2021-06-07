@@ -5,7 +5,7 @@ require_relative 'question_seed'
 
 namespace :seed do
   desc 'Generate questions'
-  task questions: [:environment] do
-    QuestionSeed.seed
+  task :questions, [:author_email] => [:environment] do |_, args|
+    QuestionSeed.seed(args.author_email)
   end
 end

@@ -3,6 +3,11 @@
 # rubocop:disable all
 module Questions
   module Chapter1
+    TEST = {
+      id: 1,
+      name: 'Раздел 1',
+      target_score: 6
+    }
     START_ID = 1
     QUESTIONS = [
       {
