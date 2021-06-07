@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# :reek:UtilityFunction
 def parameters_to_hash(parameters)
   return parameters if parameters.is_a?(Hash)
 
