@@ -25,7 +25,7 @@ RSpec.describe Question, type: :model do
     end
 
     it 'is valid for correct formula' do
-      expect(build(:question, formula_text: 'x=y', parameters: { 'y' => {} })).to be_valid
+      expect(build(:question, formula_text: 'x=y', parameters: %w[y])).to be_valid
     end
   end
 
@@ -77,7 +77,7 @@ RSpec.describe Question, type: :model do
     end
 
     describe 'formula update' do
-      let!(:question) { create(:question, formula_text: 'x=y*z', parameters: { 'y' => {}, 'z' => {} }, author: author, test: test) }
+      let!(:question) { create(:question, formula_text: 'x=y*z', parameters: %w[y z], author: author, test: test) }
 
       it 'removes unused parameters' do
         expect do

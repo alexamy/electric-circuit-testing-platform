@@ -7,7 +7,7 @@ RSpec.describe Admin::ParametersController, type: :controller do
   let!(:question) do
     create(:question, author: admin,
                       formula_text: 'X=I',
-                      parameters: { 'I' => {} })
+                      parameters: %w[I])
   end
 
   before { login(admin) }

@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe Parameter, type: :model do
   describe 'validations' do
-    let!(:question) { create(:question, formula_text: 'x=y', parameters: { 'y' => {} }) }
+    let!(:question) { create(:question, formula_text: 'x=y', parameters: %w[y]) }
 
     it { is_expected.to validate_presence_of :minimum }
     it { is_expected.to validate_presence_of :maximum }
