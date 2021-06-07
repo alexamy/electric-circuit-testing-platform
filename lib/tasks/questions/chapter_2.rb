@@ -6,8 +6,8 @@ module Questions
       name: 'Раздел 2',
       target_score: 6
     }
-    QUESTIONS = [
-      {
+    QUESTIONS = {
+      1 => {
         scheme_path: 'lib/assets/schemes/201.png',
         text: 'Определить мощность, рассеиваемую резистором R1',
         answer_unit: 'Вт',
@@ -20,7 +20,7 @@ module Questions
           'VCC' => { minimum: 2, maximum: 50, step: 1, unit: 'В' }
         }
       },
-      {
+      2 => {
         scheme_path: 'lib/assets/schemes/201.png',
         text: 'Определить мощность, рассеиваемую резистором R2',
         answer_unit: 'Вт',
@@ -33,7 +33,7 @@ module Questions
           'VCC' => { minimum: 2, maximum: 50, step: 1, unit: 'В' }
         }
       },
-      {
+      3 => {
         scheme_path: 'lib/assets/schemes/203.png',
         text: 'Определить мощность, рассеиваемую резистором R1',
         answer_unit: 'Вт',
@@ -46,7 +46,7 @@ module Questions
           'VCC' => { minimum: 10, maximum: 50, step: 1, unit: 'В' }
         }
       },
-      {
+      4 => {
         scheme_path: 'lib/assets/schemes/204.png',
         text: 'Определить мощность, рассеиваемую резистором R1',
         answer_unit: 'Вт',
@@ -59,6 +59,6 @@ module Questions
           'VCC' => { minimum: 10, maximum: 50, step: 1, unit: 'В' }
         }
       }
-    ]
+    }
   end
 end

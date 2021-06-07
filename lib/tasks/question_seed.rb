@@ -23,7 +23,7 @@ module QuestionSeed
   end
 
   def self.seed_by(questions, **attributes)
-    questions.map do |info|
+    questions.map do |_, info|
       FactoryBot.create(:question, **info, **attributes)
     end
   end

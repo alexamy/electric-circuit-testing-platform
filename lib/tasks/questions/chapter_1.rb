@@ -6,8 +6,8 @@ module Questions
       name: 'Раздел 1',
       target_score: 6
     }
-    QUESTIONS = [
-      {
+    QUESTIONS = {
+      1 => {
         scheme_path: 'lib/assets/schemes/101.png',
         text: 'Вычислить показание вольтметра XMM1',
         answer_unit: 'В',
@@ -20,7 +20,7 @@ module Questions
           'VCC' => { minimum: 2, maximum: 50, step: 1, unit: 'В' }
         }
       },
-      {
+      2 => {
         scheme_path: 'lib/assets/schemes/102.png',
         text: 'Вычислить показание вольтметра XMM1',
         answer_unit: 'В',
@@ -34,7 +34,7 @@ module Questions
           'VCC' => { minimum: 2, maximum: 50, step: 1, unit: 'В' }
         }
       },
-      {
+      3 => {
         scheme_path: 'lib/assets/schemes/103.png',
         text: 'Вычислить показание вольтметра XMM1',
         answer_unit: 'В',
@@ -48,7 +48,7 @@ module Questions
           'VCC' => { minimum: 2, maximum: 50, step: 1, unit: 'В' }
         }
       },
-      {
+      4 => {
         scheme_path: 'lib/assets/schemes/104.png',
         text: 'Вычислить показание вольтметра XMM1',
         answer_unit: 'В',
@@ -63,7 +63,7 @@ module Questions
           'VCC' => { minimum: 2, maximum: 50, step: 1, unit: 'В' }
         }
       },
-      {
+      5 => {
         scheme_path: 'lib/assets/schemes/105.png',
         text: 'Вычислить показание вольтметра XMM1',
         answer_unit: 'В',
@@ -78,7 +78,7 @@ module Questions
           'VCC' => { minimum: 2, maximum: 50, step: 1, unit: 'В' }
         }
       },
-      {
+      6 => {
         scheme_path: 'lib/assets/schemes/106.png',
         text: 'Вычислить показание вольтметра XMM1',
         answer_unit: 'В',
@@ -94,6 +94,6 @@ module Questions
           'VCC' => { minimum: 2, maximum: 50, step: 1, unit: 'В' }
         }
       }
-    ]
+    }
   end
 end
