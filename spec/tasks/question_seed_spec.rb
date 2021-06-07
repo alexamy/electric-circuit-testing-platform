@@ -35,6 +35,10 @@ RSpec.describe QuestionSeed, type: :task do
         expect(question.author).to eq admin
       end
     end
+
+    it 'throws if no admin email provided' do
+      expect { factory.seed('') }.to raise_error ArgumentError
+    end
   end
 
   describe '.seed_by' do

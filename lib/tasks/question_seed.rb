@@ -4,6 +4,8 @@ require_relative 'questions/chapter_1'
 
 class QuestionSeed
   def self.seed(author_email)
+    raise ArgumentError, 'Blank email argument!' if author_email.blank?
+
     admin = Admin.find_by!(email: author_email)
 
     data.each do |collection|
