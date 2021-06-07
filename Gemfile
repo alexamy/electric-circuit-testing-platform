@@ -64,4 +64,5 @@ gem 'devise', '~> 4.7'
 gem 'kaminari', '~> 1.2'
 gem 'pry', '~> 0.14.0'
 gem 'rails-i18n', '~> 6.0'
+gem 'require_all', '~> 3.0', require: false
 gem 'slim-rails', '~> 3.2'

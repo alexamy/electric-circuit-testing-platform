@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
-require_relative 'questions/chapter_1'
+require 'require_all'
+require_rel 'questions'
 
 class QuestionSeed
   def self.data
