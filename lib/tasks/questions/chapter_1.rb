@@ -15,8 +15,8 @@ module Questions
         completion_time: 60,
         formula_text: 'Vxmm1=VCC*R2/(R1+R2)',
         parameters: {
-          'R1' => { minimum: 100, maximum: 100_000, step: 100, unit: 'Ом' },
-          'R2' => { minimum: 100, maximum: 100_000, step: 100, unit: 'Ом' },
+          'R1' => { minimum: 100, maximum: 1_000_000, step: 100, unit: 'Ом' },
+          'R2' => { minimum: 100, maximum: 1_000_000, step: 100, unit: 'Ом' },
           'VCC' => { minimum: 2, maximum: 50, step: 1, unit: 'В' }
         }
       },
@@ -28,9 +28,9 @@ module Questions
         completion_time: 60,
         formula_text: "Rx=R2*R3/(R2+R3)\nVxmm1=VCC*Rx/(R1+Rx)",
         parameters: {
-          'R1' => { minimum: 100, maximum: 100_000, step: 100, unit: 'Ом' },
-          'R2' => { minimum: 100, maximum: 100_000, step: 100, unit: 'Ом' },
-          'R3' => { minimum: 100, maximum: 100_000, step: 100, unit: 'Ом' },
+          'R1' => { minimum: 100, maximum: 1_000_000, step: 100, unit: 'Ом' },
+          'R2' => { minimum: 100, maximum: 1_000_000, step: 100, unit: 'Ом' },
+          'R3' => { minimum: 100, maximum: 1_000_000, step: 100, unit: 'Ом' },
           'VCC' => { minimum: 2, maximum: 50, step: 1, unit: 'В' }
         }
       },
@@ -42,9 +42,9 @@ module Questions
         completion_time: 60,
         formula_text: "Rx=R1*R3/(R1+R3)\nVxmm1=VCC*R2/(Rx+R2)",
         parameters: {
-          'R1' => { minimum: 100, maximum: 100_000, step: 100, unit: 'Ом' },
-          'R2' => { minimum: 100, maximum: 100_000, step: 100, unit: 'Ом' },
-          'R3' => { minimum: 100, maximum: 100_000, step: 100, unit: 'Ом' },
+          'R1' => { minimum: 100, maximum: 1_000_000, step: 100, unit: 'Ом' },
+          'R2' => { minimum: 100, maximum: 1_000_000, step: 100, unit: 'Ом' },
+          'R3' => { minimum: 100, maximum: 1_000_000, step: 100, unit: 'Ом' },
           'VCC' => { minimum: 2, maximum: 50, step: 1, unit: 'В' }
         }
       },
@@ -56,10 +56,10 @@ module Questions
         completion_time: 60,
         formula_text: "Rx=R1*R4/(R1+R4)\nRy=R2*R3/(R2+R3)\nVxmm1=VCC*Ry/(Rx+Ry)",
         parameters: {
-          'R1' => { minimum: 100, maximum: 100_000, step: 100, unit: 'Ом' },
-          'R2' => { minimum: 100, maximum: 100_000, step: 100, unit: 'Ом' },
-          'R3' => { minimum: 100, maximum: 100_000, step: 100, unit: 'Ом' },
-          'R4' => { minimum: 100, maximum: 100_000, step: 100, unit: 'Ом' },
+          'R1' => { minimum: 100, maximum: 1_000_000, step: 100, unit: 'Ом' },
+          'R2' => { minimum: 100, maximum: 1_000_000, step: 100, unit: 'Ом' },
+          'R3' => { minimum: 100, maximum: 1_000_000, step: 100, unit: 'Ом' },
+          'R4' => { minimum: 100, maximum: 1_000_000, step: 100, unit: 'Ом' },
           'VCC' => { minimum: 2, maximum: 50, step: 1, unit: 'В' }
         }
       },
@@ -71,10 +71,10 @@ module Questions
         completion_time: 60,
         formula_text: "Vxmm1=VCC*(R2/(R1+R2) - R3/(R3+R4))",
         parameters: {
-          'R1' => { minimum: 100, maximum: 100_000, step: 100, unit: 'Ом' },
-          'R2' => { minimum: 100, maximum: 100_000, step: 100, unit: 'Ом' },
-          'R3' => { minimum: 100, maximum: 100_000, step: 100, unit: 'Ом' },
-          'R4' => { minimum: 100, maximum: 100_000, step: 100, unit: 'Ом' },
+          'R1' => { minimum: 100, maximum: 1_000_000, step: 100, unit: 'Ом' },
+          'R2' => { minimum: 100, maximum: 1_000_000, step: 100, unit: 'Ом' },
+          'R3' => { minimum: 100, maximum: 1_000_000, step: 100, unit: 'Ом' },
+          'R4' => { minimum: 100, maximum: 1_000_000, step: 100, unit: 'Ом' },
           'VCC' => { minimum: 2, maximum: 50, step: 1, unit: 'В' }
         }
       },
@@ -86,11 +86,11 @@ module Questions
         completion_time: 60,
         formula_text: "Rx=R1*R3*R5/(R3*R5+R1*R5+R1*R3)\nRy=R2*R4/(R2+R4)\nVxmm1=VCC*Ry/(Rx+Ry)",
         parameters: {
-          'R1' => { minimum: 100, maximum: 100_000, step: 100, unit: 'Ом' },
-          'R2' => { minimum: 100, maximum: 100_000, step: 100, unit: 'Ом' },
-          'R3' => { minimum: 100, maximum: 100_000, step: 100, unit: 'Ом' },
-          'R4' => { minimum: 100, maximum: 100_000, step: 100, unit: 'Ом' },
-          'R5' => { minimum: 100, maximum: 100_000, step: 100, unit: 'Ом' },
+          'R1' => { minimum: 100, maximum: 1_000_000, step: 100, unit: 'Ом' },
+          'R2' => { minimum: 100, maximum: 1_000_000, step: 100, unit: 'Ом' },
+          'R3' => { minimum: 100, maximum: 1_000_000, step: 100, unit: 'Ом' },
+          'R4' => { minimum: 100, maximum: 1_000_000, step: 100, unit: 'Ом' },
+          'R5' => { minimum: 100, maximum: 1_000_000, step: 100, unit: 'Ом' },
           'VCC' => { minimum: 2, maximum: 50, step: 1, unit: 'В' }
         }
       }
