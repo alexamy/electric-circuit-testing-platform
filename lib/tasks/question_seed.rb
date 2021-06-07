@@ -5,7 +5,7 @@ require_rel 'questions'
 
 module QuestionSeed
   def self.data
-    [Questions::Chapter1]
+    [Questions::Chapter1, Questions::Chapter2]
   end
 
   # :reek:TooManyStatements
@@ -15,15 +15,18 @@ module QuestionSeed
     admin = Admin.find_by!(email: author_email)
 
     data.each do |collection|
-      next if Test.find_by(**collection::TEST)
+      test = collection::TEST
+      next if Test.find_by(**test)
 
-      test = Test.create!(**collection::TEST)
+      Rails.logger.info "Generating test #{test.name}"
+      test = Test.create!(**test)
       seed_by(collection::QUESTIONS, test: test, author: admin)
     end
   end
 
   def self.seed_by(questions, **attributes)
-    questions.map do |_, info|
+    questions.map do |index, info|
+      Rails.logger.info "Generating question #{index}"
       FactoryBot.create(:question, **info, **attributes)
     end
   end
