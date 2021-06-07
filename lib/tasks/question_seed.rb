@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require '../../spec/factories'
+require_relative 'questions/chapter_1'
 
 class QuestionSeed
   def self.seed; end
