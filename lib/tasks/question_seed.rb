@@ -13,16 +13,16 @@ class QuestionSeed
     admin = Admin.find_by!(email: author_email)
 
     data.each do |collection|
-      test = Test.find_or_create_by(**collection::TEST)
+      next if Test.find_by(**collection::TEST)
+
+      test = Test.create!(**collection::TEST)
       seed_by(collection::QUESTIONS, test: test, author: admin)
     end
   end
 
   def self.seed_by(questions, **attributes)
-    questions.each do |id, info|
-      next if Question.find_by(id: id)
-
-      FactoryBot.create(:question, id: id, **info, **attributes)
+    questions.map do |info|
+      FactoryBot.create(:question, **info, **attributes)
     end
   end
 end

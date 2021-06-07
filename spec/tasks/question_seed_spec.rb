@@ -19,11 +19,6 @@ RSpec.describe QuestionSeed, type: :task do
       expect { seed }.to change(Question, :count).by_at_least(1)
     end
 
-    it 'starts with specified index' do
-      seed
-      expect(Question.first.id).to eq 1
-    end
-
     it 'ignores existing records' do
       factory.seed('test@test.com')
       expect { factory.seed('test@test.com') }.not_to raise_error
@@ -43,7 +38,7 @@ RSpec.describe QuestionSeed, type: :task do
 
   describe '.seed_by' do
     it 'returns questions' do
-      expect(factory.seed_by([attributes_for(:question)], 1)).to all be_instance_of(Question)
+      expect(factory.seed_by([attributes_for(:question)])).to all be_instance_of(Question)
     end
   end
 
