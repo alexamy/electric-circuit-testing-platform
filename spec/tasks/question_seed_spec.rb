@@ -20,10 +20,8 @@ RSpec.describe QuestionSeed, type: :task do
     end
 
     it 'ignores existing questions' do
-      expect do
-        factory.seed
-        factory.seed
-      end.not_to raise_error
+      factory.seed
+      expect { factory.seed }.not_to change(Question, :count)
     end
   end
 
