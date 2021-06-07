@@ -8,7 +8,7 @@ feature 'User can view question', "
   I'd like to be able to view questions
 " do
   given(:admin) { create(:admin) }
-  given!(:questions) { create_list(:question, 3) }
+  given!(:questions) { create_list(:question, 3, comment: 'question comment') }
   given(:question) { questions.first }
 
   background { sign_in(admin) }

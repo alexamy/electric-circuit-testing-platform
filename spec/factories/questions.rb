@@ -8,10 +8,6 @@ def parameters_to_hash(parameters)
 end
 
 FactoryBot.define do
-  sequence :comment do |n|
-    "Comment of question ##{n}"
-  end
-
   factory :question do
     transient do
       scheme_path { 'spec/support/files/397KB.png' }
@@ -25,7 +21,7 @@ FactoryBot.define do
 
     formula_text { 'V=I*R' }
     text { 'Найти V' }
-    comment
+    comment { nil }
     precision { 0 }
     answer_unit { 'Unit' }
     completion_time { 5 } # seconds
