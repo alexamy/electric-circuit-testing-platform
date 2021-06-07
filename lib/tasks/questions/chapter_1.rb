@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
+# rubocop:disable all
 module Questions
-  # rubocop:disable all
   module Chapter1
     START_ID = 1
-    DATA = [
+    QUESTIONS = [
       {
         scheme_path: 'lib/assets/schemes/001.png',
         text: 'Вычислить показание вольтметра XMM1',
@@ -34,5 +34,5 @@ module Questions
       }
     ]
   end
-  # rubocop:enable all
 end
+# rubocop:enable all
