@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-# rubocop:disable all
 module Questions
   module Chapter1
     TEST = {
@@ -40,4 +39,3 @@ module Questions
     ]
   end
 end
-# rubocop:enable all
