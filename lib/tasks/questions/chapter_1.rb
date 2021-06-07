@@ -10,7 +10,7 @@ module Questions
     START_ID = 1
     QUESTIONS = [
       {
-        scheme_path: 'lib/assets/schemes/001.png',
+        scheme_path: 'lib/assets/schemes/101.png',
         text: 'Вычислить показание вольтметра XMM1',
         answer_unit: 'В',
         precision: 2,
@@ -23,7 +23,7 @@ module Questions
         }
       },
       {
-        scheme_path: 'lib/assets/schemes/002.png',
+        scheme_path: 'lib/assets/schemes/102.png',
         text: 'Вычислить показание вольтметра XMM1',
         answer_unit: 'В',
         precision: 2,
