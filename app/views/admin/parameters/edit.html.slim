@@ -15,15 +15,15 @@
 
         .form-group
           = param.label :minimum, class: 'form-label'
-          = param.number_field :minimum, class: 'form-input'
+          = param.number_field :minimum, step: :any, class: 'form-input'
 
         .form-group
           = param.label :maximum, class: 'form-label'
-          = param.number_field :maximum, class: 'form-input'
+          = param.number_field :maximum, step: :any, class: 'form-input'
 
         .form-group
           = param.label :step, class: 'form-label'
-          = param.number_field :step, class: 'form-input'
+          = param.number_field :step, step: :any, class: 'form-input'
 
         .form-group
           = param.label :unit, class: 'form-label'

@@ -34,7 +34,7 @@ module Formula
 
     def check_assignment_target
       entries.all? do |entry|
-        entry.split('=').map(&:strip).first =~ /^[a-z][a-z0-9]*$/i
+        entry.split('=').map(&:strip).first =~ /^[a-zа-я][a-zа-я0-9]*$/i
       end
     end
 

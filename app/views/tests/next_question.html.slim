@@ -28,9 +28,10 @@
       p
         | Количество знаков после запятой:
         =< @question.precision
-      p
-        | Единицы измерения:
-        =< @question.answer_unit
+      - unless @question.answer_unit.empty?
+        p
+          | Единицы измерения:
+          =< @question.answer_unit
 
     - if @question.scheme.attached?
       .mb-4.md:hidden

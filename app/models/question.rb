@@ -3,7 +3,7 @@
 class Question < ApplicationRecord
   include Authorable
 
-  validates :text, :formula, :formula_text, :precision, :answer_unit, presence: true
+  validates :text, :formula, :formula_text, :precision, presence: true
   validates :scheme, blob: { content_type: :image, size_range: 1..1.megabytes }
   validates :precision, numericality: {
     only_integer: true,

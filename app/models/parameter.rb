@@ -10,11 +10,16 @@ class Parameter < ApplicationRecord
   def generate_value
     return minimum unless step.positive?
 
-    offset = (maximum - minimum) / step + 1
-    minimum + rand(offset) * step
+    result = generate_value_raw
+    result.frac.zero? ? result.to_i : result
   end
 
   private
+
+  def generate_value_raw
+    offset = (maximum - minimum) / step + 1
+    minimum + rand(offset) * step.to_d
+  end
 
   def validates_formula_dependency
     return unless question
