@@ -49,7 +49,6 @@ module Questions
         completion_time: 60,
         formula_text: 'Uвых=U*Y/G',
         parameters: {
-          'R' => { minimum: 100, maximum: 2_000_000, step: 100, unit: 'Ом' },
           'U' => { minimum: 1, maximum: 50, step: 1, unit: 'В' },
           'G' => { minimum: 180, maximum: 320, step: 10, unit: '°' },
           'Y' => { minimum: 180, maximum: 320, step: 10, unit: '°' },
