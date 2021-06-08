@@ -13,6 +13,7 @@ feature 'Student can view report for test', "
   given!(:test) { create(:test, name: 'Test example', target_score: 6) }
   given!(:test_empty) { create(:test, name: 'Test example empty') }
   given!(:question) { create(:question, text: 'Sample question', completion_time: 60, test: test) }
+  given(:question_empty) { create(:question, text: 'Question without scheme', scheme: nil) }
 
   given!(:attempt) { create(:attempt, test: test, author: student) }
 
@@ -149,6 +150,19 @@ feature 'Student can view report for test', "
 
       scenario 'can see scheme' do
         expect(page).to have_selector "td[data-tooltip-image='#{rails_blob_path(question.scheme)}']"
+      end
+    end
+
+    describe 'views question without scheme' do
+      let!(:answer_for_no_scheme) do
+        create(:task, :correct, question: question_empty, attempt: attempt, author: student)
+      end
+
+      scenario 'can view' do
+        visit reports_student_path
+        click_on 'Test example'
+
+        expect(page).to have_content 'Question without scheme'
       end
     end
   end
