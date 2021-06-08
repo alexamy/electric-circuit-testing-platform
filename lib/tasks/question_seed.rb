@@ -4,6 +4,10 @@ require 'require_all'
 require_rel 'questions'
 
 module QuestionSeed
+  def self.log(message)
+    Rails.logger.tagged('SEED') { Rails.logger.info { message } }
+  end
+
   def self.data
     [Questions::Chapter1, Questions::Chapter2]
   end
@@ -18,7 +22,7 @@ module QuestionSeed
       test = collection::TEST
       next if Test.find_by(**test)
 
-      Rails.logger.info "Generating test #{test[:name]}"
+      log "Generating test #{test[:name]}"
       test = Test.create!(**test)
       seed_by(collection::QUESTIONS, test: test, author: admin)
     end
@@ -26,7 +30,7 @@ module QuestionSeed
 
   def self.seed_by(questions, **attributes)
     questions.map do |index, info|
-      Rails.logger.info "Generating question #{index}"
+      log "Generating question #{index}"
       FactoryBot.create(:question, **info, **attributes)
     end
   end
