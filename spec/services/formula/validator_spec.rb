@@ -46,6 +46,10 @@ RSpec.describe Formula::Validator, type: :service do
     expect(validator.call('X1=2')).to be true
   end
 
+  it 'checks assignment targets with russian letters' do
+    expect(validator.call('Uвых=2')).to be true
+  end
+
   it 'checks duplicate targets' do
     expect(validator.call("x=1 \n y=2 \n x=2")).to be false
   end
