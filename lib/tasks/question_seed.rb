@@ -4,6 +4,7 @@ require 'require_all'
 require_rel 'questions'
 
 module QuestionSeed
+  # :reek:DuplicateMethodCall
   def self.log(message)
     Rails.logger.tagged('SEED') { Rails.logger.info { message } }
   end

@@ -44,6 +44,9 @@ RSpec/Capybara/FeatureMethods:
 RSpec/ExampleLength:
   Enabled: false
 
+RSpec/LetSetup:
+  Enabled: false
+
 RSpec/MultipleExpectations:
   Enabled: false
 

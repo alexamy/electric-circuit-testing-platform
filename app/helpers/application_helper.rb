@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 # :reek:UtilityFunction
+# :reek:FeatureEnvy
 module ApplicationHelper
   def seconds_to_minsec(seconds)
     return '00:00' if seconds.negative? || seconds.zero?
@@ -12,6 +13,7 @@ module ApplicationHelper
     "#{minutes.to_s.rjust(2, '0')}:#{seconds_left.to_s.rjust(2, '0')}"
   end
 
+  # :reek:DuplicateMethodCall
   def task_report_scheme_data(report)
     return if report.scheme.blank?
 
