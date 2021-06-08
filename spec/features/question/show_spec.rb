@@ -14,32 +14,34 @@ feature 'User can view question', "
 
   background { sign_in(admin) }
 
-  scenario 'Admin views question list' do
-    visit admin_questions_path
+  describe 'Admin' do
+    scenario 'views question list' do
+      visit admin_questions_path
 
-    questions.each do |question|
-      expect(page).to have_content question.id
-      expect(page).to have_link question.text, href: admin_question_path(question)
+      questions.each do |question|
+        expect(page).to have_content question.id
+        expect(page).to have_link question.text, href: admin_question_path(question)
+      end
     end
-  end
 
-  scenario 'Admin views question' do
-    visit admin_question_path(question)
+    scenario 'views question' do
+      visit admin_question_path(question)
 
-    expect(page).to have_content(question.text)
-    expect(page).to have_content(question.comment)
-    expect(page).to have_content(question.formula_text)
-  end
+      expect(page).to have_content(question.text)
+      expect(page).to have_content(question.comment)
+      expect(page).to have_content(question.formula_text)
+    end
 
-  scenario 'Admin views example of question' do
-    visit admin_question_path(question)
+    scenario 'views example of question' do
+      visit admin_question_path(question)
 
-    expect(page).to have_selector '.question-example', text: 'Пример задания'
-  end
+      expect(page).to have_selector '.question-example', text: 'Пример задания'
+    end
 
-  scenario 'Admin views question without scheme' do
-    visit admin_question_path(question_without_scheme)
+    scenario 'views question without scheme' do
+      visit admin_question_path(question_without_scheme)
 
-    expect(page).not_to have_selector '.question-scheme'
+      expect(page).not_to have_selector '.question-scheme'
+    end
   end
 end
