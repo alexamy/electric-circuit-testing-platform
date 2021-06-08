@@ -9,9 +9,6 @@ feature 'Admin can edit question', "
 " do
   given(:admin) { create(:admin) }
   given!(:question) { create(:question, formula_text: 'x=y', parameters: %w[y]) }
-  given!(:question_long_text) do
-    create(:question, text: 'На какой угол Y относительно контакта, подключенного к нулевому потенциалу источника питания')
-  end
 
   background { sign_in(admin) }
 
@@ -38,11 +35,17 @@ feature 'Admin can edit question', "
       expect(page).to have_field 'Название', with: 't'
     end
 
-    scenario 'can see shortened version of question text' do
-      visit admin_questions_path
+    context 'when question has long text' do
+      given!(:question_long_text) do
+        create(:question, text: 'На какой угол Y относительно контакта, подключенного к нулевому потенциалу источника питания')
+      end
 
-      expect(page).not_to have_content 'На какой угол Y относительно контакта, подключенного к нулевому потенциалу источника питания'
-      expect(page).to have_content 'На какой угол Y относительно контакта, подключенного к нулевому потенциалу ис...'
+      scenario 'can see shortened version of question text' do
+        visit admin_questions_path
+
+        expect(page).not_to have_content 'На какой угол Y относительно контакта, подключенного к нулевому потенциалу источника питания'
+        expect(page).to have_content 'На какой угол Y относительно контакта, подключенного к нулевому потенциалу ис...'
+      end
     end
   end
 end
