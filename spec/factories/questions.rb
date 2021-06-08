@@ -10,7 +10,7 @@ end
 FactoryBot.define do
   factory :question do
     transient do
-      scheme_path { 'spec/support/files/397KB.png' }
+      scheme_path { nil }
       parameters do
         {
           'I' => { minimum: 2, maximum: 50, step: 1, unit: 'А' },
@@ -33,6 +33,10 @@ FactoryBot.define do
       parameters_to_hash(evaluator.parameters).each do |name, info|
         create(:parameter, question: question, name: name, **info)
       end
+    end
+
+    trait :with_scheme do
+      scheme_path { 'spec/support/files/397KB.png' }
     end
   end
 end

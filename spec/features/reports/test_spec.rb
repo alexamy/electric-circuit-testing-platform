@@ -12,7 +12,7 @@ feature 'Student can view report for test', "
 
   given!(:test) { create(:test, name: 'Test example', target_score: 6) }
   given!(:test_empty) { create(:test, name: 'Test example empty') }
-  given!(:question) { create(:question, text: 'Sample question', completion_time: 60, test: test) }
+  given!(:question) { create(:question, :with_scheme, text: 'Sample question', completion_time: 60, test: test) }
   given(:question_empty) { create(:question, text: 'Question without scheme', scheme: nil) }
 
   given!(:attempt) { create(:attempt, test: test, author: student) }

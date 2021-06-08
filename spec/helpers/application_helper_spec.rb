@@ -28,19 +28,19 @@ RSpec.describe ApplicationHelper, type: :helper do
   describe '#task_report_scheme_data' do
     let(:student) { create(:student) }
     let(:question) { create(:question) }
-    let(:question_without_scheme) { create(:question, scheme: nil) }
+    let(:question_with_scheme) { create(:question, :with_scheme) }
     let(:attempt) { create(:attempt, author: student) }
 
     let(:task) { create(:task, question: question) }
-    let(:task_without_scheme) { create(:task, question: question_without_scheme) }
+    let(:task_with_scheme) { create(:task, question: question_with_scheme) }
 
     it 'returns nil for task without scheme' do
-      report = Report::Task.new(task_without_scheme)
+      report = Report::Task.new(task)
       expect(task_report_scheme_data(report)).to be_nil
     end
 
     it 'returns data attributes for task with scheme' do
-      report = Report::Task.new(task)
+      report = Report::Task.new(task_with_scheme)
       result = task_report_scheme_data(report)
 
       expect(result).to be_instance_of Hash

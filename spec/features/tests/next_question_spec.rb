@@ -8,8 +8,10 @@ feature 'User can start test', "
   I would like to start testing
 " do
   given(:test) { create(:test) }
-  given!(:question) { create(:question, test: test, completion_time: 65, formula_text: 'x=_test', parameters: %w[_test]) }
   given(:user) { create(:user) }
+  given!(:question) do
+    create(:question, :with_scheme, test: test, completion_time: 65, formula_text: 'x=_test', parameters: %w[_test])
+  end
 
   scenario 'Unauthenticated user tries to start testing' do
     visit start_attempt_path(test)
