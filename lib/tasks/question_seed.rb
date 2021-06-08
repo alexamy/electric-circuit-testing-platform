@@ -9,7 +9,11 @@ module QuestionSeed
   end
 
   def self.data
-    [Questions::Chapter1, Questions::Chapter2]
+    [
+      Questions::Chapter1,
+      Questions::Chapter2,
+      Questions::Chapter3
+    ]
   end
 
   # :reek:TooManyStatements
