@@ -72,6 +72,14 @@ RSpec.describe Parameter, type: :model do
       it 'returns exact float values' do
         expect(results == results.map { |number| number.round(1) }).to be true
       end
+
+      it 'returns result greater or equal to minimum' do
+        expect(results).to all be >= 0.2
+      end
+
+      it 'returns result less than or equal to maximum when maximum is in range' do
+        expect(results).to all be <= 0.4
+      end
     end
   end
 end
