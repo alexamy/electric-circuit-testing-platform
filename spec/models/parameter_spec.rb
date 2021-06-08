@@ -32,6 +32,10 @@ RSpec.describe Parameter, type: :model do
       let(:parameter) { build(:parameter, minimum: 10, maximum: 100, step: step) }
       let(:results) { Array.new(100) { parameter.generate_value } }
 
+      it 'returns integer' do
+        expect(results).to all be_an_instance_of Integer
+      end
+
       it 'returns result greater or equal to minimum' do
         expect(results).to all be >= 10
       end
