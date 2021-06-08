@@ -3,7 +3,6 @@
 require 'require_all'
 require_rel 'questions'
 
-# rubocop:disable Rails/Output
 module QuestionSeed
   def self.data
     [Questions::Chapter1, Questions::Chapter2]
@@ -19,7 +18,7 @@ module QuestionSeed
       test = collection::TEST
       next if Test.find_by(**test)
 
-      puts "Generating test #{test[:name]}"
+      Rails.logger.info "Generating test #{test[:name]}"
       test = Test.create!(**test)
       seed_by(collection::QUESTIONS, test: test, author: admin)
     end
@@ -27,9 +26,8 @@ module QuestionSeed
 
   def self.seed_by(questions, **attributes)
     questions.map do |index, info|
-      puts "Generating question #{index}"
+      Rails.logger.info "Generating question #{index}"
       FactoryBot.create(:question, **info, **attributes)
     end
   end
 end
-# rubocop:enable Rails/Output
