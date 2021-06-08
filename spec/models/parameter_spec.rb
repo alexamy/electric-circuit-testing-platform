@@ -63,15 +63,20 @@ RSpec.describe Parameter, type: :model do
       context 'with non-multiple step' do
         let(:step) { 80 }
 
-        it 'returns minimimum' do
+        it 'returns less than maximum' do
           expect(results).to all be < 100
         end
       end
     end
 
     describe 'float intervals' do
-      let(:parameter) { build(:parameter, minimum: 0.2, maximum: 0.4, step: 0.1) }
+      let(:step) { 0.1 }
+      let(:parameter) { build(:parameter, minimum: 0.2, maximum: 0.4, step: step) }
       let(:results) { Array.new(100) { parameter.generate_value } }
+
+      it 'returns big decimal' do
+        expect(results).to all be_an_instance_of BigDecimal
+      end
 
       it 'returns exact float values' do
         expect(results == results.map { |number| number.round(1) }).to be true
@@ -83,6 +88,14 @@ RSpec.describe Parameter, type: :model do
 
       it 'returns result less than or equal to maximum when maximum is in range' do
         expect(results).to all be <= 0.4
+      end
+
+      context 'with non-multiple step' do
+        let(:step) { 0.15 }
+
+        it 'returns less than maximum' do
+          expect(results).to all be < 0.4
+        end
       end
     end
   end
