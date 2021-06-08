@@ -11,7 +11,7 @@ class Parameter < ApplicationRecord
     return minimum unless step.positive?
 
     offset = (maximum - minimum) / step + 1
-    minimum + rand(offset) * step
+    minimum + rand(offset) * step.to_d
   end
 
   private
