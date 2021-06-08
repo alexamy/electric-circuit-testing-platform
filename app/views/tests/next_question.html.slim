@@ -17,9 +17,9 @@
   .block
     .mb-4
       p Задание
-      p = @question.text
+      .question-text = simple_format @question.text
     .mb-4
-      = @question.comment
+      .question-comment = simple_format @question.comment
     .mb-4
       p Параметры схемы
       - @question.parameters.each do |parameter|

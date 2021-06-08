@@ -1,11 +1,11 @@
 .py-2
   p.italic = Question.human_attribute_name('text')
-  p = @question.text
+  .question-text = simple_format @question.text
 
 - if @question.comment.present?
   .py-2
     p.italic = Question.human_attribute_name('comment')
-    p = @question.comment
+    .question-comment = simple_format @question.comment
 
 .py-2
   p.italic = Question.human_attribute_name('completion_time')
@@ -13,7 +13,7 @@
 
 .py-2
   p.italic = Question.human_attribute_name('formula_text')
-  = simple_format(@question.formula_text)
+  .formula_text = simple_format @question.formula_text
 
 .flex.flex-col.md:flex-row
   .question-example.py-2

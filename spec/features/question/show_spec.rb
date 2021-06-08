@@ -11,6 +11,7 @@ feature 'User can view question', "
   given!(:questions) { create_list(:question, 3, comment: 'question comment') }
   given(:question) { questions.first }
   given(:question_without_scheme) { create(:question, scheme: nil) }
+  given(:question_multiline) { create(:question, text: "Line 1\nLine 2") }
 
   background { sign_in(admin) }
 
@@ -42,6 +43,14 @@ feature 'User can view question', "
       visit admin_question_path(question_without_scheme)
 
       expect(page).not_to have_selector '.question-scheme'
+    end
+
+    scenario 'views question with multiline text' do
+      visit admin_question_path(question_multiline)
+
+      within '.question-text' do
+        expect(page).to have_selector 'br'
+      end
     end
   end
 end
