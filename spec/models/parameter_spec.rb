@@ -2,6 +2,7 @@
 
 require 'rails_helper'
 
+# rubocop:disable RSpec/NestedGroups
 RSpec.describe Parameter, type: :model do
   describe 'validations' do
     let!(:question) { create(:question, formula_text: 'x=y', parameters: %w[y]) }
@@ -27,56 +28,51 @@ RSpec.describe Parameter, type: :model do
     before { srand(101) }
 
     describe 'integer intervals' do
-      it 'returns minimimum for zero step' do
-        parameter = build(:parameter, minimum: 10, maximum: 100, step: 0)
-
-        100.times.each do
-          expect(parameter.generate_value).to eq 10
-        end
-      end
-
-      it 'returns minimimum for negative step' do
-        parameter = build(:parameter, minimum: 10, maximum: 100, step: -10)
-
-        100.times.each do
-          expect(parameter.generate_value).to eq 10
-        end
-      end
+      let(:step) { 3 }
+      let(:parameter) { build(:parameter, minimum: 10, maximum: 100, step: step) }
+      let(:results) { Array.new(100) { parameter.generate_value } }
 
       it 'returns result greater or equal to minimum' do
-        parameter = build(:parameter, minimum: 10, maximum: 100, step: 3)
-
-        100.times.each do
-          expect(parameter.generate_value).to be >= 10
-        end
-      end
-
-      it 'returns result less than maximum' do
-        parameter = build(:parameter, minimum: 10, maximum: 20, step: 4)
-
-        100.times.each do
-          expect(parameter.generate_value).to be < 20
-        end
+        expect(results).to all be >= 10
       end
 
       it 'returns result less than or equal to maximum when maximum is in range' do
-        parameter = build(:parameter, minimum: 10, maximum: 100, step: 3)
+        expect(results).to all be <= 100
+      end
 
-        100.times.each do
-          expect(parameter.generate_value).to be <= 100
+      context 'with zero step' do
+        let(:step) { 0 }
+
+        it 'returns minimimum' do
+          expect(results).to all eq 10
+        end
+      end
+
+      context 'with negative step' do
+        let(:step) { -10 }
+
+        it 'returns minimimum' do
+          expect(results).to all eq 10
+        end
+      end
+
+      context 'with non-multiple step' do
+        let(:step) { 80 }
+
+        it 'returns minimimum' do
+          expect(results).to all be < 100
         end
       end
     end
 
     describe 'float intervals' do
-      xit 'returns exact float values' do
-        parameter = build(:parameter, minimum: 0.2, maximum: 0.4, step: 0.1)
+      let(:parameter) { build(:parameter, minimum: 0.2, maximum: 0.4, step: 0.1) }
+      let(:results) { Array.new(100) { parameter.generate_value } }
 
-        100.times.each do
-          value = parameter.generate_value
-          expect(value == value.round(1)).to be true
-        end
+      it 'returns exact float values' do
+        expect(results == results.map { |number| number.round(1) }).to be true
       end
     end
   end
 end
+# rubocop:enable RSpec/NestedGroups
