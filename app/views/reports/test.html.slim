@@ -25,13 +25,8 @@
         tr.table-row.answer class="answer-#{report.id} #{report.correct? ? 'bg-green-100' : 'bg-red-100'}"
           td.table-cell
             = report.question.text
-          - if report.scheme.attached?
-            td.table-cell.arguments(data-tooltip-image=rails_blob_path(report.scheme)
-                                    data-hover-class="#{report.correct? ? 'bg-green-200' : 'bg-red-200'}")
-              = simple_format(report.arguments_text)
-          - else
-            td.table-cell.arguments
-              = simple_format(report.arguments_text)
+          = content_tag :td, class: 'table-cell arguments', data: task_report_scheme_data(report)
+            = simple_format(report.arguments_text)
           td.table-cell.correct-answer
             = report.correct_answer
           td.table-cell.user-answer

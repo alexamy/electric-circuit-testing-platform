@@ -11,4 +11,13 @@ module ApplicationHelper
 
     "#{minutes.to_s.rjust(2, '0')}:#{seconds_left.to_s.rjust(2, '0')}"
   end
+
+  def task_report_scheme_data(report)
+    return if report.scheme.blank?
+
+    {
+      tooltip_image: rails_blob_path(report.scheme),
+      hover_class: report.correct? ? 'bg-green-200' : 'bg-red-200'
+    }
+  end
 end
