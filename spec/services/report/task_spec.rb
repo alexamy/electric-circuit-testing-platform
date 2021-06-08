@@ -31,7 +31,8 @@ RSpec.describe Report::Task, type: :service do
   end
 
   let!(:attempt_other) { create(:attempt, test: test, author: student_other) }
-  let!(:answers_other) { create_list(:task, 5, :correct, question: question, attempt: attempt_other, author: student_other) }
+
+  before { create_list(:task, 5, :correct, question: question, attempt: attempt_other, author: student_other) }
 
   it 'sets task' do
     expect(report.task).to eq answer

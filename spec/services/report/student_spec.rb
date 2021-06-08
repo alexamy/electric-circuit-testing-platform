@@ -17,7 +17,8 @@ RSpec.describe Report::Student, type: :service do
   let!(:answer_wrong) { create(:task, :wrong, question: question, attempt: attempt, author: student) }
 
   let!(:attempt_other) { create(:attempt, test: test, author: student_other) }
-  let!(:answers_other) { create_list(:task, 5, :correct, question: question, attempt: attempt_other, author: student_other) }
+
+  before { create_list(:task, 5, :correct, question: question, attempt: attempt_other, author: student_other) }
 
   it 'sets user' do
     expect(report.user).to eq student

@@ -154,7 +154,7 @@ feature 'Student can view report for test', "
     end
 
     describe 'views question without scheme' do
-      let!(:answer_for_no_scheme) do
+      before do
         create(:task, :correct, question: question_empty, attempt: attempt, author: student)
       end
 
