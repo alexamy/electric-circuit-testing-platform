@@ -8,7 +8,8 @@ feature 'Admin can edit question', "
   I'd like to be able to edit question
 " do
   given(:admin) { create(:admin) }
-  given!(:question) { create(:question, formula_text: 'x=y', parameters: %w[y]) }
+
+  before { create(:question, formula_text: 'x=y', parameters: %w[y]) }
 
   background { sign_in(admin) }
 
@@ -36,7 +37,7 @@ feature 'Admin can edit question', "
     end
 
     context 'when question has long text' do
-      given!(:question_long_text) do
+      before do
         create(:question, text: 'На какой угол Y относительно контакта, подключенного к нулевому потенциалу источника питания')
       end
 
