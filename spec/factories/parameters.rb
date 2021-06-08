@@ -4,8 +4,8 @@ FactoryBot.define do
   factory :parameter do
     name { 'Parameter' }
     minimum { 1 }
-    maximum { 100 }
-    step { 10 }
+    maximum { 1 }
+    step { 1 }
     unit { 'Unit' }
     question
 

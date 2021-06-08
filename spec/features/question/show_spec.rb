@@ -8,31 +8,49 @@ feature 'User can view question', "
   I'd like to be able to view questions
 " do
   given(:admin) { create(:admin) }
-  given!(:questions) { create_list(:question, 3) }
+  given!(:questions) { create_list(:question, 3, comment: 'question comment') }
   given(:question) { questions.first }
+  given(:question_without_scheme) { create(:question, scheme: nil) }
+  given(:question_multiline) { create(:question, text: "Line 1\nLine 2") }
 
   background { sign_in(admin) }
 
-  scenario 'Admin views question list' do
-    visit admin_questions_path
+  describe 'Admin' do
+    scenario 'views question list' do
+      visit admin_questions_path
 
-    questions.each do |question|
-      expect(page).to have_content question.id
-      expect(page).to have_link question.text, href: admin_question_path(question)
+      questions.each do |question|
+        expect(page).to have_content question.id
+        expect(page).to have_link question.text, href: admin_question_path(question)
+      end
     end
-  end
 
-  scenario 'Admin views question' do
-    visit admin_question_path(question)
+    scenario 'views question' do
+      visit admin_question_path(question)
 
-    expect(page).to have_content(question.text)
-    expect(page).to have_content(question.comment)
-    expect(page).to have_content(question.formula_text)
-  end
+      expect(page).to have_content(question.text)
+      expect(page).to have_content(question.comment)
+      expect(page).to have_content(question.formula_text)
+    end
 
-  scenario 'Admin views example of question' do
-    visit admin_question_path(question)
+    scenario 'views example of question' do
+      visit admin_question_path(question)
 
-    expect(page).to have_selector '.question-example', text: 'Пример задания'
+      expect(page).to have_selector '.question-example', text: 'Пример задания'
+    end
+
+    scenario 'views question without scheme' do
+      visit admin_question_path(question_without_scheme)
+
+      expect(page).not_to have_selector '.question-scheme'
+    end
+
+    scenario 'views question with multiline text' do
+      visit admin_question_path(question_multiline)
+
+      within '.question-text' do
+        expect(page).to have_selector 'br'
+      end
+    end
   end
 end

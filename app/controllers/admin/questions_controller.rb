@@ -8,7 +8,7 @@ class Admin::QuestionsController < Admin::BaseController
   def create
     @question = Question.new(question_params)
 
-    if @question.save
+    if @question.save && @question.create_parameters
       redirect_to edit_admin_question_parameters_path(@question), notice: t('.successful')
     else
       render :new

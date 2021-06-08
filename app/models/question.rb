@@ -4,7 +4,7 @@ class Question < ApplicationRecord
   include Authorable
 
   validates :text, :formula, :formula_text, :precision, :answer_unit, presence: true
-  validates :scheme, presence: true, blob: { content_type: :image, size_range: 1..1.megabytes }
+  validates :scheme, blob: { content_type: :image, size_range: 1..1.megabytes }
   validates :precision, numericality: {
     only_integer: true,
     greater_than_or_equal_to: 0
@@ -25,8 +25,13 @@ class Question < ApplicationRecord
   accepts_nested_attributes_for :parameters
 
   before_validation :set_formula, if: :formula_text_changed?
-  after_create :create_parameters
   before_update :remove_unused_parameters, :add_new_parameters, if: :formula_changed?
+
+  def create_parameters
+    formula['dependencies'].each do |name|
+      parameters.create(name: name, **Formula::Parameter.call(name))
+    end
+  end
 
   private
 
@@ -39,12 +44,6 @@ class Question < ApplicationRecord
 
   def set_formula
     self.formula = Formula::Parser.call(formula_text)
-  end
-
-  def create_parameters
-    formula['dependencies'].each do |name|
-      parameters.create(name: name, **Formula::Parameter.call(name))
-    end
   end
 
   def remove_unused_parameters

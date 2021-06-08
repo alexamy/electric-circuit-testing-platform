@@ -15,7 +15,6 @@ RSpec.describe Question, type: :model do
     it { is_expected.to validate_presence_of :formula_text }
     it { is_expected.to validate_presence_of :precision }
     it { is_expected.to validate_presence_of :answer_unit }
-    it { is_expected.to validate_presence_of :scheme }
 
     it { is_expected.to validate_numericality_of(:precision).only_integer.is_greater_than_or_equal_to(0) }
     it { is_expected.to validate_numericality_of(:completion_time).only_integer.is_greater_than_or_equal_to(0) }
@@ -25,7 +24,7 @@ RSpec.describe Question, type: :model do
     end
 
     it 'is valid for correct formula' do
-      expect(build(:question, formula_text: 'x=y')).to be_valid
+      expect(build(:question, formula_text: 'x=y', parameters: %w[y])).to be_valid
     end
   end
 
@@ -71,12 +70,13 @@ RSpec.describe Question, type: :model do
 
     it 'creates parameters' do
       expect do
-        model.create!(**attributes_for(:question), formula_text: 'x=y', author: author, test: test)
+        question = model.create!(**attributes_for(:question), formula_text: 'x=y', author: author, test: test)
+        question.create_parameters
       end.to change(Parameter, :count).by(1)
     end
 
     describe 'formula update' do
-      let!(:question) { create(:question, formula_text: 'x=y*z', author: author, test: test) }
+      let!(:question) { create(:question, formula_text: 'x=y*z', parameters: %w[y z], author: author, test: test) }
 
       it 'removes unused parameters' do
         expect do

@@ -3,7 +3,6 @@
 require 'rails_helper'
 
 # rubocop:disable RSpec/MultipleMemoizedHelpers
-# rubocop:disable RSpec/LetSetup
 RSpec.describe Report::Task, type: :service do
   let(:report) { described_class.new(answer) }
 
@@ -107,4 +106,3 @@ RSpec.describe Report::Task, type: :service do
   end
 end
 # rubocop:enable RSpec/MultipleMemoizedHelpers
-# rubocop:enable RSpec/LetSetup

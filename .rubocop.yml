@@ -5,13 +5,15 @@ require:
 
 AllCops:
   NewCops: enable
-  # TargetRubyVersion: 2.7.2
-  # Exclude:
-  #   - db/**/*
-  #   - config/**/*
-  #   - bin/**/*
-  #   - node_modules/**/*
-  #   - !ruby/regexp /old_and_unused\.rb$/
+  Exclude:
+    - '**/tmp/**/*'
+    - '**/templates/**/*'
+    - '**/vendor/**/*'
+    - '**/node_modules/**/*'
+    - 'bin/**/*'
+    - 'db/**/*'
+    - 'config/**/*'
+    - 'lib/tasks/questions/**/*'
 
 Layout/EmptyLinesAroundBlockBody:
   Enabled: false
@@ -40,6 +42,9 @@ RSpec/Capybara/FeatureMethods:
   Enabled: false
 
 RSpec/ExampleLength:
+  Enabled: false
+
+RSpec/LetSetup:
   Enabled: false
 
 RSpec/MultipleExpectations:
