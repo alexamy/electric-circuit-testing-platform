@@ -1,17 +1,17 @@
 .mb-4.text-lg
-      .test-score
-        | Текущий балл:
-        .test-score__current.inline
-          =< @score
-        .inline.mx-2
-          | /
-        .test-score__target.inline
-          = @test.target_score
+  .test-score
+    | Текущий балл:
+    .test-score__current.inline
+      =< @score
+    .inline.mx-2
+      | /
+    .test-score__target.inline
+      = @test.target_score
 
-      - if @question.completion_time
-        .completion-time
-          | Оставшееся время:
-          span#timer<(data-count=@question.completion_time) = seconds_to_minsec(@question.completion_time)
+  - if @question.completion_time
+    .completion-time
+      | Оставшееся время:
+      span#timer<(data-count=@question.completion_time) = seconds_to_minsec(@question.completion_time)
 
 .flex.flex-col.md:flex-row
   .block
@@ -32,10 +32,12 @@
         | Единицы измерения:
         =< @question.answer_unit
 
-    .mb-4.md:hidden
-      = image_tag @question.scheme, class: 'question-scheme'
+    - if @question.scheme.attached?
+      .mb-4.md:hidden
+        = image_tag @question.scheme, class: 'question-scheme'
 
     = render partial: 'answer_form'
 
-  .mb-4.hidden.md:block
-    = image_tag @question.scheme, class: 'question-scheme'
+  - if @question.scheme.attached?
+    .mb-4.hidden.md:block
+      = image_tag @question.scheme, class: 'question-scheme'

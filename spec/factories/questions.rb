@@ -25,7 +25,7 @@ FactoryBot.define do
     precision { 0 }
     answer_unit { 'Unit' }
     completion_time { 5 } # seconds
-    scheme { create_file(scheme_path) }
+    scheme { create_file(scheme_path) if scheme_path }
     test
     association :author, factory: :admin
 

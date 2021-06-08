@@ -10,6 +10,7 @@ feature 'User can view question', "
   given(:admin) { create(:admin) }
   given!(:questions) { create_list(:question, 3, comment: 'question comment') }
   given(:question) { questions.first }
+  given(:question_without_scheme) { create(:question, scheme: nil) }
 
   background { sign_in(admin) }
 
@@ -34,5 +35,11 @@ feature 'User can view question', "
     visit admin_question_path(question)
 
     expect(page).to have_selector '.question-example', text: 'Пример задания'
+  end
+
+  scenario 'Admin views question without scheme' do
+    visit admin_question_path(question_without_scheme)
+
+    expect(page).not_to have_selector '.question-scheme'
   end
 end
