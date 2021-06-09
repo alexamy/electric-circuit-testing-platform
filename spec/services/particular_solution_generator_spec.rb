@@ -48,7 +48,7 @@ RSpec.describe ParticularSolutionGenerator, type: :service do
     end
 
     it 'assigns arguments' do
-      expect(result[:arguments].keys).to eq({ 'y' => 5, 'z' => 10 })
+      expect(result[:arguments]).to eq({ 'y' => 5, 'z' => 10 })
     end
   end
 end
