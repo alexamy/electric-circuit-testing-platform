@@ -20,7 +20,23 @@ module Questions
           'In2' => { minimum: -100, maximum: 100, step: 10, unit: 'мкВ' },
           'Кус' => { minimum: -100, maximum: 100, step: 10, unit: 'мкВ' }, # TODO: add variants 10^4, 10^5, 10^6
         }
-      }
+      },
+      3 => {
+        scheme_path: 'lib/assets/schemes/503.png',
+        text: 'Определите напряжение на выходе (Out), если известны входные напряжения In1,'\
+          'сопротивления R1, R2 и напряжения питания ОУ Vcc1, Vcc2.',
+        answer_unit: 'В',
+        precision: 4,
+        completion_time: 60,
+        formula_text: 'Out=clamp(In1*10-6*R2/R1, Vcc2, Vcc1)',
+        parameters: {
+          'In1' => { minimum: -100, maximum: 100, step: 10, unit: 'мкВ' },
+          'Vcc1' => { minimum: 3, maximum: 5, step: 1, unit: 'В' },
+          'Vcc2' => { minimum: -5, maximum: -3, step: 1, unit: 'В' },
+          'R1' => { minimum: 10_000, maximum: 1_000_000, step: 10_000, unit: 'Ом' },
+          'R2' => { minimum: 10_000, maximum: 1_000_000, step: 10_000, unit: 'Ом' },
+        }
+      },
     }
   end
 end
