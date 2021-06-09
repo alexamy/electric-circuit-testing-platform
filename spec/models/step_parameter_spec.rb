@@ -61,8 +61,8 @@ RSpec.describe StepParameter, type: :model do
       end
     end
 
-    describe 'integer intervals with negative minimum' do
-      let(:parameter) { build(:parameter, minimum: -10, maximum: 10, step: 1) }
+    describe 'integer intervals with negative interval' do
+      let(:parameter) { build(:parameter, minimum: -10, maximum: -5, step: 1) }
       let(:results) { Array.new(100) { parameter.generate_value } }
 
       it 'returns result greater or equal to minimum' do
@@ -70,7 +70,7 @@ RSpec.describe StepParameter, type: :model do
       end
 
       it 'returns result less than or equal to maximum when maximum is in range' do
-        expect(results).to all be <= 10
+        expect(results).to all be <= -5
       end
     end
 
