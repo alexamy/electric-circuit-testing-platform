@@ -31,7 +31,8 @@ FactoryBot.define do
 
     after(:create) do |question, evaluator|
       parameters_to_hash(evaluator.parameters).each do |name, info|
-        create(:step_parameter, question: question, name: name, **info)
+        type = info[:type] || :step_parameter
+        create(type, question: question, name: name, **info)
       end
     end
 

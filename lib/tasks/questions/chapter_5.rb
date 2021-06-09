@@ -18,7 +18,21 @@ module Questions
         parameters: {
           'In1' => { minimum: -100, maximum: 100, step: 10, unit: 'мкВ' },
           'In2' => { minimum: -100, maximum: 100, step: 10, unit: 'мкВ' },
-          'Кус' => { minimum: -100, maximum: 100, step: 10, unit: 'мкВ' }, # TODO: add variants 10^4, 10^5, 10^6
+          'Кус' => { type: 'EnumParameter', variants: [10_000, 100_000, 1_000_000], unit: 'мкВ' },
+        }
+      },
+      2 => {
+        scheme_path: 'lib/assets/schemes/502.png',
+        text: 'Определите напряжение на выходе (Out), если известны входные напряжения In1, In2, Кус'\
+          'и напряжения питания ОУ Vcc1, Vcc2.',
+        answer_unit: 'В',
+        precision: 4,
+        completion_time: 60,
+        formula_text: 'Out=(In2-In1)*10^(-6)*Кус',
+        parameters: {
+          'In1' => { minimum: -100, maximum: 100, step: 10, unit: 'мкВ' },
+          'In2' => { minimum: -100, maximum: 100, step: 10, unit: 'мкВ' },
+          'Кус' => { type: 'EnumParameter', variants: [10_000, 100_000, 1_000_000], unit: 'мкВ' },
         }
       },
       3 => {
