@@ -25,4 +25,11 @@ FactoryBot.define do
       variants { [1, 'invalid', 3] }
     end
   end
+
+  factory :formula_parameter do
+    name { 'Parameter' }
+    formula { '' }
+    unit { 'Unit' }
+    question
+  end
 end
