@@ -32,7 +32,7 @@ class Admin::QuestionsController < Admin::BaseController
   end
 
   def index
-    @questions = Question.includes(:test).all
+    @questions = Question.includes(:test).all.page(params[:page]).per(10)
   end
 
   def show

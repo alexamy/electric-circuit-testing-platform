@@ -35,3 +35,5 @@
             = report.created_at.strftime('%T %d.%m.%y')
           td.table-cell.answer-duration
             = report.answer_duration ? seconds_to_minsec(report.answer_duration) : '-'
+
+= paginate @reports
