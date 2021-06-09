@@ -10,7 +10,7 @@ module QuestionSeed
   end
 
   def self.data
-    Questions.constants.map { |chapter| Questions.const_get(chapter) }
+    Questions.constants.sort.map { |chapter| Questions.const_get(chapter) }
   end
 
   # :reek:TooManyStatements
