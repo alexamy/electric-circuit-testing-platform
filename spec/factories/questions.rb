@@ -1,10 +1,12 @@
 # frozen_string_literal: true
 
-PARAMETER_FACTORIES = {
-  step: :step_parameter,
-  enum: :enum_parameter,
-  formula: :formula_parameter
-}.freeze
+def parameter_factories
+  {
+    step: :step_parameter,
+    enum: :enum_parameter,
+    formula: :formula_parameter
+  }.freeze
+end
 
 # :reek:UtilityFunction
 def parameters_to_hash(parameters)
@@ -37,7 +39,7 @@ FactoryBot.define do
 
     after(:create) do |question, evaluator|
       parameters_to_hash(evaluator.parameters).each do |name, info|
-        type = PARAMETER_FACTORIES[info[:factory]] || :step_parameter
+        type = parameter_factories[info[:factory]] || :step_parameter
         create(type, question: question, name: name, **info.except(:factory))
       end
     end
