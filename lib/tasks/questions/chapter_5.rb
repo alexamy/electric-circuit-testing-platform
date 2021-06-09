@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Questions
-  module Chapter3
+  module Chapter5
     TEST = {
       name: 'Раздел 5',
       target_score: 6
@@ -18,7 +18,7 @@ module Questions
         parameters: {
           'In1' => { minimum: -100, maximum: 100, step: 10, unit: 'мкВ' },
           'In2' => { minimum: -100, maximum: 100, step: 10, unit: 'мкВ' },
-          'In2' => { minimum: -100, maximum: 100, step: 10, unit: 'мкВ' }, # TODO: add variants 10^4, 10^5, 10^6
+          'Кус' => { minimum: -100, maximum: 100, step: 10, unit: 'мкВ' }, # TODO: add variants 10^4, 10^5, 10^6
         }
       }
     }
