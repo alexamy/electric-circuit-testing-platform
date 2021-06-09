@@ -25,7 +25,7 @@ RSpec.describe Formula::Parser, type: :service do
     end
 
     it 'init calculator' do
-      expect(parser.send(:calculator)).to be_instance_of Dentaku::Calculator
+      expect(parser.send(:calculator)).to be_instance_of Calculator
     end
   end
 

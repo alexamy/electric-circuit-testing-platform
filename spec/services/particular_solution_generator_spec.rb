@@ -17,7 +17,7 @@ RSpec.describe ParticularSolutionGenerator, type: :service do
     end
 
     it 'init calculator' do
-      expect(generator.send(:calculator)).to be_instance_of Dentaku::Calculator
+      expect(generator.send(:calculator)).to be_instance_of Calculator
     end
   end
 

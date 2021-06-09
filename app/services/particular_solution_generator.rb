@@ -9,7 +9,7 @@ class ParticularSolutionGenerator < ApplicationService
     @question = question
     @arguments = {}
     @answer = nil
-    @calculator = Dentaku::Calculator.new(case_sensitive: true)
+    @calculator = Calculator.new(case_sensitive: true)
   end
 
   def call

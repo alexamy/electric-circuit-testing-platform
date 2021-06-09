@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class Calculator < Dentaku::Calculator
-  def initialize
-    super
+  def initialize(*args, **kwargs, &block)
+    super(*args, **kwargs, &block)
     add_clamp_function
   end
 
