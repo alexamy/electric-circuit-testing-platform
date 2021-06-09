@@ -15,7 +15,6 @@ gem 'webpacker', '6.0.0.beta.6'
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
 
-  gem 'factory_bot_rails', '~> 6.1'
   gem 'rspec', '~> 3.10'
   gem 'rspec-rails', '~> 4.0'
 
@@ -61,6 +60,7 @@ gem 'activestorage-validator', '~> 0.1.3'
 gem 'aws-sdk-s3', '~> 1.94', require: false
 gem 'dentaku', '~> 3.4'
 gem 'devise', '~> 4.7'
+gem 'factory_bot_rails', '~> 6.1', require: false
 gem 'kaminari', '~> 1.2'
 gem 'pry', '~> 0.14.0'
 gem 'rails-i18n', '~> 6.0'
