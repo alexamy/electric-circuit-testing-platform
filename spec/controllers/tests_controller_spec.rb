@@ -7,7 +7,7 @@ RSpec.describe TestsController, type: :controller do
   let(:user) { create(:user) }
   let(:other_user) { create(:user) }
 
-  let!(:tests) { create_list(:test, 5) }
+  let!(:tests) { create_list(:test, 5, name: 'test') }
   let(:test) { tests.first }
 
   let!(:attempt) { create(:attempt, test: test, author: user) }
@@ -18,10 +18,14 @@ RSpec.describe TestsController, type: :controller do
   let(:task_other) { create(:task, answer: 10, attempt: attempt, author: other_user) }
 
   describe 'GET #index_with_questions' do
+    let!(:test_name_first) { create(:test, name: 'a') }
+
+    before { create(:question, test: test_name_first) }
+
     before { get :index }
 
-    it 'load tests with questions' do
-      expect(assigns(:tests)).to contain_exactly test
+    it 'load tests with questions ordered by name' do
+      expect(assigns(:tests)).to eq [test_name_first, test]
     end
 
     it 'renders index view' do

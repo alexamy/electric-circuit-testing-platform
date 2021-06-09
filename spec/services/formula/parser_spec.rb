@@ -41,5 +41,11 @@ RSpec.describe Formula::Parser, type: :service do
     it 'assigns solving hash' do
       expect(parser.bodies).to eq expected[:bodies]
     end
+
+    it 'can handle equal signs in bodies' do
+      expect do
+        described_class.call('X=If(1>=2, 1, 2)')
+      end.not_to raise_error
+    end
   end
 end

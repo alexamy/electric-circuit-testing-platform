@@ -36,6 +36,15 @@ RSpec.describe Formula::Validator, type: :service do
     expect(validator.call("a=1 \n b=2")).to be true
   end
 
+  it 'ignores logic operators' do
+    expect(validator.call('x=if(1 == 2, 1, 2)')).to be false
+
+    expect(validator.call('x=if(1 >= 2, 1, 2)')).to be true
+    expect(validator.call('x=if(1 <= 2, 1, 2)')).to be true
+    expect(validator.call('x=if(1 != 2, 1, 2)')).to be true
+    expect(validator.call('x=if(1 = 2, 1, 2)')).to be true
+  end
+
   it 'checks assignment target' do
     expect(validator.call('1x=2')).to be false
     expect(validator.call('x*=2')).to be false

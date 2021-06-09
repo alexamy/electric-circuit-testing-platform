@@ -26,9 +26,9 @@ module Formula
     # :reek:FeatureEnvy
     def check_assignments
       entries.all? do |entry|
-        eq_once = entry.count('=') == 1
+        double_equal = entry.include?('==')
         eq_inside = (1..entry.length - 2).cover?(entry.index('='))
-        eq_once && eq_inside
+        !double_equal && eq_inside
       end
     end
 
