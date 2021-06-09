@@ -15,6 +15,10 @@ RSpec.describe QuestionSeed, type: :task do
       expect { seed }.to change(Test, :count).by_at_least(1)
     end
 
+    it 'doesnt raise error' do
+      expect { seed }.not_to raise_error
+    end
+
     it 'populates questions' do
       expect { seed }.to change(Question, :count).by_at_least(1)
     end
