@@ -15,7 +15,7 @@ module Questions
         completion_time: 60,
         formula_text: 'Code=If(Y >= Vref, 2^N-1, (2^N-1)*Y/Vref)',
         parameters: {
-          'N' => { minimum: 8, maximum: 16, step: 1 },
+          'N' => { minimum: 8, maximum: 16, step: 1, unit: '' },
           'Vref' => { minimum: 8, maximum: 14, step: 1, unit: 'В' },
           'Y' => { minimum: 0, maximum: 16, step: 1, unit: 'В' },
         }
