@@ -30,7 +30,7 @@ feature 'Admin can edit question parameters', "
   describe 'Enum type' do
     given(:question) do
       create(:question, formula_text: 'x=y', author: admin,
-                        parameters: { 'y' => { factory: :enum_parameter, variants: [1, 2, 3] } })
+                        parameters: { 'y' => { factory: :enum, variants: [1, 2, 3] } })
     end
 
     scenario 'can see' do
@@ -45,7 +45,7 @@ feature 'Admin can edit question parameters', "
   describe 'Formula type' do
     given(:question) do
       create(:question, formula_text: 'x=y+z', author: admin,
-                        parameters: { 'y' => {}, 'z' => { factory: :formula_parameter, formula: 'y*2' } })
+                        parameters: { 'y' => {}, 'z' => { factory: :formula, formula: 'y*2' } })
     end
 
     scenario 'can see' do
