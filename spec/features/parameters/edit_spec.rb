@@ -20,8 +20,8 @@ feature 'Admin can edit question parameters', "
 
   background { sign_in(admin) }
 
-  describe 'Admin' do
-    scenario 'can see step parameter' do
+  describe 'Step type' do
+    scenario 'can see' do
       visit edit_admin_question_parameters_path(question_step)
 
       expect(page).to have_field 'Минимум'
@@ -29,13 +29,22 @@ feature 'Admin can edit question parameters', "
       expect(page).to have_field 'Шаг'
     end
 
-    scenario 'can see enum parameter' do
+    scenario 'can edit'
+  end
+
+  describe 'Enum type' do
+    scenario 'can see' do
       visit edit_admin_question_parameters_path(question_enum)
 
       expect(page).to have_field 'Варианты', with: '1 2 3'
     end
 
-    scenario 'can edit step parameter'
-    scenario 'can edit enum parameter'
+    scenario 'can edit'
+  end
+
+  describe 'Formula type' do
+    scenario 'can see'
+
+    scenario 'can edit'
   end
 end
