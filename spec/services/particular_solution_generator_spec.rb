@@ -40,7 +40,7 @@ RSpec.describe ParticularSolutionGenerator, type: :service do
     let(:question) do
       create(:question, formula_text: 'x=y+z',
                         parameters: { 'y' => { minimum: 5, maximum: 5, step: 0 },
-                                      'z' => { factory: :formula, formula: 'y*2' }})
+                                      'z' => { factory: :formula, formula: 'y*2' } })
     end
 
     it 'assigns answer' do
