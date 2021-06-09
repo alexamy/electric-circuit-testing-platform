@@ -9,7 +9,7 @@ RSpec.describe EnumParameter, type: :model do
 
     it { is_expected.to validate_presence_of :variants }
 
-    it 'isnt valid when minimum is greater than maximum' do
+    it 'isnt valid when has values other than numeric' do
       expect(parameter).not_to be_valid
     end
 
