@@ -8,7 +8,7 @@
 = form_with model: [:admin, @question], url: admin_question_parameters_path(@question) do |form|
   .flex.flex-row.flex-wrap
     = form.fields_for :parameters do |parameter|
-      = render partial: 'step_parameter', object: parameter
+      = render partial: parameter.object.class.to_s.underscore, object: parameter
 
   .form-actions
     = form.submit 'Сохранить параметры', class: 'button'
