@@ -25,7 +25,7 @@ module Formula
     attr_reader :calculator, :entries
 
     def parse_one(line)
-      target, body = line.split('=').map(&:strip)
+      target, body = line.split('=', 2).map(&:strip)
       dependencies = calculator.dependencies(body)
       { target: target, body: body, dependencies: dependencies }
     end
