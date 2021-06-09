@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
-  factory :parameter do
+  factory :step_parameter, aliases: [:parameter] do
     name { 'Parameter' }
     minimum { 1 }
     maximum { 1 }
@@ -12,6 +12,17 @@ FactoryBot.define do
     trait :invalid_range do
       minimum { 100 }
       maximum { 1 }
+    end
+  end
+
+  factory :enum_parameter do
+    name { 'Parameter' }
+    variants { [1, 2, 3] }
+    unit { 'Unit' }
+    question
+
+    trait :invalid_variants do
+      variants { [1, 'invalid', 3] }
     end
   end
 end

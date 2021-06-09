@@ -55,6 +55,7 @@ ru:
         minimum: Минимум
         maximum: Максимум
         step: Шаг
+        variants: Варианты
         unit: Единица измерения
       parameters:
         <<: *parameter
@@ -86,6 +87,10 @@ ru:
           attributes:
             name:
               not_in_dependencies: не содержится в зависимостях формулы
+        enum_parameter:
+          attributes:
+            variants:
+              not_numeric: содержит нечисловые значения
         question:
           attributes:
             scheme:
