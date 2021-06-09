@@ -22,4 +22,14 @@ RSpec.describe Calculator, type: :service do
       expect(calculator.evaluate('clamp(3, 2, 4)')).to eq 3
     end
   end
+
+  describe 'rand function' do
+    before { srand(101) }
+
+    let(:results) { Array.new(10) { calculator.evaluate('rand(10)') } }
+
+    it 'returns the same results as standard rand' do
+      expect(results).to eq [1, 6, 7, 9, 8, 4, 8, 5, 0, 5]
+    end
+  end
 end
