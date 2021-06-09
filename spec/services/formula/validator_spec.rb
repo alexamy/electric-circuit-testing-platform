@@ -50,6 +50,11 @@ RSpec.describe Formula::Validator, type: :service do
     expect(validator.call('Uвых=2')).to be true
   end
 
+  it 'checks assignment targets with underscores' do
+    expect(validator.call('_U=2')).to be true
+    expect(validator.call('U_=2')).to be true
+  end
+
   it 'checks duplicate targets' do
     expect(validator.call("x=1 \n y=2 \n x=2")).to be false
   end
