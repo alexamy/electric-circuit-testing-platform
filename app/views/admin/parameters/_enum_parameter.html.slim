@@ -5,7 +5,7 @@
 
   .form-group
     = enum_parameter.label :variants, class: 'form-label'
-    = enum_parameter.text_field :variants, class: 'form-input'
+    = enum_parameter.text_field :variants, readonly: true, class: 'form-input read-only'
 
   .form-group
     = enum_parameter.label :unit, class: 'form-label'

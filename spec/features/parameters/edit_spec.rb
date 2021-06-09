@@ -34,5 +34,8 @@ feature 'Admin can edit question parameters', "
 
       expect(page).to have_field 'Варианты', with: '1 2 3'
     end
+
+    scenario 'can edit step parameter'
+    scenario 'can edit enum parameter'
   end
 end
