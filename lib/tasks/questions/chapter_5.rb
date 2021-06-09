@@ -18,7 +18,7 @@ module Questions
         parameters: {
           'In1' => { minimum: -100, maximum: 100, step: 10, unit: 'мкВ' },
           'In2' => { minimum: -100, maximum: 100, step: 10, unit: 'мкВ' },
-          'Кус' => { type: 'EnumParameter', variants: [10_000, 100_000, 1_000_000], unit: 'мкВ' },
+          'Кус' => { factory: :enum_parameter, variants: [10_000, 100_000, 1_000_000], unit: 'мкВ' },
         }
       },
       2 => {
@@ -32,7 +32,7 @@ module Questions
         parameters: {
           'In1' => { minimum: -100, maximum: 100, step: 10, unit: 'мкВ' },
           'In2' => { minimum: -100, maximum: 100, step: 10, unit: 'мкВ' },
-          'Кус' => { type: 'EnumParameter', variants: [10_000, 100_000, 1_000_000], unit: 'мкВ' },
+          'Кус' => { factory: :enum_parameter, variants: [10_000, 100_000, 1_000_000], unit: 'мкВ' },
         }
       },
       3 => {
