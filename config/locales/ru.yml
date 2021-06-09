@@ -55,6 +55,7 @@ ru:
         minimum: Минимум
         maximum: Максимум
         step: Шаг
+        variants: Варианты
         unit: Единица измерения
       parameters:
         <<: *parameter

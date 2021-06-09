@@ -1,0 +1,12 @@
+.block.w-max.p-4.m-2.border.rounded-lg
+  .form-group
+    = enum_parameter.label :name, class: 'form-label'
+    = enum_parameter.text_field :name, readonly: true, class: 'form-input read-only'
+
+  .form-group
+    = enum_parameter.label :variants, class: 'form-label'
+    = enum_parameter.text_field :variants, class: 'form-input'
+
+  .form-group
+    = enum_parameter.label :unit, class: 'form-label'
+    = enum_parameter.text_field :unit, class: 'form-input'

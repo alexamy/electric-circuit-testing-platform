@@ -8,7 +8,12 @@ feature 'Admin can edit question parameters', "
   I'd like to be able to edit question parameters
 " do
   given(:admin) { create(:admin) }
-  given(:question) do
+
+  given(:question_step) do
+    create(:question, formula_text: 'x=y', author: admin, parameters: ['y'])
+  end
+
+  given(:question_enum) do
     create(:question, formula_text: 'x=y', author: admin,
                       parameters: { 'y' => { factory: :enum_parameter, variants: [1, 2, 3] } })
   end
@@ -16,12 +21,18 @@ feature 'Admin can edit question parameters', "
   background { sign_in(admin) }
 
   describe 'Admin' do
-    scenario 'can see enum parameter' do
-      visit edit_admin_question_parameters_path(question)
+    scenario 'can see step parameter' do
+      visit edit_admin_question_parameters_path(question_step)
 
-      within '.parameter-variants' do
-        expect(page).to have_content '1, 2, 3'
-      end
+      expect(page).to have_field 'Минимум'
+      expect(page).to have_field 'Максимум'
+      expect(page).to have_field 'Шаг'
+    end
+
+    scenario 'can see enum parameter' do
+      visit edit_admin_question_parameters_path(question_enum)
+
+      expect(page).to have_field 'Варианты', with: '1 2 3'
     end
   end
 end
