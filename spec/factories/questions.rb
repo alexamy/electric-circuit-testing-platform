@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# :reek:UtilityFunction
 def parameter_factories
   {
     step: :step_parameter,
