@@ -87,6 +87,43 @@ module Questions
           'R3' => { minimum: 10_000, maximum: 1_000_000, step: 10_000, unit: 'Ом' },
           'R4' => { minimum: 10_000, maximum: 1_000_000, step: 10_000, unit: 'Ом' },
         }
+      },
+      7 => {
+        scheme_path: 'lib/assets/schemes/507.png',
+        text: 'Определите напряжение на выходе (Out), если известны входные напряжения In1,'\
+          'сопротивления R1 - R4 и напряжения питания ОУ Vcc1, Vcc2.',
+        answer_unit: 'В',
+        precision: 4,
+        completion_time: 60,
+        formula_text: "Out_1=clamp(In1*10^(-6)*(R2/R1), Vcc2, Vcc1)\nOut=clamp(Out_1*(R4/R3), Vcc2, Vcc1)",
+        parameters: {
+          'In1' => { minimum: -100, maximum: 100, step: 10, unit: 'мкВ' },
+          'Vcc1' => { minimum: 3, maximum: 5, step: 1, unit: 'В' },
+          'Vcc2' => { minimum: -5, maximum: -3, step: 1, unit: 'В' },
+          'R1' => { minimum: 10_000, maximum: 1_000_000, step: 10_000, unit: 'Ом' },
+          'R2' => { minimum: 10_000, maximum: 1_000_000, step: 10_000, unit: 'Ом' },
+          'R3' => { minimum: 10_000, maximum: 1_000_000, step: 10_000, unit: 'Ом' },
+          'R4' => { minimum: 10_000, maximum: 1_000_000, step: 10_000, unit: 'Ом' },
+        }
+      },
+      8 => {
+        scheme_path: 'lib/assets/schemes/508.png',
+        text: 'Определите напряжение на выходе (Out), если известны входные напряжения In1,'\
+          'сопротивления R1 - R5 и напряжения питания ОУ Vcc1, Vcc2.',
+        answer_unit: 'В',
+        precision: 4,
+        completion_time: 60,
+        formula_text: "Out_1=clamp(In1*10^(-6)*((R2+R3)/R1), Vcc2, Vcc1)\nOut=clamp(Out_1*(R5/R4), Vcc2, Vcc1)",
+        parameters: {
+          'In1' => { minimum: -100, maximum: 100, step: 10, unit: 'мкВ' },
+          'Vcc1' => { minimum: 3, maximum: 5, step: 1, unit: 'В' },
+          'Vcc2' => { minimum: -5, maximum: -3, step: 1, unit: 'В' },
+          'R1' => { minimum: 10_000, maximum: 1_000_000, step: 10_000, unit: 'Ом' },
+          'R2' => { minimum: 10_000, maximum: 1_000_000, step: 10_000, unit: 'Ом' },
+          'R3' => { minimum: 10_000, maximum: 1_000_000, step: 10_000, unit: 'Ом' },
+          'R4' => { minimum: 10_000, maximum: 1_000_000, step: 10_000, unit: 'Ом' },
+          'R5' => { minimum: 10_000, maximum: 1_000_000, step: 10_000, unit: 'Ом' },
+        }
       }
     }
   end
