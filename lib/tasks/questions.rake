@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
+require 'factory_bot'
+FactoryBot.find_definitions
+
 require Rails.root.join('spec', 'support', 'upload_file')
+
 require_relative 'question_seed'
 
 namespace :seed do

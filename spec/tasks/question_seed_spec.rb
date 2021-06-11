@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-Rails.application.load_tasks
+require Rails.root.join('lib', 'tasks', 'question_seed')
 
 RSpec.describe QuestionSeed, type: :task do
   let(:factory) { described_class }
