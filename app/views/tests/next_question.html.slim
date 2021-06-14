@@ -12,6 +12,8 @@
     .completion-time
       | Оставшееся время:
       span#timer<(data-count=@question.completion_time) = seconds_to_minsec(@question.completion_time)
+      span<
+        | (мм:сс)
 
 .flex.flex-col.md:flex-row
   .block
