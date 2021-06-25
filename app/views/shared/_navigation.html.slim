@@ -2,10 +2,11 @@
 
 nav.h-12.p-out.flex.justify-between.items-center.bg-gray-400
   .flex.justify-between.divide-x
-    a.link-navbar.pr-2 href=tests_path class="#{current_page if current_page?(tests_path)}"
-      | Тесты
-    a.link-navbar.px-2 href=reports_student_path class="#{current_page if current_page?(reports_student_path)}"
-      | Статистика
+    - if current_user
+      a.link-navbar.pr-2 href=tests_path class="#{current_page if current_page?(tests_path)}"
+        | Тесты
+      a.link-navbar.px-2 href=reports_student_path class="#{current_page if current_page?(reports_student_path)}"
+        | Статистика
     - if current_user&.admin?
       a.link-navbar.px-2.italic href=admin_questions_path class="#{current_page if current_page?(admin_questions_path)}"
         | Вопросы
