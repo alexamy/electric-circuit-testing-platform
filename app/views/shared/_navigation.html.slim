@@ -1,6 +1,6 @@
 - current_page = 'font-bold'
 
-nav.h-12.p-out.flex.justify-between.items-center.bg-gray-400
+nav.navigation-bar.h-12.p-out.flex.justify-between.items-center.bg-gray-400
   .flex.justify-between.divide-x
     - if current_user
       a.link-navbar.pr-2 href=tests_path class="#{current_page if current_page?(tests_path)}"
@@ -17,6 +17,9 @@ nav.h-12.p-out.flex.justify-between.items-center.bg-gray-400
       a.link-navbar.px-2.italic href=admin_students_path class="#{current_page if current_page?(admin_students_path)}"
         | Студенты
   div
+    span.text-white
+      = "#{current_user&.first_name} #{current_user&.last_name}" if current_user&.student?
+      = current_user&.email if current_user&.admin?
   div
   - if user_signed_in?
     a.link-navbar href=destroy_user_session_path data-method="delete"
