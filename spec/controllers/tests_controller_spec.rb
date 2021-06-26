@@ -22,7 +22,7 @@ RSpec.describe TestsController, type: :controller do
 
     before { create(:question, test: test_name_first) }
 
-    before do 
+    before do
       login(student)
       get :index
     end

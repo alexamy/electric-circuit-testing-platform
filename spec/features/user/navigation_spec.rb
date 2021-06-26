@@ -12,7 +12,7 @@ feature 'User can see his name', "
 
   scenario 'Student see his name' do
     sign_in(student)
-    
+
     within '.navigation-bar' do
       expect(page).to have_content 'John Doe'
     end
@@ -20,7 +20,7 @@ feature 'User can see his name', "
 
   scenario 'Teacher see his email' do
     sign_in(teacher)
-    
+
     within '.navigation-bar' do
       expect(page).to have_content 'jd.admin@example.com'
     end
