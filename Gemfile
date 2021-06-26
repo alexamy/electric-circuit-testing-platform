@@ -29,6 +29,7 @@ group :development, :test do
   gem 'rubocop-performance', '~> 1.10'
   gem 'rubocop-rails', '~> 2.9'
   gem 'rubocop-rspec', '~> 2.2'
+  gem 'rubycritic', '~> 4.6'
 end
 
 group :development do

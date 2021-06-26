@@ -1,0 +1,2 @@
+formats: # Available values are: html, json, console, lint. Default value is html.
+  - lint
