@@ -20,6 +20,7 @@ gem 'rails-i18n', '~> 6.0'
 gem 'slim-rails', '~> 3.2'
 
 gem 'aws-sdk-s3', '~> 1.94', require: false
+gem 'factory_bot_rails', '~> 6.1', require: false
 gem 'require_all', '~> 3.0', require: false
 
 group :development, :test do
@@ -64,7 +65,6 @@ group :test do
   gem 'timecop', '~> 0.9.4'
   gem 'webdrivers', '~> 4.6.0'
 
-  gem 'factory_bot_rails', '~> 6.1', require: false
   gem 'simplecov', '~> 0.21.2', require: false
 end
 
