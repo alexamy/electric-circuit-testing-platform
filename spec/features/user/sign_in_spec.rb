@@ -7,12 +7,10 @@ feature 'User can sign in', "
   As an unauthenticated user
   I'd like to be able to sign in
 " do
-
   given(:user) { create(:user) }
 
   scenario 'Registered user tries to sign in' do
     visit root_path
-    click_on 'Войти'
 
     within '.new_user' do
       fill_in 'Email', with: user.email
