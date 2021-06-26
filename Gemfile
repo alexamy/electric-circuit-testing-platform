@@ -23,6 +23,7 @@ group :development, :test do
   gem 'brakeman', '~> 5.0'
   gem 'bullet', '~> 6.1'
 
+  gem 'rails_best_practices', '~> 1.21'
   gem 'reek', '~> 6.0'
   gem 'rubocop', '~> 1.11'
   gem 'rubocop-performance', '~> 1.10'
