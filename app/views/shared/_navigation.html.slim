@@ -3,18 +3,18 @@
 nav.navigation-bar.h-12.p-out.flex.justify-between.items-center.bg-gray-400
   .flex.justify-between.divide-x
     - if current_user
-      a.link-navbar.pr-2 href=tests_path class="#{current_page if current_page?(tests_path)}"
+      a.link-navbar.pr-2 href=tests_path class=current_page_class(tests_path)
         | Тесты
-      a.link-navbar.px-2 href=reports_student_path class="#{current_page if current_page?(reports_student_path)}"
+      a.link-navbar.px-2 href=reports_student_path class=current_page_class(reports_student_path)
         | Статистика
     - if current_user&.admin?
-      a.link-navbar.px-2.italic href=admin_questions_path class="#{current_page if current_page?(admin_questions_path)}"
+      a.link-navbar.px-2.italic href=admin_questions_path class=current_page_class(admin_questions_path)
         | Вопросы
-      a.link-navbar.px-2.italic href=admin_tests_path class="#{current_page if current_page?(admin_tests_path)}"
+      a.link-navbar.px-2.italic href=admin_tests_path class=current_page_class(admin_tests_path)
         | Тесты (управление)
-      a.link-navbar.px-2.italic href=admin_groups_path class="#{current_page if current_page?(admin_groups_path)}"
+      a.link-navbar.px-2.italic href=admin_groups_path class=current_page_class(admin_groups_path)
         | Группы
-      a.link-navbar.px-2.italic href=admin_students_path class="#{current_page if current_page?(admin_students_path)}"
+      a.link-navbar.px-2.italic href=admin_students_path class=current_page_class(admin_students_path)
         | Студенты
   div
     span.text-white

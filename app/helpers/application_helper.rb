@@ -22,4 +22,8 @@ module ApplicationHelper
       hover_class: report.correct? ? 'bg-green-200' : 'bg-red-200'
     }
   end
+
+  def current_page_class(path)
+    'font-bold' if current_page?(path)
+  end
 end
