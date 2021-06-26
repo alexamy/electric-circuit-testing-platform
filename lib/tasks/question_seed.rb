@@ -4,13 +4,16 @@ require 'require_all'
 require_rel 'questions'
 
 module QuestionSeed
+  QUESTION_DIRECTORY = 'lib/assets/questions'
+
   # :reek:DuplicateMethodCall
   def self.log(message)
     Rails.logger.tagged('SEED') { Rails.logger.info { message } }
   end
 
   def self.data
-    Questions.constants.sort.map { |chapter| Questions.const_get(chapter) }
+    files = Dir[Rails.root.join(QUESTION_DIRECTORY, '*.yml')]
+    files.map { |path| YAML.load(File.open(path)).deep_symbolize_keys }
   end
 
   # :reek:TooManyStatements
@@ -20,19 +23,19 @@ module QuestionSeed
     teacher = Teacher.find_by!(email: author_email)
 
     data.each do |collection|
-      test = collection::TEST
+      test = collection[:test]
       next if Test.find_by(**test)
 
       log "Generating test #{test[:name]}"
       test = Test.create!(**test)
-      seed_by(collection::QUESTIONS, test: test, author: teacher)
+      seed_by(collection[:questions], test: test, author: teacher)
     end
   end
 
   def self.seed_by(questions, **attributes)
-    questions.map do |index, info|
+    questions.map.with_index(1) do |question, index|
       log "Generating question #{index}"
-      FactoryBot.create(:question, **info, **attributes)
+      FactoryBot.create(:question, **question, **attributes)
     end
   end
 end
