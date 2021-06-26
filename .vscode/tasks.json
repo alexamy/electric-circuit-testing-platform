@@ -5,7 +5,7 @@
       "label": "Run test line",
       "type": "shell",
       "group": "test",
-      "command": "bundle exec rspec ${file}:${lineNumber} --format p",
+      "command": "rbenv exec bundle exec rspec ${file}:${lineNumber} --format p",
       "problemMatcher": [],
       "presentation": {
         "clear": true
@@ -15,7 +15,7 @@
       "label": "Run test file",
       "type": "shell",
       "group": "test",
-      "command": "bundle exec rspec ${file} --format p",
+      "command": "rbenv exec bundle exec rspec ${file} --format p",
       "problemMatcher": [],
       "presentation": {
         "clear": true
@@ -25,7 +25,7 @@
       "label": "Run test folder",
       "type": "shell",
       "group": "test",
-      "command": "bundle exec rspec ${fileDirname} --format p",
+      "command": "rbenv exec bundle exec rspec ${fileDirname} --format p",
       "problemMatcher": [],
       "presentation": {
         "clear": true
@@ -35,7 +35,7 @@
       "label": "Run all tests (crystalball)",
       "type": "shell",
       "group": "test",
-      "command": "bundle exec crystalball --format p",
+      "command": "rbenv exec bundle exec crystalball --format p",
       "problemMatcher": [],
       "presentation": {
         "clear": true
@@ -45,7 +45,7 @@
       "label": "Run all tests",
       "type": "shell",
       "group": "test",
-      "command": "bundle exec rspec --format p",
+      "command": "rbenv exec bundle exec rspec --format p",
       "problemMatcher": [],
       "presentation": {
         "clear": true
@@ -55,7 +55,7 @@
       "label": "Run all tests (fail only 3)",
       "type": "shell",
       "group": "test",
-      "command": "bundle exec rspec --format p --fail-fast=3",
+      "command": "rbenv exec bundle exec rspec --format p --fail-fast=3",
       "problemMatcher": [],
       "presentation": {
         "clear": true
@@ -65,7 +65,7 @@
       "label": "Build test coverage mapping",
       "type": "shell",
       "group": "test",
-      "command": "CRYSTALBALL=true bundle exec rspec --format p",
+      "command": "CRYSTALBALL=true rspec exec bundle exec rspec --format p",
       "problemMatcher": [],
       "presentation": {
         "clear": true
@@ -75,7 +75,7 @@
       "label": "Run all tests (without slow tag)",
       "type": "shell",
       "group": "test",
-      "command": "bundle exec rspec --format p --tag ~slow",
+      "command": "rbenv exec bundle exec rspec --format p --tag ~slow",
       "problemMatcher": [],
       "presentation": {
         "clear": true
@@ -85,7 +85,7 @@
       "label": "Run all tests with report",
       "type": "shell",
       "group": "test",
-      "command": "bundle exec rspec --format f",
+      "command": "rbenv exec bundle exec rspec --format f",
       "presentation": {
         "reveal": "always",
         "revealProblems": "onProblem",

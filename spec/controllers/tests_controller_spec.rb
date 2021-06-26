@@ -4,25 +4,28 @@ require 'rails_helper'
 
 # rubocop:disable RSpec/MultipleMemoizedHelpers
 RSpec.describe TestsController, type: :controller do
-  let(:user) { create(:user) }
-  let(:other_user) { create(:user) }
+  let(:student) { create(:student) }
+  let(:other_student) { create(:student) }
 
   let!(:tests) { create_list(:test, 5, name: 'test') }
   let(:test) { tests.first }
 
-  let!(:attempt) { create(:attempt, test: test, author: user) }
-  let(:other_attempt) { create(:attempt, test: test, author: other_user) }
+  let!(:attempt) { create(:attempt, test: test, author: student) }
+  let(:other_attempt) { create(:attempt, test: test, author: other_student) }
 
   let!(:questions) { create_list(:question, 5, test: test) }
-  let(:task) { create(:task, answer: 10, attempt: attempt, author: user) }
-  let(:task_other) { create(:task, answer: 10, attempt: attempt, author: other_user) }
+  let(:task) { create(:task, answer: 10, attempt: attempt, author: student) }
+  let(:task_other) { create(:task, answer: 10, attempt: attempt, author: other_student) }
 
-  describe 'GET #index_with_questions' do
+  describe 'GET #index' do
     let!(:test_name_first) { create(:test, name: 'a') }
 
     before { create(:question, test: test_name_first) }
 
-    before { get :index }
+    before do
+      login(student)
+      get :index
+    end
 
     it 'load tests with questions ordered by name' do
       expect(assigns(:tests)).to eq [test_name_first, test]
@@ -34,7 +37,7 @@ RSpec.describe TestsController, type: :controller do
   end
 
   describe 'GET #start' do
-    before { login(user) }
+    before { login(student) }
 
     it 'creates attempt' do
       expect do
@@ -50,7 +53,7 @@ RSpec.describe TestsController, type: :controller do
 
     it 'stops when get enough score' do
       10.times.each do
-        create(:task, :correct, question: questions.first, attempt: attempt, author: user)
+        create(:task, :correct, question: questions.first, attempt: attempt, author: student)
       end
       get :start, params: { test_id: test.id }
 
@@ -63,8 +66,8 @@ RSpec.describe TestsController, type: :controller do
       let(:action) { get :next_question, params: { id: test.id } }
     end
 
-    describe 'Authenticated user' do
-      before { login(user) }
+    describe 'Authenticated student' do
+      before { login(student) }
 
       it 'sets current attempt' do
         get :next_question, params: { id: attempt.id }
@@ -92,7 +95,7 @@ RSpec.describe TestsController, type: :controller do
 
       it 'can proceed on the latest attempt only' do
         Timecop.travel(5.minutes.from_now) do
-          create(:attempt, test: test, author: user)
+          create(:attempt, test: test, author: student)
         end
 
         get :next_question, params: { id: attempt.id }
@@ -102,7 +105,7 @@ RSpec.describe TestsController, type: :controller do
 
       it 'dont create new attempts' do
         Timecop.travel(5.minutes.from_now) do
-          create(:attempt, test: test, author: user)
+          create(:attempt, test: test, author: student)
         end
 
         expect do
@@ -125,7 +128,7 @@ RSpec.describe TestsController, type: :controller do
 
       it 'stops when get enough score' do
         10.times.each do
-          create(:task, :correct, question: questions.first, attempt: attempt, author: user)
+          create(:task, :correct, question: questions.first, attempt: attempt, author: student)
         end
         get :next_question, params: { id: attempt.id }
 

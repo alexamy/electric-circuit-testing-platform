@@ -7,11 +7,13 @@ feature 'User can view list of tests', "
   As an unauthenticated user
   I would like to select a test
 " do
+  given(:student) { create(:student) }
   given!(:test) { create(:test, name: 'with questions') }
   given!(:test_without_questions) { create(:test, name: 'without questions') }
   given!(:questions) { create_list(:question, 3, test: test) }
 
   scenario 'User views list of tests' do
+    sign_in(student)
     visit tests_path
 
     expect(page).not_to have_content test_without_questions.name

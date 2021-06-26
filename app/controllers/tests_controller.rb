@@ -3,8 +3,6 @@
 class TestsController < ApplicationController
   before_action :authenticate_user!
 
-  skip_before_action :authenticate_user!, only: [:index]
-
   def index
     @tests = Test.with_questions.order(:name)
   end
