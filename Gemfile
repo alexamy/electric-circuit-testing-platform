@@ -15,6 +15,8 @@ gem 'webpacker', '6.0.0.beta.6'
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
 
+  gem 'guard', '~> 2.17'
+  gem 'guard-rspec', '~> 4.7'
   gem 'rspec', '~> 3.10'
   gem 'rspec-rails', '~> 4.0'
 
