@@ -4,31 +4,31 @@ require 'rails_helper'
 
 feature 'User can create question', "
   In order to fill tests
-  As an authenticated admin
+  As an authenticated teacher
   I'd like to be able to create question with formulas
 " do
   given(:user) { create(:user) }
-  given(:admin) { create(:admin) }
+  given(:teacher) { create(:teacher) }
   given!(:test) { create(:test) }
 
   scenario 'Unauthenticated user cant create question' do
-    visit new_admin_question_path
+    visit new_teacher_question_path
 
     expect(page).to have_content 'Доступ к ресурсу запрещен'
   end
 
   scenario 'Student cant create question' do
     sign_in(user)
-    visit new_admin_question_path
+    visit new_teacher_question_path
 
     expect(page).to have_content 'Доступ к ресурсу запрещен'
   end
 
-  describe 'Admin' do
-    background { sign_in(admin) }
+  describe 'Teacher' do
+    background { sign_in(teacher) }
 
     scenario 'sees alert when enters invalid formula' do
-      visit new_admin_question_path
+      visit new_teacher_question_path
 
       fill_in 'Текст вопроса', with: 'Вычислить показание вольтметра XMM1'
       fill_in 'Формула', with: 'formula with error'
@@ -38,7 +38,7 @@ feature 'User can create question', "
     end
 
     scenario 'sees validation error' do
-      visit new_admin_question_path
+      visit new_teacher_question_path
 
       fill_in 'Формула', with: 'V=R'
       click_on 'Сохранить вопрос'
@@ -47,7 +47,7 @@ feature 'User can create question', "
     end
 
     scenario 'can create question' do
-      visit new_admin_question_path
+      visit new_teacher_question_path
 
       select test.name, from: 'Тест'
       fill_in 'Текст вопроса', with: 'Вычислить показание вольтметра XMM1'
@@ -62,7 +62,7 @@ feature 'User can create question', "
     end
 
     scenario 'can change parameters default values' do
-      visit new_admin_question_path
+      visit new_teacher_question_path
 
       select test.name, from: 'Тест'
       fill_in 'Текст вопроса', with: 'Вычислить показание вольтметра XMM1'
@@ -83,7 +83,7 @@ feature 'User can create question', "
     end
 
     scenario 'see error when has empty fields' do
-      visit new_admin_question_path
+      visit new_teacher_question_path
 
       select test.name, from: 'Тест'
       fill_in 'Текст вопроса', with: 'Вычислить показание вольтметра XMM1'

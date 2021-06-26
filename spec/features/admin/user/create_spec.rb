@@ -2,18 +2,18 @@
 
 require 'rails_helper'
 
-feature 'Admin can create student', "
+feature 'Teacher can create student', "
   In order to add new students
-  As an authenticated admin
+  As an authenticated teacher
   I'd like to be able to create new students
 " do
-  given(:admin) { create(:admin) }
+  given(:teacher) { create(:teacher) }
   given!(:group) { create(:group, name: 'Group', year: 2000) }
 
-  background { sign_in(admin) }
+  background { sign_in(teacher) }
 
-  scenario 'Admin creates student' do
-    visit new_admin_student_path
+  scenario 'Teacher creates student' do
+    visit new_teacher_student_path
 
     fill_in 'Email', with: 'student@example.com'
     fill_in 'Пароль', with: 'testpassword'

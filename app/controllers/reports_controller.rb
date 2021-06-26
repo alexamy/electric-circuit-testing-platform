@@ -22,7 +22,7 @@ class ReportsController < ApplicationController
     @user = current_user
     return unless params[:id]
 
-    @user = User.find(params[:id]) if current_user.admin?
+    @user = User.find(params[:id]) if current_user.teacher?
   end
 
   def find_test

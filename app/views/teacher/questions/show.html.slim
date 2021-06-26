@@ -1,0 +1,29 @@
+.py-2
+  p.italic = Question.human_attribute_name('text')
+  .question-text = simple_format @question.text
+
+- if @question.comment.present?
+  .py-2
+    p.italic = Question.human_attribute_name('comment')
+    .question-comment = simple_format @question.comment
+
+.py-2
+  p.italic = Question.human_attribute_name('completion_time')
+  p = t('plural.seconds', count: @question.completion_time)
+
+.py-2
+  p.italic = Question.human_attribute_name('formula_text')
+  .formula_text = simple_format @question.formula_text
+
+.flex.flex-col.md:flex-row
+  .question-example.py-2
+    p.italic Пример задания
+    = render partial: 'task'
+
+  - if @question.scheme.attached?
+    .py-2.md:ml-4
+      p.italic = Question.human_attribute_name('scheme')
+      = image_tag @question.scheme, class: 'question-scheme'
+
+.mt-4
+  = link_to 'Изменить параметры формулы', edit_teacher_question_parameters_path(@question), class: 'link'

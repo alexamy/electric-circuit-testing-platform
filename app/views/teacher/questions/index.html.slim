@@ -1,0 +1,28 @@
+= paginate @questions
+
+.table-wrapper
+  table.table
+    thead.table-head
+      th.table-header
+        | ID
+      th.table-header
+        = Question.human_attribute_name(:text)
+      th.table-header
+        = Question.human_attribute_name(:test)
+      th.table-header
+        | Действия
+
+    tbody.table-body
+    - @questions.each do |question|
+      tr
+        td.table-cell
+          = question.id
+        td.table-cell
+          = link_to truncate(question.text, length: 80), teacher_question_path(question), class: 'link'
+        td.table-cell
+          = question.test.name
+        td.table-cell.space-x-4
+          = link_to 'Редактировать', edit_teacher_question_path(question), class: 'link'
+          = link_to 'Удалить', teacher_question_path(question), method: :delete, data: { confirm: 'Вы уверены?' }, class: 'link'
+
+= link_to 'Создать новый', new_teacher_question_path, class: 'button'

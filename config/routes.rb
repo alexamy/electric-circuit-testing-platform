@@ -18,14 +18,14 @@ Rails.application.routes.draw do
     get 'test/:test_id', action: 'test', as: 'test'
   end
 
-  scope :admin, as: 'admin' do
+  scope :teacher, as: 'teacher' do
     scope :reports, controller: 'reports', as: 'reports' do
       get 'student/:id', action: 'student', as: 'student'
       get 'student/:id/test/:test_id', action: 'test', as: 'test'
     end
   end
 
-  namespace :admin do
+  namespace :teacher do
     resources :tests, shallow: true, except: %i[show]
     resources :students, shallow: true, except: %i[show]
     resources :groups, shallow: true, except: %i[show]

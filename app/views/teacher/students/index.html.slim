@@ -1,0 +1,39 @@
+.table-wrapper
+  table.table
+    thead.table-head
+      th.table-header
+        | ID
+      th.table-header
+        = User.human_attribute_name(:email)
+      th.table-header
+        = User.human_attribute_name(:last_name)
+      th.table-header
+        = User.human_attribute_name(:first_name)
+      th.table-header
+        = User.human_attribute_name(:middle_name)
+      th.table-header
+        = User.human_attribute_name(:group)
+      th.table-header
+        | Действия
+
+    tbody.table-body
+    - @students.each do |student|
+      tr.table-row class="student-#{student.id}"
+        td.table-cell
+          = student.id
+        td.table-cell
+          = student.email
+        td.table-cell
+          = student.last_name
+        td.table-cell
+          = student.first_name
+        td.table-cell
+          = student.middle_name
+        td.table-cell
+          = student.group
+        td.table-cell.space-x-4
+          = link_to 'Статистика', teacher_reports_student_path(student), class: 'link'
+          = link_to 'Редактировать', edit_teacher_student_path(student), class: 'link'
+          = link_to 'Удалить', teacher_student_path(student), method: :delete, data: { confirm: 'Вы уверены?' }, class: 'link'
+
+= link_to 'Создать нового', new_teacher_student_path, class: 'button'

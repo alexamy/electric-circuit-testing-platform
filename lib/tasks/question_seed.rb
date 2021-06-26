@@ -17,7 +17,7 @@ module QuestionSeed
   def self.seed(author_email)
     raise ArgumentError, 'Blank email argument!' if author_email.blank?
 
-    admin = Admin.find_by!(email: author_email)
+    teacher = Teacher.find_by!(email: author_email)
 
     data.each do |collection|
       test = collection::TEST
@@ -25,7 +25,7 @@ module QuestionSeed
 
       log "Generating test #{test[:name]}"
       test = Test.create!(**test)
-      seed_by(collection::QUESTIONS, test: test, author: admin)
+      seed_by(collection::QUESTIONS, test: test, author: teacher)
     end
   end
 

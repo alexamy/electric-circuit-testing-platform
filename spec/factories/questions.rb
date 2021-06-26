@@ -36,7 +36,7 @@ FactoryBot.define do
     completion_time { 5 } # seconds
     scheme { create_file(scheme_path) if scheme_path }
     test
-    association :author, factory: :admin
+    association :author, factory: :teacher
 
     after(:create) do |question, evaluator|
       parameters_to_hash(evaluator.parameters).each do |name, info|

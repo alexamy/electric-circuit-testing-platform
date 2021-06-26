@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe ReportsController, type: :controller do
-  let!(:admin) { create(:admin) }
+  let!(:teacher) { create(:teacher) }
   let!(:student) { create(:student) }
 
   let!(:test) { create(:test, name: 'Test example', target_score: 6) }
@@ -34,21 +34,21 @@ RSpec.describe ReportsController, type: :controller do
 
     it 'dont use params when requested by student' do
       login(student)
-      get :student, params: { id: admin.id }
+      get :student, params: { id: teacher.id }
 
       expect(assigns(:user)).to eq student
     end
 
-    describe 'admin' do
-      before { login(admin) }
+    describe 'teacher' do
+      before { login(teacher) }
 
       it 'sets current user' do
         get :student
 
-        expect(assigns(:user)).to eq admin
+        expect(assigns(:user)).to eq teacher
       end
 
-      it 'sets other user when requested by admin' do
+      it 'sets other user when requested by teacher' do
         get :student, params: { id: student.id }
 
         expect(assigns(:user)).to eq student
@@ -84,7 +84,7 @@ RSpec.describe ReportsController, type: :controller do
       end
     end
 
-    describe 'Admin'
+    describe 'teacher'
 
     it 'returns no content when test isnt found' do
       login(student)

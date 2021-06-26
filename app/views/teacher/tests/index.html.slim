@@ -1,0 +1,30 @@
+.table-wrapper
+  table.table
+    thead.table-head
+      th.table-header
+        | ID
+      th.table-header
+        = Test.human_attribute_name(:name)
+      th.table-header
+        = Test.human_attribute_name(:target_score)
+      th.table-header
+        | Количество вопросов
+      th.table-header
+        | Действия
+
+    tbody.table-body
+    - @tests.each do |test|
+      tr.table-row
+        td.table-cell
+          = test.id
+        td.test.table-cell
+          = test.name
+        td.table-cell
+          = test.target_score
+        td.table-cell
+          = test.questions.count
+        td.table-cell.space-x-4
+          = link_to 'Редактировать', edit_teacher_test_path(test), class: 'link'
+          = link_to 'Удалить', teacher_test_path(test), method: :delete, data: { confirm: 'Вы уверены?' }, class: 'link'
+
+= link_to 'Создать', new_teacher_test_path, class: 'button'

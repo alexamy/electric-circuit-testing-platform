@@ -7,7 +7,7 @@ feature 'Student can view his report', "
   As an authenticated student
   I'd like to be able to view report of all tests
 " do
-  given(:admin) { create(:admin) }
+  given(:teacher) { create(:teacher) }
   given(:student) { create(:student, email: 'js@example.com', first_name: 'John', last_name: 'Smith') }
 
   given!(:test) { create(:test, name: 'Test example', target_score: 6) }
@@ -18,8 +18,8 @@ feature 'Student can view his report', "
   given!(:answer) { create(:task, :correct, question: question, attempt: attempt, author: student) }
   given!(:answer_wrong) { create(:task, :wrong, question: question, attempt: attempt, author: student) }
 
-  given!(:attempt_admin) { create(:attempt, test: test, author: admin) }
-  given!(:answers_admin) { create_list(:task, 5, :correct, question: question, attempt: attempt_admin, author: admin) }
+  given!(:attempt_teacher) { create(:attempt, test: test, author: teacher) }
+  given!(:answers_teacher) { create_list(:task, 5, :correct, question: question, attempt: attempt_teacher, author: teacher) }
 
   scenario 'Unauthenticated user cant view report' do
     visit reports_student_path
@@ -88,17 +88,17 @@ feature 'Student can view his report', "
     end
   end
 
-  describe 'Admin' do
-    background { sign_in(admin) }
+  describe 'Teacher' do
+    background { sign_in(teacher) }
 
     scenario 'can view report of all students' do
-      visit admin_reports_student_path(student)
+      visit teacher_reports_student_path(student)
 
       expect(page).to have_content 'Smith John'
     end
 
     scenario 'can view report through link on users page' do
-      visit admin_students_path
+      visit teacher_students_path
 
       within ".student-#{student.id}" do
         click_on 'Статистика'
