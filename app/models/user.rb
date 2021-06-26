@@ -11,8 +11,8 @@ class User < ApplicationRecord
   has_many :tasks, foreign_key: 'author_id', inverse_of: 'author', dependent: :destroy
   has_many :attempts, foreign_key: 'author_id', inverse_of: 'author', dependent: :destroy
 
-  def admin?
-    is_a?(Admin)
+  def teacher?
+    is_a?(Teacher)
   end
 
   def student?

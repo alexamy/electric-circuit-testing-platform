@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe Question, type: :model do
-  let(:author) { create(:admin) }
+  let(:author) { create(:teacher) }
   let(:test) { create(:test) }
   let(:model) { described_class }
 

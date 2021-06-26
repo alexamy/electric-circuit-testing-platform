@@ -8,10 +8,10 @@ feature "
   I'd like to be able to get notifications and interact with them
 " do
   describe 'Notification', js: true do
-    given(:admin) { create(:admin) }
+    given(:teacher) { create(:teacher) }
 
     background do
-      sign_in(admin)
+      sign_in(teacher)
       visit root_path
       click_on 'Выйти'
     end

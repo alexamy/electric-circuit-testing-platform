@@ -2,17 +2,17 @@
 
 require 'rails_helper'
 
-feature 'Admin can create test', "
+feature 'Teacher can create test', "
   In order to add new test
-  As an authenticated admin
+  As an authenticated teacher
   I'd like to be able to create test
 " do
-  given(:admin) { create(:admin) }
+  given(:teacher) { create(:teacher) }
 
-  background { sign_in(admin) }
+  background { sign_in(teacher) }
 
-  scenario 'Admin creates test' do
-    visit admin_tests_path
+  scenario 'Teacher creates test' do
+    visit teacher_tests_path
     click_on 'Создать'
 
     fill_in 'Название', with: 'Test'
@@ -23,8 +23,8 @@ feature 'Admin can create test', "
   end
 
   describe 'errors' do
-    scenario 'Admin creates test with name error' do
-      visit admin_tests_path
+    scenario 'Teacher creates test with name error' do
+      visit teacher_tests_path
       click_on 'Создать'
 
       fill_in 'Название', with: ''
@@ -34,8 +34,8 @@ feature 'Admin can create test', "
       expect(page).to have_content 'Название не может быть пустым'
     end
 
-    scenario 'Admin creates test with completion time error' do
-      visit admin_tests_path
+    scenario 'Teacher creates test with completion time error' do
+      visit teacher_tests_path
       click_on 'Создать'
 
       fill_in 'Название', with: 'Test'

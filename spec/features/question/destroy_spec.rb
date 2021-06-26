@@ -2,18 +2,18 @@
 
 require 'rails_helper'
 
-feature 'Admin can delete question', "
+feature 'Teacher can delete question', "
   In order to git rid of the question
-  As an authenticated admin
+  As an authenticated teacher
   I'd like to be able to delete question
 " do
-  given(:admin) { create(:admin) }
+  given(:teacher) { create(:teacher) }
   given!(:question) { create(:question) }
 
-  background { sign_in(admin) }
+  background { sign_in(teacher) }
 
-  scenario 'Admin deletes question' do
-    visit admin_questions_path
+  scenario 'Teacher deletes question' do
+    visit teacher_questions_path
     click_on 'Удалить'
 
     expect(page).not_to have_content question.text

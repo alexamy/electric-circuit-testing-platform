@@ -1,0 +1,8 @@
+.question-errors
+  = render 'shared/errors', resource: @question
+
+.question
+  = render 'form'
+
+.mt-4
+  = link_to 'Изменить параметры формулы', edit_teacher_question_parameters_path(@question), class: 'link'

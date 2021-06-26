@@ -1,0 +1,17 @@
+.block
+  = render 'shared/errors', resource: @question
+
+.block
+  p.italic = Question.human_attribute_name('formula_text')
+  p = simple_format @question.formula_text
+
+= form_with model: [:teacher, @question], url: teacher_question_parameters_path(@question) do |form|
+  .flex.flex-row.flex-wrap
+    = form.fields_for :parameters do |parameter|
+      = render partial: parameter.object.class.to_s.underscore, object: parameter
+
+  .form-actions
+    = form.submit 'Сохранить параметры', class: 'button'
+
+.mt-4
+  = link_to 'Перейти к вопросу', teacher_question_path(@question), class: 'link'

@@ -2,20 +2,20 @@
 
 require 'rails_helper'
 
-feature 'Admin can edit question', "
+feature 'Teacher can edit question', "
   In order to change question data
-  As an authenticated admin
+  As an authenticated teacher
   I'd like to be able to edit question
 " do
-  given(:admin) { create(:admin) }
+  given(:teacher) { create(:teacher) }
 
   before { create(:question, formula_text: 'x=y', parameters: %w[y]) }
 
-  background { sign_in(admin) }
+  background { sign_in(teacher) }
 
-  describe 'Admin' do
+  describe 'Teacher' do
     scenario 'can edit question fields other than formula' do
-      visit admin_questions_path
+      visit teacher_questions_path
 
       click_on 'Редактировать'
       fill_in 'Текст вопроса', with: 'Sample question text'
@@ -26,7 +26,7 @@ feature 'Admin can edit question', "
     end
 
     scenario 'can edit question formula' do
-      visit admin_questions_path
+      visit teacher_questions_path
 
       click_on 'Редактировать'
       fill_in 'Формула', with: 'x=t'
@@ -42,7 +42,7 @@ feature 'Admin can edit question', "
       end
 
       scenario 'can see shortened version of question text' do
-        visit admin_questions_path
+        visit teacher_questions_path
 
         expect(page).not_to have_content 'На какой угол Y относительно контакта, подключенного к нулевому потенциалу источника питания'
         expect(page).to have_content 'На какой угол Y относительно контакта, подключенного к нулевому потенциалу ис...'

@@ -2,22 +2,22 @@
 
 require 'rails_helper'
 
-feature 'Admin can edit question parameters', "
+feature 'Teacher can edit question parameters', "
   In order to change parameter values
-  As an authenticated admin
+  As an authenticated teacher
   I'd like to be able to edit question parameters
 " do
-  given(:admin) { create(:admin) }
+  given(:teacher) { create(:teacher) }
 
-  background { sign_in(admin) }
+  background { sign_in(teacher) }
 
   describe 'Step type' do
     given(:question) do
-      create(:question, formula_text: 'x=y', author: admin, parameters: ['y'])
+      create(:question, formula_text: 'x=y', author: teacher, parameters: ['y'])
     end
 
     scenario 'can see' do
-      visit edit_admin_question_parameters_path(question)
+      visit edit_teacher_question_parameters_path(question)
 
       expect(page).to have_field 'Минимум'
       expect(page).to have_field 'Максимум'
@@ -29,12 +29,12 @@ feature 'Admin can edit question parameters', "
 
   describe 'Enum type' do
     given(:question) do
-      create(:question, formula_text: 'x=y', author: admin,
+      create(:question, formula_text: 'x=y', author: teacher,
                         parameters: { 'y' => { factory: :enum, variants: [1, 2, 3] } })
     end
 
     scenario 'can see' do
-      visit edit_admin_question_parameters_path(question)
+      visit edit_teacher_question_parameters_path(question)
 
       expect(page).to have_field 'Варианты', with: '1 2 3'
     end
@@ -44,12 +44,12 @@ feature 'Admin can edit question parameters', "
 
   describe 'Formula type' do
     given(:question) do
-      create(:question, formula_text: 'x=y+z', author: admin,
+      create(:question, formula_text: 'x=y+z', author: teacher,
                         parameters: { 'y' => {}, 'z' => { factory: :formula, formula: 'y*2' } })
     end
 
     scenario 'can see' do
-      visit edit_admin_question_parameters_path(question)
+      visit edit_teacher_question_parameters_path(question)
 
       expect(page).to have_field 'Формула', with: 'y*2'
     end

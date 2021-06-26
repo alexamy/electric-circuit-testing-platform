@@ -2,19 +2,19 @@
 
 require 'rails_helper'
 
-feature 'Admin can edit student', "
+feature 'Teacher can edit student', "
   In order to change student information
-  As an authenticated admin
+  As an authenticated teacher
   I'd like to be able to edit existing students
 " do
-  given(:admin) { create(:admin) }
+  given(:teacher) { create(:teacher) }
   given(:group) { create(:group, name: 'Group', year: 2000) }
   given!(:student) { create(:student, group: group) }
 
-  background { sign_in(admin) }
+  background { sign_in(teacher) }
 
-  scenario 'Admin creates student' do
-    visit edit_admin_student_path(student)
+  scenario 'Teacher creates student' do
+    visit edit_teacher_student_path(student)
 
     fill_in 'Имя', with: 'Steve'
     click_on 'Сохранить'

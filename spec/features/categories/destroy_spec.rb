@@ -2,22 +2,22 @@
 
 require 'rails_helper'
 
-feature 'Admin can delete test', "
+feature 'Teacher can delete test', "
   In order to git rid of old test
-  As an authenticated admin
+  As an authenticated teacher
   I'd like to be able to delete test
 " do
-  given(:admin) { create(:admin) }
+  given(:teacher) { create(:teacher) }
   given(:test) { create(:test) }
 
   given(:question) { create(:question, test: test) }
-  given(:attempt) { create(:attempt, author: admin, test: test) }
+  given(:attempt) { create(:attempt, author: teacher, test: test) }
   given!(:task) { create(:task, question: question, attempt: attempt) }
 
-  background { sign_in(admin) }
+  background { sign_in(teacher) }
 
-  scenario 'Admin destroys test' do
-    visit admin_tests_path
+  scenario 'Teacher destroys test' do
+    visit teacher_tests_path
 
     within 'table' do
       click_on 'Удалить'

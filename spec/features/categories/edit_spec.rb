@@ -2,18 +2,18 @@
 
 require 'rails_helper'
 
-feature 'Admin can edit test', "
+feature 'Teacher can edit test', "
   In order to change test data
-  As an authenticated admin
+  As an authenticated teacher
   I'd like to be able to edit test
 " do
-  given(:admin) { create(:admin) }
+  given(:teacher) { create(:teacher) }
   given!(:test) { create(:test, name: 'Test', target_score: 10) }
 
-  background { sign_in(admin) }
+  background { sign_in(teacher) }
 
-  scenario 'Admin edits test' do
-    visit admin_tests_path
+  scenario 'Teacher edits test' do
+    visit teacher_tests_path
 
     click_on 'Редактировать'
     fill_in 'Название', with: 'Test'
@@ -25,8 +25,8 @@ feature 'Admin can edit test', "
   end
 
   describe 'errors' do
-    scenario 'Admin edits test with name error' do
-      visit admin_tests_path
+    scenario 'Teacher edits test with name error' do
+      visit teacher_tests_path
       click_on 'Редактировать'
 
       fill_in 'Название', with: ''
