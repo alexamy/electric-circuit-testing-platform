@@ -9,7 +9,7 @@ module QuestionSeed
   end
 
   def self.data
-    files = Dir[Rails.root.join(QUESTION_DIRECTORY, '*.yml')]
+    files = Dir[Rails.root.join(QUESTION_DIRECTORY, '*.yml')].sort
     files.map { |path| YAML.load(File.open(path)).deep_symbolize_keys }
   end
 
