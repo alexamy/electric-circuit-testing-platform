@@ -1,0 +1,302 @@
+test:
+  name: Раздел 5
+  target_score: 6
+
+questions:
+- scheme_path: lib/assets/schemes/501.png
+  text: Определите напряжение на выходе (Out), если известны входные напряжения In1,
+    In2, Кус и напряжения питания ОУ Vcc1, Vcc2.
+  answer_unit: В
+  precision: 4
+  completion_time: 60
+  formula_text: Out=(In1-In2)*10^(-6)*Кус
+  parameters:
+    In1:
+      minimum: -100
+      maximum: 100
+      step: 10
+      unit: мкВ
+    In2:
+      minimum: -100
+      maximum: 100
+      step: 10
+      unit: мкВ
+    Кус:
+      factory: enum
+      variants:
+      - 10000
+      - 100000
+      - 1000000
+      unit: мкВ
+- scheme_path: lib/assets/schemes/502.png
+  text: Определите напряжение на выходе (Out), если известны входные напряжения In1,
+    In2, Кус и напряжения питания ОУ Vcc1, Vcc2.
+  answer_unit: В
+  precision: 4
+  completion_time: 60
+  formula_text: Out=(In2-In1)*10^(-6)*Кус
+  parameters:
+    In1:
+      minimum: -100
+      maximum: 100
+      step: 10
+      unit: мкВ
+    In2:
+      minimum: -100
+      maximum: 100
+      step: 10
+      unit: мкВ
+    Кус:
+      factory: enum
+      variants:
+      - 10000
+      - 100000
+      - 1000000
+      unit: мкВ
+- scheme_path: lib/assets/schemes/503.png
+  text: Определите напряжение на выходе (Out), если известны входные напряжения In1, сопротивления
+    R1, R2 и напряжения питания ОУ Vcc1, Vcc2.
+  answer_unit: В
+  precision: 4
+  completion_time: 60
+  formula_text: Out=clamp(In1*10^(-6)*R2/R1, Vcc2, Vcc1)
+  parameters:
+    In1:
+      minimum: -100
+      maximum: 100
+      step: 10
+      unit: мкВ
+    Vcc1:
+      minimum: 3
+      maximum: 5
+      step: 1
+      unit: В
+    Vcc2:
+      minimum: -5
+      maximum: -3
+      step: 1
+      unit: В
+    R1:
+      minimum: 10000
+      maximum: 1000000
+      step: 10000
+      unit: Ом
+    R2:
+      minimum: 10000
+      maximum: 1000000
+      step: 10000
+      unit: Ом
+- scheme_path: lib/assets/schemes/504.png
+  text: Определите напряжение на выходе (Out), если известны входные напряжения In1, сопротивления
+    R1, R2 и напряжения питания ОУ Vcc1, Vcc2.
+  answer_unit: В
+  precision: 4
+  completion_time: 60
+  formula_text: Out=clamp(In1*10^(-6)*(R2/R1+1), Vcc2, Vcc1)
+  parameters:
+    In1:
+      minimum: -100
+      maximum: 100
+      step: 10
+      unit: мкВ
+    Vcc1:
+      minimum: 3
+      maximum: 5
+      step: 1
+      unit: В
+    Vcc2:
+      minimum: -5
+      maximum: -3
+      step: 1
+      unit: В
+    R1:
+      minimum: 10000
+      maximum: 1000000
+      step: 10000
+      unit: Ом
+    R2:
+      minimum: 10000
+      maximum: 1000000
+      step: 10000
+      unit: Ом
+- scheme_path: lib/assets/schemes/505.png
+  text: Определите напряжение на выходе (Out), если известны входные напряжения In1, сопротивления
+    R1, R2, R3 и напряжения питания ОУ Vcc1, Vcc2.
+  answer_unit: В
+  precision: 4
+  completion_time: 60
+  formula_text: |-
+    Rx=R2*R3/(R2+R3)
+    Out=clamp(In1*10^(-6)*(Rx/R1), Vcc2, Vcc1)
+  parameters:
+    In1:
+      minimum: -100
+      maximum: 100
+      step: 10
+      unit: мкВ
+    Vcc1:
+      minimum: 3
+      maximum: 5
+      step: 1
+      unit: В
+    Vcc2:
+      minimum: -5
+      maximum: -3
+      step: 1
+      unit: В
+    R1:
+      minimum: 10000
+      maximum: 1000000
+      step: 10000
+      unit: Ом
+    R2:
+      minimum: 10000
+      maximum: 1000000
+      step: 10000
+      unit: Ом
+    R3:
+      minimum: 10000
+      maximum: 1000000
+      step: 10000
+      unit: Ом
+- scheme_path: lib/assets/schemes/506.png
+  text: Определите напряжение на выходе (Out), если известны входные напряжения In1, сопротивления
+    R1, R2, R3 и напряжения питания ОУ Vcc1, Vcc2.
+  answer_unit: В
+  precision: 4
+  completion_time: 60
+  formula_text: |-
+    Ry=R2+R3
+    Rx=R4*Ry/(R4+Ry)
+    Out=clamp(In1*10^(-6)*(Rx/R1+1), Vcc2, Vcc1)
+  parameters:
+    In1:
+      minimum: -100
+      maximum: 100
+      step: 10
+      unit: мкВ
+    Vcc1:
+      minimum: 3
+      maximum: 5
+      step: 1
+      unit: В
+    Vcc2:
+      minimum: -5
+      maximum: -3
+      step: 1
+      unit: В
+    R1:
+      minimum: 10000
+      maximum: 1000000
+      step: 10000
+      unit: Ом
+    R2:
+      minimum: 10000
+      maximum: 1000000
+      step: 10000
+      unit: Ом
+    R3:
+      minimum: 10000
+      maximum: 1000000
+      step: 10000
+      unit: Ом
+    R4:
+      minimum: 10000
+      maximum: 1000000
+      step: 10000
+      unit: Ом
+- scheme_path: lib/assets/schemes/507.png
+  text: Определите напряжение на выходе (Out), если известны входные напряжения In1, сопротивления
+    R1 - R4 и напряжения питания ОУ Vcc1, Vcc2.
+  answer_unit: В
+  precision: 4
+  completion_time: 60
+  formula_text: |-
+    Out_1=clamp(In1*10^(-6)*(R2/R1), Vcc2, Vcc1)
+    Out=clamp(Out_1*(R4/R3), Vcc2, Vcc1)
+  parameters:
+    In1:
+      minimum: -100
+      maximum: 100
+      step: 10
+      unit: мкВ
+    Vcc1:
+      minimum: 3
+      maximum: 5
+      step: 1
+      unit: В
+    Vcc2:
+      minimum: -5
+      maximum: -3
+      step: 1
+      unit: В
+    R1:
+      minimum: 10000
+      maximum: 1000000
+      step: 10000
+      unit: Ом
+    R2:
+      minimum: 10000
+      maximum: 1000000
+      step: 10000
+      unit: Ом
+    R3:
+      minimum: 10000
+      maximum: 1000000
+      step: 10000
+      unit: Ом
+    R4:
+      minimum: 10000
+      maximum: 1000000
+      step: 10000
+      unit: Ом
+- scheme_path: lib/assets/schemes/508.png
+  text: Определите напряжение на выходе (Out), если известны входные напряжения In1, сопротивления
+    R1 - R5 и напряжения питания ОУ Vcc1, Vcc2.
+  answer_unit: В
+  precision: 4
+  completion_time: 60
+  formula_text: |-
+    Out_1=clamp(In1*10^(-6)*((R2+R3)/R1), Vcc2, Vcc1)
+    Out=clamp(Out_1*(R5/R4), Vcc2, Vcc1)
+  parameters:
+    In1:
+      minimum: -100
+      maximum: 100
+      step: 10
+      unit: мкВ
+    Vcc1:
+      minimum: 3
+      maximum: 5
+      step: 1
+      unit: В
+    Vcc2:
+      minimum: -5
+      maximum: -3
+      step: 1
+      unit: В
+    R1:
+      minimum: 10000
+      maximum: 1000000
+      step: 10000
+      unit: Ом
+    R2:
+      minimum: 10000
+      maximum: 1000000
+      step: 10000
+      unit: Ом
+    R3:
+      minimum: 10000
+      maximum: 1000000
+      step: 10000
+      unit: Ом
+    R4:
+      minimum: 10000
+      maximum: 1000000
+      step: 10000
+      unit: Ом
+    R5:
+      minimum: 10000
+      maximum: 1000000
+      step: 10000
+      unit: Ом

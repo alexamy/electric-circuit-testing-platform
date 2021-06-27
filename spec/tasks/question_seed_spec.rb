@@ -42,20 +42,7 @@ RSpec.describe QuestionSeed, type: :task do
 
   describe '.seed_by' do
     it 'returns questions' do
-      expect(factory.seed_by({ 1 => attributes_for(:question) })).to all be_instance_of(Question)
-    end
-  end
-
-  describe '.data' do
-    it 'returns modules' do
-      expect(factory.data).to all be_instance_of(Module)
-    end
-
-    it 'returns valid modules' do
-      factory.data.each do |result|
-        expect(result::TEST).to be_present
-        expect(result::QUESTIONS).to be_present
-      end
+      expect(factory.seed_by([attributes_for(:question)])).to all be_instance_of(Question)
     end
   end
 end
