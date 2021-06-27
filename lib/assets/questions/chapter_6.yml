@@ -83,19 +83,19 @@ questions:
       step: 0.1
       unit: В
     In2:
-      factory: :formula
+      factory: formula
       formula: 2*In1
       unit: В
     In3:
-      factory: :formula
+      factory: formula
       formula: 4*In1
       unit: В
     In4:
-      factory: :formula
+      factory: formula
       formula: 8*In1
       unit: В
     In5:
-      factory: :formula
+      factory: formula
       formula: 16*In1
       unit: В
     R1:
@@ -171,19 +171,19 @@ questions:
       step: 1000
       unit: Ом
     R2:
-      factory: :formula
+      factory: formula
       formula: 2*R1
       unit: Ом
     R3:
-      factory: :formula
+      factory: formula
       formula: 4*R1
       unit: Ом
     R4:
-      factory: :formula
+      factory: formula
       formula: 8*R1
       unit: Ом
     R5:
-      factory: :formula
+      factory: formula
       formula: 16*R1
       unit: Ом
     Vcc1:

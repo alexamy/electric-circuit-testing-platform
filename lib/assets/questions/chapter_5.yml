@@ -22,7 +22,7 @@ questions:
       step: 10
       unit: мкВ
     Кус:
-      factory: :enum
+      factory: enum
       variants:
       - 10000
       - 100000
@@ -47,7 +47,7 @@ questions:
       step: 10
       unit: мкВ
     Кус:
-      factory: :enum
+      factory: enum
       variants:
       - 10000
       - 100000

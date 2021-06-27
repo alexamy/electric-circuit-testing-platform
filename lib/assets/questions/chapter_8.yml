@@ -21,6 +21,6 @@ questions:
       step: 1
       unit: В
     Code:
-      factory: :formula
+      factory: formula
       formula: rand(2^N + 1)
       unit:
