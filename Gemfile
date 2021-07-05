@@ -26,6 +26,8 @@ gem 'require_all', '~> 3.0', require: false
 group :development, :test do
   gem 'bullet', '~> 6.1'
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
+  gem 'pry', '~> 0.14.0'
+  gem 'pry-rails', '~> 0.3.9'
 
   gem 'brakeman', '~> 5.0', require: false
   gem 'guard', '~> 2.17', require: false
@@ -43,8 +45,6 @@ end
 
 group :development do
   gem 'listen', '~> 3.2'
-  gem 'pry', '~> 0.14.0'
-  gem 'pry-rails', '~> 0.3.9'
   gem 'web-console', '>= 3.3.0'
 
   gem 'spring'
